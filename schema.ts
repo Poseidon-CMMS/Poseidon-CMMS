@@ -1,25 +1,49 @@
-import { createSchema, list } from '@keystone-next/keystone/schema';
+import { createSchema, list } from "@keystone-next/keystone/schema";
 import {
   text,
   relationship,
   password,
   timestamp,
   select,
-} from '@keystone-next/fields';
-import { document } from '@keystone-next/fields-document';
+  checkbox,
+  decimal,
+} from "@keystone-next/fields";
+import { document } from "@keystone-next/fields-document";
 
 export const lists = createSchema({
+  Equipo_de_riego: list({
+    ui: { listView: {
+      initialColumns: ["nombre", "latitud", "longitud", "estado_actual", "alta", "observaciones"]
+    }},
+    fields: {
+      nombre: text({ isRequired: true }),
+      latitud: decimal({ isRequired: false }), // TODO: revisar si existe un tipo posicion en keystone 6/next
+      longitud: decimal({ isRequired: false }),
+      estado_actual: select({
+        isRequired: true,
+        options: [
+          { label: "Sin telemetría", value: "sin_telemetria" },
+          { label: "Instalado", value: "instalado" },
+        ],
+        ui: {
+          displayMode: "segmented-control",
+        },
+      }),
+      alta: checkbox({ isRequired: false }),
+      observaciones: text({ isRequired: false }),
+    },
+  }),
   User: list({
     ui: {
       listView: {
-        initialColumns: ['name', 'posts'],
+        initialColumns: ["name", "posts"],
       },
     },
     fields: {
       name: text({ isRequired: true }),
       email: text({ isRequired: true, isUnique: true }),
       password: password({ isRequired: true }),
-      posts: relationship({ ref: 'Post.author', many: true }),
+      posts: relationship({ ref: "Post.author", many: true }),
     },
   }),
   Post: list({
@@ -27,11 +51,11 @@ export const lists = createSchema({
       title: text(),
       status: select({
         options: [
-          { label: 'Published', value: 'published' },
-          { label: 'Draft', value: 'draft' },
+          { label: "Published", value: "published" },
+          { label: "Draft", value: "draft" },
         ],
         ui: {
-          displayMode: 'segmented-control',
+          displayMode: "segmented-control",
         },
       }),
       content: document({
@@ -48,24 +72,24 @@ export const lists = createSchema({
       }),
       publishDate: timestamp(),
       author: relationship({
-        ref: 'User.posts',
+        ref: "User.posts",
         ui: {
-          displayMode: 'cards',
-          cardFields: ['name', 'email'],
-          inlineEdit: { fields: ['name', 'email'] },
+          displayMode: "cards",
+          cardFields: ["name", "email"],
+          inlineEdit: { fields: ["name", "email"] },
           linkToItem: true,
-          inlineCreate: { fields: ['name', 'email'] },
+          inlineCreate: { fields: ["name", "email"] },
         },
       }),
       tags: relationship({
-        ref: 'Tag.posts',
+        ref: "Tag.posts",
         ui: {
-          displayMode: 'cards',
-          cardFields: ['name'],
-          inlineEdit: { fields: ['name'] },
+          displayMode: "cards",
+          cardFields: ["name"],
+          inlineEdit: { fields: ["name"] },
           linkToItem: true,
           inlineConnect: true,
-          inlineCreate: { fields: ['name'] },
+          inlineCreate: { fields: ["name"] },
         },
         many: true,
       }),
@@ -78,7 +102,7 @@ export const lists = createSchema({
     fields: {
       name: text(),
       posts: relationship({
-        ref: 'Post.tags',
+        ref: "Post.tags",
         many: true,
       }),
     },

@@ -1,3 +1,143 @@
+type Equipo_de_riego {
+  id: ID!
+  nombre: String
+  latitud: String
+  longitud: String
+  estado_actual: String
+  alta: Boolean
+  observaciones: String
+}
+
+input Equipo_de_riegoWhereInput {
+  AND: [Equipo_de_riegoWhereInput!]
+  OR: [Equipo_de_riegoWhereInput!]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  nombre: String
+  nombre_not: String
+  nombre_contains: String
+  nombre_not_contains: String
+  nombre_starts_with: String
+  nombre_not_starts_with: String
+  nombre_ends_with: String
+  nombre_not_ends_with: String
+  nombre_i: String
+  nombre_not_i: String
+  nombre_contains_i: String
+  nombre_not_contains_i: String
+  nombre_starts_with_i: String
+  nombre_not_starts_with_i: String
+  nombre_ends_with_i: String
+  nombre_not_ends_with_i: String
+  nombre_in: [String]
+  nombre_not_in: [String]
+  latitud: String
+  latitud_not: String
+  latitud_lt: String
+  latitud_lte: String
+  latitud_gt: String
+  latitud_gte: String
+  longitud: String
+  longitud_not: String
+  longitud_lt: String
+  longitud_lte: String
+  longitud_gt: String
+  longitud_gte: String
+  estado_actual: String
+  estado_actual_not: String
+  estado_actual_in: [String]
+  estado_actual_not_in: [String]
+  alta: Boolean
+  alta_not: Boolean
+  observaciones: String
+  observaciones_not: String
+  observaciones_contains: String
+  observaciones_not_contains: String
+  observaciones_starts_with: String
+  observaciones_not_starts_with: String
+  observaciones_ends_with: String
+  observaciones_not_ends_with: String
+  observaciones_i: String
+  observaciones_not_i: String
+  observaciones_contains_i: String
+  observaciones_not_contains_i: String
+  observaciones_starts_with_i: String
+  observaciones_not_starts_with_i: String
+  observaciones_ends_with_i: String
+  observaciones_not_ends_with_i: String
+  observaciones_in: [String]
+  observaciones_not_in: [String]
+}
+
+input Equipo_de_riegoWhereUniqueInput {
+  id: ID
+}
+
+enum SortEquipoDeRiegosBy {
+  id_ASC
+  id_DESC
+  nombre_ASC
+  nombre_DESC
+  latitud_ASC
+  latitud_DESC
+  longitud_ASC
+  longitud_DESC
+  estado_actual_ASC
+  estado_actual_DESC
+  alta_ASC
+  alta_DESC
+  observaciones_ASC
+  observaciones_DESC
+}
+
+input Equipo_de_riegoOrderByInput {
+  id: OrderDirection
+  nombre: OrderDirection
+  latitud: OrderDirection
+  longitud: OrderDirection
+  estado_actual: OrderDirection
+  alta: OrderDirection
+  observaciones: OrderDirection
+}
+
+enum OrderDirection {
+  asc
+  desc
+}
+
+input Equipo_de_riegoUpdateInput {
+  nombre: String
+  latitud: String
+  longitud: String
+  estado_actual: String
+  alta: Boolean
+  observaciones: String
+}
+
+input EquipoDeRiegosUpdateInput {
+  id: ID!
+  data: Equipo_de_riegoUpdateInput
+}
+
+input Equipo_de_riegoCreateInput {
+  nombre: String
+  latitud: String
+  longitud: String
+  estado_actual: String
+  alta: Boolean
+  observaciones: String
+}
+
+input EquipoDeRiegosCreateInput {
+  data: Equipo_de_riegoCreateInput
+}
+
 type User {
   id: ID!
   name: String
@@ -106,11 +246,6 @@ input UserOrderByInput {
   id: OrderDirection
   name: OrderDirection
   email: OrderDirection
-}
-
-enum OrderDirection {
-  asc
-  desc
 }
 
 input UserUpdateInput {
@@ -394,6 +529,15 @@ scalar JSON
   )
 
 type Mutation {
+  createEquipo_de_riego(data: Equipo_de_riegoCreateInput): Equipo_de_riego
+  createEquipoDeRiegos(data: [EquipoDeRiegosCreateInput]): [Equipo_de_riego]
+  updateEquipo_de_riego(
+    id: ID!
+    data: Equipo_de_riegoUpdateInput
+  ): Equipo_de_riego
+  updateEquipoDeRiegos(data: [EquipoDeRiegosUpdateInput]): [Equipo_de_riego]
+  deleteEquipo_de_riego(id: ID!): Equipo_de_riego
+  deleteEquipoDeRiegos(ids: [ID!]): [Equipo_de_riego]
   createUser(data: UserCreateInput): User
   createUsers(data: [UsersCreateInput]): [User]
   updateUser(id: ID!, data: UserUpdateInput): User
@@ -453,6 +597,29 @@ input CreateInitialUserInput {
 }
 
 type Query {
+  allEquipoDeRiegos(
+    where: Equipo_de_riegoWhereInput! = {}
+    search: String
+    sortBy: [SortEquipoDeRiegosBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [Equipo_de_riegoOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [Equipo_de_riego!]
+  Equipo_de_riego(where: Equipo_de_riegoWhereUniqueInput!): Equipo_de_riego
+  _allEquipoDeRiegosMeta(
+    where: Equipo_de_riegoWhereInput! = {}
+    search: String
+    sortBy: [SortEquipoDeRiegosBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [Equipo_de_riegoOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use equipoDeRiegosCount instead."
+    )
+  equipoDeRiegosCount(where: Equipo_de_riegoWhereInput! = {}): Int
   allUsers(
     where: UserWhereInput! = {}
     search: String

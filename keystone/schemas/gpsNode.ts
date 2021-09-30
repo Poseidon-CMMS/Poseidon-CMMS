@@ -25,27 +25,16 @@ import {
     image,
   } from '@keystone-next/keystone/fields';
 
-export const gateway = list({ // TODO: falta definir sus relaciones
+export const gpsNode = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['fabricationDate', 'housingType', 'loraAntennaPosition'],
+        initialColumns: ['fabricationDate'],
       },
     },
     fields: {
       fabricationDate: timestamp({ isRequired: true }), //fecha de alta
-      housingType: text({ isRequired: true }), //TODO  cambiar a entidad
-      loraAntennaPosition: select({
-        isRequired: true, //TODO cambiar aenjtidad
-        options: [
-          { label: 'Arriba', value: 'above' },
-          { label: 'Abajo', value: 'below' },
-        ],
-        ui: {
-          displayMode: 'select',
-        },
-      }),
-      irrigator: relationship({
-        ref: 'Irrigator.gateway',
+      irrigator: relationship({ //TODO faltan todas las relaciones con las entidades chiquitas
+        ref: 'Irrigator.gpsNode',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'lat', 'long', 'status', 'enabled', 'description'],

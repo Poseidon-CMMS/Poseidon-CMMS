@@ -53,13 +53,26 @@ export const irrigator = list({
         ref: 'Gateway.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['fabricationDate','housingType','loraAntennaPosition'],
-          inlineEdit: { fields: ['fabricationDate','housingType','loraAntennaPosition'] },
+          cardFields: ['fabricationDate'],
+          inlineEdit: { fields: ['fabricationDate'] },
           linkToItem: true,
           inlineConnect: true,
-          inlineCreate: { fields: ['fabricationDate','housingType','loraAntennaPosition'] },
+          inlineCreate: { fields: ['fabricationDate'] },
         },
         many: false,
       }),
+      gpsNode: relationship({
+        ref: 'GpsNode.irrigator',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['fabricationDate'],
+          inlineEdit: { fields: ['fabricationDate'] },
+          linkToItem: true,
+          inlineConnect: true,
+          inlineCreate: { fields: ['fabricationDate'] },
+        },
+        many: false,
+      }),
+      
     },
   });

@@ -9,6 +9,7 @@ import {
 import { document } from '@keystone-next/fields-document';
 import { irrigator } from './irrigator'; 
 import { gateway } from './gateway'; 
+import { gpsNode } from './gpsNode';
 
 export const lists = createSchema({
   User: list({
@@ -30,6 +31,7 @@ export const lists = createSchema({
   }),
   Irrigator: irrigator,
   Gateway: gateway,
+  GpsNode: gpsNode,
   Post: list({
     fields: {
       title: text(),

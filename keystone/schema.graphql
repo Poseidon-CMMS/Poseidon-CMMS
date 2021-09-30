@@ -21,6 +21,24 @@ type Mutation {
   updateUsers(data: [UserUpdateArgs!]!): [User]
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUsers(where: [UserWhereUniqueInput!]!): [User]
+  createIrrigator(data: IrrigatorCreateInput!): Irrigator
+  createIrrigators(data: [IrrigatorCreateInput!]!): [Irrigator]
+  updateIrrigator(
+    where: IrrigatorWhereUniqueInput!
+    data: IrrigatorUpdateInput!
+  ): Irrigator
+  updateIrrigators(data: [IrrigatorUpdateArgs!]!): [Irrigator]
+  deleteIrrigator(where: IrrigatorWhereUniqueInput!): Irrigator
+  deleteIrrigators(where: [IrrigatorWhereUniqueInput!]!): [Irrigator]
+  createGateway(data: GatewayCreateInput!): Gateway
+  createGateways(data: [GatewayCreateInput!]!): [Gateway]
+  updateGateway(
+    where: GatewayWhereUniqueInput!
+    data: GatewayUpdateInput!
+  ): Gateway
+  updateGateways(data: [GatewayUpdateArgs!]!): [Gateway]
+  deleteGateway(where: GatewayWhereUniqueInput!): Gateway
+  deleteGateways(where: [GatewayWhereUniqueInput!]!): [Gateway]
   createPost(data: PostCreateInput!): Post
   createPosts(data: [PostCreateInput!]!): [Post]
   updatePost(where: PostWhereUniqueInput!, data: PostUpdateInput!): Post
@@ -113,7 +131,13 @@ input StringNullableFilter {
   contains: String
   startsWith: String
   endsWith: String
+  mode: QueryMode
   not: NestedStringNullableFilter
+}
+
+enum QueryMode {
+  default
+  insensitive
 }
 
 input NestedStringNullableFilter {
@@ -168,6 +192,121 @@ input UserCreateInput {
 input PostRelateToManyForCreateInput {
   create: [PostCreateInput!]
   connect: [PostWhereUniqueInput!]
+}
+
+type Irrigator {
+  id: ID!
+  name: String
+  lat: Float
+  long: Float
+  status: String
+  enabled: Boolean
+  description: String
+  gateway: Gateway
+}
+
+input IrrigatorWhereUniqueInput {
+  id: ID
+}
+
+input IrrigatorWhereInput {
+  AND: [IrrigatorWhereInput!]
+  OR: [IrrigatorWhereInput!]
+  NOT: [IrrigatorWhereInput!]
+  id: IDFilter
+}
+
+input IrrigatorOrderByInput {
+  id: OrderDirection
+}
+
+input IrrigatorUpdateInput {
+  name: String
+  lat: Float
+  long: Float
+  status: String
+  enabled: Boolean
+  description: String
+  gateway: GatewayRelateToOneForUpdateInput
+}
+
+input GatewayRelateToOneForUpdateInput {
+  create: GatewayCreateInput
+  connect: GatewayWhereUniqueInput
+  disconnect: Boolean
+}
+
+input IrrigatorUpdateArgs {
+  where: IrrigatorWhereUniqueInput!
+  data: IrrigatorUpdateInput!
+}
+
+input IrrigatorCreateInput {
+  name: String
+  lat: Float
+  long: Float
+  status: String
+  enabled: Boolean
+  description: String
+  gateway: GatewayRelateToOneForCreateInput
+}
+
+input GatewayRelateToOneForCreateInput {
+  create: GatewayCreateInput
+  connect: GatewayWhereUniqueInput
+}
+
+type Gateway {
+  id: ID!
+  fabricationDate: String
+  housingType: String
+  loraAntennaPosition: String
+  irrigator: Irrigator
+}
+
+input GatewayWhereUniqueInput {
+  id: ID
+}
+
+input GatewayWhereInput {
+  AND: [GatewayWhereInput!]
+  OR: [GatewayWhereInput!]
+  NOT: [GatewayWhereInput!]
+  id: IDFilter
+}
+
+input GatewayOrderByInput {
+  id: OrderDirection
+}
+
+input GatewayUpdateInput {
+  fabricationDate: String
+  housingType: String
+  loraAntennaPosition: String
+  irrigator: IrrigatorRelateToOneForUpdateInput
+}
+
+input IrrigatorRelateToOneForUpdateInput {
+  create: IrrigatorCreateInput
+  connect: IrrigatorWhereUniqueInput
+  disconnect: Boolean
+}
+
+input GatewayUpdateArgs {
+  where: GatewayWhereUniqueInput!
+  data: GatewayUpdateInput!
+}
+
+input GatewayCreateInput {
+  fabricationDate: String
+  housingType: String
+  loraAntennaPosition: String
+  irrigator: IrrigatorRelateToOneForCreateInput
+}
+
+input IrrigatorRelateToOneForCreateInput {
+  create: IrrigatorCreateInput
+  connect: IrrigatorWhereUniqueInput
 }
 
 type Post {
@@ -311,6 +450,22 @@ type Query {
   ): [User!]
   user(where: UserWhereUniqueInput!): User
   usersCount(where: UserWhereInput! = {}): Int
+  irrigators(
+    where: IrrigatorWhereInput! = {}
+    orderBy: [IrrigatorOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Irrigator!]
+  irrigator(where: IrrigatorWhereUniqueInput!): Irrigator
+  irrigatorsCount(where: IrrigatorWhereInput! = {}): Int
+  gateways(
+    where: GatewayWhereInput! = {}
+    orderBy: [GatewayOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Gateway!]
+  gateway(where: GatewayWhereUniqueInput!): Gateway
+  gatewaysCount(where: GatewayWhereInput! = {}): Int
   posts(
     where: PostWhereInput! = {}
     orderBy: [PostOrderByInput!]! = []
@@ -400,11 +555,6 @@ enum KeystoneAdminUIFieldMetaItemViewFieldMode {
   edit
   read
   hidden
-}
-
-enum QueryMode {
-  default
-  insensitive
 }
 
 type KeystoneAdminUISort {

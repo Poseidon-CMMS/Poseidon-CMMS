@@ -7,6 +7,8 @@ import {
   select,
 } from '@keystone-next/keystone/fields';
 import { document } from '@keystone-next/fields-document';
+import { irrigator } from './irrigator'; 
+import { gateway } from './gateway'; 
 
 export const lists = createSchema({
   User: list({
@@ -26,6 +28,8 @@ export const lists = createSchema({
       posts: relationship({ ref: 'Post.author', many: true }),
     },
   }),
+  Irrigator: irrigator,
+  Gateway: gateway,
   Post: list({
     fields: {
       title: text(),

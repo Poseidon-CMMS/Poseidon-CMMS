@@ -1,7 +1,7 @@
 import { config } from '@keystone-next/keystone';
 import { statelessSessions } from '@keystone-next/keystone/session';
 
-import { lists } from './schema';
+import { lists } from './schemas/schema';
 import { withAuth, sessionSecret } from './auth';
 
 let sessionMaxAge = 60 * 60 * 24 * 30; // 30 days

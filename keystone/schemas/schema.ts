@@ -10,6 +10,9 @@ import { document } from '@keystone-next/fields-document';
 import { irrigator } from './irrigator'; 
 import { gateway } from './gateway'; 
 import { gpsNode } from './gpsNode';
+import { field as fieldDomainEntity } from './field'
+import { field } from '@graphql-ts/schema/dist/declarations/src/api-with-context';
+import { installUninstallRequest } from './installUninstallRequest';
 
 export const lists = createSchema({
   User: list({
@@ -32,6 +35,8 @@ export const lists = createSchema({
   Irrigator: irrigator,
   Gateway: gateway,
   GpsNode: gpsNode,
+  Field: fieldDomainEntity,
+  InstallUninstallRequest: installUninstallRequest,
   Post: list({
     fields: {
       title: text(),

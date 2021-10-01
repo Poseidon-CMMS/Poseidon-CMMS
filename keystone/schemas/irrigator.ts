@@ -3,32 +3,19 @@ import { list } from '@keystone-next/keystone';
 import {
     // Scalar types
     checkbox,
-    integer,
-    json,
     float,
-    password,
     select,
     text,
-    timestamp,
-  
+
     // Relationship type
     relationship,
-  
-    // Index types
-    autoIncrement,
-  
-    // Virtual type
-    virtual,
-  
-    // File types
-    file,
-    image,
   } from '@keystone-next/keystone/fields';
+import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
 
 export const irrigator = list({
     ui: {
       listView: {
-        initialColumns: ['name', 'lat', 'long', 'status', 'enabled', 'description'],
+        initialColumns: ['name', 'lat', 'long', 'status', 'enabled', 'comments'],
       },
     },
     fields: {
@@ -46,7 +33,7 @@ export const irrigator = list({
         },
       }),
       enabled: checkbox({ isRequired: true }),
-      description: text({ isRequired: false }),
+      comments: text({ isRequired: false }),
 
       //6 relations
       gateway: relationship({
@@ -60,19 +47,37 @@ export const irrigator = list({
           inlineCreate: { fields: ['fabricationDate'] },
         },
         many: false,
+        
       }),
       gpsNode: relationship({
         ref: 'GpsNode.irrigator',
         ui: {
           displayMode: 'cards',
           cardFields: ['fabricationDate'],
-          inlineEdit: { fields: ['fabricationDate'] },
           linkToItem: true,
           inlineConnect: true,
-          inlineCreate: { fields: ['fabricationDate'] },
         },
         many: false,
       }),
-      
+      field: relationship({
+        ref: 'Field.irrigator',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['name', 'gate'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: false,
+      }),
+      installUninstallRequest: relationship({
+        ref: 'InstallUninstallRequest.irrigator',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['creationDate'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: true,
+      })
     },
   });

@@ -32,7 +32,7 @@ export const irrigator = list({
           displayMode: 'segmented-control',
         },
       }),
-      enabled: checkbox({ isRequired: true }),
+      enabled: checkbox({ isRequired: true, defaultValue: false }),
       comments: text({ isRequired: false }),
 
       //6 relations
@@ -78,6 +78,16 @@ export const irrigator = list({
           inlineConnect: true,
         },
         many: true,
-      })
+      }),
+      hdwIssue: relationship({
+        ref: 'HdwIssue.irrigator',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['creationDate', 'comments'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: true,
+      }),
     },
   });

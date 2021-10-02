@@ -10,11 +10,27 @@ import { document } from '@keystone-next/fields-document';
 import { irrigator } from './irrigator'; 
 import { gateway } from './gateway'; 
 import { gpsNode } from './gpsNode';
+import { hardwareIssue } from './hdwIssue'; 
 import { field as fieldDomainEntity } from './field'
 import { field } from '@graphql-ts/schema/dist/declarations/src/api-with-context';
 import { installUninstallRequest } from './installUninstallRequest';
+import { city } from './city';
+import { fieldTechnician } from './fieldTechnician';
+import { province } from './province';
+import { zone } from './zone';
 
 export const lists = createSchema({
+  Irrigator: irrigator,
+  Gateway: gateway,
+  GpsNode: gpsNode,
+  Field: fieldDomainEntity,
+  InstallUninstallRequest: installUninstallRequest,
+  City: city,
+  FieldTechnician: fieldTechnician,
+  HdwIssue: hardwareIssue,
+  Province: province,
+  Zone: zone,
+  
   User: list({
     ui: {
       listView: {
@@ -32,11 +48,6 @@ export const lists = createSchema({
       posts: relationship({ ref: 'Post.author', many: true }),
     },
   }),
-  Irrigator: irrigator,
-  Gateway: gateway,
-  GpsNode: gpsNode,
-  Field: fieldDomainEntity,
-  InstallUninstallRequest: installUninstallRequest,
   Post: list({
     fields: {
       title: text(),

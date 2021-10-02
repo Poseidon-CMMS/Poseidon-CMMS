@@ -1,29 +1,10 @@
 import { list } from '@keystone-next/keystone';
 
 import {
-    // Scalar types
-    checkbox,
-    integer,
-    json,
-    float,
-    password,
-    select,
-    text,
-    timestamp,
-  
     // Relationship type
     relationship,
-  
-    // Index types
-    autoIncrement,
-  
-    // Virtual type
-    virtual,
-  
-    // File types
-    file,
-    image,
-  } from '@keystone-next/keystone/fields';
+    text
+    } from '@keystone-next/keystone/fields';
 import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
 
 export const field = list({
@@ -32,6 +13,9 @@ export const field = list({
         initialColumns: ['name', 'gate', 'irrigator'],
       },
     },
+    hooks: {
+      validateInput: relationshipRequiredCheckerHook('zone'),
+    },
     fields: {
       name: text({ isRequired: true }),
       gate: text({ isRequired: false}),
@@ -39,12 +23,31 @@ export const field = list({
         ref: 'Irrigator.field',
         ui: {
           displayMode: 'cards',
-          cardFields: ['name', 'lat', 'long', 'status', 'enabled', 'description'],
+          cardFields: ['name', 'lat', 'long', 'status'],
           linkToItem: true,
           inlineConnect: true,
         },
         many: true,
       }),
-      
+      zone: relationship({
+        ref: 'Zone.field',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['name', 'isForeign'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: false,
+      }),
+      province: relationship({
+        ref: 'Province.field',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['name'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: false,
+      }),
     },
   });

@@ -42,10 +42,10 @@ export const hardwareIssue = list({
       TTR: float(),
       comments: text(),
       irrigator: relationship({
-        ref: 'Irrigator.field',
+        ref: 'Irrigator.hdwIssue',
         ui: {
           displayMode: 'cards',
-          cardFields: ['name', 'lat', 'long', 'status', 'enabled', 'description'],
+          cardFields: ['name', 'lat', 'long', 'status'],
           linkToItem: true,
           inlineConnect: true,
         },

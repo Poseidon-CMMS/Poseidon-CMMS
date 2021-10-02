@@ -2,34 +2,18 @@ import { list } from '@keystone-next/keystone';
 
 import {
     // Scalar types
-    checkbox,
-    integer,
-    json,
-    float,
-    password,
     select,
-    text,
     timestamp,
   
     // Relationship type
     relationship,
-  
-    // Index types
-    autoIncrement,
-  
-    // Virtual type
-    virtual,
-  
-    // File types
-    file,
-    image,
   } from '@keystone-next/keystone/fields';
 import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
 
 export const installUninstallRequest = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['creationDate', 'irrigator'],
+        initialColumns: ['creationDate', 'status','irrigator'],
       },
     },
     hooks: {
@@ -41,11 +25,23 @@ export const installUninstallRequest = list({ // TODO: falta definir sus relacio
         ref: 'Irrigator.installUninstallRequest',
         ui: {
           displayMode: 'cards',
-          cardFields: ['name', 'lat', 'long', 'status', 'enabled', 'description'],
+          cardFields: ['name', 'lat', 'long', 'status'],
           linkToItem: true,
           inlineConnect: true,
         },
         many: false,
+      }),
+      status: select({
+        isRequired: true,
+        options: [
+          { label: 'Abierta', value: 'open' },
+          { label: 'Asignada', value: 'assigned' },
+          { label: 'Realizada', value: 'done' },
+          { label: 'Completada', value: 'completed' },
+        ],
+        ui: {
+          displayMode: 'segmented-control',
+        },
       }),
     },
   });

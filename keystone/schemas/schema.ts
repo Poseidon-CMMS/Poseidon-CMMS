@@ -8,8 +8,8 @@ import {
 } from '@keystone-next/keystone/fields';
 import { document } from '@keystone-next/fields-document';
 import { irrigator } from './irrigator'; 
-import { gateway } from './gateway'; 
-import { gpsNode } from './gpsNode';
+import { gateway } from './assets/gateway'; 
+import { gpsNode } from './assets/gpsNode';
 import { hardwareIssue } from './hdwIssue'; 
 import { field as fieldDomainEntity } from './field'
 import { field } from '@graphql-ts/schema/dist/declarations/src/api-with-context';
@@ -18,7 +18,7 @@ import { city } from './city';
 import { fieldTechnician } from './fieldTechnician';
 import { province } from './province';
 import { zone } from './zone';
-import { loraAntennaPosition } from './loraAntennaPosition';
+import { loraAntennaPosition } from './assets/loraAntennaPosition';
 import { client } from './client';
 
 export const lists = createSchema({

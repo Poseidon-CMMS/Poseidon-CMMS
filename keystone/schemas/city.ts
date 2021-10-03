@@ -29,5 +29,15 @@ export const city = list({
         },
         many: false,
       }),
+      field: relationship({
+        ref: 'Field.city',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['name'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: true,
+      }),
     },
   });

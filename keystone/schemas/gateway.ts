@@ -16,16 +16,6 @@ export const gateway = list({ // TODO: falta definir sus relaciones
     fields: {
       fabricationDate: timestamp({ isRequired: true }), //fecha de alta
       housingType: text({ isRequired: true }), //TODO  cambiar a entidad
-      loraAntennaPosition: select({
-        isRequired: true, //TODO cambiar aenjtidad
-        options: [
-          { label: 'Arriba', value: 'above' },
-          { label: 'Abajo', value: 'below' },
-        ],
-        ui: {
-          displayMode: 'select',
-        },
-      }),
       irrigator: relationship({
         ref: 'Irrigator.gateway',
         ui: {
@@ -35,6 +25,19 @@ export const gateway = list({ // TODO: falta definir sus relaciones
           inlineConnect: true,
         },
         many: false,
+      }),
+      loraAntennaPosition: relationship({
+        ref: 'LoraAntennaPosition',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['name'],
+          linkToItem: false,
+          removeMode: 'disconnect',
+          inlineConnect: true,
+          inlineCreate: {
+            fields: ['name']
+          }
+        }
       }),
     },
   });

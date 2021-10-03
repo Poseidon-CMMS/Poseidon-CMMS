@@ -10,7 +10,7 @@ import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCh
 export const field = list({
     ui: {
       listView: {
-        initialColumns: ['name', 'gate', 'irrigator'],
+        initialColumns: ['name', 'gate', 'phone', 'zone', 'province', 'city'],
       },
     },
     hooks: {
@@ -19,6 +19,7 @@ export const field = list({
     fields: {
       name: text({ isRequired: true }),
       gate: text({ isRequired: false}),
+      phone: text({ isRequired: false}),
       irrigator: relationship({
         ref: 'Irrigator.field',
         ui: {
@@ -41,6 +42,26 @@ export const field = list({
       }),
       province: relationship({
         ref: 'Province.field',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['name'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: false,
+      }),
+      city: relationship({
+        ref: 'City.field',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['name'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: false,
+      }),
+      client: relationship({
+        ref: 'Client.field',
         ui: {
           displayMode: 'cards',
           cardFields: ['name'],

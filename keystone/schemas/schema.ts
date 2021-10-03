@@ -18,6 +18,8 @@ import { city } from './city';
 import { fieldTechnician } from './fieldTechnician';
 import { province } from './province';
 import { zone } from './zone';
+import { loraAntennaPosition } from './loraAntennaPosition';
+import { client } from './client';
 
 export const lists = createSchema({
   Irrigator: irrigator,
@@ -30,7 +32,8 @@ export const lists = createSchema({
   HdwIssue: hardwareIssue,
   Province: province,
   Zone: zone,
-  
+  LoraAntennaPosition: loraAntennaPosition,  
+  Client: client,
   User: list({
     ui: {
       listView: {

@@ -20,6 +20,9 @@ import { province } from './province';
 import { zone } from './zone';
 import { loraAntennaPosition } from './assets/loraAntennaPosition';
 import { client } from './client';
+import { gatewayHousingType } from './assets/gatewayHousingType';
+import { satelliteModem } from './assets/satelliteModem';
+import { satelliteModemType } from './assets/sateliteModemType';
 
 export const lists = createSchema({
   Irrigator: irrigator,
@@ -34,6 +37,9 @@ export const lists = createSchema({
   Zone: zone,
   LoraAntennaPosition: loraAntennaPosition,  
   Client: client,
+  GatewayHousingType: gatewayHousingType,
+  SatelliteModem: satelliteModem,
+  SatelliteModemType: satelliteModemType,
   User: list({
     ui: {
       listView: {

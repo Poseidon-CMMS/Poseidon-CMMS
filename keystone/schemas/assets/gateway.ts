@@ -15,7 +15,6 @@ export const gateway = list({ // TODO: falta definir sus relaciones
     },
     fields: {
       fabricationDate: timestamp({ isRequired: true }), //fecha de alta
-      housingType: text({ isRequired: true }), //TODO  cambiar a entidad
       irrigator: relationship({
         ref: 'Irrigator.gateway',
         ui: {
@@ -29,15 +28,28 @@ export const gateway = list({ // TODO: falta definir sus relaciones
       loraAntennaPosition: relationship({
         ref: 'LoraAntennaPosition',
         ui: {
-          displayMode: 'cards',
-          cardFields: ['name'],
-          linkToItem: false,
-          removeMode: 'disconnect',
-          inlineConnect: true,
-          inlineCreate: {
-            fields: ['name']
-          }
+          displayMode: 'select',
+          labelField: 'name'
         }
       }),
+      housingType: relationship({
+        ref: 'GatewayHousingType',
+        ui: {
+          displayMode: 'select',
+          labelField: 'name'
+        }
+      }),
+      satelliteModem: relationship({
+        ref: 'SatelliteModem.gateway',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['manufacturerId', 'shipmentDate', 'isTransmitting', 'comment'],
+          inlineEdit: { fields: ['manufacturerId', 'shipmentDate', 'isTransmitting', 'comment']},
+          linkToItem: true,
+          inlineConnect: true,
+          inlineCreate: { fields: ['manufacturerId', 'shipmentDate', 'isTransmitting', 'comment'] },
+        },
+        many: false
+      })
     },
   });

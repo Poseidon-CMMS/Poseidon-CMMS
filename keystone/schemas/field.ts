@@ -8,6 +8,7 @@ import {
 import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
 
 export const field = list({
+    description: 'Campo',
     ui: {
       listView: {
         initialColumns: ['name', 'gate', 'phone', 'zone', 'province', 'city'],

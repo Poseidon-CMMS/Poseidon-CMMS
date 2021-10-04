@@ -14,8 +14,8 @@ RUN npm i focus-trap@6.6.1
 ADD . /home/node
 RUN npm run postinstall
 
-#Buildeamos una version de produccion...
-RUN npm run-script build
+# #Buildeamos una version de produccion...
+# RUN npm run-script build
 
 
 # Runtime container

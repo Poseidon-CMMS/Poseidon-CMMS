@@ -8,7 +8,7 @@ import {
 } from '@keystone-next/keystone/fields';
 import { document } from '@keystone-next/fields-document';
 import { irrigator } from './irrigator'; 
-import { gateway } from './assets/gateway'; 
+import { gateway } from './assets/gateway/gateway'; 
 import { gpsNode } from './assets/gpsNode/gpsNode';
 import { hardwareIssue } from './hdwIssue'; 
 import { field as fieldDomainEntity } from './field'
@@ -20,10 +20,10 @@ import { province } from './province';
 import { zone } from './zone';
 import { loraAntennaPosition } from './assets/loraAntennaPosition';
 import { client } from './client';
-import { gatewayHousingType } from './assets/gatewayHousingType';
-import { satelliteModem } from './assets/satelliteModem';
+import { gatewayHousingType } from './assets/gateway/gatewayHousingType';
+import { satelliteModem } from './assets/gateway/satelliteModem';
 import { satelliteModemType } from './assets/gateway/sateliteModemType';
-import { satelliteAntenna } from './assets/satelliteAntenna';
+import { satelliteAntenna } from './assets/gateway/satelliteAntenna';
 
 export const lists = createSchema({
   Irrigator: irrigator,

@@ -24,6 +24,11 @@ import { gatewayHousingType } from './assets/gateway/gatewayHousingType';
 import { satelliteModem } from './assets/gateway/satelliteModem';
 import { satelliteModemType } from './assets/gateway/sateliteModemType';
 import { satelliteAntenna } from './assets/gateway/satelliteAntenna';
+import { batteryType } from './assets/gpsNode/batteryType';
+import { gpsAntennaType } from './assets/gpsNode/gpsAntennaType';
+import { nodeHousingType } from './assets/gpsNode/nodeHousingType';
+import { nodeLoraAntennaType } from './assets/gpsNode/nodeLoraAntennaType';
+import { solarPanelType } from './assets/gpsNode/solarPanelType';
 
 export const lists = createSchema({
   Irrigator: irrigator,
@@ -42,6 +47,11 @@ export const lists = createSchema({
   SatelliteModem: satelliteModem,
   SatelliteModemType: satelliteModemType,
   SatelliteAntenna: satelliteAntenna,
+  BatteryType: batteryType,
+  GpsAntennaType: gpsAntennaType,
+  NodeHousingType: nodeHousingType,
+  NodeLoraAntennaType: nodeLoraAntennaType,
+  SolarPanelType: solarPanelType,
   User: list({
     ui: {
       listView: {

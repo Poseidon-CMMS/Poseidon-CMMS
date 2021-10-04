@@ -6,10 +6,10 @@ export const gatewayHousingType = list({
   ui: {
     isHidden: true,
     listView: {
-      initialColumns: ["name"],
+      initialColumns: ['name'],
     },
   },
   fields: {
-    name: text({ isRequired: true, isIndexed: "unique" }),
+    name: text({ isRequired: true, isIndexed: 'unique' }),
   },
 });

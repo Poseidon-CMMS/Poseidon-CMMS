@@ -1,6 +1,7 @@
 import { list } from "@keystone-next/keystone";
 
-import { relationship, text } from "@keystone-next/keystone/fields";
+import { relationship, text, virtual } from "@keystone-next/keystone/fields";
+import { graphql } from "@keystone-next/keystone/types";
 
 export const satelliteModemType = list({
   ui: {
@@ -16,12 +17,20 @@ export const satelliteModemType = list({
       
     }),
     version: text({ isRequired: true, isIndexed: "unique" }),
+    label: virtual({
+        field: graphql.field({
+            type: graphql.String,
+            resolve(item, args, context) {
+                return `${item.referenceNumber} ${item.version}`;
+            }
+        })
+    }),
     satelliteModem: relationship({
       ref: "SatelliteModem.satelliteModemType",
       ui: {
-        displayMode: "count",
+        displayMode: 'count',
         createView: {
-            fieldMode: "hidden"
+            fieldMode: 'hidden'
         }
       },
       many: true,

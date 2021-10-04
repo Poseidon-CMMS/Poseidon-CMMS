@@ -9,7 +9,7 @@ import {
 import { document } from '@keystone-next/fields-document';
 import { irrigator } from './irrigator'; 
 import { gateway } from './assets/gateway'; 
-import { gpsNode } from './assets/gpsNode';
+import { gpsNode } from './assets/gpsNode/gpsNode';
 import { hardwareIssue } from './hdwIssue'; 
 import { field as fieldDomainEntity } from './field'
 import { field } from '@graphql-ts/schema/dist/declarations/src/api-with-context';
@@ -22,7 +22,8 @@ import { loraAntennaPosition } from './assets/loraAntennaPosition';
 import { client } from './client';
 import { gatewayHousingType } from './assets/gatewayHousingType';
 import { satelliteModem } from './assets/satelliteModem';
-import { satelliteModemType } from './assets/sateliteModemType';
+import { satelliteModemType } from './assets/gateway/sateliteModemType';
+import { satelliteAntenna } from './assets/satelliteAntenna';
 
 export const lists = createSchema({
   Irrigator: irrigator,
@@ -40,6 +41,7 @@ export const lists = createSchema({
   GatewayHousingType: gatewayHousingType,
   SatelliteModem: satelliteModem,
   SatelliteModemType: satelliteModemType,
+  SatelliteAntenna: satelliteAntenna,
   User: list({
     ui: {
       listView: {

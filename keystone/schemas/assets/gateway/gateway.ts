@@ -50,6 +50,13 @@ export const gateway = list({ // TODO: falta definir sus relaciones
           inlineCreate: { fields: ['manufacturerId', 'shipmentDate', 'isTransmitting', 'comment'] },
         },
         many: false
+      }),
+      satelliteAntenna: relationship({
+        ref: 'SatelliteAntenna.gateway',
+        ui: {
+          displayMode: 'select',
+        },
+        many: false
       })
     },
   });

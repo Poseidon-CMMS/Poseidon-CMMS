@@ -29,6 +29,13 @@ import { gpsAntennaType } from './assets/gpsNode/gpsAntennaType';
 import { nodeHousingType } from './assets/gpsNode/nodeHousingType';
 import { nodeLoraAntennaType } from './assets/gpsNode/nodeLoraAntennaType';
 import { solarPanelType } from './assets/gpsNode/solarPanelType';
+import { pcbNode } from './assets/gpsNode/pcbNode';
+import { nodeFirmwareVersion } from './assets/gpsNode/nodeFirmwareVersion';
+import { nodeHardwareVersion } from './assets/gpsNode/nodeHardwareVersion';
+import { pcbGateway } from './assets/gateway/pcbGateway';
+import { gatewayFirmwareVersion } from './assets/gateway/gatewayFirmwareVersion';
+import { gatewayHardwareVersion } from './assets/gateway/gatewayHardwareVersion';
+import { assetType } from './assets/assetType';
 
 export const lists = createSchema({
   Irrigator: irrigator,
@@ -52,6 +59,13 @@ export const lists = createSchema({
   NodeHousingType: nodeHousingType,
   NodeLoraAntennaType: nodeLoraAntennaType,
   SolarPanelType: solarPanelType,
+  PcbNode: pcbNode,
+  NodeFirmwareVersion: nodeFirmwareVersion,
+  NodeHardwareVersion: nodeHardwareVersion,
+  PcbGateway: pcbGateway,
+  GatewayFirmwareVersion: gatewayFirmwareVersion,
+  GatewayHardwareVersion: gatewayHardwareVersion,
+  AssetType: assetType,
   User: list({
     ui: {
       listView: {

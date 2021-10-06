@@ -74,5 +74,15 @@ export const gpsNode = list({ // TODO: falta definir sus relaciones
         },
         many: false
       }),
+      pcbNode: relationship({
+        ref: 'PcbNode.gpsNode',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['fabricationDate', 'integrationId'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: false
+      }),
     },
   });

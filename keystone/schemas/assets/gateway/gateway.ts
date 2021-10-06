@@ -57,6 +57,15 @@ export const gateway = list({ // TODO: falta definir sus relaciones
           displayMode: 'select',
         },
         many: false
-      })
+      }),
+      pcbGateway: relationship({
+        ref: 'PcbGateway.gateway',
+        ui: {
+          createView: {
+            fieldMode: 'hidden'
+        }
+        },
+        many: false,
+      }),
     },
   });

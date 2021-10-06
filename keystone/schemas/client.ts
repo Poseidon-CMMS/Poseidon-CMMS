@@ -1,12 +1,6 @@
 import { list } from '@keystone-next/keystone';
 
-import {
-    // Scalar types
-    checkbox,  
-    text,  
-    // Relationship type
-    relationship,
-  } from '@keystone-next/keystone/fields';
+import { text, relationship } from '@keystone-next/keystone/fields';
 
 export const client = list({
     ui: {

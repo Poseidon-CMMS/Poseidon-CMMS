@@ -1,17 +1,16 @@
 import { list } from '@keystone-next/keystone';
 
-import {
-    timestamp,
-    relationship,
-    text,
-    checkbox,
-  } from '@keystone-next/keystone/fields';
+import { timestamp, relationship, text, checkbox } from '@keystone-next/keystone/fields';
+import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
 
 export const satelliteModem = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
         initialColumns: ['manufacturerId', 'shipmentDate', 'isTransmitting', 'comment', 'gateway'],
       },
+    },
+    hooks: {
+      validateInput: relationshipRequiredCheckerHook('satelliteModemType'),
     },
     fields: {
       manufacturerId: text({isRequired: true, isIndexed: 'unique'}),

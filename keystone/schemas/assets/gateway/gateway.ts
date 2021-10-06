@@ -1,11 +1,6 @@
 import { list } from '@keystone-next/keystone';
 
-import {
-    select,
-    text,
-    timestamp,
-    relationship,
-  } from '@keystone-next/keystone/fields';
+import { timestamp, relationship } from '@keystone-next/keystone/fields';
 
 export const gateway = list({ // TODO: falta definir sus relaciones
     ui: {

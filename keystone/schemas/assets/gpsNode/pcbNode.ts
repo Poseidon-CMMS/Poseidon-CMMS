@@ -1,15 +1,18 @@
 import { list } from '@keystone-next/keystone';
 
-import {
-    timestamp,
-    relationship,
-    text,
-  } from '@keystone-next/keystone/fields';
+import { timestamp, relationship, text } from '@keystone-next/keystone/fields';
+import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
 
 export const pcbNode = list({
     ui: {
       listView: {
         initialColumns: ['fabricationDate'],
+      },
+    },
+    hooks: {
+      validateInput: () => {
+        relationshipRequiredCheckerHook('firmwareVersion'),
+        relationshipRequiredCheckerHook('hardwareVersion')
       },
     },
     fields: {

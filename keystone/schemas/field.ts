@@ -1,10 +1,6 @@
 import { list } from '@keystone-next/keystone';
 
-import {
-    // Relationship type
-    relationship,
-    text
-    } from '@keystone-next/keystone/fields';
+import { relationship, text } from '@keystone-next/keystone/fields';
 import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
 
 export const field = list({

@@ -7,35 +7,37 @@ import {
   select,
 } from '@keystone-next/keystone/fields';
 import { document } from '@keystone-next/fields-document';
-import { irrigator } from './irrigator'; 
-import { gateway } from './assets/gateway/gateway'; 
-import { gpsNode } from './assets/gpsNode/gpsNode';
-import { hardwareIssue } from './hdwIssue'; 
-import { field as fieldDomainEntity } from './field'
+import { irrigator } from './schemas/irrigator'; 
+import { gateway } from './schemas/assets/gateway/gateway'; 
+import { gpsNode } from './schemas/assets/gpsNode/gpsNode';
+import { hardwareIssue } from './schemas/hdwIssue'; 
+import { field as fieldDomainEntity } from './schemas/field'
 import { field } from '@graphql-ts/schema/dist/declarations/src/api-with-context';
-import { installUninstallRequest } from './installUninstallRequest';
-import { city } from './city';
-import { fieldTechnician } from './fieldTechnician';
-import { province } from './province';
-import { zone } from './zone';
-import { loraAntennaPosition } from './assets/loraAntennaPosition';
-import { client } from './client';
-import { gatewayHousingType } from './assets/gateway/gatewayHousingType';
-import { satelliteModem } from './assets/gateway/satelliteModem';
-import { satelliteModemType } from './assets/gateway/sateliteModemType';
-import { satelliteAntenna } from './assets/gateway/satelliteAntenna';
-import { batteryType } from './assets/gpsNode/batteryType';
-import { gpsAntennaType } from './assets/gpsNode/gpsAntennaType';
-import { nodeHousingType } from './assets/gpsNode/nodeHousingType';
-import { nodeLoraAntennaType } from './assets/gpsNode/nodeLoraAntennaType';
-import { solarPanelType } from './assets/gpsNode/solarPanelType';
-import { pcbNode } from './assets/gpsNode/pcbNode';
-import { nodeFirmwareVersion } from './assets/gpsNode/nodeFirmwareVersion';
-import { nodeHardwareVersion } from './assets/gpsNode/nodeHardwareVersion';
-import { pcbGateway } from './assets/gateway/pcbGateway';
-import { gatewayFirmwareVersion } from './assets/gateway/gatewayFirmwareVersion';
-import { gatewayHardwareVersion } from './assets/gateway/gatewayHardwareVersion';
-import { assetType } from './assets/assetType';
+import { installUninstallRequest } from './schemas/installUninstallRequest';
+import { city } from './schemas/city';
+import { fieldTechnician } from './schemas/fieldTechnician';
+import { province } from './schemas/province';
+import { zone } from './schemas/zone';
+import { loraAntennaPosition } from './schemas/assets/loraAntennaPosition';
+import { client } from './schemas/client';
+import { gatewayHousingType } from './schemas/assets/gateway/gatewayHousingType';
+import { satelliteModem } from './schemas/assets/gateway/satelliteModem';
+import { satelliteModemType } from './schemas/assets/gateway/sateliteModemType';
+import { satelliteAntenna } from './schemas/assets/gateway/satelliteAntenna';
+import { batteryType } from './schemas/assets/gpsNode/batteryType';
+import { gpsAntennaType } from './schemas/assets/gpsNode/gpsAntennaType';
+import { nodeHousingType } from './schemas/assets/gpsNode/nodeHousingType';
+import { nodeLoraAntennaType } from './schemas/assets/gpsNode/nodeLoraAntennaType';
+import { solarPanelType } from './schemas/assets/gpsNode/solarPanelType';
+import { pcbNode } from './schemas/assets/gpsNode/pcbNode';
+import { nodeFirmwareVersion } from './schemas/assets/gpsNode/nodeFirmwareVersion';
+import { nodeHardwareVersion } from './schemas/assets/gpsNode/nodeHardwareVersion';
+import { pcbGateway } from './schemas/assets/gateway/pcbGateway';
+import { gatewayFirmwareVersion } from './schemas/assets/gateway/gatewayFirmwareVersion';
+import { gatewayHardwareVersion } from './schemas/assets/gateway/gatewayHardwareVersion';
+import { assetType } from './schemas/assets/assetType';
+import { workOrder } from './schemas/workOrder';
+import { fieldTechnicianWageType } from './schemas/fieldTechnicianWageType';
 
 export const lists = createSchema({
   Irrigator: irrigator,
@@ -66,6 +68,8 @@ export const lists = createSchema({
   GatewayFirmwareVersion: gatewayFirmwareVersion,
   GatewayHardwareVersion: gatewayHardwareVersion,
   AssetType: assetType,
+  WorkOrder: workOrder,
+  FieldTechnicianWageType: fieldTechnicianWageType,
   User: list({
     ui: {
       listView: {

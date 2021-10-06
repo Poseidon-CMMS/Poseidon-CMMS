@@ -1,46 +1,23 @@
 import { list } from '@keystone-next/keystone';
 
-import {
-    // Scalar types
-    checkbox,
-    integer,
-    json,
-    float,
-    password,
-    select,
-    text,
-    timestamp,
-  
-    // Relationship type
-    relationship,
-  
-    // Index types
-    autoIncrement,
-  
-    // Virtual type
-    virtual,
-  
-    // File types
-    file,
-    image,
-  } from '@keystone-next/keystone/fields';
+import { float, text, timestamp, relationship } from '@keystone-next/keystone/fields';
 import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
 
 export const hardwareIssue = list({
     ui: {
       listView: {
-        initialColumns: ['creationDate', 'diagnosticDate','closeIssueDate','TTR', 'comments'],
+        initialColumns: ['creationDate', 'diagnosticDate','closeIssueDate','TTR', 'comment'],
       },
     },
     hooks: {
-      validateInput: relationshipRequiredCheckerHook('gateway'),
+      validateInput: relationshipRequiredCheckerHook('irrigator'),
     },
     fields: {
       creationDate:  timestamp({ isRequired: true }),
       diagnosticDate:  timestamp({ isRequired: true }),
       closeIssueDate: timestamp({ isRequired: true }),
       TTR: float(),
-      comments: text(),
+      comment: text(),
       irrigator: relationship({
         ref: 'Irrigator.hdwIssue',
         ui: {

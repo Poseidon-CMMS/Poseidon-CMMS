@@ -1,7 +1,7 @@
 import { config } from '@keystone-next/keystone';
 import { statelessSessions } from '@keystone-next/keystone/session';
 
-import { lists } from './schemas/schema';
+import { lists } from './schema';
 import { withAuth, sessionSecret } from './auth';
 import { insertSeedData } from './seed-data';
 

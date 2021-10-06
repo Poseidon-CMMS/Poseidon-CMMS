@@ -1,11 +1,6 @@
 import { list } from '@keystone-next/keystone';
 
-import {
-    timestamp,
-    relationship,
-    text,
-    checkbox,
-  } from '@keystone-next/keystone/fields';
+import { relationship, text } from '@keystone-next/keystone/fields';
 
 export const satelliteAntenna = list({
     ui: {

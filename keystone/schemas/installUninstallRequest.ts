@@ -1,13 +1,6 @@
 import { list } from '@keystone-next/keystone';
 
-import {
-    // Scalar types
-    select,
-    timestamp,
-  
-    // Relationship type
-    relationship,
-  } from '@keystone-next/keystone/fields';
+import { select, timestamp, relationship } from '@keystone-next/keystone/fields';
 import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
 
 export const installUninstallRequest = list({ // TODO: falta definir sus relaciones
@@ -42,6 +35,16 @@ export const installUninstallRequest = list({ // TODO: falta definir sus relacio
         ui: {
           displayMode: 'segmented-control',
         },
+      }),
+      workOrder: relationship({
+        ref: 'WorkOrder.installUninstallRequest',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['workDate', 'kmTraveled', 'comment'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: false,
       }),
     },
   });

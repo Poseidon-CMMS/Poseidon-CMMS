@@ -1,9 +1,6 @@
 import { list } from '@keystone-next/keystone';
 
-import {
-    text,
-    relationship
-    } from '@keystone-next/keystone/fields';
+import { text, relationship } from '@keystone-next/keystone/fields';
 
 import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
 

@@ -1,21 +1,12 @@
 import { list } from '@keystone-next/keystone';
 
-import {
-    // Scalar types
-    checkbox,
-    float,
-    select,
-    text,
-
-    // Relationship type
-    relationship,
-  } from '@keystone-next/keystone/fields';
+import { checkbox, float, select, text, relationship } from '@keystone-next/keystone/fields';
 import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
 
 export const irrigator = list({
     ui: {
       listView: {
-        initialColumns: ['name', 'lat', 'long', 'status', 'enabled', 'comments'],
+        initialColumns: ['name', 'lat', 'long', 'status', 'enabled', 'comment'],
       },
     },
     fields: {
@@ -33,7 +24,7 @@ export const irrigator = list({
         },
       }),
       enabled: checkbox({ isRequired: true, defaultValue: false }),
-      comments: text({ isRequired: false }),
+      comment: text({ isRequired: false }),
 
       //6 relations
       gateway: relationship({
@@ -83,7 +74,7 @@ export const irrigator = list({
         ref: 'HdwIssue.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creationDate', 'comments'],
+          cardFields: ['creationDate', 'comment'],
           linkToItem: true,
           inlineConnect: true,
         },

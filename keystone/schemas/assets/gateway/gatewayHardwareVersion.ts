@@ -1,7 +1,6 @@
 import { list } from "@keystone-next/keystone";
 
 import { relationship, text } from "@keystone-next/keystone/fields";
-import { version } from "typescript";
 
 export const gatewayHardwareVersion = list({
   ui: {

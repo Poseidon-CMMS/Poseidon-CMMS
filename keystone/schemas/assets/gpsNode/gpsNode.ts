@@ -1,10 +1,8 @@
 import { list } from '@keystone-next/keystone';
 
-import {
-    timestamp,
-    relationship,
-    text,
-  } from '@keystone-next/keystone/fields';
+import { timestamp, relationship, text } from '@keystone-next/keystone/fields';
+
+import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
 
 export const gpsNode = list({ // TODO: falta definir sus relaciones
     ui: {

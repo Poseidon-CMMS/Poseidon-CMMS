@@ -1,12 +1,12 @@
 import { list } from '@keystone-next/keystone';
 
-import { timestamp, relationship, text } from '@keystone-next/keystone/fields';
+import { timestamp, relationship, text, select } from '@keystone-next/keystone/fields';
 import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
 
 export const pcbGateway = list({
     ui: {
       listView: {
-        initialColumns: ['fabricationDate'],
+        initialColumns: ['integrationId', 'fabricationDate', 'status'],
       },
     },
     hooks: {
@@ -19,6 +19,16 @@ export const pcbGateway = list({
       integrationId: text({isRequired: true, isIndexed: 'unique'}),
       fabricationDate: timestamp({ isRequired: true }),
       picture: text({isRequired: false}),
+      status: select({
+        isRequired: true,
+        options: [
+          { label: 'OK', value: 'ok' },
+          { label: 'Roto', value: 'broken' },
+        ],
+        ui: {
+          displayMode: 'segmented-control',
+        },
+      }),
       gateway: relationship({
         ref: 'Gateway.pcbGateway',
         ui: {

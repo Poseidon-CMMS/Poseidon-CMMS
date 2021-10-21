@@ -1,7 +1,7 @@
 import { list } from '@keystone-next/keystone';
 
 import { text, relationship, checkbox, decimal} from '@keystone-next/keystone/fields';
-import {relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
+import {relationshipRequiredCheckerHook } from '../../hooks/relationshipRequiredCheckerHook';
 
 export const fieldTechnician = list({
     ui: {

@@ -2,7 +2,7 @@ import { list } from "@keystone-next/keystone";
 
 import { text } from "@keystone-next/keystone/fields";
 
-export const loraAntennaPosition = list({
+export const loraAntennaType = list({
   ui: {
     isHidden: true,
     listView: {

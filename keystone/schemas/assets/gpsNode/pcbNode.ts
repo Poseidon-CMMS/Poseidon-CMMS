@@ -1,6 +1,6 @@
 import { list } from '@keystone-next/keystone';
 
-import { timestamp, relationship, text } from '@keystone-next/keystone/fields';
+import { timestamp, relationship, text, select } from '@keystone-next/keystone/fields';
 import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
 
 export const pcbNode = list({
@@ -18,12 +18,23 @@ export const pcbNode = list({
     fields: {
       integrationId: text({isRequired: true, isIndexed: 'unique'}),
       fabricationDate: timestamp({ isRequired: true }),
+      picture: text(),
+      status: select({
+        isRequired: true,
+        options: [
+          { label: 'OK', value: 'ok' },
+          { label: 'Roto', value: 'broken' },
+        ],
+        ui: {
+          displayMode: 'segmented-control',
+        },
+      }),
       gpsNode: relationship({
         ref: 'GpsNode.pcbNode',
         ui: {
           createView: {
             fieldMode: 'hidden'
-        }
+          }
         },
         many: false,
       }),

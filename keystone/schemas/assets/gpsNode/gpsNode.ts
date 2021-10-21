@@ -4,7 +4,7 @@ import { timestamp, relationship, text } from '@keystone-next/keystone/fields';
 
 import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
 
-export const gpsNode = list({ // TODO: falta definir sus relaciones
+export const gpsNode = list({
     ui: {
       listView: {
         initialColumns: ['fabricationDate'],
@@ -12,9 +12,10 @@ export const gpsNode = list({ // TODO: falta definir sus relaciones
     },
     fields: {
       fabricationDate: timestamp({ isRequired: true }), //fecha de alta
+      integrationId: text({isRequired: true, isIndexed: 'unique'}),
       internalPhoto: text(),
       externalPhoto: text(),
-      irrigator: relationship({ //TODO faltan todas las relaciones con las entidades chiquitas
+      irrigator: relationship({
         ref: 'Irrigator.gpsNode',
         ui: {
           displayMode: 'cards',
@@ -23,14 +24,6 @@ export const gpsNode = list({ // TODO: falta definir sus relaciones
           inlineConnect: true,
         },
         many: false,
-      }),
-      loraAntennaPosition: relationship({
-        ref: 'LoraAntennaPosition',
-        ui: {
-          displayMode: 'select',
-          labelField: 'name'
-        },
-        many: false
       }),
       batteryType: relationship({
         ref: 'BatteryType',
@@ -56,8 +49,8 @@ export const gpsNode = list({ // TODO: falta definir sus relaciones
         },
         many: false
       }),
-      nodeLoraAntennaType: relationship({
-        ref: 'NodeLoraAntennaType',
+      loraAntennaType: relationship({
+        ref: 'LoraAntennaType',
         ui: {
           displayMode: 'select',
           labelField: 'name'

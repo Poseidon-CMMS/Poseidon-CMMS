@@ -80,5 +80,15 @@ export const irrigator = list({
         },
         many: true,
       }),
+      pressureSensor: relationship({
+        ref: 'PressureSensor.irrigator',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['manufacturerId', 'status', 'order'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: false,
+      })
     },
   });

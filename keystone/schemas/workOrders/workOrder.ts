@@ -23,5 +23,15 @@ export const workOrder = list({
         },
         many: true,
       }),
+    repair: relationship({
+      ref: 'Repair.workOrder',
+      ui: {
+        displayMode: 'cards',
+        cardFields: ['date', 'status'],
+        linkToItem: true,
+        inlineConnect: true,
+      },
+      many: true,
+    }),
   },
 });

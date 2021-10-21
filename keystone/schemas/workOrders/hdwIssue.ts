@@ -1,7 +1,7 @@
 import { list } from '@keystone-next/keystone';
 
 import { float, text, timestamp, relationship } from '@keystone-next/keystone/fields';
-import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
+import { relationshipRequiredCheckerHook } from '../../hooks/relationshipRequiredCheckerHook';
 
 export const hardwareIssue = list({
     ui: {
@@ -27,6 +27,16 @@ export const hardwareIssue = list({
           inlineConnect: true,
         },
         many: true,
+      }),
+      repair: relationship({
+        ref: 'Repair.hdwIssue',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['date', 'status'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: false,
       }),
       
     },

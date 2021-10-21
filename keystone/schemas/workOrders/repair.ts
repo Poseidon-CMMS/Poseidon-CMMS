@@ -1,24 +1,24 @@
 import { list } from '@keystone-next/keystone';
 
 import { select, timestamp, relationship } from '@keystone-next/keystone/fields';
-import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
+import { relationshipRequiredCheckerHook } from '../../hooks/relationshipRequiredCheckerHook';
 
-export const installUninstallRequest = list({ // TODO: falta definir sus relaciones
+export const repair = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['creationDate', 'status','irrigator'],
+        initialColumns: ['date', 'status','workOrder'],
       },
     },
     hooks: {
-        validateInput: relationshipRequiredCheckerHook('irrigator'),
+        validateInput: relationshipRequiredCheckerHook('workOrder'),
     },
     fields: {
-      creationDate: timestamp({ isRequired: true }), //fecha de alta
-      irrigator: relationship({
-        ref: 'Irrigator.installUninstallRequest',
+      date: timestamp({ isRequired: true }), //fecha de alta
+      hdwIssue: relationship({
+        ref: 'HdwIssue.repair',
         ui: {
           displayMode: 'cards',
-          cardFields: ['name', 'lat', 'long', 'status'],
+          cardFields: ['creationDate', 'irrigator', 'TTR', 'comment'],
           linkToItem: true,
           inlineConnect: true,
         },
@@ -37,7 +37,7 @@ export const installUninstallRequest = list({ // TODO: falta definir sus relacio
         },
       }),
       workOrder: relationship({
-        ref: 'WorkOrder.installUninstallRequest',
+        ref: 'WorkOrder.repair',
         ui: {
           displayMode: 'cards',
           cardFields: ['workDate', 'kmTraveled', 'comment'],

@@ -1,15 +1,16 @@
 import { list } from '@keystone-next/keystone';
 
-import { timestamp, relationship } from '@keystone-next/keystone/fields';
+import { timestamp, relationship, text } from '@keystone-next/keystone/fields';
 
 export const gateway = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['fabricationDate', 'housingType', 'loraAntennaPosition'],
+        initialColumns: ['fabricationDate', 'housingType'],
       },
     },
     fields: {
       fabricationDate: timestamp({ isRequired: true }), //fecha de alta
+      integrationId: text({isRequired: true, isIndexed: "unique"}),
       irrigator: relationship({
         ref: 'Irrigator.gateway',
         ui: {
@@ -19,13 +20,6 @@ export const gateway = list({ // TODO: falta definir sus relaciones
           inlineConnect: true,
         },
         many: false,
-      }),
-      loraAntennaPosition: relationship({
-        ref: 'LoraAntennaPosition',
-        ui: {
-          displayMode: 'select',
-          labelField: 'name'
-        }
       }),
       housingType: relationship({
         ref: 'GatewayHousingType',
@@ -61,6 +55,14 @@ export const gateway = list({ // TODO: falta definir sus relaciones
         }
         },
         many: false,
+      }),
+      loraAntennaType: relationship({
+        ref: 'LoraAntennaType',
+        ui: {
+          displayMode: 'select',
+          labelField: 'name'
+        },
+        many: false
       }),
     },
   });

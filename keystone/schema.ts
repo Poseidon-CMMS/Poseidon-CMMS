@@ -10,15 +10,13 @@ import { document } from '@keystone-next/fields-document';
 import { irrigator } from './schemas/irrigator'; 
 import { gateway } from './schemas/assets/gateway/gateway'; 
 import { gpsNode } from './schemas/assets/gpsNode/gpsNode';
-import { hardwareIssue } from './schemas/hdwIssue'; 
+import { hardwareIssue } from './schemas/workOrders/hdwIssue'; 
 import { field as fieldDomainEntity } from './schemas/field'
-import { field } from '@graphql-ts/schema/dist/declarations/src/api-with-context';
-import { installUninstallRequest } from './schemas/installUninstallRequest';
+import { installUninstallRequest } from './schemas/workOrders/installUninstallRequest';
 import { city } from './schemas/city';
-import { fieldTechnician } from './schemas/fieldTechnician';
+import { fieldTechnician } from './schemas/users/fieldTechnician';
 import { province } from './schemas/province';
 import { zone } from './schemas/zone';
-import { loraAntennaPosition } from './schemas/assets/loraAntennaPosition';
 import { client } from './schemas/client';
 import { gatewayHousingType } from './schemas/assets/gateway/gatewayHousingType';
 import { satelliteModem } from './schemas/assets/gateway/satelliteModem';
@@ -27,7 +25,7 @@ import { satelliteAntenna } from './schemas/assets/gateway/satelliteAntenna';
 import { batteryType } from './schemas/assets/gpsNode/batteryType';
 import { gpsAntennaType } from './schemas/assets/gpsNode/gpsAntennaType';
 import { nodeHousingType } from './schemas/assets/gpsNode/nodeHousingType';
-import { nodeLoraAntennaType } from './schemas/assets/gpsNode/nodeLoraAntennaType';
+import { loraAntennaType } from './schemas/assets/loraAntennaType';
 import { solarPanelType } from './schemas/assets/gpsNode/solarPanelType';
 import { pcbNode } from './schemas/assets/gpsNode/pcbNode';
 import { nodeFirmwareVersion } from './schemas/assets/gpsNode/nodeFirmwareVersion';
@@ -36,8 +34,11 @@ import { pcbGateway } from './schemas/assets/gateway/pcbGateway';
 import { gatewayFirmwareVersion } from './schemas/assets/gateway/gatewayFirmwareVersion';
 import { gatewayHardwareVersion } from './schemas/assets/gateway/gatewayHardwareVersion';
 import { assetType } from './schemas/assets/assetType';
-import { workOrder } from './schemas/workOrder';
-import { fieldTechnicianWageType } from './schemas/fieldTechnicianWageType';
+import { workOrder } from './schemas/workOrders/workOrder';
+import { fieldTechnicianWageType } from './schemas/users/fieldTechnicianWageType';
+import { pressureSensorType } from './schemas/assets/pressureSensor/pressureSensorType';
+import { pressureSensor } from './schemas/assets/pressureSensor/pressureSensor';
+import { repair } from './schemas/workOrders/repair';
 
 export const lists = createSchema({
   Irrigator: irrigator,
@@ -50,7 +51,6 @@ export const lists = createSchema({
   HdwIssue: hardwareIssue,
   Province: province,
   Zone: zone,
-  LoraAntennaPosition: loraAntennaPosition,  
   Client: client,
   GatewayHousingType: gatewayHousingType,
   SatelliteModem: satelliteModem,
@@ -59,7 +59,7 @@ export const lists = createSchema({
   BatteryType: batteryType,
   GpsAntennaType: gpsAntennaType,
   NodeHousingType: nodeHousingType,
-  NodeLoraAntennaType: nodeLoraAntennaType,
+  LoraAntennaType: loraAntennaType,
   SolarPanelType: solarPanelType,
   PcbNode: pcbNode,
   NodeFirmwareVersion: nodeFirmwareVersion,
@@ -70,6 +70,10 @@ export const lists = createSchema({
   AssetType: assetType,
   WorkOrder: workOrder,
   FieldTechnicianWageType: fieldTechnicianWageType,
+  PressureSensorType: pressureSensorType,
+  PressureSensor: pressureSensor,
+  Repair: repair,
+
   User: list({
     ui: {
       listView: {

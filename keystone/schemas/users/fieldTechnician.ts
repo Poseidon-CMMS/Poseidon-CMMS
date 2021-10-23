@@ -34,9 +34,16 @@ export const fieldTechnician = list({
         ref: 'FieldTechnicianWageType.fieldTechnician',
         ui: {
           displayMode: 'select',
-
         },
         many: false
-      })
+      }),
+      storageLocation: relationship({
+        ref: 'StorageLocation.fieldTechnician',
+        ui: {
+          displayMode: 'select',
+          labelField: 'name',
+        },
+        many: false,
+      }),
     },
   });

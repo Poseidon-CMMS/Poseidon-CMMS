@@ -6,7 +6,7 @@ import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequ
 export const pcbNode = list({
     ui: {
       listView: {
-        initialColumns: ['fabricationDate'],
+        initialColumns: ['integrationId', 'fabricationDate'],
       },
     },
     hooks: {
@@ -53,5 +53,13 @@ export const pcbNode = list({
           labelField: 'version'
         },
         many: false
+      }),
+      storageLocation: relationship({
+        ref: 'StorageLocation.pcbNode',
+        ui: {
+          displayMode: 'select',
+          labelField: 'name',
+        },
+        many: false,
       }),
   }});

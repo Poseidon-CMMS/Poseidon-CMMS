@@ -41,6 +41,7 @@ import { pressureSensor } from './schemas/assets/pressureSensor/pressureSensor';
 import { repair } from './schemas/workOrders/repair';
 import { repairType } from './schemas/workOrders/repairType';
 import { hdwIssueStatus } from './schemas/workOrders/hdwIssueStatus';
+import { storageLocation } from './schemas/assets/storageLocation';
 
 export const lists = createSchema({
   Irrigator: irrigator,
@@ -77,6 +78,7 @@ export const lists = createSchema({
   Repair: repair,
   RepairType: repairType,
   HdwIssueStatus: hdwIssueStatus,
+  StorageLocation: storageLocation,
 
   User: list({
     ui: {

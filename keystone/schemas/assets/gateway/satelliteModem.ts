@@ -32,5 +32,12 @@ export const satelliteModem = list({ // TODO: falta definir sus relaciones
         },
         many: false,
       }),
+      storageLocation: relationship({
+        ref: 'StorageLocation.satelliteModem',
+        ui: {
+          displayMode: 'select',
+          labelField: 'name'
+        }
+      }),
     },
   });

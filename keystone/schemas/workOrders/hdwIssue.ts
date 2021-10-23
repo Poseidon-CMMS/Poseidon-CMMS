@@ -38,6 +38,14 @@ export const hardwareIssue = list({
         },
         many: false,
       }),
+      hdwIssueStatus: relationship({
+        ref: 'HdwIssueStatus',
+        ui: {
+          displayMode: 'select',
+          labelField: 'name'
+        },
+        many: false
+      }),
       
     },
   });

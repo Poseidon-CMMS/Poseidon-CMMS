@@ -1,15 +1,16 @@
 import { KeystoneContext } from "@keystone-next/keystone/types";
-import { assetTypes } from "./data";
-import { pressureSensors } from "./data";
-import { nodeFirmwareVersions } from "./data";
-import { nodeHardwareVersions } from "./data";
-import { solarPanelTypes } from "./data";
-import { loraAntennaTypes } from "./data";
-import { gpsAntennaTypes } from "./data";
-import { housingTypes } from "./data";
+import { 
+  assetTypes, batteryTypes, 
+  hdwIssueStatuses, gpsAntennaTypes,
+  pressureSensorTypes, nodeFirmwareVersions,
+  nodeHardwareVersions, nodeHousingTypes, 
+  gatewayHousingTypes, solarPanelTypes, loraAntennaTypes } from "./data";
 
-const SYSTEM_SIGNATURE = '🌊 PoseidonCMMS: ';
-const SYSTEM_SEPARATOR = '--------------------------------------------';
+import * as provinces from './geographic/provincias.json';
+import * as cities from './geographic/localidades.json';
+
+const SYSTEM_SIGNATURE = ' 🌊 PoseidonCMMS: ';
+const SYSTEM_DIVIDER = '----------------------------------------------------';
 
 type AssetTypeProps = [{
   name: string;
@@ -20,7 +21,11 @@ type PressureSensorProps = [{
 }];
 
 type NodeFirmwareVersion = [{
-  name: string;
+  version: string;
+}];
+
+type NodeHardwareVersion = [{
+  version: string;
 }];
 
 type SolarPanelType = [{
@@ -35,111 +40,116 @@ type LoraAntennaType = [{
   name: string;
 }];
 
-type NodeHardwareVersion = [{
-  name: string;
-}];
-
 type HousingType = [{
   name: string;
 }];
 
+type HdwIssueStatus=[{
+  name: string;
+}]
+
+
+const modelsToSeed = [
+  {
+    tableName: 'AssetType',
+    label: 'asset types',
+    data: assetTypes
+  },
+  {
+    tableName: 'PressureSensorType',
+    label: 'pressure sensor types',
+    data: pressureSensorTypes
+  },
+  {
+    tableName: 'NodeFirmwareVersion',
+    label: 'node firmware versions',
+    data: nodeFirmwareVersions
+  },
+  {
+    tableName: 'NodeHardwareVersion',
+    label: 'node hardware versions',
+    data: nodeHardwareVersions
+  },
+  {
+    tableName: 'SolarPanelType',
+    label: 'solar panel types',
+    data: solarPanelTypes
+  },
+  {
+    tableName: 'BatteryType',
+    label: 'battery types',
+    data: batteryTypes
+  },
+  {
+    tableName: 'GpsAntennaType',
+    label: 'gps antenna types',
+    data: gpsAntennaTypes
+  },
+  {
+    tableName: 'LoraAntennaType',
+    label: 'lora antenna types',
+    data: loraAntennaTypes
+  },
+  {
+    tableName: 'GatewayHousingType',
+    label: 'gateway housing types',
+    data: gatewayHousingTypes
+  },
+  {
+    tableName: 'NodeHousingType',
+    label: 'node housing types',
+    data: nodeHousingTypes
+  },
+  {
+    tableName: 'HdwIssueStatus',
+    label: 'hardware issue statuses',
+    data: hdwIssueStatuses
+  },
+  
+]
 
 export async function insertSeedData(context: KeystoneContext) {
-  console.log(`${SYSTEM_SIGNATURE}:🌱----- Inserting seed data -----🌱`);
-  console.log(SYSTEM_SEPARATOR);
 
-  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding asset types🌱`);
-  console.log(SYSTEM_SEPARATOR);
-  //@ts-ignore
-  await createAssetTypes(context, assetTypes);
-  
-  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding pressure sensors🌱`);
-  console.log(SYSTEM_SEPARATOR);
-  //@ts-ignore
-  await createPresureSensors(context, pressureSensors);
-  
-  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding node firmware versions🌱`);
-  console.log(SYSTEM_SEPARATOR);
-  //@ts-ignore
-  await createNodeFirmwareVersions(context, nodeFirmwareVersions);
-  
-  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding node hardware versions🌱`);
-  console.log(SYSTEM_SEPARATOR);
-  //@ts-ignore
-  await createNodeHardwareVersions(context, nodeHardwareVersions);
-  
-  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding solar panel types🌱`);
-  console.log(SYSTEM_SEPARATOR);
-  //@ts-ignore
-  await createSolarPanelTypes(context, solarPanelTypes);
-  
-  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding battery types🌱`);
-  console.log(SYSTEM_SEPARATOR);
-  //@ts-ignore
-  await createBatteryTypes(context, batteryTypes);
+  console.log(SYSTEM_DIVIDER);
+  console.log(`${SYSTEM_SIGNATURE}:🌱Inserting seed data🌱`);
+  console.log(SYSTEM_DIVIDER);
 
-  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding gps antenna types🌱`);
-  console.log(SYSTEM_SEPARATOR);
-  //@ts-ignore
-  await createGpsAntennaTypes(context, gpsAntennaTypes);
-
-  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding lora antenna types`);
-  console.log(SYSTEM_SEPARATOR);
-  //@ts-ignore
-  await createLoraAntennaTypes(context, loraAntennaTypes);
-
-  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding housing types`);
-  console.log(SYSTEM_SEPARATOR);
-  //@ts-ignore
-  await createHousingTypes(context, housingTypes);
-
-}  
-
-const createAssetTypes = async (context: KeystoneContext, data: AssetTypeProps) => {// TODO: Revisar caminos no felices
-  await context.lists.AssetType.createMany({
-      data: data,
-    });
+  for (const model of modelsToSeed){
+    console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding ${model.label}🌱`);
+    console.log(SYSTEM_DIVIDER);
+    //@ts-ignore
+    await insertData(context, model.tableName, model.data);
   };
 
-const createPresureSensors = async (context: KeystoneContext, data: PressureSensorProps) => {// TODO: Revisar caminos no felices
-  await context.lists.PressureSensor.createMany({
-      data: data,
-    });
-  };
-  
-const createNodeFirmwareVersions = async (context: KeystoneContext, data: NodeFirmwareVersion) => {// TODO: Revisar caminos no felices
-  await context.lists.NodeFirmwareVersion.createMany({
-      data: data,
-    });
-  };
-  
-const createNodeHardwareVersions = async (context: KeystoneContext, data: NodeHardwareVersion) => {// TODO: Revisar caminos no felices
-  await context.lists.NodeHardwareVersion.createMany({
-      data: data,
-    });
-  };
-  
-const createSolarPanelTypes = async (context: KeystoneContext, data: SolarPanelType) => {// TODO: Revisar caminos no felices
-  await context.lists.SolarPanelType.createMany({
-      data: data,
-    });
-  };
-  
-const createBatteryTypes = async (context: KeystoneContext, data: BatteryType) => {// TODO: Revisar caminos no felices
-  await context.lists.BatteryType.createMany({
-      data: data,
-    });
-  };
+  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding provinces🌱`);
+  console.log(SYSTEM_DIVIDER);
+  await insertProvinces(context);
 
-const createLoraAntennaTypes = async (context: KeystoneContext, data: LoraAntennaType) => {// TODO: Revisar caminos no felices
-  await context.lists.BatteryType.createMany({
+  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding cities🌱`);
+  console.log(SYSTEM_DIVIDER);
+  await insertCities(context);
+
+  console.log(SYSTEM_DIVIDER);
+  console.log(`${SYSTEM_SIGNATURE}:🌱Data inserted🌱`);
+  console.log(SYSTEM_DIVIDER);
+}
+
+const insertProvinces = async (context: KeystoneContext) => {
+  const parsedProvinces = provinces.provincias.map(province => ({name: province.nombre}))
+  await insertData(context, 'Province', parsedProvinces); 
+}
+
+const insertCities = async (context: KeystoneContext) => {
+  const dbProvinces = await context.lists.Province.findMany({query: 'id name'});
+  const parsedCities = cities.localidades.map(city => {
+    const cityProvince = dbProvinces.find(p => p.name === city.provincia.nombre);
+    return {name: city.nombre, province: {connect: {id: cityProvince?.id}}};
+  })
+  await insertData(context, 'City', parsedCities);
+}
+
+const insertData = async (context: KeystoneContext, schema: string, data: any) => {// TODO: Revisar caminos no felices
+  await context.lists[schema].createMany({
     data: data,
   });
 };
-
-const createHousingTypes = async (context: KeystoneContext, data: HousingType) => {// TODO: Revisar caminos no felices
-  await context.lists.HousingType.createMany({
-    data: data,
-  });
-};
-  

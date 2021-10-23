@@ -36,6 +36,14 @@ export const repair = list({ // TODO: falta definir sus relaciones
           displayMode: 'segmented-control',
         },
       }),
+      repairType: relationship({
+        ref: 'RepairType',
+        ui: {
+          displayMode: 'select',
+          labelField: 'name'
+        },
+        many: false
+      }),
       workOrder: relationship({
         ref: 'WorkOrder.repair',
         ui: {

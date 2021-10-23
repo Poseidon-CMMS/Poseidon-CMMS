@@ -5,7 +5,7 @@ export const assetTypes = [
   { name:  'Sensor de Presion'}
 ]
 
-export const pressureSensors = [
+export const pressureSensorTypes = [
   { name: 'GPT230 0-6bar'},
   { name: 'FST800-211A 0-6'},
   { name: 'Sensor viejo 0-4'},
@@ -53,13 +53,19 @@ export const gpsAntennaTypes = [
   { name : 'Hongsense - GPS ufl'}
 ]
 
-export const housingTypes = [
-  { name : 'Rotomoldeo v1.0'}
+export const nodeHousingTypes = [
+  { name : 'Rotomoldeo v1.0'},
+  { name: 'Roker'},
 ]
+
+export const gatewayHousingTypes = [
+  { name : 'Rotomoldeo v1.0'},
+]
+
 
 // --- END ASSETS ---
 
-// --- BUSSINES ---
+// --- BUSINESS ---
 
 export const SLA = [
   { 
@@ -90,6 +96,14 @@ export const periciaTypes = [ //TODO: Traducir y ver con mauri si hay que crear 
     loraPower: true,
     pressureSensor: true
   },
+]
+
+export const hdwIssueStatuses = [
+  { name: 'In field'},
+  { name: 'Assigned'},
+  { name: 'Out of field'},
+  { name: 'Closed'},
+
 ]
 
 // --- END OT ---

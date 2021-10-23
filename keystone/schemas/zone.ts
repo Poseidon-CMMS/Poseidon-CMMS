@@ -5,11 +5,12 @@ import { checkbox, text, relationship } from '@keystone-next/keystone/fields';
 export const zone = list({
     ui: {
       listView: {
-        initialColumns: ['name', 'isForeign'],
+        initialColumns: ['code', 'name', 'isForeign'],
       },
     },
     fields: {
       name: text({ isRequired: true }),
+      code: text(),
       isForeign: checkbox({ isRequired: true, defaultValue: false}),
       field: relationship({
         ref: 'Field.zone',

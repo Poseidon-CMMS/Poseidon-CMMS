@@ -82,7 +82,7 @@ export const SLA = [
   },
 ]
 
-// --- END BUSSINES ---
+// --- END BUSINESS ---
 
 // --- OT ---
 
@@ -107,3 +107,28 @@ export const hdwIssueStatuses = [
 ]
 
 // --- END OT ---
+
+
+// --- GEOGRAPHIC ---
+export const creaZones =[
+  {name: 'Centro', code: 'CEN'},
+  {name: 'Chaco Santiagueño', code: 'CHS'},
+  {name: 'Córdoba Norte', code: 'COR'},
+  {name: 'Este', code: 'EST'},
+  {name: 'Litoral Norte', code: 'LIN'},
+  {name: 'Litoral Sur', code: 'LIS'},
+  {name: 'Mar y Sierras', code: 'MYS'},
+  {name: 'Norte de Buenos Aires', code: 'NBA'},
+  {name: 'Noroeste Argentino', code: 'CEN'},
+  {name: 'Norte de Santa Fé', code: 'NSF'},
+  {name: 'Oeste Arenoso', code: 'OAR'},
+  {name: 'Oeste', code: 'OES'},
+  {name: 'Patagonia', code: 'PAT'},
+  {name: 'Semiárida', code: 'SAR'},
+  {name: 'Santa Fé Centro', code: 'SFC'},
+  {name: 'Sur de Santa Fé', code: 'SSF'},
+  {name: 'Sudeste', code: 'SDE'},
+  {name: 'Sudoeste', code: 'SUO'},
+  {name: 'Valles Cordilleranos', code: 'VAC'},
+]
+// --- END GROGRAPHIC ---

@@ -22,7 +22,7 @@ export const fieldTechnician = list({
         ref: 'Zone.fieldTechnician',
         ui: {
           displayMode: 'cards',
-          cardFields: ['name', 'isForeign'],
+          cardFields: ['code', 'name', 'isForeign'],
           inlineEdit: { fields: ['name', 'isForeign'] },
           linkToItem: true,
           inlineConnect: true,

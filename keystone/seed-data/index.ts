@@ -4,7 +4,8 @@ import {
   hdwIssueStatuses, gpsAntennaTypes,
   pressureSensorTypes, nodeFirmwareVersions,
   nodeHardwareVersions, nodeHousingTypes, 
-  gatewayHousingTypes, solarPanelTypes, loraAntennaTypes } from "./data";
+  gatewayHousingTypes, solarPanelTypes,
+  loraAntennaTypes, creaZones } from "./data";
 
 import * as provinces from './geographic/provincias.json';
 import * as cities from './geographic/localidades.json';
@@ -104,6 +105,11 @@ const modelsToSeed = [
     tableName: 'HdwIssueStatus',
     label: 'hardware issue statuses',
     data: hdwIssueStatuses
+  },
+  {
+    tableName: 'Zone',
+    label: 'CREA zones',
+    data: creaZones
   },
   
 ]

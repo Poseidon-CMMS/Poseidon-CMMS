@@ -35,7 +35,6 @@ import { gatewayFirmwareVersion } from './schemas/assets/gateway/gatewayFirmware
 import { gatewayHardwareVersion } from './schemas/assets/gateway/gatewayHardwareVersion';
 import { assetType } from './schemas/assets/assetType';
 import { workOrder } from './schemas/workOrders/workOrder';
-import { fieldTechnicianWageType } from './schemas/users/fieldTechnicianWageType';
 import { pressureSensorType } from './schemas/assets/pressureSensor/pressureSensorType';
 import { pressureSensor } from './schemas/assets/pressureSensor/pressureSensor';
 import { repair } from './schemas/workOrders/repair';
@@ -72,7 +71,6 @@ export const lists = createSchema({
   GatewayHardwareVersion: gatewayHardwareVersion,
   AssetType: assetType,
   WorkOrder: workOrder,
-  FieldTechnicianWageType: fieldTechnicianWageType,
   PressureSensorType: pressureSensorType,
   PressureSensor: pressureSensor,
   Repair: repair,

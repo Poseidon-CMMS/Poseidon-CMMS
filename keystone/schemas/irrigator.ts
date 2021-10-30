@@ -6,10 +6,11 @@ import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCh
 export const irrigator = list({
     ui: {
       listView: {
-        initialColumns: ['name', 'lat', 'long', 'status', 'enabled', 'comment'],
+        initialColumns: ['integrationID','name', 'lat', 'long', 'status', 'enabled', 'comment'],
       },
     },
     fields: {
+      integrationID: text({ isRequired: true }),
       name: text({ isRequired: true }),
       lat: float({ isRequired: true }),
       long: float({ isRequired: true }),

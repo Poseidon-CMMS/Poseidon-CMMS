@@ -26,7 +26,7 @@ export const zone = list({
         ref: 'FieldTechnician.zone',
         ui: {
           displayMode: 'cards',
-          cardFields: ['name', 'email', 'isSeasonal'],
+          cardFields: ['name', 'email'],
           linkToItem: true,
           inlineConnect: true,
         },

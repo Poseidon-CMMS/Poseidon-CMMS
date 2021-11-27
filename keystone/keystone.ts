@@ -14,6 +14,7 @@ const session = statelessSessions({
 
 export default withAuth(
   config({
+
     db: {
       provider: 'postgresql',
       url: process.env.DATABASE_URL || ' ',
@@ -30,5 +31,10 @@ export default withAuth(
     },
     lists,
     session,
+    server: {
+      cors: {
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS'
+      }
+    }
   })
 );

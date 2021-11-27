@@ -6,7 +6,7 @@ import {relationshipRequiredCheckerHook } from '../../hooks/relationshipRequired
 export const fieldTechnician = list({
     ui: {
       listView: {
-        initialColumns: ['name', 'email', 'isSeasonal', 'seasonalWage'],
+        initialColumns: ['name', 'email'],
       },
     },
     hooks: {
@@ -16,8 +16,6 @@ export const fieldTechnician = list({
     fields: {
       name: text({ isRequired: true }),
       email: text({ isRequired: true }),
-      isSeasonal: checkbox({ isRequired: true, defaultValue: false}),
-      seasonalWage: decimal({ isRequired: false }),
       zone: relationship({
         ref: 'Zone.fieldTechnician',
         ui: {
@@ -29,13 +27,6 @@ export const fieldTechnician = list({
           inlineCreate: { fields: ['name', 'isForeign'] },
         },
         many: true,
-      }),
-      wageType: relationship({ // Solo para tecnicos con isSeasonal = false
-        ref: 'FieldTechnicianWageType.fieldTechnician',
-        ui: {
-          displayMode: 'select',
-        },
-        many: false
       }),
       storageLocation: relationship({
         ref: 'StorageLocation.fieldTechnician',

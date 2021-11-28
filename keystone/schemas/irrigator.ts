@@ -1,6 +1,7 @@
 import { list } from '@keystone-next/keystone';
 
-import { checkbox, float, select, text, relationship } from '@keystone-next/keystone/fields';
+import { graphql } from '@keystone-next/keystone/types';
+import { checkbox, float, select, text, relationship, virtual } from '@keystone-next/keystone/fields';
 import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
 
 export const irrigator = list({
@@ -90,6 +91,17 @@ export const irrigator = list({
           inlineConnect: true,
         },
         many: false,
-      })
+      }),
+      transmissionStatus: virtual({
+        field: graphql.field({
+          type: graphql.String,
+          async resolve(item, args, context) {
+            const later = (delay: number, value: string) :Promise<string> =>
+                  new Promise(resolve => setTimeout(resolve, delay, value));
+    
+            return await  later(300,Math.random()>0.5?"transmitting":"error");
+          },
+        }),
+      }),
     },
   });

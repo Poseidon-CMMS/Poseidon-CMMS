@@ -54,9 +54,6 @@ jobs:
           # For more information look at https://devcenter.heroku.com/articles/process-model
           process_type: web
           
-        env:
-          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
-          
    
           
 ### ⬆ IMPORTANT PART ⬆ ###

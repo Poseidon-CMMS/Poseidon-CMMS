@@ -23,8 +23,6 @@ FROM node:${NODE_VERSION}-alpine
 WORKDIR /home/node
 
 COPY --from=build /home/node /home/node
-ENV SESSION_SECRET=${SESSION_SECRET}
-
 EXPOSE 3000
 
 CMD ["npm", "run", "start"]

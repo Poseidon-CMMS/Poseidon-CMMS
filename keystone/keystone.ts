@@ -19,7 +19,7 @@ export default withAuth(
       provider: 'postgresql',
       url: process.env.DATABASE_URL || ' ',
       onConnect: async context => { 
-        // await insertSeedData(context); // TODO: esto quizas podria ser opcional
+        //await insertSeedData(context); // TODO: esto quizas podria ser opcional
        },
       // Optional advanced configuration
       enableLogging: true,

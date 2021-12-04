@@ -1,5 +1,5 @@
 # Poseidon CMMS
-Un proyecto hecho por Maricio Lima y Fernando Navarro, que es un producto de el proyecto final de Ingeniería en Informática, Universidad Nacaional de Mar del Plata.
+Un proyecto hecho por Maricio Lima y Fernando Navarro, que es un producto de el proyecto final de Ingeniería en Informática, Universidad Nacional de Mar del Plata.
 
 ![Logo](https://i.ibb.co/cNmHj0P/logo256.png)
 

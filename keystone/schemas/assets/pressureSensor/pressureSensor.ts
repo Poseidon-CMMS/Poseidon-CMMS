@@ -45,5 +45,12 @@ export const pressureSensor = list({ // TODO: falta definir sus relaciones
           labelField: 'name'
         }
       }),
+      storageLocation: relationship({
+        ref: 'StorageLocation.pressureSensor',
+        ui: {
+          displayMode: 'select',
+          labelField: 'name'
+        }
+      }),
     },
   });

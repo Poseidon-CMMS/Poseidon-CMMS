@@ -5,7 +5,7 @@ import { timestamp, relationship, text } from '@keystone-next/keystone/fields';
 export const gateway = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['fabricationDate', 'housingType'],
+        initialColumns: ['integrationId', 'fabricationDate', 'housingType'],
       },
     },
     fields: {
@@ -63,6 +63,13 @@ export const gateway = list({ // TODO: falta definir sus relaciones
           labelField: 'name'
         },
         many: false
+      }),
+      storageLocation: relationship({
+        ref: 'StorageLocation.gateway',
+        ui: {
+          displayMode: 'select',
+          labelField: 'name'
+        }
       }),
     },
   });

@@ -7,7 +7,7 @@ import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequ
 export const gpsNode = list({
     ui: {
       listView: {
-        initialColumns: ['fabricationDate'],
+        initialColumns: ['integrationId', 'fabricationDate'],
       },
     },
     fields: {
@@ -74,6 +74,13 @@ export const gpsNode = list({
           inlineConnect: true,
         },
         many: false
+      }),
+      storageLocation: relationship({
+        ref: 'StorageLocation.gpsNode',
+        ui: {
+          displayMode: 'select',
+          labelField: 'name'
+        }
       }),
     },
   });

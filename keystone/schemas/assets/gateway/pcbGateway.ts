@@ -54,4 +54,11 @@ export const pcbGateway = list({
         },
         many: false
       }),
+      storageLocation: relationship({
+        ref: 'StorageLocation.pcbGateway',
+        ui: {
+          displayMode: 'select',
+          labelField: 'name'
+        }
+      }),
   }});

@@ -5,7 +5,7 @@ export const assetTypes = [
   { name:  'Sensor de Presion'}
 ]
 
-export const pressureSensors = [
+export const pressureSensorTypes = [
   { name: 'GPT230 0-6bar'},
   { name: 'FST800-211A 0-6'},
   { name: 'Sensor viejo 0-4'},
@@ -53,13 +53,19 @@ export const gpsAntennaTypes = [
   { name : 'Hongsense - GPS ufl'}
 ]
 
-export const housingTypes = [
-  { name : 'Rotomoldeo v1.0'}
+export const nodeHousingTypes = [
+  { name : 'Rotomoldeo v1.0'},
+  { name: 'Roker'},
 ]
+
+export const gatewayHousingTypes = [
+  { name : 'Rotomoldeo v1.0'},
+]
+
 
 // --- END ASSETS ---
 
-// --- BUSSINES ---
+// --- BUSINESS ---
 
 export const SLA = [
   { 
@@ -76,7 +82,7 @@ export const SLA = [
   },
 ]
 
-// --- END BUSSINES ---
+// --- END BUSINESS ---
 
 // --- OT ---
 
@@ -92,4 +98,37 @@ export const periciaTypes = [ //TODO: Traducir y ver con mauri si hay que crear 
   },
 ]
 
+export const hdwIssueStatuses = [
+  { name: 'In field'},
+  { name: 'Assigned'},
+  { name: 'Out of field'},
+  { name: 'Closed'},
+
+]
+
 // --- END OT ---
+
+
+// --- GEOGRAPHIC ---
+export const creaZones =[
+  {name: 'Centro', code: 'CEN'},
+  {name: 'Chaco Santiagueño', code: 'CHS'},
+  {name: 'Córdoba Norte', code: 'COR'},
+  {name: 'Este', code: 'EST'},
+  {name: 'Litoral Norte', code: 'LIN'},
+  {name: 'Litoral Sur', code: 'LIS'},
+  {name: 'Mar y Sierras', code: 'MYS'},
+  {name: 'Norte de Buenos Aires', code: 'NBA'},
+  {name: 'Noroeste Argentino', code: 'CEN'},
+  {name: 'Norte de Santa Fé', code: 'NSF'},
+  {name: 'Oeste Arenoso', code: 'OAR'},
+  {name: 'Oeste', code: 'OES'},
+  {name: 'Patagonia', code: 'PAT'},
+  {name: 'Semiárida', code: 'SAR'},
+  {name: 'Santa Fé Centro', code: 'SFC'},
+  {name: 'Sur de Santa Fé', code: 'SSF'},
+  {name: 'Sudeste', code: 'SDE'},
+  {name: 'Sudoeste', code: 'SUO'},
+  {name: 'Valles Cordilleranos', code: 'VAC'},
+]
+// --- END GROGRAPHIC ---

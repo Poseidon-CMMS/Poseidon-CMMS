@@ -6,7 +6,7 @@ import { relationshipRequiredCheckerHook } from '../../hooks/relationshipRequire
 export const hardwareIssue = list({
     ui: {
       listView: {
-        initialColumns: ['creationDate', 'diagnosticDate','closeIssueDate','TTR', 'comment'],
+        initialColumns: ['creationDate', 'diagnosticDate','closeIssueDate','TTR', 'observations'],
       },
     },
     hooks: {
@@ -15,9 +15,10 @@ export const hardwareIssue = list({
     fields: {
       creationDate:  timestamp({ isRequired: true }),
       diagnosticDate:  timestamp({ isRequired: true }),
-      closeIssueDate: timestamp({ isRequired: true }),
+      closeIssueDate: timestamp({ isRequired: false }),
       TTR: float(),
-      comment: text(),
+      grafanaLink: text(),
+      observations: text(),
       irrigator: relationship({
         ref: 'Irrigator.hdwIssue',
         ui: {
@@ -46,6 +47,15 @@ export const hardwareIssue = list({
         },
         many: false
       }),
-      
+      diagnosticType: relationship({
+        ref: 'DiagnosticType.hdwIssue',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['name', 'type'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: false,
+      }),
     },
   });

@@ -76,7 +76,7 @@ export const irrigator = list({
         ref: 'HdwIssue.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creationDate', 'comment'],
+          cardFields: ['creationDate', 'observations'],
           linkToItem: true,
           inlineConnect: true,
         },

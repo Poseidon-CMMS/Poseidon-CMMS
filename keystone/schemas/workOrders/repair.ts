@@ -18,7 +18,7 @@ export const repair = list({ // TODO: falta definir sus relaciones
         ref: 'HdwIssue.repair',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creationDate', 'irrigator', 'TTR', 'comment'],
+          cardFields: ['creationDate', 'irrigator', 'TTR', 'observations'],
           linkToItem: true,
           inlineConnect: true,
         },

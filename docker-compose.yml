@@ -11,6 +11,7 @@ services:
     environment:
       - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       - NODE_ENV=development
+      - SESSION_SECRET=${SESSION_SECRET}
     networks:
       - backend
       - frontend

@@ -56,6 +56,15 @@ export const gateway = list({ // TODO: falta definir sus relaciones
         },
         many: false,
       }),
+      hdwIssue: relationship({
+        ref: 'HdwIssue.gateway',
+        ui: {
+          createView: {
+            fieldMode: 'hidden'
+          }
+        },
+        many: false,
+      }),
       loraAntennaType: relationship({
         ref: 'LoraAntennaType',
         ui: {

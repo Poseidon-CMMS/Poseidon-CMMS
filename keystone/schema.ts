@@ -42,6 +42,7 @@ import { repairType } from './schemas/workOrders/repairType';
 import { hdwIssueStatus } from './schemas/workOrders/hdwIssueStatus';
 import { storageLocation } from './schemas/assets/storageLocation';
 import { diagnosticType } from './schemas/workOrders/diagnostic/diagnosticType';
+import { diagnostic } from './schemas/workOrders/diagnostic/diagnostic';
 
 export const lists = createSchema({
   Irrigator: irrigator,
@@ -79,6 +80,7 @@ export const lists = createSchema({
   HdwIssueStatus: hdwIssueStatus,
   StorageLocation: storageLocation,
   DiagnosticType: diagnosticType,
+  Diagnostic: diagnostic,
 
   User: list({
     ui: {

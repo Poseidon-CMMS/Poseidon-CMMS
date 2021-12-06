@@ -22,16 +22,6 @@ export const diagnosticType = list({
         ui: {
           displayMode: 'segmented-control',
         },
-      }),
-      hdwIssue: relationship({
-        ref: 'HdwIssue.diagnosticType',
-        ui: {
-          displayMode: 'cards',
-          cardFields: ['irrigator', 'creationDate'],
-          linkToItem: true,
-          inlineConnect: true,
-        },
-        many: true,
-      }),
+    }),
   },
 });

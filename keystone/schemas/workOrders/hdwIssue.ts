@@ -6,7 +6,7 @@ import { relationshipRequiredCheckerHook } from '../../hooks/relationshipRequire
 export const hardwareIssue = list({
     ui: {
       listView: {
-        initialColumns: ['creationDate', 'diagnosticDate','closeIssueDate','TTR', 'observations'],
+        initialColumns: ['creationDate', 'diagnosticDate','closeIssueDate','TTR', 'comment', 'observations'],
       },
     },
     hooks: {
@@ -14,10 +14,11 @@ export const hardwareIssue = list({
     },
     fields: {
       creationDate:  timestamp({ isRequired: true }),
-      diagnosticDate:  timestamp({ isRequired: true }),
-      closeIssueDate: timestamp({ isRequired: false }),
+      diagnosticDate:  timestamp(),
+      closeIssueDate: timestamp(),
       TTR: float(),
-      grafanaLink: text(),
+      downtime: float(),
+      comment: text(),
       observations: text(),
       irrigator: relationship({
         ref: 'Irrigator.hdwIssue',
@@ -29,31 +30,72 @@ export const hardwareIssue = list({
         },
         many: true,
       }),
-      repair: relationship({
-        ref: 'Repair.hdwIssue',
+      diagnostic: relationship({
+        ref: 'Diagnostic.hdwIssue',
         ui: {
           displayMode: 'cards',
-          cardFields: ['date', 'status'],
+          cardFields: ['creationDate', 'comments'],
           linkToItem: true,
           inlineConnect: true,
         },
         many: false,
       }),
-      hdwIssueStatus: relationship({
-        ref: 'HdwIssueStatus',
+      assetType: relationship({
+        ref: 'AssetType',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         },
         many: false
       }),
-      diagnosticType: relationship({
-        ref: 'DiagnosticType.hdwIssue',
+      gateway: relationship({
+        ref: 'Gateway.hdwIssue',
         ui: {
           displayMode: 'cards',
-          cardFields: ['name', 'type'],
+          cardFields: ['fabricationDate'],
+          inlineEdit: { fields: ['fabricationDate'] },
           linkToItem: true,
           inlineConnect: true,
+          inlineCreate: { fields: ['fabricationDate'] },
+        },
+        many: false,
+      }),
+      gpsNode: relationship({
+        ref: 'GpsNode.hdwIssue',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['fabricationDate'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: false,
+      }),
+      field: relationship({
+        ref: 'Field.hdwIssue',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['name', 'gate'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: false,
+      }),
+      pressureSensor: relationship({
+        ref: 'PressureSensor.hdwIssue',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['manufacturerId', 'status', 'order'],
+          linkToItem: true,
+          inlineConnect: true,
+        },
+        many: false,
+      }),
+      repair: relationship({
+        ref: 'Repair.hdwIssue',
+        ui: {
+          createView: {
+            fieldMode: 'hidden'
+          }
         },
         many: false,
       }),

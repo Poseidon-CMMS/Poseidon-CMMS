@@ -67,5 +67,14 @@ export const field = list({
         },
         many: false,
       }),
+      hdwIssue: relationship({
+        ref: 'HdwIssue.field',
+        ui: {
+          createView: {
+            fieldMode: 'hidden'
+          }
+        },
+        many: false,
+      }),
     },
   });

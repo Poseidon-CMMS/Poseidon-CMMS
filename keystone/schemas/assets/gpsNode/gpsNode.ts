@@ -82,5 +82,14 @@ export const gpsNode = list({
           labelField: 'name'
         }
       }),
+      hdwIssue: relationship({
+        ref: 'HdwIssue.gpsNode',
+        ui: {
+          createView: {
+            fieldMode: 'hidden'
+          }
+        },
+        many: false,
+      }),
     },
   });

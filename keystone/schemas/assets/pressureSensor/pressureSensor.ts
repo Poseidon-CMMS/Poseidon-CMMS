@@ -52,5 +52,14 @@ export const pressureSensor = list({ // TODO: falta definir sus relaciones
           labelField: 'name'
         }
       }),
+      hdwIssue: relationship({
+        ref: 'HdwIssue.pressureSensor',
+        ui: {
+          createView: {
+            fieldMode: 'hidden'
+          }
+        },
+        many: false,
+      }),
     },
   });

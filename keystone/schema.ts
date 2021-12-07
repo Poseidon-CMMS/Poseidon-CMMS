@@ -39,7 +39,6 @@ import { pressureSensorType } from './schemas/assets/pressureSensor/pressureSens
 import { pressureSensor } from './schemas/assets/pressureSensor/pressureSensor';
 import { repair } from './schemas/workOrders/repair';
 import { repairType } from './schemas/workOrders/repairType';
-import { hdwIssueStatus } from './schemas/workOrders/hdwIssueStatus';
 import { storageLocation } from './schemas/assets/storageLocation';
 import { diagnosticType } from './schemas/workOrders/diagnostic/diagnosticType';
 import { diagnostic } from './schemas/workOrders/diagnostic/diagnostic';
@@ -77,7 +76,6 @@ export const lists = createSchema({
   PressureSensor: pressureSensor,
   Repair: repair,
   RepairType: repairType,
-  HdwIssueStatus: hdwIssueStatus,
   StorageLocation: storageLocation,
   DiagnosticType: diagnosticType,
   Diagnostic: diagnostic,

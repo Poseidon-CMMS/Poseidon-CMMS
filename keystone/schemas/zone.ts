@@ -5,7 +5,7 @@ import { checkbox, text, relationship } from '@keystone-next/keystone/fields';
 export const zone = list({
     ui: {
       listView: {
-        initialColumns: ['code', 'name', 'isForeign'],
+        initialColumns: ['code', 'name', 'is_foreign'],
       },
     },
     fields: {

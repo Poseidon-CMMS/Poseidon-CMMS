@@ -6,7 +6,7 @@ import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequ
 export const satelliteModem = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['manufacturerId', 'shipmentDate', 'isTransmitting', 'comment', 'gateway'],
+        initialColumns: ['manufacturer_id', 'shipment_date', 'is_transmitting', 'comment', 'gateway'],
       },
     },
     hooks: {
@@ -21,7 +21,7 @@ export const satelliteModem = list({ // TODO: falta definir sus relaciones
         ref: 'satelliteModemType.satelliteModem',
         ui: {
           displayMode: 'cards',
-          cardFields: ['referenceNumber', 'version'],
+          cardFields: ['reference_number', 'version'],
           inlineConnect: true,
         }
       }),

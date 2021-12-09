@@ -6,7 +6,7 @@ import { relationshipRequiredCheckerHook } from '../../hooks/relationshipRequire
 export const installUninstallRequest = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['creationDate', 'status','irrigator'],
+        initialColumns: ['creation_date', 'status','irrigator'],
       },
     },
     hooks: {
@@ -40,7 +40,7 @@ export const installUninstallRequest = list({ // TODO: falta definir sus relacio
         ref: 'workOrder.installUninstallRequest',
         ui: {
           displayMode: 'cards',
-          cardFields: ['workDate', 'kmTraveled', 'comment'],
+          cardFields: ['work_date', 'km_traveled', 'comment'],
           linkToItem: true,
           inlineConnect: true,
         },

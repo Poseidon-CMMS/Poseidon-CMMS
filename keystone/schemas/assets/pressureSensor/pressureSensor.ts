@@ -6,9 +6,9 @@ import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequ
 export const pressureSensor = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['manufacturerId', 'status', 'irrigator', 'pressureSensorType', 'order','comments'],
+        initialColumns: ['manufacturer_id', 'status', 'irrigator', 'pressureSensorType', 'order','comments'],
       },
-      labelField: 'manufacturerId',
+      labelField: 'manufacturer_id',
     },
     hooks: {
         validateInput: relationshipRequiredCheckerHook('pressureSensorType'),

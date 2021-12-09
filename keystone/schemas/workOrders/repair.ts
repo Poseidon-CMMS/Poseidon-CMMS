@@ -6,11 +6,11 @@ import { relationshipRequiredCheckerHook } from '../../hooks/relationshipRequire
 export const repair = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['date', 'status','workOrder'],
+        initialColumns: ['date', 'status','work_order'],
       },
     },
     hooks: {
-        validateInput: relationshipRequiredCheckerHook('workOrder'),
+        validateInput: relationshipRequiredCheckerHook('work_order'),
     },
     fields: {
       date: timestamp({ isRequired: true }), //fecha de alta
@@ -18,7 +18,7 @@ export const repair = list({ // TODO: falta definir sus relaciones
         ref: 'hdwIssue.repair',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creationDate', 'irrigator', 'TTR', 'observations'],
+          cardFields: ['creation_date', 'irrigator', 'TTR', 'observations'],
           linkToItem: true,
           inlineConnect: true,
         },
@@ -37,7 +37,7 @@ export const repair = list({ // TODO: falta definir sus relaciones
         },
       }),
       repairType: relationship({
-        ref: 'repairType',
+        ref: 'repair_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'
@@ -48,7 +48,7 @@ export const repair = list({ // TODO: falta definir sus relaciones
         ref: 'workOrder.repair',
         ui: {
           displayMode: 'cards',
-          cardFields: ['workDate', 'kmTraveled', 'comment'],
+          cardFields: ['work_date', 'km_traveled', 'comment'],
           linkToItem: true,
           inlineConnect: true,
         },

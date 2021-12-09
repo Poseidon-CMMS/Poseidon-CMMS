@@ -7,7 +7,7 @@ import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequ
 export const gpsNode = list({
     ui: {
       listView: {
-        initialColumns: ['integrationId', 'fabricationDate'],
+        initialColumns: ['integration_id', 'fabrication_date'],
       },
     },
     fields: {
@@ -26,7 +26,7 @@ export const gpsNode = list({
         many: false,
       }),
       batteryType: relationship({
-        ref: 'batteryType',
+        ref: 'battery_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'
@@ -69,7 +69,7 @@ export const gpsNode = list({
         ref: 'pcbNode.gpsNode',
         ui: {
           displayMode: 'cards',
-          cardFields: ['fabricationDate', 'integrationId'],
+          cardFields: ['fabrication_date', 'integration_id'],
           linkToItem: true,
           inlineConnect: true,
         },

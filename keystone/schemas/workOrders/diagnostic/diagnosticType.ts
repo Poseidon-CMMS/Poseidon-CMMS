@@ -16,7 +16,7 @@ export const diagnosticType = list({
         options: [
           { label: 'Pressure Sensor', value: 'SPRES' },
           { label: 'Gateway', value: 'GTW' },
-          { label: 'GPS Node', value: 'gpsNode' },
+          { label: 'GPS Node', value: 'gps_node' },
           { label: 'LoRa', value: 'lora' },
         ],
         ui: {

@@ -6,11 +6,11 @@ import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequ
 export const diagnostic = list({
     ui: {
       listView: {
-        initialColumns: ['hdwIssue', 'date','user', 'comments'],
+        initialColumns: ['hdw_issue', 'date','user', 'comments'],
       },
     },
     hooks: {
-        validateInput: relationshipRequiredCheckerHook('hdwIssue'),
+        validateInput: relationshipRequiredCheckerHook('hdw_issue'),
     },
     fields: {
       date: timestamp({ isRequired: true }), //fecha de alta
@@ -58,14 +58,14 @@ export const diagnostic = list({
         ref: 'hdwIssue.diagnostic',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creationDate', 'irrigator', 'observations'],
+          cardFields: ['creation_date', 'irrigator', 'observations'],
           linkToItem: true,
           inlineConnect: true,
         },
         many: false,
       }),
       diagnosticType: relationship({
-        ref: 'diagnosticType',
+        ref: 'diagnostic_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'

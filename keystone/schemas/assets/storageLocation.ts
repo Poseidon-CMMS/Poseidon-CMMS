@@ -16,7 +16,7 @@ export const storageLocation = list({
         ref: 'gateway.storageLocation',
         ui: {
           displayMode: 'cards',
-          cardFields: ['integrationId'],
+          cardFields: ['integration_id'],
           linkToItem: true,
           inlineConnect: true,
         },
@@ -26,7 +26,7 @@ export const storageLocation = list({
         ref: 'pcbGateway.storageLocation',
         ui: {
         displayMode: 'cards',
-        cardFields: ['integrationId'],
+        cardFields: ['integration_id'],
         linkToItem: true,
         inlineConnect: true,
         },
@@ -36,7 +36,7 @@ export const storageLocation = list({
         ref: 'gpsNode.storageLocation',
         ui: {
         displayMode: 'cards',
-        cardFields: ['integrationId'],
+        cardFields: ['integration_id'],
         linkToItem: true,
         inlineConnect: true,
         },
@@ -46,7 +46,7 @@ export const storageLocation = list({
         ref: 'pressureSensor.storageLocation',
         ui: {
         displayMode: 'cards',
-        cardFields: ['manufacturerId'],
+        cardFields: ['manufacturer_id'],
         linkToItem: true,
         inlineConnect: true,
         },
@@ -56,7 +56,7 @@ export const storageLocation = list({
         ref: 'satelliteModem.storageLocation',
         ui: {
         displayMode: 'cards',
-        cardFields: ['manufacturerId'],
+        cardFields: ['manufacturer_id'],
         linkToItem: true,
         inlineConnect: true,
         },
@@ -66,7 +66,7 @@ export const storageLocation = list({
         ref: 'pcbNode.storageLocation',
         ui: {
         displayMode: 'cards',
-        cardFields: ['integrationId'],
+        cardFields: ['integration_id'],
         linkToItem: true,
         inlineConnect: true,
         },
@@ -76,7 +76,7 @@ export const storageLocation = list({
         ref: 'satelliteAntenna.storageLocation',
         ui: {
         displayMode: 'cards',
-        cardFields: ['manufacturerId'],
+        cardFields: ['manufacturer_id'],
         linkToItem: true,
         inlineConnect: true,
         },

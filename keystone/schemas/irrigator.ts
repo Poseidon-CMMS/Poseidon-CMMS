@@ -33,11 +33,11 @@ export const irrigator = list({
         ref: 'gateway.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['fabricationDate'],
-          inlineEdit: { fields: ['fabricationDate'] },
+          cardFields: ['fabrication_date'],
+          inlineEdit: { fields: ['fabrication_date'] },
           linkToItem: true,
           inlineConnect: true,
-          inlineCreate: { fields: ['fabricationDate'] },
+          inlineCreate: { fields: ['fabrication_date'] },
         },
         many: false,
         
@@ -46,7 +46,7 @@ export const irrigator = list({
         ref: 'gpsNode.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['fabricationDate'],
+          cardFields: ['fabrication_date'],
           linkToItem: true,
           inlineConnect: true,
         },
@@ -66,7 +66,7 @@ export const irrigator = list({
         ref: 'installUninstallRequest.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creationDate'],
+          cardFields: ['creation_date'],
           linkToItem: true,
           inlineConnect: true,
         },
@@ -76,7 +76,7 @@ export const irrigator = list({
         ref: 'hdwIssue.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creationDate', 'observations'],
+          cardFields: ['creation_date', 'observations'],
           linkToItem: true,
           inlineConnect: true,
         },
@@ -86,7 +86,7 @@ export const irrigator = list({
         ref: 'pressureSensor.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['manufacturerId', 'status', 'order'],
+          cardFields: ['manufacturer_id', 'status', 'order'],
           linkToItem: true,
           inlineConnect: true,
         },

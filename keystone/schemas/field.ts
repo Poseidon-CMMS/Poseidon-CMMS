@@ -31,7 +31,7 @@ export const field = list({
         ref: 'zone.field',
         ui: {
           displayMode: 'cards',
-          cardFields: ['code', 'name', 'isForeign'],
+          cardFields: ['code', 'name', 'is_foreign'],
           linkToItem: true,
           inlineConnect: true,
         },

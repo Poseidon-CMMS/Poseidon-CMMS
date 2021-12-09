@@ -6,13 +6,13 @@ import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequ
 export const pcbNode = list({
     ui: {
       listView: {
-        initialColumns: ['integrationId', 'fabricationDate'],
+        initialColumns: ['integration_id', 'fabrication_date'],
       },
     },
     hooks: {
       validateInput: () => {
-        relationshipRequiredCheckerHook('firmwareVersion'),
-        relationshipRequiredCheckerHook('hardwareVersion')
+        relationshipRequiredCheckerHook('firmware_version'),
+        relationshipRequiredCheckerHook('hardware_version')
       },
     },
     fields: {

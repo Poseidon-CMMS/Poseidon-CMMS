@@ -5,7 +5,7 @@ import { timestamp, relationship, text } from '@keystone-next/keystone/fields';
 export const gateway = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['integrationId', 'fabricationDate', 'housingType'],
+        initialColumns: ['integration_id', 'fabrication_date', 'housing_type'],
       },
     },
     fields: {
@@ -32,11 +32,11 @@ export const gateway = list({ // TODO: falta definir sus relaciones
         ref: 'satelliteModem.gateway',
         ui: {
           displayMode: 'cards',
-          cardFields: ['manufacturerId', 'shipmentDate', 'isTransmitting', 'comment'],
-          inlineEdit: { fields: ['manufacturerId', 'shipmentDate', 'isTransmitting', 'comment']},
+          cardFields: ['manufacturer_id', 'shipment_date', 'is_transmitting', 'comment'],
+          inlineEdit: { fields: ['manufacturer_id', 'shipment_date', 'is_transmitting', 'comment']},
           linkToItem: true,
           inlineConnect: true,
-          inlineCreate: { fields: ['manufacturerId', 'shipmentDate', 'isTransmitting', 'comment'] },
+          inlineCreate: { fields: ['manufacturer_id', 'shipment_date', 'is_transmitting', 'comment'] },
         },
         many: false
       }),

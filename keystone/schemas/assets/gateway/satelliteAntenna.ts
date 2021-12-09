@@ -7,7 +7,7 @@ export const satelliteAntenna = list({
       listView: {
         initialColumns: [],
       },
-      labelField: 'manufacturerId'
+      labelField: 'manufacturer_id'
     },
     fields: {
       manufacturerId: text({isRequired: true, isIndexed: 'unique'}),

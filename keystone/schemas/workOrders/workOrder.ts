@@ -6,7 +6,7 @@ export const workOrder = list({
   ui: {
     isHidden: true,
     listView: {
-      initialColumns: ['workDate', 'kmTraveled', 'comment'],
+      initialColumns: ['work_date', 'km_traveled', 'comment'],
     },
   },
   fields: {
@@ -17,7 +17,7 @@ export const workOrder = list({
         ref: 'installUninstallRequest.workOrder',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creationDate', 'status'],
+          cardFields: ['creation_date', 'status'],
           linkToItem: true,
           inlineConnect: true,
         },

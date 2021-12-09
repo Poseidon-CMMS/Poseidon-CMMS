@@ -18,7 +18,7 @@ export const satelliteModem = list({ // TODO: falta definir sus relaciones
       isTransmitting: checkbox({defaultValue: false, isRequired: true}),
       comment: text(),
       satelliteModemType: relationship({
-        ref: 'SatelliteModemType.satelliteModem',
+        ref: 'satelliteModemType.satelliteModem',
         ui: {
           displayMode: 'cards',
           cardFields: ['referenceNumber', 'version'],
@@ -26,14 +26,14 @@ export const satelliteModem = list({ // TODO: falta definir sus relaciones
         }
       }),
       gateway: relationship({
-        ref: 'Gateway.satelliteModem',
+        ref: 'gateway.satelliteModem',
         ui: {
           displayMode: 'select',
         },
         many: false,
       }),
       storageLocation: relationship({
-        ref: 'StorageLocation.satelliteModem',
+        ref: 'storageLocation.satelliteModem',
         ui: {
           displayMode: 'select',
           labelField: 'name'

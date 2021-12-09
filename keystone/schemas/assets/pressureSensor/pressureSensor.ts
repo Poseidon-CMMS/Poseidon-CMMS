@@ -29,7 +29,7 @@ export const pressureSensor = list({ // TODO: falta definir sus relaciones
       order: integer(),
       image: text(),
       irrigator: relationship({
-        ref: 'Irrigator.pressureSensor',
+        ref: 'irrigator.pressureSensor',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'lat', 'long', 'status'],
@@ -39,21 +39,21 @@ export const pressureSensor = list({ // TODO: falta definir sus relaciones
         many: false,
       }),
       pressureSensorType: relationship({
-        ref: 'PressureSensorType',
+        ref: 'pressureSensorType',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         }
       }),
       storageLocation: relationship({
-        ref: 'StorageLocation.pressureSensor',
+        ref: 'storageLocation.pressureSensor',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         }
       }),
       hdwIssue: relationship({
-        ref: 'HdwIssue.pressureSensor',
+        ref: 'hdwIssue.pressureSensor',
         ui: {
           createView: {
             fieldMode: 'hidden'

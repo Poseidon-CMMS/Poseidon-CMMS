@@ -52,10 +52,10 @@ export const diagnostic = list({
 
       //relationships
       user: relationship({
-        ref: 'Diagnostic.user'
+        ref: 'diagnostic.user'
       }),
       hdwIssue: relationship({
-        ref: 'HdwIssue.diagnostic',
+        ref: 'hdwIssue.diagnostic',
         ui: {
           displayMode: 'cards',
           cardFields: ['creationDate', 'irrigator', 'observations'],
@@ -65,7 +65,7 @@ export const diagnostic = list({
         many: false,
       }),
       diagnosticType: relationship({
-        ref: 'DiagnosticType',
+        ref: 'diagnosticType',
         ui: {
           displayMode: 'select',
           labelField: 'name'

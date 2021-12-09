@@ -13,7 +13,7 @@ export const gatewayFirmwareVersion = list({
   fields: {
     version: text({ isRequired: true, isIndexed: 'unique' }),
     pcbGateway: relationship({
-        ref: 'PcbGateway.firmwareVersion',
+        ref: 'pcbGateway.firmwareVersion',
         ui: {
             displayMode: 'count',
             createView: {

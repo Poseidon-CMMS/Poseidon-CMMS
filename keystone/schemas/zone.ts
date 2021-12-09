@@ -13,7 +13,7 @@ export const zone = list({
       code: text(),
       isForeign: checkbox({ isRequired: true, defaultValue: false}),
       field: relationship({
-        ref: 'Field.zone',
+        ref: 'field.zone',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'gate'],
@@ -23,7 +23,7 @@ export const zone = list({
         many: true,
       }),
       fieldTechnician: relationship({
-        ref: 'FieldTechnician.zone',
+        ref: 'fieldTechnician.zone',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'email'],

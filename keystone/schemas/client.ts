@@ -11,7 +11,7 @@ export const client = list({
     fields: {
       name: text({ isRequired: true }),
       field: relationship({
-        ref: 'Field.client',
+        ref: 'field.client',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'gate'],

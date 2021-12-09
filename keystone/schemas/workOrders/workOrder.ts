@@ -14,7 +14,7 @@ export const workOrder = list({
     kmTraveled: float({isRequired: true}),
     comment: text(),
     installUninstallRequest: relationship({
-        ref: 'InstallUninstallRequest.workOrder',
+        ref: 'installUninstallRequest.workOrder',
         ui: {
           displayMode: 'cards',
           cardFields: ['creationDate', 'status'],
@@ -24,7 +24,7 @@ export const workOrder = list({
         many: true,
       }),
     repair: relationship({
-      ref: 'Repair.workOrder',
+      ref: 'repair.workOrder',
       ui: {
         displayMode: 'cards',
         cardFields: ['date', 'status'],

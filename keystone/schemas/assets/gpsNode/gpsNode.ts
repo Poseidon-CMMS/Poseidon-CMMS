@@ -16,7 +16,7 @@ export const gpsNode = list({
       internalPhoto: text(),
       externalPhoto: text(),
       irrigator: relationship({
-        ref: 'Irrigator.gpsNode',
+        ref: 'irrigator.gpsNode',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'lat', 'long', 'status'],
@@ -26,7 +26,7 @@ export const gpsNode = list({
         many: false,
       }),
       batteryType: relationship({
-        ref: 'BatteryType',
+        ref: 'batteryType',
         ui: {
           displayMode: 'select',
           labelField: 'name'
@@ -34,7 +34,7 @@ export const gpsNode = list({
         many: false
       }),
       gpsAntennaType: relationship({
-        ref: 'GpsAntennaType',
+        ref: 'gpsAntennaType',
         ui: {
           displayMode: 'select',
           labelField: 'name'
@@ -42,7 +42,7 @@ export const gpsNode = list({
         many: false
       }),
       nodeHousingType: relationship({
-        ref: 'NodeHousingType',
+        ref: 'nodeHousingType',
         ui: {
           displayMode: 'select',
           labelField: 'name'
@@ -50,7 +50,7 @@ export const gpsNode = list({
         many: false
       }),
       loraAntennaType: relationship({
-        ref: 'LoraAntennaType',
+        ref: 'loraAntennaType',
         ui: {
           displayMode: 'select',
           labelField: 'name'
@@ -58,7 +58,7 @@ export const gpsNode = list({
         many: false
       }),
       solarPanelType: relationship({
-        ref: 'SolarPanelType',
+        ref: 'solarPanelType',
         ui: {
           displayMode: 'select',
           labelField: 'name'
@@ -66,7 +66,7 @@ export const gpsNode = list({
         many: false
       }),
       pcbNode: relationship({
-        ref: 'PcbNode.gpsNode',
+        ref: 'pcbNode.gpsNode',
         ui: {
           displayMode: 'cards',
           cardFields: ['fabricationDate', 'integrationId'],
@@ -76,14 +76,14 @@ export const gpsNode = list({
         many: false
       }),
       storageLocation: relationship({
-        ref: 'StorageLocation.gpsNode',
+        ref: 'storageLocation.gpsNode',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         }
       }),
       hdwIssue: relationship({
-        ref: 'HdwIssue.gpsNode',
+        ref: 'hdwIssue.gpsNode',
         ui: {
           createView: {
             fieldMode: 'hidden'

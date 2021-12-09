@@ -30,7 +30,7 @@ export const pcbGateway = list({
         },
       }),
       gateway: relationship({
-        ref: 'Gateway.pcbGateway',
+        ref: 'gateway.pcbGateway',
         ui: {
           createView: {
             fieldMode: 'hidden'
@@ -39,7 +39,7 @@ export const pcbGateway = list({
         many: false,
       }),
       firmwareVersion: relationship({
-        ref: 'GatewayFirmwareVersion.pcbGateway',
+        ref: 'gatewayFirmwareVersion.pcbGateway',
         ui: {
           displayMode: 'select',
           labelField: 'version'
@@ -47,7 +47,7 @@ export const pcbGateway = list({
         many: false
       }),
       hardwareVersion: relationship({
-        ref: 'GatewayHardwareVersion.pcbGateway',
+        ref: 'gatewayHardwareVersion.pcbGateway',
         ui: {
           displayMode: 'select',
           labelField: 'version'
@@ -55,7 +55,7 @@ export const pcbGateway = list({
         many: false
       }),
       storageLocation: relationship({
-        ref: 'StorageLocation.pcbGateway',
+        ref: 'storageLocation.pcbGateway',
         ui: {
           displayMode: 'select',
           labelField: 'name'

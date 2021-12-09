@@ -13,7 +13,7 @@ export const nodeFirmwareVersion = list({
   fields: {
     version: text({ isRequired: true, isIndexed: 'unique' }),
     pcbNode: relationship({
-        ref: 'PcbNode.firmwareVersion',
+        ref: 'pcbNode.firmwareVersion',
         ui: {
             displayMode: 'count',
             createView: {

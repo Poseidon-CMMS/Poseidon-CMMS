@@ -18,7 +18,7 @@ export const field = list({
       gate: text({ isRequired: false}),
       phone: text({ isRequired: false}),
       irrigator: relationship({
-        ref: 'Irrigator.field',
+        ref: 'irrigator.field',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'lat', 'long', 'status'],
@@ -28,7 +28,7 @@ export const field = list({
         many: true,
       }),
       zone: relationship({
-        ref: 'Zone.field',
+        ref: 'zone.field',
         ui: {
           displayMode: 'cards',
           cardFields: ['code', 'name', 'isForeign'],
@@ -38,7 +38,7 @@ export const field = list({
         many: false,
       }),
       province: relationship({
-        ref: 'Province.field',
+        ref: 'province.field',
         ui: {
           displayMode: 'cards',
           cardFields: ['name'],
@@ -48,7 +48,7 @@ export const field = list({
         many: false,
       }),
       city: relationship({
-        ref: 'City.field',
+        ref: 'city.field',
         ui: {
           displayMode: 'cards',
           cardFields: ['name'],
@@ -58,7 +58,7 @@ export const field = list({
         many: false,
       }),
       client: relationship({
-        ref: 'Client.field',
+        ref: 'client.field',
         ui: {
           displayMode: 'cards',
           cardFields: ['name'],
@@ -68,7 +68,7 @@ export const field = list({
         many: false,
       }),
       hdwIssue: relationship({
-        ref: 'HdwIssue.field',
+        ref: 'hdwIssue.field',
         ui: {
           createView: {
             fieldMode: 'hidden'

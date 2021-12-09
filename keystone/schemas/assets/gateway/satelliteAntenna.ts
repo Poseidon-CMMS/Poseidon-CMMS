@@ -12,7 +12,7 @@ export const satelliteAntenna = list({
     fields: {
       manufacturerId: text({isRequired: true, isIndexed: 'unique'}),
       gateway: relationship({
-        ref: 'Gateway.satelliteAntenna',
+        ref: 'gateway.satelliteAntenna',
         ui: {
           createView: {
               fieldMode: 'hidden'
@@ -21,7 +21,7 @@ export const satelliteAntenna = list({
         many: false,
       }),
       storageLocation: relationship({
-        ref: 'StorageLocation.satelliteAntenna',
+        ref: 'storageLocation.satelliteAntenna',
         ui: {
           displayMode: 'select',
           labelField: 'name',

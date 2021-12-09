@@ -30,7 +30,7 @@ export const pcbNode = list({
         },
       }),
       gpsNode: relationship({
-        ref: 'GpsNode.pcbNode',
+        ref: 'gpsNode.pcbNode',
         ui: {
           createView: {
             fieldMode: 'hidden'
@@ -39,7 +39,7 @@ export const pcbNode = list({
         many: false,
       }),
       firmwareVersion: relationship({
-        ref: 'NodeFirmwareVersion.pcbNode',
+        ref: 'nodeFirmwareVersion.pcbNode',
         ui: {
           displayMode: 'select',
           labelField: 'version'
@@ -47,7 +47,7 @@ export const pcbNode = list({
         many: false
       }),
       hardwareVersion: relationship({
-        ref: 'NodeHardwareVersion.pcbNode',
+        ref: 'nodeHardwareVersion.pcbNode',
         ui: {
           displayMode: 'select',
           labelField: 'version'
@@ -55,7 +55,7 @@ export const pcbNode = list({
         many: false
       }),
       storageLocation: relationship({
-        ref: 'StorageLocation.pcbNode',
+        ref: 'storageLocation.pcbNode',
         ui: {
           displayMode: 'select',
           labelField: 'name',

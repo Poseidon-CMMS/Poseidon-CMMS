@@ -30,7 +30,7 @@ export const irrigator = list({
 
       //6 relations
       gateway: relationship({
-        ref: 'Gateway.irrigator',
+        ref: 'gateway.irrigator',
         ui: {
           displayMode: 'cards',
           cardFields: ['fabricationDate'],
@@ -43,7 +43,7 @@ export const irrigator = list({
         
       }),
       gpsNode: relationship({
-        ref: 'GpsNode.irrigator',
+        ref: 'gpsNode.irrigator',
         ui: {
           displayMode: 'cards',
           cardFields: ['fabricationDate'],
@@ -53,7 +53,7 @@ export const irrigator = list({
         many: false,
       }),
       field: relationship({
-        ref: 'Field.irrigator',
+        ref: 'field.irrigator',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'gate'],
@@ -63,7 +63,7 @@ export const irrigator = list({
         many: false,
       }),
       installUninstallRequest: relationship({
-        ref: 'InstallUninstallRequest.irrigator',
+        ref: 'installUninstallRequest.irrigator',
         ui: {
           displayMode: 'cards',
           cardFields: ['creationDate'],
@@ -73,7 +73,7 @@ export const irrigator = list({
         many: true,
       }),
       hdwIssue: relationship({
-        ref: 'HdwIssue.irrigator',
+        ref: 'hdwIssue.irrigator',
         ui: {
           displayMode: 'cards',
           cardFields: ['creationDate', 'observations'],
@@ -83,7 +83,7 @@ export const irrigator = list({
         many: true,
       }),
       pressureSensor: relationship({
-        ref: 'PressureSensor.irrigator',
+        ref: 'pressureSensor.irrigator',
         ui: {
           displayMode: 'cards',
           cardFields: ['manufacturerId', 'status', 'order'],

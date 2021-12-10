@@ -6,25 +6,25 @@ export const workOrder = list({
   ui: {
     isHidden: true,
     listView: {
-      initialColumns: ['workDate', 'kmTraveled', 'comment'],
+      initialColumns: ['work_date', 'km_traveled', 'comment'],
     },
   },
   fields: {
-    workDate: timestamp({ isRequired: true }),
-    kmTraveled: float({isRequired: true}),
+    work_date: timestamp({ isRequired: true }),
+    km_traveled: float({isRequired: true}),
     comment: text(),
-    installUninstallRequest: relationship({
-        ref: 'InstallUninstallRequest.workOrder',
+    install_uninstall_request: relationship({
+        ref: 'install_uninstall_request.work_order',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creationDate', 'status'],
+          cardFields: ['creation_date', 'status'],
           linkToItem: true,
           inlineConnect: true,
         },
         many: true,
       }),
     repair: relationship({
-      ref: 'Repair.workOrder',
+      ref: 'repair.work_order',
       ui: {
         displayMode: 'cards',
         cardFields: ['date', 'status'],

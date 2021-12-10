@@ -6,16 +6,16 @@ import { relationshipRequiredCheckerHook } from '../../hooks/relationshipRequire
 export const installUninstallRequest = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['creationDate', 'status','irrigator'],
+        initialColumns: ['creation_date', 'status','irrigator'],
       },
     },
     hooks: {
         validateInput: relationshipRequiredCheckerHook('irrigator'),
     },
     fields: {
-      creationDate: timestamp({ isRequired: true }), //fecha de alta
+      creation_date: timestamp({ isRequired: true }), //fecha de alta
       irrigator: relationship({
-        ref: 'Irrigator.installUninstallRequest',
+        ref: 'irrigator.install_uninstall_request',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'lat', 'long', 'status'],
@@ -36,11 +36,11 @@ export const installUninstallRequest = list({ // TODO: falta definir sus relacio
           displayMode: 'segmented-control',
         },
       }),
-      workOrder: relationship({
-        ref: 'WorkOrder.installUninstallRequest',
+      work_order: relationship({
+        ref: 'work_order.install_uninstall_request',
         ui: {
           displayMode: 'cards',
-          cardFields: ['workDate', 'kmTraveled', 'comment'],
+          cardFields: ['work_date', 'km_traveled', 'comment'],
           linkToItem: true,
           inlineConnect: true,
         },

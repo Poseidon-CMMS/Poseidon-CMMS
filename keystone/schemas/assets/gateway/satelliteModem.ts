@@ -6,34 +6,34 @@ import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequ
 export const satelliteModem = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['manufacturerId', 'shipmentDate', 'isTransmitting', 'comment', 'gateway'],
+        initialColumns: ['manufacturer_id', 'shipment_date', 'is_transmitting', 'comment', 'gateway'],
       },
     },
     hooks: {
-      validateInput: relationshipRequiredCheckerHook('satelliteModemType'),
+      validateInput: relationshipRequiredCheckerHook('satellite_modem_type'),
     },
     fields: {
-      manufacturerId: text({isRequired: true, isIndexed: 'unique'}),
-      shipmentDate: timestamp({ isRequired: true }),
-      isTransmitting: checkbox({defaultValue: false, isRequired: true}),
+      manufacturer_id: text({isRequired: true, isIndexed: 'unique'}),
+      shipment_date: timestamp({ isRequired: true }),
+      is_transmitting: checkbox({defaultValue: false, isRequired: true}),
       comment: text(),
-      satelliteModemType: relationship({
-        ref: 'SatelliteModemType.satelliteModem',
+      satellite_modem_type: relationship({
+        ref: 'satellite_modem_type.satellite_modem',
         ui: {
           displayMode: 'cards',
-          cardFields: ['referenceNumber', 'version'],
+          cardFields: ['reference_number', 'version'],
           inlineConnect: true,
         }
       }),
       gateway: relationship({
-        ref: 'Gateway.satelliteModem',
+        ref: 'gateway.satellite_modem',
         ui: {
           displayMode: 'select',
         },
         many: false,
       }),
-      storageLocation: relationship({
-        ref: 'StorageLocation.satelliteModem',
+      storage_location: relationship({
+        ref: 'storage_location.satellite_modem',
         ui: {
           displayMode: 'select',
           labelField: 'name'

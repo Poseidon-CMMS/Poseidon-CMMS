@@ -12,8 +12,8 @@ export const gatewayFirmwareVersion = list({
   },
   fields: {
     version: text({ isRequired: true, isIndexed: 'unique' }),
-    pcbGateway: relationship({
-        ref: 'PcbGateway.firmwareVersion',
+    pcb_gateway: relationship({
+        ref: 'pcb_gateway.firmware_version',
         ui: {
             displayMode: 'count',
             createView: {

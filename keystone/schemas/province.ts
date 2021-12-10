@@ -12,7 +12,7 @@ export const province = list({
   fields: {
     name: text({ isRequired: true }),
     field: relationship({
-      ref: "Field.province",
+      ref: "field.province",
       ui: {
         displayMode: "cards",
         cardFields: ["name", "gate"],
@@ -22,7 +22,7 @@ export const province = list({
       many: true,
     }),
     city: relationship({
-      ref: "City.province",
+      ref: "city.province",
       ui: {
         displayMode: "select",
         labelField: "name",

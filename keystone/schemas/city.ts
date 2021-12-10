@@ -17,7 +17,7 @@ export const city = list({
     fields: {
       name:  text({ isRequired: true }),
       province: relationship({
-        ref: 'Province.city',
+        ref: 'province.city',
         ui: {
           displayMode: 'cards',
           cardFields: ['name'],
@@ -27,7 +27,7 @@ export const city = list({
         many: false,
       }),
       field: relationship({
-        ref: 'Field.city',
+        ref: 'field.city',
         ui: {
           displayMode: 'cards',
           cardFields: ['name'],

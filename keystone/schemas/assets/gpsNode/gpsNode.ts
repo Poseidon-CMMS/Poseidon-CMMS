@@ -7,16 +7,16 @@ import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequ
 export const gpsNode = list({
     ui: {
       listView: {
-        initialColumns: ['integrationId', 'fabricationDate'],
+        initialColumns: ['integration_id', 'fabrication_date'],
       },
     },
     fields: {
-      fabricationDate: timestamp({ isRequired: true }), //fecha de alta
-      integrationId: text({isRequired: true, isIndexed: 'unique'}),
-      internalPhoto: text(),
-      externalPhoto: text(),
+      fabrication_date: timestamp({ isRequired: true }), //fecha de alta
+      integration_id: text({isRequired: true, isIndexed: 'unique'}),
+      internal_photo: text(),
+      external_photo: text(),
       irrigator: relationship({
-        ref: 'Irrigator.gpsNode',
+        ref: 'irrigator.gps_node',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'lat', 'long', 'status'],
@@ -25,65 +25,65 @@ export const gpsNode = list({
         },
         many: false,
       }),
-      batteryType: relationship({
-        ref: 'BatteryType',
+      battery_type: relationship({
+        ref: 'battery_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         },
         many: false
       }),
-      gpsAntennaType: relationship({
-        ref: 'GpsAntennaType',
+      gps_antenna_type: relationship({
+        ref: 'gps_antenna_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         },
         many: false
       }),
-      nodeHousingType: relationship({
-        ref: 'NodeHousingType',
+      node_housing_type: relationship({
+        ref: 'node_housing_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         },
         many: false
       }),
-      loraAntennaType: relationship({
-        ref: 'LoraAntennaType',
+      lora_antenna_type: relationship({
+        ref: 'lora_antenna_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         },
         many: false
       }),
-      solarPanelType: relationship({
-        ref: 'SolarPanelType',
+      solar_panel_type: relationship({
+        ref: 'solar_panel_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         },
         many: false
       }),
-      pcbNode: relationship({
-        ref: 'PcbNode.gpsNode',
+      pcb_node: relationship({
+        ref: 'pcb_node.gps_node',
         ui: {
           displayMode: 'cards',
-          cardFields: ['fabricationDate', 'integrationId'],
+          cardFields: ['fabrication_date', 'integration_id'],
           linkToItem: true,
           inlineConnect: true,
         },
         many: false
       }),
-      storageLocation: relationship({
-        ref: 'StorageLocation.gpsNode',
+      storage_location: relationship({
+        ref: 'storage_location.gps_node',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         }
       }),
-      hdwIssue: relationship({
-        ref: 'HdwIssue.gpsNode',
+      hdw_issue: relationship({
+        ref: 'hdw_issue.gps_node',
         ui: {
           createView: {
             fieldMode: 'hidden'

@@ -5,15 +5,15 @@ import { checkbox, text, relationship } from '@keystone-next/keystone/fields';
 export const zone = list({
     ui: {
       listView: {
-        initialColumns: ['code', 'name', 'isForeign'],
+        initialColumns: ['code', 'name', 'is_foreign'],
       },
     },
     fields: {
       name: text({ isRequired: true }),
       code: text(),
-      isForeign: checkbox({ isRequired: true, defaultValue: false}),
+      is_foreign: checkbox({ isRequired: true, defaultValue: false}),
       field: relationship({
-        ref: 'Field.zone',
+        ref: 'field.zone',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'gate'],
@@ -22,8 +22,8 @@ export const zone = list({
         },
         many: true,
       }),
-      fieldTechnician: relationship({
-        ref: 'FieldTechnician.zone',
+      field_technician: relationship({
+        ref: 'field_technician.zone',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'email'],

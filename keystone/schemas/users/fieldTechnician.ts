@@ -17,19 +17,19 @@ export const fieldTechnician = list({
       name: text({ isRequired: true }),
       email: text({ isRequired: true }),
       zone: relationship({
-        ref: 'Zone.fieldTechnician',
+        ref: 'zone.field_technician',
         ui: {
           displayMode: 'cards',
-          cardFields: ['code', 'name', 'isForeign'],
-          inlineEdit: { fields: ['name', 'isForeign'] },
+          cardFields: ['code', 'name', 'is_foreign'],
+          inlineEdit: { fields: ['name', 'is_foreign'] },
           linkToItem: true,
           inlineConnect: true,
-          inlineCreate: { fields: ['name', 'isForeign'] },
+          inlineCreate: { fields: ['name', 'is_foreign'] },
         },
         many: true,
       }),
-      storageLocation: relationship({
-        ref: 'StorageLocation.fieldTechnician',
+      storage_location: relationship({
+        ref: 'storage_location.field_technician',
         ui: {
           displayMode: 'select',
           labelField: 'name',

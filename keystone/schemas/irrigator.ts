@@ -7,11 +7,11 @@ import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCh
 export const irrigator = list({
     ui: {
       listView: {
-        initialColumns: ['integrationID','name', 'lat', 'long', 'status', 'enabled', 'comment'],
+        initialColumns: ['integration_id','name', 'lat', 'long', 'status', 'enabled', 'comment'],
       },
     },
     fields: {
-      integrationID: text({ isRequired: true }),
+      integration_id: text({ isRequired: true }),
       name: text({ isRequired: true }),
       lat: float({ isRequired: true }),
       long: float({ isRequired: true }),
@@ -30,30 +30,30 @@ export const irrigator = list({
 
       //6 relations
       gateway: relationship({
-        ref: 'Gateway.irrigator',
+        ref: 'gateway.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['fabricationDate'],
-          inlineEdit: { fields: ['fabricationDate'] },
+          cardFields: ['fabrication_date'],
+          inlineEdit: { fields: ['fabrication_date'] },
           linkToItem: true,
           inlineConnect: true,
-          inlineCreate: { fields: ['fabricationDate'] },
+          inlineCreate: { fields: ['fabrication_date'] },
         },
         many: false,
         
       }),
-      gpsNode: relationship({
-        ref: 'GpsNode.irrigator',
+      gps_node: relationship({
+        ref: 'gps_node.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['fabricationDate'],
+          cardFields: ['fabrication_date'],
           linkToItem: true,
           inlineConnect: true,
         },
         many: false,
       }),
       field: relationship({
-        ref: 'Field.irrigator',
+        ref: 'field.irrigator',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'gate'],
@@ -62,37 +62,37 @@ export const irrigator = list({
         },
         many: false,
       }),
-      installUninstallRequest: relationship({
-        ref: 'InstallUninstallRequest.irrigator',
+      install_uninstall_request: relationship({
+        ref: 'install_uninstall_request.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creationDate'],
+          cardFields: ['creation_date'],
           linkToItem: true,
           inlineConnect: true,
         },
         many: true,
       }),
-      hdwIssue: relationship({
-        ref: 'HdwIssue.irrigator',
+      hdw_issue: relationship({
+        ref: 'hdw_issue.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creationDate', 'observations'],
+          cardFields: ['creation_date', 'comments'],
           linkToItem: true,
           inlineConnect: true,
         },
         many: true,
       }),
-      pressureSensor: relationship({
-        ref: 'PressureSensor.irrigator',
+      pressure_sensor: relationship({
+        ref: 'pressure_sensor.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['manufacturerId', 'status', 'order'],
+          cardFields: ['manufacturer_id', 'status', 'order'],
           linkToItem: true,
           inlineConnect: true,
         },
         many: false,
       }),
-      transmissionStatus: virtual({
+      transmission_status: virtual({
         field: graphql.field({
           type: graphql.String,
           async resolve(item, args, context) {

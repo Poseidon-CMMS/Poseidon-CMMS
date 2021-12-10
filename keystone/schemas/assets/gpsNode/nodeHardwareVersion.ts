@@ -12,8 +12,8 @@ export const nodeHardwareVersion = list({
   },
   fields: {
     version: text({ isRequired: true, isIndexed: "unique" }),
-    pcbNode: relationship({
-      ref: "PcbNode.hardwareVersion",
+    pcb_node: relationship({
+      ref: "pcb_node.hardware_version",
       ui: {
         displayMode: "count",
         createView: {

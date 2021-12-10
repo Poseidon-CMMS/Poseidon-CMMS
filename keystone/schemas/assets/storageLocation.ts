@@ -13,78 +13,78 @@ export const storageLocation = list({
     lat: float({ isRequired: true }),
     long: float({ isRequired: true }),
     gateway: relationship({
-        ref: 'Gateway.storageLocation',
+        ref: 'gateway.storage_location',
         ui: {
           displayMode: 'cards',
-          cardFields: ['integrationId'],
+          cardFields: ['integration_id'],
           linkToItem: true,
           inlineConnect: true,
         },
         many: true,
       }),
-    pcbGateway: relationship({
-        ref: 'PcbGateway.storageLocation',
+    pcb_gateway: relationship({
+        ref: 'pcb_gateway.storage_location',
         ui: {
         displayMode: 'cards',
-        cardFields: ['integrationId'],
+        cardFields: ['integration_id'],
         linkToItem: true,
         inlineConnect: true,
         },
         many: true,
     }),
-    gpsNode: relationship({
-        ref: 'GpsNode.storageLocation',
+    gps_node: relationship({
+        ref: 'gps_node.storage_location',
         ui: {
         displayMode: 'cards',
-        cardFields: ['integrationId'],
+        cardFields: ['integration_id'],
         linkToItem: true,
         inlineConnect: true,
         },
         many: true,
     }),
-    pressureSensor: relationship({
-        ref: 'PressureSensor.storageLocation',
+    pressure_sensor: relationship({
+        ref: 'pressure_sensor.storage_location',
         ui: {
         displayMode: 'cards',
-        cardFields: ['manufacturerId'],
+        cardFields: ['manufacturer_id'],
         linkToItem: true,
         inlineConnect: true,
         },
         many: true,
     }),
-    satelliteModem: relationship({
-        ref: 'SatelliteModem.storageLocation',
+    satellite_modem: relationship({
+        ref: 'satellite_modem.storage_location',
         ui: {
         displayMode: 'cards',
-        cardFields: ['manufacturerId'],
+        cardFields: ['manufacturer_id'],
         linkToItem: true,
         inlineConnect: true,
         },
         many: true,
     }),
-    pcbNode: relationship({
-        ref: 'PcbNode.storageLocation',
+    pcb_node: relationship({
+        ref: 'pcb_node.storage_location',
         ui: {
         displayMode: 'cards',
-        cardFields: ['integrationId'],
+        cardFields: ['integration_id'],
         linkToItem: true,
         inlineConnect: true,
         },
         many: true,
     }),
-    satelliteAntenna: relationship({
-        ref: 'SatelliteAntenna.storageLocation',
+    satellite_antenna: relationship({
+        ref: 'satellite_antenna.storage_location',
         ui: {
         displayMode: 'cards',
-        cardFields: ['manufacturerId'],
+        cardFields: ['manufacturer_id'],
         linkToItem: true,
         inlineConnect: true,
         },
         many: true,
     }),
     //People
-    fieldTechnician: relationship({
-        ref: 'FieldTechnician.storageLocation',
+    field_technician: relationship({
+        ref: 'field_technician.storage_location',
         ui: {
         displayMode: 'cards',
         cardFields: ['email'],

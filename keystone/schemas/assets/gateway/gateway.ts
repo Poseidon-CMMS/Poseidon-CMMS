@@ -5,14 +5,14 @@ import { timestamp, relationship, text } from '@keystone-next/keystone/fields';
 export const gateway = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['integrationId', 'fabricationDate', 'housingType'],
+        initialColumns: ['integration_id', 'fabrication_date', 'housing_type'],
       },
     },
     fields: {
-      fabricationDate: timestamp({ isRequired: true }), //fecha de alta
-      integrationId: text({isRequired: true, isIndexed: "unique"}),
+      fabrication_date: timestamp({ isRequired: true }), //fecha de alta
+      integration_id: text({isRequired: true, isIndexed: "unique"}),
       irrigator: relationship({
-        ref: 'Irrigator.gateway',
+        ref: 'irrigator.gateway',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'lat', 'long', 'status'],
@@ -21,34 +21,34 @@ export const gateway = list({ // TODO: falta definir sus relaciones
         },
         many: false,
       }),
-      housingType: relationship({
-        ref: 'GatewayHousingType',
+      housing_type: relationship({
+        ref: 'gateway_housing_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         }
       }),
-      satelliteModem: relationship({
-        ref: 'SatelliteModem.gateway',
+      satellite_modem: relationship({
+        ref: 'satellite_modem.gateway',
         ui: {
           displayMode: 'cards',
-          cardFields: ['manufacturerId', 'shipmentDate', 'isTransmitting', 'comment'],
-          inlineEdit: { fields: ['manufacturerId', 'shipmentDate', 'isTransmitting', 'comment']},
+          cardFields: ['manufacturer_id', 'shipment_date', 'is_transmitting', 'comment'],
+          inlineEdit: { fields: ['manufacturer_id', 'shipment_date', 'is_transmitting', 'comment']},
           linkToItem: true,
           inlineConnect: true,
-          inlineCreate: { fields: ['manufacturerId', 'shipmentDate', 'isTransmitting', 'comment'] },
+          inlineCreate: { fields: ['manufacturer_id', 'shipment_date', 'is_transmitting', 'comment'] },
         },
         many: false
       }),
-      satelliteAntenna: relationship({
-        ref: 'SatelliteAntenna.gateway',
+      satellite_antenna: relationship({
+        ref: 'satellite_antenna.gateway',
         ui: {
           displayMode: 'select',
         },
         many: false
       }),
-      pcbGateway: relationship({
-        ref: 'PcbGateway.gateway',
+      pcb_gateway: relationship({
+        ref: 'pcb_gateway.gateway',
         ui: {
           createView: {
             fieldMode: 'hidden'
@@ -56,8 +56,8 @@ export const gateway = list({ // TODO: falta definir sus relaciones
         },
         many: false,
       }),
-      hdwIssue: relationship({
-        ref: 'HdwIssue.gateway',
+      hdw_issue: relationship({
+        ref: 'hdw_issue.gateway',
         ui: {
           createView: {
             fieldMode: 'hidden'
@@ -65,16 +65,16 @@ export const gateway = list({ // TODO: falta definir sus relaciones
         },
         many: false,
       }),
-      loraAntennaType: relationship({
-        ref: 'LoraAntennaType',
+      lora_antenna_type: relationship({
+        ref: 'lora_antenna_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         },
         many: false
       }),
-      storageLocation: relationship({
-        ref: 'StorageLocation.gateway',
+      storage_location: relationship({
+        ref: 'storage_location.gateway',
         ui: {
           displayMode: 'select',
           labelField: 'name'

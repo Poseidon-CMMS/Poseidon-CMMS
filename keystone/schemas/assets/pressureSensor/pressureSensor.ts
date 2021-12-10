@@ -6,15 +6,15 @@ import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequ
 export const pressureSensor = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['manufacturer_id', 'status', 'irrigator', 'pressureSensorType', 'order','comments'],
+        initialColumns: ['manufacturer_id', 'status', 'irrigator', 'pressure_sensor_type', 'order','comments'],
       },
       labelField: 'manufacturer_id',
     },
     hooks: {
-        validateInput: relationshipRequiredCheckerHook('pressureSensorType'),
+        validateInput: relationshipRequiredCheckerHook('pressure_sensor_type'),
     },
     fields: {
-      manufacturerId: text({ isRequired: true }),
+      manufacturer_id: text({ isRequired: true }),
       status: select({
         isRequired: true,
         options: [
@@ -29,7 +29,7 @@ export const pressureSensor = list({ // TODO: falta definir sus relaciones
       order: integer(),
       image: text(),
       irrigator: relationship({
-        ref: 'irrigator.pressureSensor',
+        ref: 'irrigator.pressure_sensor',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'lat', 'long', 'status'],
@@ -38,22 +38,22 @@ export const pressureSensor = list({ // TODO: falta definir sus relaciones
         },
         many: false,
       }),
-      pressureSensorType: relationship({
-        ref: 'pressureSensorType',
+      pressure_sensor_type: relationship({
+        ref: 'pressure_sensor_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         }
       }),
-      storageLocation: relationship({
-        ref: 'storageLocation.pressureSensor',
+      storage_location: relationship({
+        ref: 'storage_location.pressure_sensor',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         }
       }),
-      hdwIssue: relationship({
-        ref: 'hdwIssue.pressureSensor',
+      hdw_issue: relationship({
+        ref: 'hdw_issue.pressure_sensor',
         ui: {
           createView: {
             fieldMode: 'hidden'

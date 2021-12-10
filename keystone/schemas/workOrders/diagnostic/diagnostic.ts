@@ -17,11 +17,11 @@ export const diagnostic = list({
       comments: text(),
       //type-dependent attributes
       angles: text(),
-      heightDiff: float(),
+      height_diff: float(),
       battery2to3: checkbox(),
-      timeStart: text(),
-      timeEnd: text(),
-      gpsPositions: select({
+      time_start: text(),
+      time_end: text(),
+      gps_positions: select({
         isRequired: false,
         dataType: "integer",
         options: [
@@ -32,9 +32,9 @@ export const diagnostic = list({
           displayMode: "segmented-control",
         },
       }),
-      packetsLost: integer(),
-      distanceToIrrigatorCenterInMeters: integer(),
-      initialSNR: select({
+      packets_lost: integer(),
+      distance_to_irrigator_center_in_meters: integer(),
+      initial_snr: select({
         isRequired: false,
         dataType: "integer",
         options: [
@@ -46,25 +46,25 @@ export const diagnostic = list({
           displayMode: "segmented-control",
         },
       }),
-      pressureSensorPackets: integer(),
-      grafanaLink: text(),
-      altimetryImage: image(),
+      pressure_sensor_packets: integer(),
+      grafana_link: text(),
+      altimetry_image: image(),
 
       //relationships
       user: relationship({
         ref: 'diagnostic.user'
       }),
-      hdwIssue: relationship({
-        ref: 'hdwIssue.diagnostic',
+      hdw_issue: relationship({
+        ref: 'hdw_issue.diagnostic',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creation_date', 'irrigator', 'observations'],
+          cardFields: ['creation_date', 'irrigator', 'comments'],
           linkToItem: true,
           inlineConnect: true,
         },
         many: false,
       }),
-      diagnosticType: relationship({
+      diagnostic_type: relationship({
         ref: 'diagnostic_type',
         ui: {
           displayMode: 'select',

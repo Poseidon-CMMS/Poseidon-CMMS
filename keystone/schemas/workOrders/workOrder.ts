@@ -10,11 +10,11 @@ export const workOrder = list({
     },
   },
   fields: {
-    workDate: timestamp({ isRequired: true }),
-    kmTraveled: float({isRequired: true}),
+    work_date: timestamp({ isRequired: true }),
+    km_traveled: float({isRequired: true}),
     comment: text(),
-    installUninstallRequest: relationship({
-        ref: 'installUninstallRequest.workOrder',
+    install_uninstall_request: relationship({
+        ref: 'install_uninstall_request.work_order',
         ui: {
           displayMode: 'cards',
           cardFields: ['creation_date', 'status'],
@@ -24,7 +24,7 @@ export const workOrder = list({
         many: true,
       }),
     repair: relationship({
-      ref: 'repair.workOrder',
+      ref: 'repair.work_order',
       ui: {
         displayMode: 'cards',
         cardFields: ['date', 'status'],

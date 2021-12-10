@@ -13,9 +13,9 @@ export const installUninstallRequest = list({ // TODO: falta definir sus relacio
         validateInput: relationshipRequiredCheckerHook('irrigator'),
     },
     fields: {
-      creationDate: timestamp({ isRequired: true }), //fecha de alta
+      creation_date: timestamp({ isRequired: true }), //fecha de alta
       irrigator: relationship({
-        ref: 'irrigator.installUninstallRequest',
+        ref: 'irrigator.install_uninstall_request',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'lat', 'long', 'status'],
@@ -36,8 +36,8 @@ export const installUninstallRequest = list({ // TODO: falta definir sus relacio
           displayMode: 'segmented-control',
         },
       }),
-      workOrder: relationship({
-        ref: 'workOrder.installUninstallRequest',
+      work_order: relationship({
+        ref: 'work_order.install_uninstall_request',
         ui: {
           displayMode: 'cards',
           cardFields: ['work_date', 'km_traveled', 'comment'],

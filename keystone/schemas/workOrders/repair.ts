@@ -14,11 +14,11 @@ export const repair = list({ // TODO: falta definir sus relaciones
     },
     fields: {
       date: timestamp({ isRequired: true }), //fecha de alta
-      hdwIssue: relationship({
-        ref: 'hdwIssue.repair',
+      hdw_issue: relationship({
+        ref: 'hdw_issue.repair',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creation_date', 'irrigator', 'TTR', 'observations'],
+          cardFields: ['creation_date', 'irrigator', 'TTR', 'comments'],
           linkToItem: true,
           inlineConnect: true,
         },
@@ -36,7 +36,7 @@ export const repair = list({ // TODO: falta definir sus relaciones
           displayMode: 'segmented-control',
         },
       }),
-      repairType: relationship({
+      repair_type: relationship({
         ref: 'repair_type',
         ui: {
           displayMode: 'select',
@@ -44,8 +44,8 @@ export const repair = list({ // TODO: falta definir sus relaciones
         },
         many: false
       }),
-      workOrder: relationship({
-        ref: 'workOrder.repair',
+      work_order: relationship({
+        ref: 'work_order.repair',
         ui: {
           displayMode: 'cards',
           cardFields: ['work_date', 'km_traveled', 'comment'],

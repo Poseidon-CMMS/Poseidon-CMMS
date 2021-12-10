@@ -16,8 +16,8 @@ export const pcbNode = list({
       },
     },
     fields: {
-      integrationId: text({isRequired: true, isIndexed: 'unique'}),
-      fabricationDate: timestamp({ isRequired: true }),
+      integration_id: text({isRequired: true, isIndexed: 'unique'}),
+      fabrication_date: timestamp({ isRequired: true }),
       picture: text(),
       status: select({
         isRequired: true,
@@ -29,8 +29,8 @@ export const pcbNode = list({
           displayMode: 'segmented-control',
         },
       }),
-      gpsNode: relationship({
-        ref: 'gpsNode.pcbNode',
+      gps_node: relationship({
+        ref: 'gps_node.pcb_node',
         ui: {
           createView: {
             fieldMode: 'hidden'
@@ -38,24 +38,24 @@ export const pcbNode = list({
         },
         many: false,
       }),
-      firmwareVersion: relationship({
-        ref: 'nodeFirmwareVersion.pcbNode',
+      firmware_version: relationship({
+        ref: 'node_firmware_version.pcb_node',
         ui: {
           displayMode: 'select',
           labelField: 'version'
         },
         many: false
       }),
-      hardwareVersion: relationship({
-        ref: 'nodeHardwareVersion.pcbNode',
+      hardware_version: relationship({
+        ref: 'node_hardware_version.pcb_node',
         ui: {
           displayMode: 'select',
           labelField: 'version'
         },
         many: false
       }),
-      storageLocation: relationship({
-        ref: 'storageLocation.pcbNode',
+      storage_location: relationship({
+        ref: 'storage_location.pcb_node',
         ui: {
           displayMode: 'select',
           labelField: 'name',

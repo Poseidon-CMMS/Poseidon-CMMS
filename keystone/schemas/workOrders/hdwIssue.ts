@@ -14,15 +14,15 @@ import { graphql } from "@keystone-next/keystone/types";
 export const hardwareIssue = list({
   ui: {
     listView: {
-      initialColumns: ["creationDate", "closeDate", "TTR", "comments"],
+      initialColumns: ["creation_date", "close_date", "TTR", "comments"],
     },
   },
   hooks: {
     validateInput: relationshipRequiredCheckerHook("irrigator"),
   },
   fields: {
-    creationDate: timestamp({ isRequired: true }),
-    closeDate: timestamp(),
+    creation_date: timestamp({ isRequired: true }),
+    close_date: timestamp(),
 
     //virtuals
     TTR: virtual({
@@ -32,7 +32,7 @@ export const hardwareIssue = list({
           //@ts-ignore
           if (item.diagnostic && item.repair && item.repair) {
             //@ts-ignore
-            const oldDate: Date = new Date(item.diagnosticDate);
+            const oldDate: Date = new Date(item.diagnostic_date);
             //@ts-ignore
             const finalDate: Date = new Date(item.repair.date);
             //@ts-ignore
@@ -46,17 +46,17 @@ export const hardwareIssue = list({
     comments: text(),
 
     diagnostic: relationship({
-      ref: "Diagnostic.hdwIssue",
+      ref: "diagnostic.hdw_issue",
       ui: {
         displayMode: "cards",
-        cardFields: ["creationDate", "comments"],
+        cardFields: ["date", "comments"],
         linkToItem: true,
         inlineConnect: true,
       },
       many: false,
     }),
     repair: relationship({
-      ref: "Repair.hdwIssue",
+      ref: "repair.hdw_issue",
       ui: {
         createView: {
           fieldMode: "hidden",
@@ -80,7 +80,7 @@ export const hardwareIssue = list({
     }),
     //entities
     field: relationship({
-      ref: "Field.hdwIssue",
+      ref: "field.hdw_issue",
       ui: {
         displayMode: "cards",
         cardFields: ["name", "gate"],
@@ -90,7 +90,7 @@ export const hardwareIssue = list({
       many: false,
     }),
     irrigator: relationship({
-      ref: "Irrigator.hdwIssue",
+      ref: "irrigator.hdw_issue",
       ui: {
         displayMode: "cards",
         cardFields: ["name", "lat", "long", "status"],
@@ -100,32 +100,32 @@ export const hardwareIssue = list({
       many: true,
     }),
     gateway: relationship({
-      ref: "Gateway.hdwIssue",
+      ref: "gateway.hdw_issue",
       ui: {
         displayMode: "cards",
-        cardFields: ["fabricationDate"],
-        inlineEdit: { fields: ["fabricationDate"] },
+        cardFields: ["fabrication_date"],
+        inlineEdit: { fields: ["fabrication_date"] },
         linkToItem: true,
         inlineConnect: true,
-        inlineCreate: { fields: ["fabricationDate"] },
+        inlineCreate: { fields: ["fabrication_date"] },
       },
       many: false,
     }),
-    gpsNode: relationship({
-      ref: "GpsNode.hdwIssue",
+    gps_node: relationship({
+      ref: "gps_node.hdw_issue",
       ui: {
         displayMode: "cards",
-        cardFields: ["fabricationDate"],
+        cardFields: ["fabrication_date"],
         linkToItem: true,
         inlineConnect: true,
       },
       many: false,
     }),
-    pressureSensor: relationship({
-      ref: "PressureSensor.hdwIssue",
+    pressure_sensor: relationship({
+      ref: "pressure_sensor.hdw_issue",
       ui: {
         displayMode: "cards",
-        cardFields: ["manufacturerId", "status", "order"],
+        cardFields: ["manufacturer_id", "status", "order"],
         linkToItem: true,
         inlineConnect: true,
       },

@@ -16,8 +16,8 @@ export const pcbGateway = list({
       },
     },
     fields: {
-      integrationId: text({isRequired: true, isIndexed: 'unique'}),
-      fabricationDate: timestamp({ isRequired: true }),
+      integration_id: text({isRequired: true, isIndexed: 'unique'}),
+      fabrication_date: timestamp({ isRequired: true }),
       picture: text({isRequired: false}),
       status: select({
         isRequired: true,
@@ -30,7 +30,7 @@ export const pcbGateway = list({
         },
       }),
       gateway: relationship({
-        ref: 'gateway.pcbGateway',
+        ref: 'gateway.pcb_gateway',
         ui: {
           createView: {
             fieldMode: 'hidden'
@@ -38,24 +38,24 @@ export const pcbGateway = list({
         },
         many: false,
       }),
-      firmwareVersion: relationship({
-        ref: 'gatewayFirmwareVersion.pcbGateway',
+      firmware_version: relationship({
+        ref: 'gateway_firmware_version.pcb_gateway',
         ui: {
           displayMode: 'select',
           labelField: 'version'
         },
         many: false
       }),
-      hardwareVersion: relationship({
-        ref: 'gatewayHardwareVersion.pcbGateway',
+      hardware_version: relationship({
+        ref: 'gateway_hardware_version.pcb_gateway',
         ui: {
           displayMode: 'select',
           labelField: 'version'
         },
         many: false
       }),
-      storageLocation: relationship({
-        ref: 'storageLocation.pcbGateway',
+      storage_location: relationship({
+        ref: 'storage_location.pcb_gateway',
         ui: {
           displayMode: 'select',
           labelField: 'name'

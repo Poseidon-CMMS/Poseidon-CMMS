@@ -11,7 +11,7 @@ export const zone = list({
     fields: {
       name: text({ isRequired: true }),
       code: text(),
-      isForeign: checkbox({ isRequired: true, defaultValue: false}),
+      is_foreign: checkbox({ isRequired: true, defaultValue: false}),
       field: relationship({
         ref: 'field.zone',
         ui: {
@@ -22,8 +22,8 @@ export const zone = list({
         },
         many: true,
       }),
-      fieldTechnician: relationship({
-        ref: 'fieldTechnician.zone',
+      field_technician: relationship({
+        ref: 'field_technician.zone',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'email'],

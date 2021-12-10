@@ -48,7 +48,7 @@ export const lists = createSchema({
   gateway: gateway,
   gps_node: gpsNode,
   field: fieldDomainEntity,
-  installuninstallrequest: installUninstallRequest,
+  install_uninstall_request: installUninstallRequest,
   city: city,
   field_technician: fieldTechnician,
   hdw_issue: hardwareIssue,

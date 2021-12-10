@@ -7,11 +7,11 @@ export const satelliteModemType = list({
   ui: {
     isHidden: true,
     listView: {
-      initialColumns: ["referenceNumber", "version"],
+      initialColumns: ["reference_number", "version"],
     },
   },
   fields: {
-    referenceNumber: text({
+    reference_number: text({
       isRequired: true,
       isIndexed: "unique",
       
@@ -25,8 +25,8 @@ export const satelliteModemType = list({
             }
         })
     }),
-    satelliteModem: relationship({
-      ref: "SatelliteModem.satelliteModemType",
+    satellite_modem: relationship({
+      ref: "satellite_modem.satellite_modem_type",
       ui: {
         displayMode: 'count',
         createView: {

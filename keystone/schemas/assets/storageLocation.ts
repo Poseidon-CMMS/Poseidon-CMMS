@@ -13,7 +13,7 @@ export const storageLocation = list({
     lat: float({ isRequired: true }),
     long: float({ isRequired: true }),
     gateway: relationship({
-        ref: 'gateway.storageLocation',
+        ref: 'gateway.storage_location',
         ui: {
           displayMode: 'cards',
           cardFields: ['integration_id'],
@@ -22,8 +22,8 @@ export const storageLocation = list({
         },
         many: true,
       }),
-    pcbGateway: relationship({
-        ref: 'pcbGateway.storageLocation',
+    pcb_gateway: relationship({
+        ref: 'pcb_gateway.storage_location',
         ui: {
         displayMode: 'cards',
         cardFields: ['integration_id'],
@@ -32,8 +32,8 @@ export const storageLocation = list({
         },
         many: true,
     }),
-    gpsNode: relationship({
-        ref: 'gpsNode.storageLocation',
+    gps_node: relationship({
+        ref: 'gps_node.storage_location',
         ui: {
         displayMode: 'cards',
         cardFields: ['integration_id'],
@@ -42,8 +42,8 @@ export const storageLocation = list({
         },
         many: true,
     }),
-    pressureSensor: relationship({
-        ref: 'pressureSensor.storageLocation',
+    pressure_sensor: relationship({
+        ref: 'pressure_sensor.storage_location',
         ui: {
         displayMode: 'cards',
         cardFields: ['manufacturer_id'],
@@ -52,8 +52,8 @@ export const storageLocation = list({
         },
         many: true,
     }),
-    satelliteModem: relationship({
-        ref: 'satelliteModem.storageLocation',
+    satellite_modem: relationship({
+        ref: 'satellite_modem.storage_location',
         ui: {
         displayMode: 'cards',
         cardFields: ['manufacturer_id'],
@@ -62,8 +62,8 @@ export const storageLocation = list({
         },
         many: true,
     }),
-    pcbNode: relationship({
-        ref: 'pcbNode.storageLocation',
+    pcb_node: relationship({
+        ref: 'pcb_node.storage_location',
         ui: {
         displayMode: 'cards',
         cardFields: ['integration_id'],
@@ -72,8 +72,8 @@ export const storageLocation = list({
         },
         many: true,
     }),
-    satelliteAntenna: relationship({
-        ref: 'satelliteAntenna.storageLocation',
+    satellite_antenna: relationship({
+        ref: 'satellite_antenna.storage_location',
         ui: {
         displayMode: 'cards',
         cardFields: ['manufacturer_id'],
@@ -83,8 +83,8 @@ export const storageLocation = list({
         many: true,
     }),
     //People
-    fieldTechnician: relationship({
-        ref: 'fieldTechnician.storageLocation',
+    field_technician: relationship({
+        ref: 'field_technician.storage_location',
         ui: {
         displayMode: 'cards',
         cardFields: ['email'],

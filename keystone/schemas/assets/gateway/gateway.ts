@@ -9,8 +9,8 @@ export const gateway = list({ // TODO: falta definir sus relaciones
       },
     },
     fields: {
-      fabricationDate: timestamp({ isRequired: true }), //fecha de alta
-      integrationId: text({isRequired: true, isIndexed: "unique"}),
+      fabrication_date: timestamp({ isRequired: true }), //fecha de alta
+      integration_id: text({isRequired: true, isIndexed: "unique"}),
       irrigator: relationship({
         ref: 'irrigator.gateway',
         ui: {
@@ -21,15 +21,15 @@ export const gateway = list({ // TODO: falta definir sus relaciones
         },
         many: false,
       }),
-      housingType: relationship({
-        ref: 'gatewayHousingType',
+      housing_type: relationship({
+        ref: 'gateway_housing_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         }
       }),
-      satelliteModem: relationship({
-        ref: 'satelliteModem.gateway',
+      satellite_modem: relationship({
+        ref: 'satellite_modem.gateway',
         ui: {
           displayMode: 'cards',
           cardFields: ['manufacturer_id', 'shipment_date', 'is_transmitting', 'comment'],
@@ -40,15 +40,15 @@ export const gateway = list({ // TODO: falta definir sus relaciones
         },
         many: false
       }),
-      satelliteAntenna: relationship({
-        ref: 'satelliteAntenna.gateway',
+      satellite_antenna: relationship({
+        ref: 'satellite_antenna.gateway',
         ui: {
           displayMode: 'select',
         },
         many: false
       }),
-      pcbGateway: relationship({
-        ref: 'pcbGateway.gateway',
+      pcb_gateway: relationship({
+        ref: 'pcb_gateway.gateway',
         ui: {
           createView: {
             fieldMode: 'hidden'
@@ -56,8 +56,8 @@ export const gateway = list({ // TODO: falta definir sus relaciones
         },
         many: false,
       }),
-      hdwIssue: relationship({
-        ref: 'hdwIssue.gateway',
+      hdw_issue: relationship({
+        ref: 'hdw_issue.gateway',
         ui: {
           createView: {
             fieldMode: 'hidden'
@@ -65,16 +65,16 @@ export const gateway = list({ // TODO: falta definir sus relaciones
         },
         many: false,
       }),
-      loraAntennaType: relationship({
-        ref: 'loraAntennaType',
+      lora_antenna_type: relationship({
+        ref: 'lora_antenna_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'
         },
         many: false
       }),
-      storageLocation: relationship({
-        ref: 'storageLocation.gateway',
+      storage_location: relationship({
+        ref: 'storage_location.gateway',
         ui: {
           displayMode: 'select',
           labelField: 'name'

@@ -10,15 +10,15 @@ export const satelliteModem = list({ // TODO: falta definir sus relaciones
       },
     },
     hooks: {
-      validateInput: relationshipRequiredCheckerHook('satelliteModemType'),
+      validateInput: relationshipRequiredCheckerHook('satellite_modem_type'),
     },
     fields: {
-      manufacturerId: text({isRequired: true, isIndexed: 'unique'}),
-      shipmentDate: timestamp({ isRequired: true }),
-      isTransmitting: checkbox({defaultValue: false, isRequired: true}),
+      manufacturer_id: text({isRequired: true, isIndexed: 'unique'}),
+      shipment_date: timestamp({ isRequired: true }),
+      is_transmitting: checkbox({defaultValue: false, isRequired: true}),
       comment: text(),
-      satelliteModemType: relationship({
-        ref: 'satelliteModemType.satelliteModem',
+      satellite_modem_type: relationship({
+        ref: 'satellite_modem_type.satellite_modem',
         ui: {
           displayMode: 'cards',
           cardFields: ['reference_number', 'version'],
@@ -26,14 +26,14 @@ export const satelliteModem = list({ // TODO: falta definir sus relaciones
         }
       }),
       gateway: relationship({
-        ref: 'gateway.satelliteModem',
+        ref: 'gateway.satellite_modem',
         ui: {
           displayMode: 'select',
         },
         many: false,
       }),
-      storageLocation: relationship({
-        ref: 'storageLocation.satelliteModem',
+      storage_location: relationship({
+        ref: 'storage_location.satellite_modem',
         ui: {
           displayMode: 'select',
           labelField: 'name'

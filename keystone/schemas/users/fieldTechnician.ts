@@ -17,7 +17,7 @@ export const fieldTechnician = list({
       name: text({ isRequired: true }),
       email: text({ isRequired: true }),
       zone: relationship({
-        ref: 'zone.fieldTechnician',
+        ref: 'zone.field_technician',
         ui: {
           displayMode: 'cards',
           cardFields: ['code', 'name', 'is_foreign'],
@@ -28,8 +28,8 @@ export const fieldTechnician = list({
         },
         many: true,
       }),
-      storageLocation: relationship({
-        ref: 'storageLocation.fieldTechnician',
+      storage_location: relationship({
+        ref: 'storage_location.field_technician',
         ui: {
           displayMode: 'select',
           labelField: 'name',

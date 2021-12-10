@@ -7,11 +7,11 @@ import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCh
 export const irrigator = list({
     ui: {
       listView: {
-        initialColumns: ['integrationID','name', 'lat', 'long', 'status', 'enabled', 'comment'],
+        initialColumns: ['integration_id','name', 'lat', 'long', 'status', 'enabled', 'comment'],
       },
     },
     fields: {
-      integrationID: text({ isRequired: true }),
+      integration_id: text({ isRequired: true }),
       name: text({ isRequired: true }),
       lat: float({ isRequired: true }),
       long: float({ isRequired: true }),
@@ -42,8 +42,8 @@ export const irrigator = list({
         many: false,
         
       }),
-      gpsNode: relationship({
-        ref: 'gpsNode.irrigator',
+      gps_node: relationship({
+        ref: 'gps_node.irrigator',
         ui: {
           displayMode: 'cards',
           cardFields: ['fabrication_date'],
@@ -62,8 +62,8 @@ export const irrigator = list({
         },
         many: false,
       }),
-      installUninstallRequest: relationship({
-        ref: 'installUninstallRequest.irrigator',
+      install_uninstall_request: relationship({
+        ref: 'install_uninstall_request.irrigator',
         ui: {
           displayMode: 'cards',
           cardFields: ['creation_date'],
@@ -72,18 +72,18 @@ export const irrigator = list({
         },
         many: true,
       }),
-      hdwIssue: relationship({
-        ref: 'hdwIssue.irrigator',
+      hdw_issue: relationship({
+        ref: 'hdw_issue.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creation_date', 'observations'],
+          cardFields: ['creation_date', 'comments'],
           linkToItem: true,
           inlineConnect: true,
         },
         many: true,
       }),
-      pressureSensor: relationship({
-        ref: 'pressureSensor.irrigator',
+      pressure_sensor: relationship({
+        ref: 'pressure_sensor.irrigator',
         ui: {
           displayMode: 'cards',
           cardFields: ['manufacturer_id', 'status', 'order'],
@@ -92,7 +92,7 @@ export const irrigator = list({
         },
         many: false,
       }),
-      transmissionStatus: virtual({
+      transmission_status: virtual({
         field: graphql.field({
           type: graphql.String,
           async resolve(item, args, context) {

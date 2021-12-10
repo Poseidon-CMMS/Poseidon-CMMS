@@ -1,6 +1,6 @@
-import { list } from "@keystone-next/keystone";
+import { list } from '@keystone-6/core';
 
-import { text, select, relationship } from "@keystone-next/keystone/fields";
+import { text, select, relationship } from '@keystone-6/core/fields';
 
 export const inspectionType = list({
   ui: {
@@ -10,7 +10,9 @@ export const inspectionType = list({
     },
   },
   fields: {
-    name: text({ isRequired: true, isIndexed: 'unique' }),
+    name: text({           validation: {
+            isRequired: true,
+          }, isIndexed: 'unique' }),
     type: relationship({
         ref: 'asset_type.inspection_type',
         many: false

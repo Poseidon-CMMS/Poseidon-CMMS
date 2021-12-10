@@ -9,10 +9,10 @@ WORKDIR /home/node
 COPY package*.json ./
 
 RUN npm install
-RUN npm i focus-trap@6.6.1
+#RUN npm i focus-trap@6.6.1
 
 ADD . /home/node
-RUN npm run postinstall
+RUN npm run postinstallfix
 
 RUN npm run-script build
 

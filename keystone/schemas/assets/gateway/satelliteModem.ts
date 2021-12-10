@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { timestamp, relationship, text, checkbox } from '@keystone-next/keystone/fields';
+import { timestamp, relationship, text, checkbox } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
 
 export const satelliteModem = list({ // TODO: falta definir sus relaciones
@@ -13,9 +13,13 @@ export const satelliteModem = list({ // TODO: falta definir sus relaciones
       validateInput: relationshipRequiredCheckerHook('satellite_modem_type'),
     },
     fields: {
-      manufacturer_id: text({isRequired: true, isIndexed: 'unique'}),
-      shipment_date: timestamp({ isRequired: true }),
-      is_transmitting: checkbox({defaultValue: false, isRequired: true}),
+      manufacturer_id: text({          validation: {
+            isRequired: true,
+          }, isIndexed: 'unique'}),
+      shipment_date: timestamp({           validation: {
+            isRequired: true,
+          } }),
+      is_transmitting: checkbox({defaultValue: false}),
       comment: text(),
       satellite_modem_type: relationship({
         ref: 'satellite_modem_type.satellite_modem',

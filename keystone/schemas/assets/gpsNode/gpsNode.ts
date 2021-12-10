@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { timestamp, relationship, text } from '@keystone-next/keystone/fields';
+import { timestamp, relationship, text } from '@keystone-6/core/fields';
 
 import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
 
@@ -11,8 +11,12 @@ export const gpsNode = list({
       },
     },
     fields: {
-      fabrication_date: timestamp({ isRequired: true }), //fecha de alta
-      integration_id: text({isRequired: true, isIndexed: 'unique'}),
+      fabrication_date: timestamp({           validation: {
+            isRequired: true,
+          } }), //fecha de alta
+      integration_id: text({          validation: {
+            isRequired: true,
+          }, isIndexed: 'unique'}),
       internal_photo: text(),
       external_photo: text(),
       irrigator: relationship({

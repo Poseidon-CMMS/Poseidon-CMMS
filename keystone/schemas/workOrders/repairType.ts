@@ -1,6 +1,6 @@
-import { list } from "@keystone-next/keystone";
+import { list } from '@keystone-6/core';
 
-import { text, select } from "@keystone-next/keystone/fields";
+import { text, select } from '@keystone-6/core/fields';
 
 export const repairType = list({
   ui: {
@@ -11,7 +11,9 @@ export const repairType = list({
   },
   fields: {
     type: select({
-        isRequired: true,
+                  validation: {
+            isRequired: true,
+          },
         options: [
             { label: 'Reparación dispositivo actual', value: 'repair' },
             { label: 'Cambio de dispositivo', value: 'replace' },
@@ -20,6 +22,8 @@ export const repairType = list({
             displayMode: 'segmented-control',
         },
       }),
-    name: text({ isRequired: true, isIndexed: 'unique' }),
+    name: text({           validation: {
+            isRequired: true,
+          }, isIndexed: 'unique' }),
   },
 });

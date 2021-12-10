@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { select, timestamp, relationship } from '@keystone-next/keystone/fields';
+import { select, timestamp, relationship } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../../hooks/relationshipRequiredCheckerHook';
 
 export const installUninstallRequest = list({ // TODO: falta definir sus relaciones
@@ -13,7 +13,9 @@ export const installUninstallRequest = list({ // TODO: falta definir sus relacio
         validateInput: relationshipRequiredCheckerHook('irrigator'),
     },
     fields: {
-      creation_date: timestamp({ isRequired: true }), //fecha de alta
+      creation_date: timestamp({           validation: {
+            isRequired: true,
+          } }), //fecha de alta
       irrigator: relationship({
         ref: 'irrigator.install_uninstall_request',
         ui: {
@@ -25,7 +27,9 @@ export const installUninstallRequest = list({ // TODO: falta definir sus relacio
         many: false,
       }),
       status: select({
-        isRequired: true,
+                  validation: {
+            isRequired: true,
+          },
         options: [
           { label: 'Abierta', value: 'open' },
           { label: 'Asignada', value: 'assigned' },

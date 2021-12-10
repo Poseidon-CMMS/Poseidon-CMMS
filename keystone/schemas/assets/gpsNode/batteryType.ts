@@ -1,6 +1,6 @@
-import { list } from "@keystone-next/keystone";
+import { list } from '@keystone-6/core';
 
-import { text } from "@keystone-next/keystone/fields";
+import { text } from '@keystone-6/core/fields';
 
 export const batteryType = list({
   ui: {
@@ -10,6 +10,8 @@ export const batteryType = list({
     },
   },
   fields: {
-    name: text({ isRequired: true, isIndexed: 'unique' }),
+    name: text({           validation: {
+            isRequired: true,
+          }, isIndexed: 'unique' }),
   },
 });

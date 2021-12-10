@@ -1,6 +1,6 @@
-import { list } from "@keystone-next/keystone";
+import { list } from '@keystone-6/core';
 
-import { text, float, relationship} from "@keystone-next/keystone/fields";
+import { text, float, relationship} from '@keystone-6/core/fields';
 
 export const storageLocation = list({
   ui: {
@@ -9,9 +9,15 @@ export const storageLocation = list({
     },
   },
   fields: {
-    name: text({ isRequired: true, isIndexed: 'unique' }),
-    lat: float({ isRequired: true }),
-    long: float({ isRequired: true }),
+    name: text({           validation: {
+            isRequired: true,
+          }, isIndexed: 'unique' }),
+    lat: float({           validation: {
+            isRequired: true,
+          } }),
+    long: float({           validation: {
+            isRequired: true,
+          } }),
     gateway: relationship({
         ref: 'gateway.storage_location',
         ui: {

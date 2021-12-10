@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { relationship, text, select, integer } from '@keystone-next/keystone/fields';
+import { relationship, text, select, integer } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
 
 export const pressureSensor = list({ // TODO: falta definir sus relaciones
@@ -14,9 +14,13 @@ export const pressureSensor = list({ // TODO: falta definir sus relaciones
         validateInput: relationshipRequiredCheckerHook('pressure_sensor_type'),
     },
     fields: {
-      manufacturer_id: text({ isRequired: true }),
+      manufacturer_id: text({           validation: {
+            isRequired: true,
+          } }),
       status: select({
-        isRequired: true,
+                  validation: {
+            isRequired: true,
+          },
         options: [
           { label: 'OK', value: 'ok' },
           { label: 'Roto', value: 'broken' },

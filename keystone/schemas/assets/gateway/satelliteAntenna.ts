@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { relationship, text } from '@keystone-next/keystone/fields';
+import { relationship, text } from '@keystone-6/core/fields';
 
 export const satelliteAntenna = list({
     ui: {
@@ -10,7 +10,9 @@ export const satelliteAntenna = list({
       labelField: 'manufacturer_id'
     },
     fields: {
-      manufacturer_id: text({isRequired: true, isIndexed: 'unique'}),
+      manufacturer_id: text({          validation: {
+            isRequired: true,
+          }, isIndexed: 'unique'}),
       gateway: relationship({
         ref: 'gateway.satellite_antenna',
         ui: {

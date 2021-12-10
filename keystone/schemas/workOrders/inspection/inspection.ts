@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { text, timestamp, relationship, float, checkbox, select, integer, image, file } from '@keystone-next/keystone/fields';
+import { text, timestamp, relationship, float, checkbox, select, integer, image, file } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
 
 export const inspection = list({
@@ -13,7 +13,9 @@ export const inspection = list({
         validateInput: relationshipRequiredCheckerHook('hdw_issue'),
     },
     fields: {
-      date: timestamp({ isRequired: true }), //fecha de alta
+      date: timestamp({           validation: {
+            isRequired: true,
+          } }), //fecha de alta
       comments: text(),
      
       //type-dependent fields

@@ -1,6 +1,6 @@
-import { list } from "@keystone-next/keystone";
+import { list } from '@keystone-6/core';
 
-import { relationship, text } from "@keystone-next/keystone/fields";
+import { relationship, text } from '@keystone-6/core/fields';
 
 export const nodeFirmwareVersion = list({
   ui: {
@@ -11,7 +11,9 @@ export const nodeFirmwareVersion = list({
     },
   },
   fields: {
-    version: text({ isRequired: true, isIndexed: 'unique' }),
+    version: text({           validation: {
+            isRequired: true,
+          }, isIndexed: 'unique' }),
     pcb_node: relationship({
         ref: 'pcb_node.firmware_version',
         ui: {

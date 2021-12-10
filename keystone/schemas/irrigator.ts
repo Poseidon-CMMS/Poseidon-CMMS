@@ -1,7 +1,7 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { graphql } from '@keystone-next/keystone/types';
-import { checkbox, float, select, text, relationship, virtual } from '@keystone-next/keystone/fields';
+import { graphql } from '@keystone-6/core';
+import { checkbox, float, select, text, relationship, virtual } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
 
 export const irrigator = list({
@@ -11,12 +11,22 @@ export const irrigator = list({
       },
     },
     fields: {
-      integration_id: text({ isRequired: true }),
-      name: text({ isRequired: true }),
-      lat: float({ isRequired: true }),
-      long: float({ isRequired: true }),
+      integration_id: text({           validation: {
+            isRequired: true,
+          } }),
+      name: text({           validation: {
+            isRequired: true,
+          } }),
+      lat: float({           validation: {
+            isRequired: true,
+          } }),
+      long: float({           validation: {
+            isRequired: true,
+          } }),
       status: select({
-        isRequired: true,
+                  validation: {
+            isRequired: true,
+          },
         options: [
           { label: 'Sin telemetria', value: 'no-telemetry' },
           { label: 'Instalado', value: 'installed' },
@@ -25,8 +35,10 @@ export const irrigator = list({
           displayMode: 'segmented-control',
         },
       }),
-      enabled: checkbox({ isRequired: true, defaultValue: false }),
-      comment: text({ isRequired: false }),
+      enabled: checkbox({defaultValue: false }),
+      comment: text({ validation: {
+            isRequired: false,
+          } }),
 
       //6 relations
       gateway: relationship({

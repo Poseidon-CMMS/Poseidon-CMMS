@@ -1,4 +1,4 @@
-import { list } from "@keystone-next/keystone";
+import { list } from '@keystone-6/core';
 
 import {
   float,
@@ -7,9 +7,9 @@ import {
   timestamp,
   relationship,
   virtual,
-} from "@keystone-next/keystone/fields";
+} from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from "../../hooks/relationshipRequiredCheckerHook";
-import { graphql } from "@keystone-next/keystone/types";
+import { graphql } from '@keystone-6/core';
 
 export const hardwareIssue = list({
   ui: {
@@ -21,7 +21,9 @@ export const hardwareIssue = list({
     validateInput: relationshipRequiredCheckerHook("irrigator"),
   },
   fields: {
-    creation_date: timestamp({ isRequired: true }),
+    creation_date: timestamp({           validation: {
+            isRequired: true,
+          } }),
     close_date: timestamp(),
 
     //virtuals
@@ -75,8 +77,10 @@ export const hardwareIssue = list({
       many: false,
     }),
     status: select({
-      isRequired: true,
-      dataType: "integer",
+                validation: {
+            isRequired: true,
+          },
+          type: "integer",
       options: [
         { label: "In Field", value: 0 },
         { label: "Assigned", value: 1 },

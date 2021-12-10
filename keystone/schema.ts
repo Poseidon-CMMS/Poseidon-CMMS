@@ -42,6 +42,8 @@ import { repairType } from './schemas/workOrders/repairType';
 import { storageLocation } from './schemas/assets/storageLocation';
 import { diagnosticType } from './schemas/workOrders/diagnostic/diagnosticType';
 import { diagnostic } from './schemas/workOrders/diagnostic/diagnostic';
+import { inspection } from './schemas/workOrders/inspection/inspection';
+import { inspectionType } from './schemas/workOrders/inspection/inspectionType';
 
 export const lists = createSchema({
   irrigator: irrigator,
@@ -79,6 +81,8 @@ export const lists = createSchema({
   storage_location: storageLocation,
   diagnostic_type: diagnosticType,
   diagnostic: diagnostic,
+  inspection: inspection,
+  inspection_type: inspectionType,
 
   user: list({
     ui: {
@@ -94,6 +98,15 @@ export const lists = createSchema({
         isFilterable: true,
       }),
       password: password({ isRequired: true }),
+
+      diagnostic: relationship({
+        ref: 'diagnostic.user',
+        many: true
+      }),
+      inspection: relationship({
+        ref: 'inspection.user',
+        many: true
+      })
     },
   })
 });

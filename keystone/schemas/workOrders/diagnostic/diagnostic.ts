@@ -52,7 +52,7 @@ export const diagnostic = list({
 
       //relationships
       user: relationship({
-        ref: 'diagnostic.user'
+        ref: 'user.diagnostic'
       }),
       hdw_issue: relationship({
         ref: 'hdw_issue.diagnostic',

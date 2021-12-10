@@ -55,6 +55,16 @@ export const hardwareIssue = list({
       },
       many: false,
     }),
+    inspection: relationship({
+      ref: "inspection.hdw_issue",
+      ui: {
+        displayMode: "cards",
+        cardFields: ["date", "comments"],
+        linkToItem: true,
+        inlineConnect: true,
+      },
+      many: false,
+    }),
     repair: relationship({
       ref: "repair.hdw_issue",
       ui: {

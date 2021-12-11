@@ -31,6 +31,10 @@ export const user = list({
       ref: "diagnostic.user",
       many: true,
     }),
+    autopsy: relationship({
+      ref: "autopsy.user",
+      many: true,
+    }),
 
     //technician-only fields
     inspection: relationship({

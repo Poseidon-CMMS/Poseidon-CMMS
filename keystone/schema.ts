@@ -54,6 +54,8 @@ import { diagnostic } from './schemas/workOrders/diagnostic/diagnostic';
 import { inspection } from './schemas/workOrders/inspection/inspection';
 import { inspectionType } from './schemas/workOrders/inspection/inspectionType';
 import { user } from './schemas/users/user';
+import { autopsy } from './schemas/workOrders/autopsy/autopsy';
+import { autopsyType } from './schemas/workOrders/autopsy/autopsyType';
 
 // We have a users list, a blogs list, and tags for blog posts, so they can be filtered.
 // Each property on the exported object will become the name of a list (a.k.a. the `listKey`),
@@ -95,5 +97,7 @@ export const lists = {
   diagnostic: diagnostic,
   inspection: inspection,
   inspection_type: inspectionType,
-  user: user
+  user: user,
+  autopsy: autopsy,
+  autopsy_type: autopsyType
 };

@@ -79,7 +79,13 @@ input StringFilter {
   contains: String
   startsWith: String
   endsWith: String
+  mode: QueryMode
   not: NestedStringFilter
+}
+
+enum QueryMode {
+  default
+  insensitive
 }
 
 input NestedStringFilter {
@@ -761,6 +767,7 @@ input work_orderRelateToOneForCreateInput {
 type city {
   id: ID!
   name: String
+  borrame: String
   province: province
   field(
     where: fieldWhereInput! = {}
@@ -781,6 +788,7 @@ input cityWhereInput {
   NOT: [cityWhereInput!]
   id: IDFilter
   name: StringFilter
+  borrame: StringFilter
   province: provinceWhereInput
   field: fieldManyRelationFilter
 }
@@ -794,10 +802,12 @@ input fieldManyRelationFilter {
 input cityOrderByInput {
   id: OrderDirection
   name: OrderDirection
+  borrame: OrderDirection
 }
 
 input cityUpdateInput {
   name: String
+  borrame: String
   province: provinceRelateToOneForUpdateInput
   field: fieldRelateToManyForUpdateInput
 }
@@ -816,6 +826,7 @@ input cityUpdateArgs {
 
 input cityCreateInput {
   name: String
+  borrame: String
   province: provinceRelateToOneForCreateInput
   field: fieldRelateToManyForCreateInput
 }
@@ -4072,11 +4083,6 @@ enum KeystoneAdminUIFieldMetaItemViewFieldMode {
   edit
   read
   hidden
-}
-
-enum QueryMode {
-  default
-  insensitive
 }
 
 type KeystoneAdminUISort {

@@ -9,7 +9,6 @@ WORKDIR /home/node
 COPY package*.json ./
 
 RUN npm install
-#RUN npm i focus-trap@6.6.1
 
 ADD . /home/node
 RUN npm run postinstallfix
@@ -25,4 +24,4 @@ WORKDIR /home/node
 COPY --from=build /home/node /home/node
 EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]

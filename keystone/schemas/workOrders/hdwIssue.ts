@@ -76,6 +76,16 @@ export const hardwareIssue = list({
       },
       many: false,
     }),
+    autopsy: relationship({
+      ref: "autopsy.hdw_issue",
+      ui: {
+        displayMode: "cards",
+        cardFields: ["date", "comments"],
+        linkToItem: true,
+        inlineConnect: true,
+      },
+      many: false,
+    }),
     status: select({
                 validation: {
             isRequired: true,

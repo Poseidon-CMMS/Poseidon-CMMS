@@ -1,8 +1,8 @@
 import { list } from "@keystone-6/core";
 
-import { text, select, relationship } from "@keystone-6/core/fields";
+import { text, select } from "@keystone-6/core/fields";
 
-export const diagnosticType = list({
+export const autopsyType = list({
   ui: {
     isHidden: true,
     listView: {

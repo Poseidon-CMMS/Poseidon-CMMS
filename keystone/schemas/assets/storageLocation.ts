@@ -89,8 +89,8 @@ export const storageLocation = list({
         many: true,
     }),
     //People
-    field_technician: relationship({
-        ref: 'field_technician.storage_location',
+    user: relationship({
+        ref: 'user.storage_location',
         ui: {
         displayMode: 'cards',
         cardFields: ['email'],

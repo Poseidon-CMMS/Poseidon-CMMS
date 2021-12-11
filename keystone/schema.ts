@@ -12,20 +12,7 @@ A field: The individual bits of data on your list, each with its own type.
 
 */
 
-// Like the `config` function we use in keystone.ts, we use functions
-// for putting in our config so we get useful errors. With typescript,
-// we get these even before code runs.
-import { list } from '@keystone-6/core';
 
-// We're using some common fields in the starter. Check out https://keystonejs.com/docs/apis/fields#fields-api
-// for the full list of fields.
-import {
-  text,
-  relationship,
-  password,
-  timestamp,
-  select,
-} from '@keystone-6/core/fields';
 // The document field is a more complicated field, so it's in its own package
 // Keystone aims to have all the base field types, but you can make your own
 // custom ones.
@@ -37,7 +24,6 @@ import { hardwareIssue } from './schemas/workOrders/hdwIssue';
 import { field as fieldDomainEntity } from './schemas/field'
 import { installUninstallRequest } from './schemas/workOrders/installUninstallRequest';
 import { city } from './schemas/city';
-import { fieldTechnician } from './schemas/users/fieldTechnician';
 import { province } from './schemas/province';
 import { zone } from './schemas/zone';
 import { client } from './schemas/client';
@@ -67,6 +53,7 @@ import { diagnosticType } from './schemas/workOrders/diagnostic/diagnosticType';
 import { diagnostic } from './schemas/workOrders/diagnostic/diagnostic';
 import { inspection } from './schemas/workOrders/inspection/inspection';
 import { inspectionType } from './schemas/workOrders/inspection/inspectionType';
+import { user } from './schemas/users/user';
 
 // We have a users list, a blogs list, and tags for blog posts, so they can be filtered.
 // Each property on the exported object will become the name of a list (a.k.a. the `listKey`),
@@ -78,7 +65,6 @@ export const lists = {
   field: fieldDomainEntity,
   install_uninstall_request: installUninstallRequest,
   city: city,
-  field_technician: fieldTechnician,
   hdw_issue: hardwareIssue,
   province: province,
   zone: zone,
@@ -109,34 +95,5 @@ export const lists = {
   diagnostic: diagnostic,
   inspection: inspection,
   inspection_type: inspectionType,
-
-  // Here we define the user list.
-  user: list({
-    // Here are the fields that `User` will have. We want an email and password so they can log in
-    // a name so we can refer to them, and a way to connect users to posts.
-    fields: {
-      name: text({ validation: { isRequired: true } }),
-      email: text({
-        validation: { isRequired: true },
-        isIndexed: 'unique',
-        isFilterable: true,
-      }),
-      // The password field takes care of hiding details and hashing values
-      password: password({ validation: { isRequired: true } }),
-      diagnostic: relationship({
-        ref: 'diagnostic.user',
-        many: true
-      }),
-      inspection: relationship({
-        ref: 'inspection.user',
-        many: true
-      })
-    },
-    // Here we can configure the Admin UI. We want to show a user's name and posts in the Admin UI
-    ui: {
-      listView: {
-        initialColumns: ['name'],
-      },
-    },
-  }),
+  user: user
 };

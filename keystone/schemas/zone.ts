@@ -24,8 +24,8 @@ export const zone = list({
         },
         many: true,
       }),
-      field_technician: relationship({
-        ref: 'field_technician.zone',
+      user: relationship({
+        ref: 'user.zone',
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'email'],

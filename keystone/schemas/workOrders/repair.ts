@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { select, timestamp, relationship } from '@keystone-next/keystone/fields';
+import { select, timestamp, relationship } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../../hooks/relationshipRequiredCheckerHook';
 
 export const repair = list({ // TODO: falta definir sus relaciones
@@ -13,7 +13,9 @@ export const repair = list({ // TODO: falta definir sus relaciones
         validateInput: relationshipRequiredCheckerHook('work_order'),
     },
     fields: {
-      date: timestamp({ isRequired: true }), //fecha de alta
+      date: timestamp({           validation: {
+            isRequired: true,
+          } }), //fecha de alta
       hdw_issue: relationship({
         ref: 'hdw_issue.repair',
         ui: {
@@ -25,7 +27,9 @@ export const repair = list({ // TODO: falta definir sus relaciones
         many: false,
       }),
       status: select({
-        isRequired: true,
+                  validation: {
+            isRequired: true,
+          },
         options: [
           { label: 'Abierta', value: 'open' },
           { label: 'Asignada', value: 'assigned' },

@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { text, timestamp, relationship, float, checkbox, select, integer, image } from '@keystone-next/keystone/fields';
+import { text, timestamp, relationship, float, checkbox, select, integer, image } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
 
 export const diagnostic = list({
@@ -13,7 +13,9 @@ export const diagnostic = list({
         validateInput: relationshipRequiredCheckerHook('hdw_issue'),
     },
     fields: {
-      date: timestamp({ isRequired: true }), //fecha de alta
+      date: timestamp({           validation: {
+            isRequired: true,
+          } }), //fecha de alta
       comments: text(),
       //type-dependent attributes
       angles: text(),
@@ -22,8 +24,10 @@ export const diagnostic = list({
       time_start: text(),
       time_end: text(),
       gps_positions: select({
-        isRequired: false,
-        dataType: "integer",
+        validation: {
+            isRequired: false,
+          },
+        type: "integer",
         options: [
           { label: "Null", value: 0 },
           { label: "Non-Null", value: 1 },
@@ -35,8 +39,10 @@ export const diagnostic = list({
       packets_lost: integer(),
       distance_to_irrigator_center_in_meters: integer(),
       initial_snr: select({
-        isRequired: false,
-        dataType: "integer",
+        validation: {
+            isRequired: false,
+          },
+          type: "integer",
         options: [
           { label: "Good", value: 0 },
           { label: "Regular", value: 1 },
@@ -52,7 +58,7 @@ export const diagnostic = list({
 
       //relationships
       user: relationship({
-        ref: 'diagnostic.user'
+        ref: 'user.diagnostic'
       }),
       hdw_issue: relationship({
         ref: 'hdw_issue.diagnostic',

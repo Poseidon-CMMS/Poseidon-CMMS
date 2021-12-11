@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { timestamp, relationship, text, select } from '@keystone-next/keystone/fields';
+import { timestamp, relationship, text, select } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
 
 export const pcbNode = list({
@@ -16,11 +16,17 @@ export const pcbNode = list({
       },
     },
     fields: {
-      integration_id: text({isRequired: true, isIndexed: 'unique'}),
-      fabrication_date: timestamp({ isRequired: true }),
+      integration_id: text({          validation: {
+            isRequired: true,
+          }, isIndexed: 'unique'}),
+      fabrication_date: timestamp({           validation: {
+            isRequired: true,
+          } }),
       picture: text(),
       status: select({
-        isRequired: true,
+                  validation: {
+            isRequired: true,
+          },
         options: [
           { label: 'OK', value: 'ok' },
           { label: 'Roto', value: 'broken' },

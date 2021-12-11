@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { checkbox, text, relationship } from '@keystone-next/keystone/fields';
+import { checkbox, text, relationship } from '@keystone-6/core/fields';
 
 export const zone = list({
     ui: {
@@ -9,9 +9,11 @@ export const zone = list({
       },
     },
     fields: {
-      name: text({ isRequired: true }),
+      name: text({           validation: {
+            isRequired: true,
+          } }),
       code: text(),
-      is_foreign: checkbox({ isRequired: true, defaultValue: false}),
+      is_foreign: checkbox({defaultValue: false}),
       field: relationship({
         ref: 'field.zone',
         ui: {

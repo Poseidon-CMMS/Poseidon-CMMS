@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { text, relationship, checkbox, decimal} from '@keystone-next/keystone/fields';
+import { text, relationship, checkbox, decimal} from '@keystone-6/core/fields';
 import {relationshipRequiredCheckerHook } from '../../hooks/relationshipRequiredCheckerHook';
 
 export const fieldTechnician = list({
@@ -14,8 +14,12 @@ export const fieldTechnician = list({
       // TODO: un hook que revise q seasonalWage sea un numero valido en el caos de q isSeasonal sea true
     },
     fields: {
-      name: text({ isRequired: true }),
-      email: text({ isRequired: true }),
+      name: text({           validation: {
+            isRequired: true,
+          } }),
+      email: text({           validation: {
+            isRequired: true,
+          } }),
       zone: relationship({
         ref: 'zone.field_technician',
         ui: {

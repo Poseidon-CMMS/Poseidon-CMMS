@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { relationship, text } from '@keystone-next/keystone/fields';
+import { relationship, text } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
 
 export const field = list({
@@ -14,9 +14,15 @@ export const field = list({
       validateInput: relationshipRequiredCheckerHook('zone'),
     },
     fields: {
-      name: text({ isRequired: true }),
-      gate: text({ isRequired: false}),
-      phone: text({ isRequired: false}),
+      name: text({           validation: {
+            isRequired: true,
+          } }),
+      gate: text({ validation: {
+            isRequired: false,
+          }}),
+      phone: text({ validation: {
+            isRequired: false,
+          }}),
       irrigator: relationship({
         ref: 'irrigator.field',
         ui: {

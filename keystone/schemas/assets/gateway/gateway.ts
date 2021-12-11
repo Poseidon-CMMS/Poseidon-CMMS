@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
+import { list } from '@keystone-6/core';
 
-import { timestamp, relationship, text } from '@keystone-next/keystone/fields';
+import { timestamp, relationship, text } from '@keystone-6/core/fields';
 
 export const gateway = list({ // TODO: falta definir sus relaciones
     ui: {
@@ -9,8 +9,12 @@ export const gateway = list({ // TODO: falta definir sus relaciones
       },
     },
     fields: {
-      fabrication_date: timestamp({ isRequired: true }), //fecha de alta
-      integration_id: text({isRequired: true, isIndexed: "unique"}),
+      fabrication_date: timestamp({           validation: {
+            isRequired: true,
+          } }), //fecha de alta
+      integration_id: text({          validation: {
+            isRequired: true,
+          }, isIndexed: "unique"}),
       irrigator: relationship({
         ref: 'irrigator.gateway',
         ui: {

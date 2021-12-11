@@ -97,7 +97,7 @@ export const hardwareIssue = list({
         linkToItem: true,
         inlineConnect: true,
       },
-      many: true,
+      many: false,
     }),
     gateway: relationship({
       ref: "gateway.hdw_issue",

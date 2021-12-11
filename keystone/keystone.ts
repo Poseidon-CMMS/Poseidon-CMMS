@@ -36,5 +36,10 @@ export default withAuth(
     },
     lists,
     session,
+    server: {
+      cors: {
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS'
+      }
+    }
   })
 );

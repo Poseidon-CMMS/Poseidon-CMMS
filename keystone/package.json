@@ -1,6 +1,6 @@
 {
-  "name": "keystone-app",
-  "version": "5.0.0",
+  "name": "poseidon-cmms",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "keystone dev",

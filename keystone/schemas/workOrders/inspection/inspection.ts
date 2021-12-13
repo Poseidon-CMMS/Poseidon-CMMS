@@ -47,8 +47,8 @@ export const inspection = list({
         },
         many: false,
       }),
-      diagnostic_type: relationship({
-        ref: 'diagnostic_type',
+      inspection_type: relationship({
+        ref: 'inspection_type',
         ui: {
           displayMode: 'select',
           labelField: 'name'

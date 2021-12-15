@@ -116,4 +116,12 @@ export const irrigator = list({
         }),
       }),
     },
+    access: {
+      operation: {
+        query: ({ session, context, listKey, operation }) => {debugger; return true;},
+        create: ({ session, context, listKey, operation }) => true,
+        update: ({ session, context, listKey, operation }) => true,
+        delete: ({ session, context, listKey, operation }) => true,
+      }
+    },
   });

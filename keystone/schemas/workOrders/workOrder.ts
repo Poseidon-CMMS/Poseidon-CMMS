@@ -4,10 +4,11 @@ import { text, timestamp, float, relationship } from '@keystone-6/core/fields';
 
 export const workOrder = list({
   ui: {
-    isHidden: true,
+    isHidden: false,
     listView: {
       initialColumns: ['work_date', 'km_traveled', 'comment'],
     },
+    labelField: 'comment'
   },
   fields: {
     work_date: timestamp({           validation: {

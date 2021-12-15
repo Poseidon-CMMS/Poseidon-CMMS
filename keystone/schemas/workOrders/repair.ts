@@ -8,6 +8,7 @@ export const repair = list({ // TODO: falta definir sus relaciones
       listView: {
         initialColumns: ['date', 'status','work_order'],
       },
+      labelField: 'date'
     },
     hooks: {
         validateInput: relationshipRequiredCheckerHook('work_order'),
@@ -20,7 +21,7 @@ export const repair = list({ // TODO: falta definir sus relaciones
         ref: 'hdw_issue.repair',
         ui: {
           displayMode: 'cards',
-          cardFields: ['creation_date', 'irrigator', 'TTR', 'comments'],
+          cardFields: ['creation_date', 'irrigator', 'time_to_repair_hours', 'comments'],
           linkToItem: true,
           inlineConnect: true,
         },

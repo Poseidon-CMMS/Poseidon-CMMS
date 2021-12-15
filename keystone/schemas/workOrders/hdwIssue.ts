@@ -14,8 +14,9 @@ import { graphql } from '@keystone-6/core';
 export const hardwareIssue = list({
   ui: {
     listView: {
-      initialColumns: ["creation_date", "close_date", "TTR", "comments"],
+      initialColumns: ["creation_date", "close_date", "time_to_repair_hours", "comments"],
     },
+    labelField: "comments"
   },
   hooks: {
     validateInput: relationshipRequiredCheckerHook("irrigator"),
@@ -27,16 +28,21 @@ export const hardwareIssue = list({
     close_date: timestamp(),
 
     //virtuals
-    TTR: virtual({
+    time_to_repair_hours: virtual({
       field: graphql.field({
         type: graphql.String,
-        resolve(item, args, context) {
+        async resolve(item, args, context) {
+          const { diagnostic, repair } = await context.query.hdw_issue.findOne({
+            //@ts-expect-error
+            where: { id: item.id.toString() },
+            query: 'diagnostic { date } repair { date }  ', //meter la otra query aca tm b
+          });
           //@ts-ignore
-          if (item.diagnostic && item.repair && item.repair) {
+          if (diagnostic && diagnostic.date && repair && repair.date) {
             //@ts-ignore
-            const oldDate: Date = new Date(item.diagnostic_date);
+            const oldDate: Date = new Date(diagnostic.date);
             //@ts-ignore
-            const finalDate: Date = new Date(item.repair.date);
+            const finalDate: Date = new Date(repair.date);
             //@ts-ignore
             const differenceinMs = finalDate - oldDate;
             const differenceinHours = differenceinMs / (1000 * 60 * 60);

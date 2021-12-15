@@ -74,6 +74,29 @@ export const hardwareIssue = list({
         },
       }),
     }),
+    time_from_removal_to_autopsy_hours: virtual({
+      field: graphql.field({
+        type: graphql.String,
+        async resolve(item, args, context) {
+          const { repair, autopsy } = await context.query.hdw_issue.findOne({
+            //@ts-expect-error
+            where: { id: item.id.toString() },
+            query: 'repair { date repair_type } autopsy { date }',
+          });
+          //@ts-ignore
+          if (repair && repair.repair_type === 'device_change' && autopsy) {
+            //@ts-ignore
+            const oldDate: Date = new Date(repair.date);
+            //@ts-ignore
+            const finalDate: Date = new Date(autopsy.date);
+            //@ts-ignore
+            const differenceinMs = finalDate - oldDate;
+            const differenceinHours = differenceinMs / (1000 * 60 * 60);
+            return `${differenceinHours}`;
+          } else return null;
+        },
+      }),
+    }),
     comments: text(),
 
     diagnostic: relationship({

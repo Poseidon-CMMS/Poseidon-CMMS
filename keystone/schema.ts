@@ -1,21 +1,3 @@
-/*
-Welcome to the schema! The schema is the heart of Keystone.
-
-Here we define our 'lists', which will then be used both for the GraphQL
-API definition, our database tables, and our Admin UI layout.
-
-Some quick definitions to help out:
-A list: A definition of a collection of fields with a name. For the starter
-  we have `User`, `Post`, and `Tag` lists.
-A field: The individual bits of data on your list, each with its own type.
-  you can see some of the lists in what we use below.
-
-*/
-
-
-// The document field is a more complicated field, so it's in its own package
-// Keystone aims to have all the base field types, but you can make your own
-// custom ones.
 import { document } from '@keystone-6/fields-document';
 import { irrigator } from './schemas/irrigator'; 
 import { gateway } from './schemas/assets/gateway/gateway'; 
@@ -47,7 +29,6 @@ import { workOrder } from './schemas/workOrders/workOrder';
 import { pressureSensorType } from './schemas/assets/pressureSensor/pressureSensorType';
 import { pressureSensor } from './schemas/assets/pressureSensor/pressureSensor';
 import { repair } from './schemas/workOrders/repair';
-import { repairType } from './schemas/workOrders/repairType';
 import { storageLocation } from './schemas/assets/storageLocation';
 import { diagnosticType } from './schemas/workOrders/diagnostic/diagnosticType';
 import { diagnostic } from './schemas/workOrders/diagnostic/diagnostic';
@@ -57,9 +38,6 @@ import { user } from './schemas/users/user';
 import { autopsy } from './schemas/workOrders/autopsy/autopsy';
 import { autopsyType } from './schemas/workOrders/autopsy/autopsyType';
 
-// We have a users list, a blogs list, and tags for blog posts, so they can be filtered.
-// Each property on the exported object will become the name of a list (a.k.a. the `listKey`),
-// with the value being the definition of the list, including the fields.
 export const lists = {
   irrigator: irrigator,
   gateway: gateway,
@@ -91,7 +69,6 @@ export const lists = {
   pressure_sensor_type: pressureSensorType,
   pressure_sensor: pressureSensor,
   repair: repair,
-  repair_type: repairType,
   storage_location: storageLocation,
   diagnostic_type: diagnosticType,
   diagnostic: diagnostic,

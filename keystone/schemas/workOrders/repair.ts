@@ -61,6 +61,19 @@ export const repair = list({
         displayMode: "segmented-control",
       },
     }),
+    replaced_asset: select({
+      validation: {
+        isRequired: false,
+      },
+      options: [
+        { label: "Nuevo Gateway", value: "gtw" },
+        { label: "Nuevo SGPS", value: "sgps" },
+        { label: "Nuevo SPRES", value: "spres" },
+      ],
+      ui: {
+        displayMode: "segmented-control",
+      },
+    }),
     work_order: relationship({
       ref: "work_order.repair",
       ui: {

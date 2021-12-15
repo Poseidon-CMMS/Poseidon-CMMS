@@ -35,7 +35,7 @@ export const hardwareIssue = list({
           const { diagnostic, repair } = await context.query.hdw_issue.findOne({
             //@ts-expect-error
             where: { id: item.id.toString() },
-            query: 'diagnostic { date } repair { date }  ', //meter la otra query aca tm b
+            query: 'diagnostic { date } repair { date }  ',
           });
           //@ts-ignore
           if (diagnostic && diagnostic.date && repair && repair.date) {
@@ -43,6 +43,29 @@ export const hardwareIssue = list({
             const oldDate: Date = new Date(diagnostic.date);
             //@ts-ignore
             const finalDate: Date = new Date(repair.date);
+            //@ts-ignore
+            const differenceinMs = finalDate - oldDate;
+            const differenceinHours = differenceinMs / (1000 * 60 * 60);
+            return `${differenceinHours}`;
+          } else return null;
+        },
+      }),
+    }),
+    time_to_diagnostic_hours: virtual({
+      field: graphql.field({
+        type: graphql.String,
+        async resolve(item, args, context) {
+          const { diagnostic } = await context.query.hdw_issue.findOne({
+            //@ts-expect-error
+            where: { id: item.id.toString() },
+            query: 'diagnostic { date }',
+          });
+          //@ts-ignore
+          if (diagnostic && diagnostic.date) {
+            //@ts-ignore
+            const oldDate: Date = new Date(diagnostic.date);
+            //@ts-ignore
+            const finalDate: Date = new Date(item.creation_date);
             //@ts-ignore
             const differenceinMs = finalDate - oldDate;
             const differenceinHours = differenceinMs / (1000 * 60 * 60);

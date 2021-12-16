@@ -3,6 +3,7 @@ import { list } from '@keystone-6/core';
 import { graphql } from '@keystone-6/core';
 import { checkbox, float, select, text, relationship, virtual } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
+import { isAdmin } from '../utils/accessControl';
 
 export const irrigator = list({
     ui: {
@@ -118,10 +119,10 @@ export const irrigator = list({
     },
     access: {
       operation: {
-        query: ({ session, context, listKey, operation }) => {debugger; return true;},
-        create: ({ session, context, listKey, operation }) => true,
-        update: ({ session, context, listKey, operation }) => true,
-        delete: ({ session, context, listKey, operation }) => true,
+        query: isAdmin,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
       }
     },
   });

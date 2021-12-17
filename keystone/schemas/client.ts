@@ -1,6 +1,7 @@
 import { list } from '@keystone-6/core';
 
 import { text, relationship } from '@keystone-6/core/fields';
+import { isAdmin } from '../utils/accessControl';
 
 export const client = list({
     ui: {
@@ -22,5 +23,13 @@ export const client = list({
         },
         many: false,
       }),
+    },
+    access: {
+      operation: {
+        query: isAdmin,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+      }
     },
   });

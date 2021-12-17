@@ -11,6 +11,7 @@ import {
   image,
 } from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../../hooks/relationshipRequiredCheckerHook";
+import { isAdmin } from "../../../utils/accessControl";
 
 export const diagnostic = list({
   ui: {
@@ -89,5 +90,13 @@ export const diagnostic = list({
       },
       many: false,
     }),
+  },
+  access: {
+    operation: {
+      query: isAdmin,
+      create: isAdmin,
+      update: isAdmin,
+      delete: isAdmin,
+    }
   },
 });

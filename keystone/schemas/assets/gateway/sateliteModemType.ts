@@ -1,6 +1,7 @@
 import { list, graphql } from '@keystone-6/core';
 
 import { relationship, text, virtual } from '@keystone-6/core/fields';
+import { isAdmin } from '../../../utils/accessControl';
 
 export const satelliteModemType = list({
   ui: {
@@ -40,5 +41,13 @@ export const satelliteModemType = list({
       many: true,
 
     }),
+  },
+  access: {
+    operation: {
+      query: isAdmin,
+      create: isAdmin,
+      update: isAdmin,
+      delete: isAdmin,
+    }
   },
 });

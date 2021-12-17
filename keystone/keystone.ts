@@ -38,7 +38,9 @@ export default withAuth(
     session,
     server: {
       cors: {
-        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS'
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+        origin: 'http://localhost:8080',
+        credentials: true
       }
     }
   })

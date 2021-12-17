@@ -1,6 +1,7 @@
 import { list } from '@keystone-6/core';
 
 import { text } from '@keystone-6/core/fields';
+import { isAdmin } from '../../../utils/accessControl';
 
 export const gatewayHousingType = list({
   ui: {
@@ -13,5 +14,13 @@ export const gatewayHousingType = list({
     name: text({           validation: {
             isRequired: true,
           }, isIndexed: 'unique' }),
+  },
+  access: {
+    operation: {
+      query: isAdmin,
+      create: isAdmin,
+      update: isAdmin,
+      delete: isAdmin,
+    }
   },
 });

@@ -1,6 +1,7 @@
 import { list } from '@keystone-6/core';
 
 import { relationship, text } from '@keystone-6/core/fields';
+import { isAdmin } from '../../../utils/accessControl';
 
 export const nodeHardwareVersion = list({
   ui: {
@@ -24,5 +25,13 @@ export const nodeHardwareVersion = list({
       },
       many: true,
     }),
+  },
+  access: {
+    operation: {
+      query: isAdmin,
+      create: isAdmin,
+      update: isAdmin,
+      delete: isAdmin,
+    }
   },
 });

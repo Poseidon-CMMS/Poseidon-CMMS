@@ -2,6 +2,7 @@ import { list } from '@keystone-6/core';
 
 import { relationship, text, select, integer } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
+import { isAdmin } from '../../../utils/accessControl';
 
 export const pressureSensor = list({ // TODO: falta definir sus relaciones
     ui: {
@@ -65,5 +66,13 @@ export const pressureSensor = list({ // TODO: falta definir sus relaciones
         },
         many: false,
       }),
+    },
+    access: {
+      operation: {
+        query: isAdmin,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+      }
     },
   });

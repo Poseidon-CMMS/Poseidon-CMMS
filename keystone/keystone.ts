@@ -40,7 +40,7 @@ export default withAuth(
       cors: {
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
         origin: process.env.CORS_FRONTEND_URL,
-        credentials: true
+        credentials: true,
       }
     }
   })

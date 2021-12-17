@@ -48,6 +48,8 @@ let sessionMaxAge = 60 * 60 * 24 * 30; // 30 days
 // This defines how sessions should work. For more details, check out: https://keystonejs.com/docs/apis/session#session-api
 const session = statelessSessions({
   maxAge: sessionMaxAge,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: process.env.NODE_ENV === 'production'?"none":"lax",
   secret: sessionSecret!,
 });
 

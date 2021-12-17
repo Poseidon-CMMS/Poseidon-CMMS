@@ -10,6 +10,7 @@ import {
 } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from "../../hooks/relationshipRequiredCheckerHook";
 import { graphql } from '@keystone-6/core';
+import { isAdmin } from '../../utils/accessControl';
 
 export const hardwareIssue = list({
   ui: {
@@ -207,5 +208,13 @@ export const hardwareIssue = list({
       },
       many: false,
     }),
+  },
+  access: {
+    operation: {
+      query: isAdmin,
+      create: isAdmin,
+      update: isAdmin,
+      delete: isAdmin,
+    }
   },
 });

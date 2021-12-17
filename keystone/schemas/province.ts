@@ -1,6 +1,7 @@
 import { list } from '@keystone-6/core';
 
 import { text, relationship } from '@keystone-6/core/fields';
+import { isAdmin } from '../utils/accessControl';
 
 
 export const province = list({
@@ -31,5 +32,13 @@ export const province = list({
       },
       many: true,
     }),
+  },
+  access: {
+    operation: {
+      query: isAdmin,
+      create: isAdmin,
+      update: isAdmin,
+      delete: isAdmin,
+    }
   },
 });

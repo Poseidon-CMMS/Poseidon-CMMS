@@ -1,6 +1,7 @@
 import { list } from '@keystone-6/core';
 
 import { text, float, relationship} from '@keystone-6/core/fields';
+import { isAdmin } from '../../utils/accessControl';
 
 export const storageLocation = list({
   ui: {
@@ -99,5 +100,13 @@ export const storageLocation = list({
         },
         many: false,
     }),
+  },
+  access: {
+    operation: {
+      query: isAdmin,
+      create: isAdmin,
+      update: isAdmin,
+      delete: isAdmin,
+    }
   },
 });

@@ -1,6 +1,7 @@
 import { list } from '@keystone-6/core';
 
 import { text, select, relationship } from '@keystone-6/core/fields';
+import { isAdmin } from '../../../utils/accessControl';
 
 export const inspectionType = list({
   ui: {
@@ -17,5 +18,13 @@ export const inspectionType = list({
         ref: 'asset_type.inspection_type',
         many: false
     }),
+  },
+  access: {
+    operation: {
+      query: isAdmin,
+      create: isAdmin,
+      update: isAdmin,
+      delete: isAdmin,
+    }
   },
 });

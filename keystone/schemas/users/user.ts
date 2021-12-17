@@ -1,5 +1,6 @@
 import { list } from "@keystone-6/core";
 import { text, relationship, password, select } from "@keystone-6/core/fields";
+import { isAdmin } from "../../utils/accessControl";
 
 export const user = list({
   // Here are the fields that `User` will have. We want an email and password so they can log in
@@ -67,5 +68,13 @@ export const user = list({
     listView: {
       initialColumns: ["name"],
     },
+  },
+  access: {
+    operation: {
+      query: isAdmin,
+      create: isAdmin,
+      update: isAdmin,
+      delete: isAdmin,
+    }
   },
 });

@@ -2,6 +2,7 @@ import { list } from '@keystone-6/core';
 
 import { text, timestamp, relationship, float, checkbox, select, integer, image, file } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
+import { isAdmin } from '../../../utils/accessControl';
 
 export const inspection = list({
     ui: {
@@ -55,5 +56,13 @@ export const inspection = list({
         },
         many: false
       }), 
+    },
+    access: {
+      operation: {
+        query: isAdmin,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+      }
     },
   });

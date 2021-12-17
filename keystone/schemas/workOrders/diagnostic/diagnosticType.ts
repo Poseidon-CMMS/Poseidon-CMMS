@@ -1,6 +1,7 @@
 import { list } from "@keystone-6/core";
 
 import { text, select, relationship } from "@keystone-6/core/fields";
+import { isAdmin } from "../../../utils/accessControl";
 
 export const diagnosticType = list({
   ui: {
@@ -30,5 +31,13 @@ export const diagnosticType = list({
         displayMode: "segmented-control",
       },
     }),
+  },
+  access: {
+    operation: {
+      query: isAdmin,
+      create: isAdmin,
+      update: isAdmin,
+      delete: isAdmin,
+    }
   },
 });

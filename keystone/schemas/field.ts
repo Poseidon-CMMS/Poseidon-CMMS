@@ -2,6 +2,7 @@ import { list } from '@keystone-6/core';
 
 import { relationship, text } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../hooks/relationshipRequiredCheckerHook';
+import { isAdmin } from '../utils/accessControl';
 
 export const field = list({
     description: 'Campo',
@@ -82,5 +83,13 @@ export const field = list({
         },
         many: false,
       }),
+    },
+    access: {
+      operation: {
+        query: isAdmin,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+      }
     },
   });

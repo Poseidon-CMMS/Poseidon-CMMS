@@ -1,6 +1,7 @@
 import { list } from '@keystone-6/core';
 
 import { checkbox, text, relationship } from '@keystone-6/core/fields';
+import { isAdmin } from '../utils/accessControl';
 
 export const zone = list({
     ui: {
@@ -34,5 +35,13 @@ export const zone = list({
         },
         many: true,
       }),
+    },
+    access: {
+      operation: {
+        query: isAdmin,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+      }
     },
   });

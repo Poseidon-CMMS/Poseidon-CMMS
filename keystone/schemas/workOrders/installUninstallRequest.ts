@@ -2,6 +2,7 @@ import { list } from '@keystone-6/core';
 
 import { select, timestamp, relationship } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../../hooks/relationshipRequiredCheckerHook';
+import { isAdmin } from '../../utils/accessControl';
 
 export const installUninstallRequest = list({ // TODO: falta definir sus relaciones
     ui: {
@@ -50,5 +51,13 @@ export const installUninstallRequest = list({ // TODO: falta definir sus relacio
         },
         many: false,
       }),
+    },
+    access: {
+      operation: {
+        query: isAdmin,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+      }
     },
   });

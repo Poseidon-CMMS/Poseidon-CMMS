@@ -2,6 +2,7 @@ import { list } from '@keystone-6/core';
 
 import { timestamp, relationship, text, checkbox } from '@keystone-6/core/fields';
 import { relationshipRequiredCheckerHook } from '../../../hooks/relationshipRequiredCheckerHook';
+import { isAdmin } from '../../../utils/accessControl';
 
 export const satelliteModem = list({ // TODO: falta definir sus relaciones
     ui: {
@@ -43,5 +44,13 @@ export const satelliteModem = list({ // TODO: falta definir sus relaciones
           labelField: 'name'
         }
       }),
+    },
+    access: {
+      operation: {
+        query: isAdmin,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+      }
     },
   });

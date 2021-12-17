@@ -49,7 +49,7 @@ let sessionMaxAge = 60 * 60 * 24 * 30; // 30 days
 const session = statelessSessions({
   maxAge: sessionMaxAge,
   secure: process.env.NODE_ENV === 'production',
-  sameSite: process.env.NODE_ENV === 'production'?"lax":"none",
+  sameSite: process.env.NODE_ENV === 'production'?"none":"lax",
   secret: sessionSecret!,
 });
 

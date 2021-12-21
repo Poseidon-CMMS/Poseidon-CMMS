@@ -118,7 +118,7 @@ export const hardwareIssue = list({
         linkToItem: true,
         inlineConnect: true,
       },
-      many: false,
+      many: true,
     }),
     repair: relationship({
       ref: "repair.hdw_issue",
@@ -127,7 +127,7 @@ export const hardwareIssue = list({
           fieldMode: "hidden",
         },
       },
-      many: false,
+      many: true,
     }),
     autopsy: relationship({
       ref: "autopsy.hdw_issue",

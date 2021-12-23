@@ -21,7 +21,7 @@ export const client = list({
           linkToItem: true,
           inlineConnect: true,
         },
-        many: false,
+        many: true,
       }),
     },
     access: {

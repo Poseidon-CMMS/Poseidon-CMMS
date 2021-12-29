@@ -143,17 +143,25 @@ export const hardwareIssue = list({
                 validation: {
             isRequired: true,
           },
-          type: "integer",
+          type: "string",
       options: [
-        { label: "In Field", value: 0 },
-        { label: "Assigned", value: 1 },
-        { label: "Repaired", value: 2 },
-        { label: "Out of field", value: 3 },
-        { label: "Closed", value: 4 },
+        { label: "In Field", value: "in-field" },
+        { label: "Assigned", value: "assigned" },
+        { label: "Repaired", value: "repaired" },
+        { label: "Out of field", value: "out-of-field" },
+        { label: "Closed", value: "closed" },
       ],
       ui: {
         displayMode: "segmented-control",
       },
+    }),
+    assigned_technician: relationship({
+      ref: "user.hdw_issue",
+      ui: {
+        displayMode: "select",
+
+      },
+      many: false
     }),
     //entities
     field: relationship({

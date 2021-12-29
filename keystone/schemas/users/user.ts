@@ -38,6 +38,10 @@ export const user = list({
     }),
 
     //technician-only fields
+    hdw_issue: relationship({
+      ref: "hdw_issue.assigned_technician",
+      many: true
+    }),
     inspection: relationship({
       ref: "inspection.user",
       many: true,

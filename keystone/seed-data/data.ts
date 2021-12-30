@@ -2,7 +2,7 @@
 export const assetTypes = [
   { name:  'Gateway'},
   { name:  'Nodo GPS'},
-  { name:  'Sensor de Presion'},
+  { name:  'Sensor de Presión'},
   { name:  'LoRa'},
 ]
 
@@ -64,6 +64,7 @@ export const gatewayHousingTypes = [
 ]
 
 
+
 // --- END ASSETS ---
 
 // --- BUSINESS ---
@@ -86,6 +87,22 @@ export const SLA = [
 // --- END BUSINESS ---
 
 // --- OT ---
+export const diagnosticTypes = [
+  {type: 'Gateway', name: 'Sin datos de GTW'},
+  {type: 'Gateway', name: 'Intermitencia satelital - Ubicación'},
+  {type: 'Gateway', name: 'Intermitencia satelital - Alimentación'},
+  {type: 'Nodo GPS', name: 'Pérdida de paquetes LORA - Muerte súbita'},
+  {type: 'Nodo GPS', name: 'Posiciones GPS inválidas'},
+  {type: 'Nodo GPS', name: 'Pérdida de paquetes LORA - Intermitente'},
+  {type: 'Nodo GPS', name: 'Pérdida de paquetes LORA - Desde inicio de datos'},
+  {type: 'Nodo GPS', name: 'Pérdida de paquetes LORA - Ubicación'},
+  {type: 'Nodo GPS', name: 'Pérdida de paquetes LORA - Horario'},
+  {type: 'Sensor de Presión', name: 'Presión en 0mA (203)'},
+  {type: 'Sensor de Presión', name: 'Presiones inválidas (203)'},
+  {type: 'Sensor de Presión', name: 'Oscilación de presión'},
+  {type: 'Sensor de Presión', name: 'Presión medida distinta de real'},
+];
+
 
 export const periciaTypes = [ //TODO: Traducir y ver con mauri si hay que crear distintos tipos
   //ej: periciaGtwTypes, periciaNodeTypes

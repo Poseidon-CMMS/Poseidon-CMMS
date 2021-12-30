@@ -12,6 +12,7 @@ import {
   loraAntennaTypes,
   creaZones,
   diagnosticTypes,
+  inspectionTypes
 } from "./data";
 
 import * as provinces from "./geographic/provincias.json";
@@ -156,6 +157,10 @@ export async function insertSeedData(context: KeystoneContext) {
   console.log(SYSTEM_DIVIDER);
   await insertDiagnosticTypes(context);
 
+  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding inspection types🌱`);
+  console.log(SYSTEM_DIVIDER);
+  await insertInspectionTypes(context);
+
   console.log(SYSTEM_DIVIDER);
   console.log(`${SYSTEM_SIGNATURE}:🌱Data inserted🌱`);
   console.log(SYSTEM_DIVIDER);
@@ -196,12 +201,32 @@ const insertDiagnosticTypes = async (context: KeystoneContext) => {
         type: { connect: { id: assetType.id } },
       };
     else {
-      console.log('Advertencia: se intentó insertar un tipo de diagnóstico para un tipo de dispositivo inexistente');
+      console.log('Warning: missing asset_type for a given diagnostic');
       return null;
     }
   });
   parsedDiagnosticTypes = parsedDiagnosticTypes.filter(e => !!e);
   await insertData(context, "diagnostic_type", parsedDiagnosticTypes);
+};
+
+const insertInspectionTypes = async (context: KeystoneContext) => {
+  const asset_types = await context.query.asset_type.findMany({
+    query: "id name",
+  });
+  let parsedInspectionTypes = inspectionTypes.map((inspectionType: any) => {
+    const assetType = asset_types.find((a) => a.name === inspectionType.type);
+    if (assetType)
+      return {
+        ...inspectionType,
+        type: { connect: { id: assetType.id } },
+      };
+    else {
+      console.log('Warning: missing asset_type for a given inspection');
+      return null;
+    }
+  });
+  parsedInspectionTypes = parsedInspectionTypes.filter(e => !!e);
+  await insertData(context, "inspection_type", parsedInspectionTypes);
 };
 
 const insertData = async (

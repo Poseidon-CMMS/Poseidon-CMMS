@@ -11,7 +11,7 @@ export const inspection = list({
       },
     },
     hooks: {
-        validateInput: relationshipRequiredCheckerHook('hdw_issue'),
+        // validateInput: relationshipRequiredCheckerHook('hdw_issue'), //TODO no sirve
     },
     fields: {
       date: timestamp({           validation: {

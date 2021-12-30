@@ -1,6 +1,6 @@
 import { list } from '@keystone-6/core';
 
-import { text, select, relationship } from '@keystone-6/core/fields';
+import { text, select, relationship, checkbox } from '@keystone-6/core/fields';
 import { isAdmin } from '../../../utils/accessControl';
 
 export const inspectionType = list({
@@ -17,6 +17,21 @@ export const inspectionType = list({
     type: relationship({
         ref: 'asset_type.inspection_type',
         many: false
+    }),
+    pot_sat: checkbox({
+      defaultValue: false
+    }),
+    gateway_battery_voltage: checkbox({
+      defaultValue: false
+    }),
+    gps_node_battery_voltage: checkbox({
+      defaultValue: false
+    }),
+    lora_power: checkbox({
+      defaultValue: false
+    }),
+    pressure_sensor_signal: checkbox({
+      defaultValue: false
     }),
   },
   access: {

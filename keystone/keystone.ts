@@ -45,6 +45,20 @@ export default withAuth(
         origin: process.env.CORS_FRONTEND_URL,
         credentials: true,
       }
+    },
+    files: {
+      upload: 'local',
+      local: {
+        storagePath: 'public/files',
+        baseUrl: '/files',
+      },
+    },
+    images: {
+      upload: 'local',
+      local: {
+        storagePath: 'public/images',
+        baseUrl: '/images',
+      },
     }
   })
 );

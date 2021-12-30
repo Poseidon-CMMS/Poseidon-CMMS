@@ -31,10 +31,6 @@ export const inspection = list({
       log: file(),
 
       //relationships
-      device_with_problems: relationship({
-        ref: 'asset_type.inspection',
-        }),
-    
       user: relationship({
         ref: 'user.inspection'
       }),

@@ -29,7 +29,7 @@ export const repair = list({
           "creation_date",
           "irrigator",
           "time_to_repair_hours",
-          "comments",
+          "comments"
         ],
         linkToItem: true,
         inlineConnect: true,

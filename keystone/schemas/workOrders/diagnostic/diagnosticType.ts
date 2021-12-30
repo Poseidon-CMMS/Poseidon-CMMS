@@ -17,20 +17,14 @@ export const diagnosticType = list({
       },
       isIndexed: "unique",
     }),
-    type: select({
-      validation: {
-        isRequired: true,
-      },
-      options: [
-        { label: "Pressure Sensor", value: "SPRES" },
-        { label: "Gateway", value: "GTW" },
-        { label: "GPS Node", value: "gps_node" },
-        { label: "LoRa", value: "lora" },
-      ],
+    type: relationship({
+      ref: 'asset_type.diagnostic_type',
       ui: {
-        displayMode: "segmented-control",
+        displayMode: 'select',
+        labelField: 'name'
       },
-    }),
+      many: false
+  }),
   },
   access: {
     operation: {

@@ -20,7 +20,7 @@ export const diagnostic = list({
     },
   },
   hooks: {
-    validateInput: relationshipRequiredCheckerHook("hdw_issue"),
+    // validateInput: relationshipRequiredCheckerHook("hdw_issue"), //TODO: complica la creacion en cadena
   },
   fields: {
     date: timestamp({

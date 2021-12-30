@@ -15,9 +15,9 @@ import { isAdmin } from '../../utils/accessControl';
 export const hardwareIssue = list({
   ui: {
     listView: {
-      initialColumns: ["creation_date", "close_date", "time_to_repair_hours", "comments"],
+      initialColumns: ["creation_date", "close_date", "time_to_repair_hours"],
     },
-    labelField: "comments"
+    labelField: "creation_date"
   },
   hooks: {
     // validateInput: relationshipRequiredCheckerHook("irrigator"), //TODO: valido para la creacion, nunca para el update
@@ -33,6 +33,21 @@ export const hardwareIssue = list({
             isRequired: true,
           } }),
     close_date: timestamp(),
+    comments: virtual({
+      field: graphql.field({
+        type: graphql.String,
+        async resolve(item, args, context) {
+          const { diagnostic } = await context.query.hdw_issue.findOne({
+            where: { id: item.id.toString() },
+            query: 'diagnostic { comments }',
+          });
+          //@ts-ignore
+          if (diagnostic && diagnostic.comments) {
+            return diagnostic.comments;
+          } else return null;
+        },
+      }),
+    }),
 
     //virtuals
     time_to_repair_hours: virtual({
@@ -104,7 +119,6 @@ export const hardwareIssue = list({
         },
       }),
     }),
-    comments: text(),
 
     diagnostic: relationship({
       ref: "diagnostic.hdw_issue",

@@ -1,8 +1,9 @@
 // --- ASSETS ---
 export const assetTypes = [
   { name:  'Gateway'},
-  { name:  'Nodo'},
-  { name:  'Sensor de Presion'}
+  { name:  'Nodo GPS'},
+  { name:  'Sensor de Presion'},
+  { name:  'LoRa'},
 ]
 
 export const pressureSensorTypes = [

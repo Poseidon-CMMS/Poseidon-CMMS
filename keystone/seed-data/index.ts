@@ -1,7 +1,7 @@
-import { KeystoneContext } from "@keystone-next/keystone/types";
+import { KeystoneContext } from "@keystone-6/core/types";
 import { 
   assetTypes, batteryTypes, 
-  hdwIssueStatuses, gpsAntennaTypes,
+  gpsAntennaTypes,
   pressureSensorTypes, nodeFirmwareVersions,
   nodeHardwareVersions, nodeHousingTypes, 
   gatewayHousingTypes, solarPanelTypes,
@@ -52,62 +52,57 @@ type HdwIssueStatus=[{
 
 const modelsToSeed = [
   {
-    tableName: 'AssetType',
+    tableName: 'asset_type',
     label: 'asset types',
     data: assetTypes
   },
   {
-    tableName: 'PressureSensorType',
+    tableName: 'pressure_sensor_type',
     label: 'pressure sensor types',
     data: pressureSensorTypes
   },
   {
-    tableName: 'NodeFirmwareVersion',
+    tableName: 'node_firmware_version',
     label: 'node firmware versions',
     data: nodeFirmwareVersions
   },
   {
-    tableName: 'NodeHardwareVersion',
+    tableName: 'node_hardware_version',
     label: 'node hardware versions',
     data: nodeHardwareVersions
   },
   {
-    tableName: 'SolarPanelType',
+    tableName: 'solar_panel_type',
     label: 'solar panel types',
     data: solarPanelTypes
   },
   {
-    tableName: 'BatteryType',
+    tableName: 'battery_type',
     label: 'battery types',
     data: batteryTypes
   },
   {
-    tableName: 'GpsAntennaType',
+    tableName: 'gps_antenna_type',
     label: 'gps antenna types',
     data: gpsAntennaTypes
   },
   {
-    tableName: 'LoraAntennaType',
+    tableName: 'lora_antenna_type',
     label: 'lora antenna types',
     data: loraAntennaTypes
   },
   {
-    tableName: 'GatewayHousingType',
+    tableName: 'gateway_housing_type',
     label: 'gateway housing types',
     data: gatewayHousingTypes
   },
   {
-    tableName: 'NodeHousingType',
+    tableName: 'node_housing_type',
     label: 'node housing types',
     data: nodeHousingTypes
   },
   {
-    tableName: 'HdwIssueStatus',
-    label: 'hardware issue statuses',
-    data: hdwIssueStatuses
-  },
-  {
-    tableName: 'Zone',
+    tableName: 'zone',
     label: 'CREA zones',
     data: creaZones
   },
@@ -127,13 +122,13 @@ export async function insertSeedData(context: KeystoneContext) {
     await insertData(context, model.tableName, model.data);
   };
 
-  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding provinces🌱`);
-  console.log(SYSTEM_DIVIDER);
-  await insertProvinces(context);
+  // console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding provinces🌱`);
+  // console.log(SYSTEM_DIVIDER);
+  // await insertProvinces(context);
 
-  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding cities🌱`);
-  console.log(SYSTEM_DIVIDER);
-  await insertCities(context);
+  // console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding cities🌱`);
+  // console.log(SYSTEM_DIVIDER);
+  // await insertCities(context);
 
   console.log(SYSTEM_DIVIDER);
   console.log(`${SYSTEM_SIGNATURE}:🌱Data inserted🌱`);
@@ -141,13 +136,13 @@ export async function insertSeedData(context: KeystoneContext) {
 }
 
 const insertProvinces = async (context: KeystoneContext) => {
-  const parsedProvinces = provinces.provincias.map(province => ({name: province.nombre}))
+  const parsedProvinces = provinces.provincias.map((province :any) => ({name: province.nombre}))
   await insertData(context, 'Province', parsedProvinces); 
 }
 
 const insertCities = async (context: KeystoneContext) => {
-  const dbProvinces = await context.lists.Province.findMany({query: 'id name'});
-  const parsedCities = cities.localidades.map(city => {
+  const dbProvinces = await context.query.Province.findMany({query: 'id name'});
+  const parsedCities = cities.localidades.map((city: any) => {
     const cityProvince = dbProvinces.find(p => p.name === city.provincia.nombre);
     return {name: city.nombre, province: {connect: {id: cityProvince?.id}}};
   })
@@ -155,7 +150,8 @@ const insertCities = async (context: KeystoneContext) => {
 }
 
 const insertData = async (context: KeystoneContext, schema: string, data: any) => {// TODO: Revisar caminos no felices
-  await context.lists[schema].createMany({
+  console.log(`voy a mter la tabla: ${schema}`)
+  await context.db[schema].createMany({
     data: data,
   });
 };

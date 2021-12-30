@@ -98,14 +98,6 @@ export const periciaTypes = [ //TODO: Traducir y ver con mauri si hay que crear 
   },
 ]
 
-export const hdwIssueStatuses = [
-  { name: 'In field'},
-  { name: 'Assigned'},
-  { name: 'Out of field'},
-  { name: 'Closed'},
-
-]
-
 // --- END OT ---
 
 

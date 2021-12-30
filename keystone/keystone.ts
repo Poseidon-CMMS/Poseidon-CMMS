@@ -13,6 +13,7 @@ import { lists } from './schema';
 
 // Keystone auth is configured separately - check out the basic auth setup we are importing from our auth file.
 import { withAuth, session } from './auth';
+import { insertSeedData } from './seed-data';
 
 export default withAuth(
   // Using the config function helps typescript guide you to the available options.
@@ -22,7 +23,7 @@ export default withAuth(
       provider: 'postgresql',
       url: process.env.DATABASE_URL || ' ',
       onConnect: async context => { 
-        //await insertSeedData(context); // TODO: esto quizas podria ser opcional
+        await insertSeedData(context); // TODO: esto quizas podria ser opcional
        },
       // Optional advanced configuration
       enableLogging: true,

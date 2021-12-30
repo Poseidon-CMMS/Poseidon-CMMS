@@ -20,7 +20,13 @@ export const hardwareIssue = list({
     labelField: "comments"
   },
   hooks: {
-    validateInput: relationshipRequiredCheckerHook("irrigator"),
+    // validateInput: relationshipRequiredCheckerHook("irrigator"), //TODO: valido para la creacion, nunca para el update
+    resolveInput: ({ resolvedData, item }) => {
+      if(item && !item.assigned_technician && resolvedData.assigned_technician)
+        resolvedData.status = "assigned";
+      // We always return resolvedData from the resolveInput hook
+      return resolvedData;
+    }
   },
   fields: {
     creation_date: timestamp({           validation: {

@@ -23,10 +23,10 @@ export const inspection = list({
       led_gtw: text(),
       jumper_wifi: checkbox(),
       satellite_power: float(),
-      gateway_battery_voltage: text(),
+      gateway_battery_voltage: float(),
       lora_power: float(),
-      gps_node_battery_voltage: text(),
-      pressure_sensor_signal: text(),
+      gps_node_battery_voltage: float(),
+      pressure_sensor_signal: float(),
       picture: image(),
       log: file(),
 

@@ -29,42 +29,35 @@ export const diagnostic = list({
       },
     }), //fecha de alta
     comments: text(),
-    //type-dependent attributes
-    angles: text(),
-    height_diff: float(),
-    battery2to3: checkbox(),
-    time_start: text(),
-    time_end: text(),
-    gps_positions: select({
+    ///nuevos opcionales
+    gateway_satellite_power: float(),
+    angles: text({ }),
+    packet_202_count: integer(),
+    battery_2to3: checkbox({
+      defaultValue: false,
+    }),
+    positions: select({
       validation: {
         isRequired: false,
       },
-      type: "integer",
+      type: "string",
       options: [
-        { label: "Null", value: 0 },
-        { label: "Non-Null", value: 1 },
+        { label: "Null", value: "null" },
+        { label: "Non-Null", value: "non-null" },
       ],
       ui: {
         displayMode: "segmented-control",
       },
     }),
-    packets_lost: integer(),
-    distance_to_irrigator_center_in_meters: integer(),
-    initial_snr: select({
-      validation: {
-        isRequired: false,
-      },
-      type: "integer",
-      options: [
-        { label: "Good", value: 0 },
-        { label: "Regular", value: 1 },
-        { label: "Poor", value: 2 },
-      ],
-      ui: {
-        displayMode: "segmented-control",
-      },
-    }),
-    pressure_sensor_packets: integer(),
+    lost_packets:  integer(),
+    node_to_gateway_distance_in_meters: float(),
+    gateway_first_data_transmission_date: timestamp(),
+    height_difference_in_meters: float(),
+    from_hour: text(),
+    to_hour: text(),
+    packet_203_count: integer(),
+    pressure_difference: float(),
+
     grafana_link: text(),
     altimetry_image: image(),
 
@@ -97,6 +90,6 @@ export const diagnostic = list({
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,
-    }
+    },
   },
 });

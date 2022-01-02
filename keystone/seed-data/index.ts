@@ -12,7 +12,7 @@ import {
   loraAntennaTypes,
   creaZones,
   diagnosticTypes,
-  inspectionTypes
+  inspectionTypes,
 } from "./data";
 
 import * as provinces from "./geographic/provincias.json";
@@ -195,17 +195,18 @@ const insertDiagnosticTypes = async (context: KeystoneContext) => {
   });
   let parsedDiagnosticTypes = diagnosticTypes.map((diagnosticType: any) => {
     const assetType = asset_types.find((a) => a.name === diagnosticType.type);
-    if (assetType)
+    if (assetType) {
+      delete diagnosticType.type;
       return {
-        name: diagnosticType.name,
         type: { connect: { id: assetType.id } },
+        ...diagnosticType,
       };
-    else {
-      console.log('Warning: missing asset_type for a given diagnostic');
+    } else {
+      console.log("Warning: missing asset_type for a given diagnostic");
       return null;
     }
   });
-  parsedDiagnosticTypes = parsedDiagnosticTypes.filter(e => !!e);
+  parsedDiagnosticTypes = parsedDiagnosticTypes.filter((e) => !!e);
   await insertData(context, "diagnostic_type", parsedDiagnosticTypes);
 };
 
@@ -221,11 +222,11 @@ const insertInspectionTypes = async (context: KeystoneContext) => {
         type: { connect: { id: assetType.id } },
       };
     else {
-      console.log('Warning: missing asset_type for a given inspection');
+      console.log("Warning: missing asset_type for a given inspection");
       return null;
     }
   });
-  parsedInspectionTypes = parsedInspectionTypes.filter(e => !!e);
+  parsedInspectionTypes = parsedInspectionTypes.filter((e) => !!e);
   await insertData(context, "inspection_type", parsedInspectionTypes);
 };
 
@@ -235,7 +236,6 @@ const insertData = async (
   data: any
 ) => {
   // TODO: Revisar caminos no felices
-  console.log(`voy a mter la tabla: ${schema}`);
   await context.db[schema].createMany({
     data: data,
   });

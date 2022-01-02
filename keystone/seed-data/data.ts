@@ -84,23 +84,33 @@ export const SLA = [
 // --- END BUSINESS ---
 
 // --- OT ---
+
 export const diagnosticTypes = [
-  { type: "Gateway", name: "Sin datos de GTW" },
-  { type: "Gateway", name: "Intermitencia satelital - Ubicación" },
-  { type: "Gateway", name: "Intermitencia satelital - Alimentación" },
-  { type: "Nodo GPS", name: "Pérdida de paquetes LORA - Muerte súbita" },
-  { type: "Nodo GPS", name: "Posiciones GPS inválidas" },
-  { type: "Nodo GPS", name: "Pérdida de paquetes LORA - Intermitente" },
+  { type: "Gateway", name: "Sin datos de GTW", gateway_satellite_power: true },
+  { type: "Gateway", name: "Intermitencia satelital - Ubicación", gateway_satellite_power: true, angles: true },
+  { type: "Gateway", name: "Intermitencia satelital - Alimentación", packet_202_count: true },
+  { type: "Nodo GPS", name: "Pérdida de paquetes LORA - Muerte súbita", battery_2to3: true },
+  { type: "Nodo GPS", name: "Posiciones GPS inválidas", positions: true },
+  { type: "Nodo GPS", name: "Pérdida de paquetes LORA - Intermitente", lost_packets: true, node_to_gateway_distance_in_meters: true },
   {
     type: "Nodo GPS",
     name: "Pérdida de paquetes LORA - Desde inicio de datos",
+    battery_2to3: true,
+    gateway_first_data_transmission_date: true
   },
-  { type: "Nodo GPS", name: "Pérdida de paquetes LORA - Ubicación" },
-  { type: "Nodo GPS", name: "Pérdida de paquetes LORA - Horario" },
-  { type: "Sensor de Presión", name: "Presión en 0mA (203)" },
-  { type: "Sensor de Presión", name: "Presiones inválidas (203)" },
-  { type: "Sensor de Presión", name: "Oscilación de presión" },
-  { type: "Sensor de Presión", name: "Presión medida distinta de real" },
+  { 
+    type: "Nodo GPS", 
+    name: "Pérdida de paquetes LORA - Ubicación", 
+    angles: true,
+    height_difference_in_meters: true,
+    lost_packets: true,
+    node_to_gateway_distance_in_meters: true
+  },
+  { type: "Nodo GPS", name: "Pérdida de paquetes LORA - Horario", to_hour:true, from_hour: true, lost_packets: true },
+  { type: "Sensor de Presión", name: "Presión en 0mA (203)", packet_203_count: true },
+  { type: "Sensor de Presión", name: "Presiones inválidas (203)", packet_203_count: true },
+  { type: "Sensor de Presión", name: "Oscilación de presión", pressure_difference: true },
+  { type: "Sensor de Presión", name: "Presión medida distinta de real", pressure_difference:true },
 ];
 
 export const inspectionTypes = [

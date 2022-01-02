@@ -66,6 +66,10 @@ export const pressureSensor = list({ // TODO: falta definir sus relaciones
         },
         many: false,
       }),
+      installed_in_repair: relationship({ //NO es una reparacion a este sensor de presión. Es una reparacion a algún equipo de riego, en la cual este sensor de presión se utilizó para reemplazar uno que estaba roto
+        ref: 'repair.new_pressure_sensor',
+        many:true
+      })
     },
     access: {
       operation: {

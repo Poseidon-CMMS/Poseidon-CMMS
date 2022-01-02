@@ -96,6 +96,10 @@ export const gpsNode = list({
         },
         many: false,
       }),
+      installed_in_repair: relationship({ //NO es una reparacion a este Nodo. Es una reparacion a algún equipo de riego, en la cual este Nodo se utilizó para reemplazar uno que estaba roto
+        ref: 'repair.new_gps_node',
+        many:true
+      })
     },
     
     access: {

@@ -1,14 +1,15 @@
 import { list } from "@keystone-6/core";
 
-import { select, timestamp, relationship } from "@keystone-6/core/fields";
+import { select, timestamp, relationship, text, file } from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../hooks/relationshipRequiredCheckerHook";
 import { isAdmin } from "../../utils/accessControl";
+import { gateway } from "../assets/gateway/gateway";
 
 export const repair = list({
   // TODO: falta definir sus relaciones
   ui: {
     listView: {
-      initialColumns: ["date", "status", "work_order"],
+      initialColumns: ["date", "work_order"],
     },
     labelField: "date",
   },
@@ -36,20 +37,6 @@ export const repair = list({
       },
       many: false,
     }),
-    status: select({
-      validation: {
-        isRequired: true,
-      },
-      options: [
-        { label: "Abierta", value: "open" },
-        { label: "Asignada", value: "assigned" },
-        { label: "Realizada", value: "done" },
-        { label: "Completada", value: "completed" },
-      ],
-      ui: {
-        displayMode: "segmented-control",
-      },
-    }),
     repair_type: select({
       validation: {
         isRequired: true,
@@ -62,18 +49,21 @@ export const repair = list({
         displayMode: "segmented-control",
       },
     }),
-    replaced_asset: select({
-      validation: {
-        isRequired: false,
-      },
-      options: [
-        { label: "Nuevo Gateway", value: "gtw" },
-        { label: "Nuevo SGPS", value: "sgps" },
-        { label: "Nuevo SPRES", value: "spres" },
-      ],
-      ui: {
-        displayMode: "segmented-control",
-      },
+    replaced_asset_type: relationship({
+      ref: 'asset_type.repair',
+      many: false
+    }),
+    new_gateway: relationship({
+      ref: 'gateway.installed_in_repair',
+      many:false
+    }),
+    new_gps_node: relationship({
+      ref: 'gps_node.installed_in_repair',
+      many:false
+    }),
+    new_pressure_sensor: relationship({
+      ref: 'pressure_sensor.installed_in_repair',
+      many:false
     }),
     work_order: relationship({
       ref: "work_order.repair",
@@ -85,6 +75,8 @@ export const repair = list({
       },
       many: false,
     }),
+    comments: text(),
+    log: file(),
   },
   access: {
     operation: {

@@ -29,6 +29,10 @@ export const assetType = list({
       ref: "autopsy_type.type",
       many: true,
     }),
+    repair: relationship({
+      ref: 'repair.replaced_asset_type',
+      many: true
+    })
   },
   access: {
     operation: {

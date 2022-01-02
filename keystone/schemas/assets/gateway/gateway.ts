@@ -85,6 +85,10 @@ export const gateway = list({ // TODO: falta definir sus relaciones
           labelField: 'name'
         }
       }),
+      installed_in_repair: relationship({ //NO es una reparacion a este gateway. Es una reparacion a algún equipo de riego, en la cual este gateway se utilizó para reemplazar uno que estaba roto
+        ref: 'repair.new_gateway',
+        many:true
+      })
     },
     
     access: {

@@ -37,6 +37,8 @@ import { inspectionType } from './schemas/workOrders/inspection/inspectionType';
 import { user } from './schemas/users/user';
 import { autopsy } from './schemas/workOrders/autopsy/autopsy';
 import { autopsyType } from './schemas/workOrders/autopsy/autopsyType';
+import { solutionType } from './schemas/workOrders/solutionType';
+import { repairType } from './schemas/workOrders/repairType';
 
 export const lists = {
   irrigator: irrigator,
@@ -76,5 +78,7 @@ export const lists = {
   inspection_type: inspectionType,
   user: user,
   autopsy: autopsy,
-  autopsy_type: autopsyType
+  autopsy_type: autopsyType,
+  solution_type: solutionType,
+  repair_type: repairType
 };

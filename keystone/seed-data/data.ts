@@ -257,6 +257,27 @@ export const inspectionTypes = [
   },
 ];
 
+export const solutionTypes = [
+  {name: "GTW - Alimentación Ext - Reconexión del cable de alimentación"},
+  {name: "GTW - Alimentación Ext - Se conecta bien el Jumper Selector"},
+  {name: "GTW - Antena LORA - Se conecta bien la antena desconectada"},
+  {name: "GTW - Antena SAT - Se conecta bien la antena al módem"},
+  {name: "GTW - Se empareja bien el Sensor GPS actual"},
+  {name: "GTW - Se cambia la disposición del GTW en el EQ de riego"},
+  {name: "GTW - Se conectan correctamente los terminales de batería"},
+  {name: "GTW - Se corrige el GTW registrado en App"},
+  {name: "SGPS - Se posiciona correctamente el sensor en el EQ de riego"},
+  {name: "SGPS - Se conecta el conector de batería suelto"},
+  {name: "SPRES - Se conecta correctamente el cable en la placa GTW"},
+  {name: "SPRES - Se coloca correctamente el conector del cable en el sensor"},
+  {name: "SPRES - Se limpia el conector del sensor"},
+]
+
+export const repairTypes = [
+  { name: "Cambio de dispositivo", value: "device_change" },
+  { name: "Reparación de dispositivo actual", value: "device_repair" },
+]
+
 // --- END OT ---
 
 // --- GEOGRAPHIC ---

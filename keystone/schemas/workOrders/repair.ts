@@ -3,7 +3,6 @@ import { list } from "@keystone-6/core";
 import { select, timestamp, relationship, text, file } from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../hooks/relationshipRequiredCheckerHook";
 import { isAdmin } from "../../utils/accessControl";
-import { gateway } from "../assets/gateway/gateway";
 
 export const repair = list({
   // TODO: falta definir sus relaciones
@@ -37,18 +36,22 @@ export const repair = list({
       },
       many: false,
     }),
-    repair_type: select({
-      validation: {
-        isRequired: true,
-      },
-      options: [
-        { label: "Cambio de dispositivo", value: "device_change" },
-        { label: "Reparación de dispositivo actual", value: "device_repair" },
-      ],
+    repair_type: relationship({
+      ref: 'repair',
       ui: {
-        displayMode: "segmented-control",
+        displayMode: 'select',
+        labelField: 'name'
       },
-    }),
+      many: false
+    }), 
+    solution_type: relationship({
+      ref: 'solution_type',
+      ui: {
+        displayMode: 'select',
+        labelField: 'name'
+      },
+      many: false
+    }), 
     replaced_asset_type: relationship({
       ref: 'asset_type.repair',
       many: false

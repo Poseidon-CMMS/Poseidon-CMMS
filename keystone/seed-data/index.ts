@@ -13,6 +13,8 @@ import {
   creaZones,
   diagnosticTypes,
   inspectionTypes,
+  solutionTypes,
+  repairTypes
 } from "./data";
 
 import * as provinces from "./geographic/provincias.json";
@@ -20,60 +22,6 @@ import * as cities from "./geographic/localidades.json";
 
 const SYSTEM_SIGNATURE = " 🌊 PoseidonCMMS: ";
 const SYSTEM_DIVIDER = "----------------------------------------------------";
-
-type AssetTypeProps = [
-  {
-    name: string;
-  }
-];
-
-type PressureSensorProps = [
-  {
-    name: string;
-  }
-];
-
-type NodeFirmwareVersion = [
-  {
-    version: string;
-  }
-];
-
-type NodeHardwareVersion = [
-  {
-    version: string;
-  }
-];
-
-type SolarPanelType = [
-  {
-    name: string;
-  }
-];
-
-type BatteryType = [
-  {
-    name: string;
-  }
-];
-
-type LoraAntennaType = [
-  {
-    name: string;
-  }
-];
-
-type HousingType = [
-  {
-    name: string;
-  }
-];
-
-type HdwIssueStatus = [
-  {
-    name: string;
-  }
-];
 
 const modelsToSeed = [
   {
@@ -130,6 +78,16 @@ const modelsToSeed = [
     tableName: "zone",
     label: "CREA zones",
     data: creaZones,
+  },
+  {
+    tableName: "solution_type",
+    label: "solution types",
+    data: solutionTypes,
+  },
+  {
+    tableName: "repair_type",
+    label: "repair types",
+    data: repairTypes,
   },
 ];
 

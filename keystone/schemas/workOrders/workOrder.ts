@@ -39,6 +39,10 @@ export const workOrder = list({
       },
       many: true,
     }),
+    technician: relationship({
+      ref: 'user.work_order',
+      many: false
+    })
   },
   access: {
     operation: {

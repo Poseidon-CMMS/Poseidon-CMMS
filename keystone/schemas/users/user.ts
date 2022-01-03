@@ -66,6 +66,10 @@ export const user = list({
       },
       many: false,
     }),
+    work_order: relationship({
+      ref: "work_order.technician",
+      many: true
+    })
   },
   // Here we can configure the Admin UI. We want to show a user's name and posts in the Admin UI
   ui: {

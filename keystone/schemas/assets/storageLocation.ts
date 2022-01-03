@@ -53,7 +53,7 @@ export const storageLocation = list({
         ref: 'pressure_sensor.storage_location',
         ui: {
         displayMode: 'cards',
-        cardFields: ['manufacturer_id'],
+        cardFields: ['integration_id'],
         linkToItem: true,
         inlineConnect: true,
         },
@@ -63,7 +63,7 @@ export const storageLocation = list({
         ref: 'satellite_modem.storage_location',
         ui: {
         displayMode: 'cards',
-        cardFields: ['manufacturer_id'],
+        cardFields: ['integration_id'],
         linkToItem: true,
         inlineConnect: true,
         },
@@ -83,7 +83,7 @@ export const storageLocation = list({
         ref: 'satellite_antenna.storage_location',
         ui: {
         displayMode: 'cards',
-        cardFields: ['manufacturer_id'],
+        cardFields: ['integration_id'],
         linkToItem: true,
         inlineConnect: true,
         },

@@ -7,14 +7,14 @@ import { isAdmin } from '../../../utils/accessControl';
 export const satelliteModem = list({ // TODO: falta definir sus relaciones
     ui: {
       listView: {
-        initialColumns: ['manufacturer_id', 'shipment_date', 'is_transmitting', 'comment', 'gateway'],
+        initialColumns: ['integration_id', 'shipment_date', 'is_transmitting', 'comment', 'gateway'],
       },
     },
     hooks: {
       validateInput: relationshipRequiredCheckerHook('satellite_modem_type'),
     },
     fields: {
-      manufacturer_id: text({          validation: {
+      integration_id: text({          validation: {
             isRequired: true,
           }, isIndexed: 'unique'}),
       shipment_date: timestamp({           validation: {

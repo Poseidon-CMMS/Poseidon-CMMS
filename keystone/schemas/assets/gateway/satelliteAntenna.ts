@@ -8,10 +8,10 @@ export const satelliteAntenna = list({
       listView: {
         initialColumns: [],
       },
-      labelField: 'manufacturer_id'
+      labelField: 'integration_id'
     },
     fields: {
-      manufacturer_id: text({          validation: {
+      integration_id: text({          validation: {
             isRequired: true,
           }, isIndexed: 'unique'}),
       gateway: relationship({

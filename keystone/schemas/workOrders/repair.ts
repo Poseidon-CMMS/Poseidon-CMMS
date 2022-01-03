@@ -37,7 +37,7 @@ export const repair = list({
       many: false,
     }),
     repair_type: relationship({
-      ref: 'repair',
+      ref: 'repair_type',
       ui: {
         displayMode: 'select',
         labelField: 'name'

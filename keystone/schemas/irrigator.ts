@@ -99,7 +99,7 @@ export const irrigator = list({
         ref: 'pressure_sensor.irrigator',
         ui: {
           displayMode: 'cards',
-          cardFields: ['manufacturer_id', 'status', 'order'],
+          cardFields: ['integration_id', 'status', 'order'],
           linkToItem: true,
           inlineConnect: true,
         },

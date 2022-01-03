@@ -37,11 +37,11 @@ export const gateway = list({ // TODO: falta definir sus relaciones
         ref: 'satellite_modem.gateway',
         ui: {
           displayMode: 'cards',
-          cardFields: ['manufacturer_id', 'shipment_date', 'is_transmitting', 'comment'],
-          inlineEdit: { fields: ['manufacturer_id', 'shipment_date', 'is_transmitting', 'comment']},
+          cardFields: ['integration_id', 'shipment_date', 'is_transmitting', 'comment'],
+          inlineEdit: { fields: ['integration_id', 'shipment_date', 'is_transmitting', 'comment']},
           linkToItem: true,
           inlineConnect: true,
-          inlineCreate: { fields: ['manufacturer_id', 'shipment_date', 'is_transmitting', 'comment'] },
+          inlineCreate: { fields: ['integration_id', 'shipment_date', 'is_transmitting', 'comment'] },
         },
         many: false
       }),

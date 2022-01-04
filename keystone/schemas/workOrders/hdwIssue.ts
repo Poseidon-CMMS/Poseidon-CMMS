@@ -103,14 +103,29 @@ export const hardwareIssue = list({
           const { repair, autopsy } = await context.query.hdw_issue.findOne({
             //@ts-expect-error
             where: { id: item.id.toString() },
-            query: 'repair { date repair_type } autopsy { date }',
+            query: `
+              repair(
+                orderBy: { date: desc }
+              ) {
+                date
+                repair_type {
+                  name
+                  value
+                }
+              }
+              autopsy(
+                orderBy: { date: desc }
+              ) {
+                date
+              }
+            `,
           });
           //@ts-ignore
-          if (repair && repair.repair_type === 'device_change' && autopsy) {
+          if (repair && repair[0] && repair[0].repair_type.value === 'device_change' && autopsy && autopsy[0]) {
             //@ts-ignore
-            const oldDate: Date = new Date(repair.date);
+            const oldDate: Date = new Date(repair[0].date);
             //@ts-ignore
-            const finalDate: Date = new Date(autopsy.date);
+            const finalDate: Date = new Date(autopsy[0].date);
             //@ts-ignore
             const differenceinMs = finalDate - oldDate;
             const differenceinHours = differenceinMs / (1000 * 60 * 60);
@@ -157,7 +172,7 @@ export const hardwareIssue = list({
         linkToItem: true,
         inlineConnect: true,
       },
-      many: false,
+      many: true,
     }),
     status: select({
                 validation: {

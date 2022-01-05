@@ -199,16 +199,6 @@ export const hardwareIssue = list({
       many: false
     }),
     //entities
-    field: relationship({
-      ref: "field.hdw_issue",
-      ui: {
-        displayMode: "cards",
-        cardFields: ["name", "gate"],
-        linkToItem: true,
-        inlineConnect: true,
-      },
-      many: false,
-    }),
     irrigator: relationship({
       ref: "irrigator.hdw_issue",
       ui: {

@@ -74,15 +74,6 @@ export const field = list({
         },
         many: false,
       }),
-      hdw_issue: relationship({
-        ref: 'hdw_issue.field',
-        ui: {
-          createView: {
-            fieldMode: 'hidden'
-          }
-        },
-        many: false,
-      }),
     },
     access: {
       operation: {

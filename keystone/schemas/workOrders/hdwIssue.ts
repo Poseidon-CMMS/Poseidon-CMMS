@@ -21,10 +21,31 @@ export const hardwareIssue = list({
   },
   hooks: {
     // validateInput: relationshipRequiredCheckerHook("irrigator"), //TODO: valido para la creacion, nunca para el update
-    resolveInput: ({ resolvedData, item }) => {
+    resolveInput: async ({ resolvedData, item, context }) => {//resolvedData es siempre los datos enviados. En caso de operaciones update, item representa el estado previo del item a actualizar
+
+      //generacion de status
       if(item && !item.assigned_technician && resolvedData.assigned_technician)
         resolvedData.status = "assigned";
-      // We always return resolvedData from the resolveInput hook
+
+      const isCreationOperation = !item;
+      if(isCreationOperation) {
+
+        const { gateway, gps_node, pressure_sensor } = await context.query.irrigator.findOne({
+          where: { id: resolvedData.irrigator.connect.id },
+          query: 'gateway {id} gps_node {id} pressure_sensor {id}',
+        });
+
+        if(gateway && gateway.id){
+          resolvedData.gateway = {connect: {id: gateway.id}};
+        }
+        if(gps_node && gps_node.id){
+          resolvedData.gps_node = {connect: {id: gps_node.id}};
+        }
+        if(pressure_sensor && pressure_sensor.id){
+          resolvedData.pressure_sensor = {connect: {id: pressure_sensor.id}};
+        }
+      }
+        
       return resolvedData;
     }
   },

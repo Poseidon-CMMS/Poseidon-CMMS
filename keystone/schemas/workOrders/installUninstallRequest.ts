@@ -16,7 +16,10 @@ export const installUninstallRequest = list({ // TODO: falta definir sus relacio
     fields: {
       creation_date: timestamp({           validation: {
             isRequired: true,
-          } }), //fecha de alta
+          } }), //fecha de creacion de la solicitud
+      completion_date: timestamp({           validation: {
+        isRequired: false,
+      } }), //fecha en la que realmente se hizo lo que habia que hacer (instalar o desinstalar)
       irrigator: relationship({
         ref: 'irrigator.install_uninstall_request',
         ui: {
@@ -26,6 +29,16 @@ export const installUninstallRequest = list({ // TODO: falta definir sus relacio
           inlineConnect: true,
         },
         many: false,
+      }),
+      request_type: select({
+        validation: {isRequired: true},
+        options: [
+          {label: 'Instalación', value: 'install'},
+          {label: 'Desinstalación', value: 'uninstall'},
+        ],
+        ui: {
+          displayMode: 'segmented-control',
+        },
       }),
       status: select({
                   validation: {

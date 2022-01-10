@@ -21,6 +21,10 @@ export const repair = list({
         isRequired: true,
       },
     }), //fecha de alta
+    technician: relationship({ //Justificación: a veces un hdw issue es reparado varias veces por tecnicos distintos. En este caso debemos distinguir que tecnico hizo cada reparación.
+      ref: "user.repair",
+      many: false,
+    }),
     hdw_issue: relationship({
       ref: "hdw_issue.repair",
       ui: {

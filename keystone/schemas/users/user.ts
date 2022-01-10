@@ -46,6 +46,10 @@ export const user = list({
       ref: "inspection.user",
       many: true,
     }),
+    repair: relationship({
+      ref: "repair.technician",
+      many: true,
+    }),
     zone: relationship({
       ref: "zone.user",
       ui: {

@@ -1,8 +1,16 @@
 import { list } from "@keystone-6/core";
 
-import { select, timestamp, relationship, text, file } from "@keystone-6/core/fields";
+import {
+  select,
+  timestamp,
+  relationship,
+  text,
+  virtual,
+  file,
+} from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../hooks/relationshipRequiredCheckerHook";
 import { isAdmin } from "../../utils/accessControl";
+import { graphql } from '@keystone-6/core';
 
 export const repair = list({
   // TODO: falta definir sus relaciones
@@ -14,6 +22,18 @@ export const repair = list({
   },
   hooks: {
     validateInput: relationshipRequiredCheckerHook("work_order"),
+    afterOperation: async ({ resolvedData, item, context, operation }) => {
+      if (operation === "create") {
+        const hdwIssueId = resolvedData?.hdw_issue?.connect?.id;
+        await context.query.hdw_issue.updateOne({
+          where: { id: hdwIssueId },
+          data: {
+            status: "repaired",
+          },
+          query: "id status",
+        });
+      }
+    },
   },
   fields: {
     date: timestamp({
@@ -21,10 +41,6 @@ export const repair = list({
         isRequired: true,
       },
     }), //fecha de alta
-    technician: relationship({ //Justificación: a veces un hdw issue es reparado varias veces por tecnicos distintos. En este caso debemos distinguir que tecnico hizo cada reparación.
-      ref: "user.repair",
-      many: false,
-    }),
     hdw_issue: relationship({
       ref: "hdw_issue.repair",
       ui: {
@@ -33,7 +49,7 @@ export const repair = list({
           "creation_date",
           "irrigator",
           "time_to_repair_hours",
-          "comments"
+          "comments",
         ],
         linkToItem: true,
         inlineConnect: true,
@@ -41,36 +57,36 @@ export const repair = list({
       many: false,
     }),
     repair_type: relationship({
-      ref: 'repair_type',
+      ref: "repair_type",
       ui: {
-        displayMode: 'select',
-        labelField: 'name'
+        displayMode: "select",
+        labelField: "name",
       },
-      many: false
-    }), 
+      many: false,
+    }),
     solution_type: relationship({
-      ref: 'solution_type',
+      ref: "solution_type",
       ui: {
-        displayMode: 'select',
-        labelField: 'name'
+        displayMode: "select",
+        labelField: "name",
       },
-      many: false
-    }), 
+      many: false,
+    }),
     replaced_asset_type: relationship({
-      ref: 'asset_type.repair',
-      many: false
+      ref: "asset_type.repair",
+      many: false,
     }),
     new_gateway: relationship({
-      ref: 'gateway.installed_in_repair',
-      many:false
+      ref: "gateway.installed_in_repair",
+      many: false,
     }),
     new_gps_node: relationship({
-      ref: 'gps_node.installed_in_repair',
-      many:false
+      ref: "gps_node.installed_in_repair",
+      many: false,
     }),
     new_pressure_sensor: relationship({
-      ref: 'pressure_sensor.installed_in_repair',
-      many:false
+      ref: "pressure_sensor.installed_in_repair",
+      many: false,
     }),
     work_order: relationship({
       ref: "work_order.repair",
@@ -91,6 +107,6 @@ export const repair = list({
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,
-    }
+    },
   },
 });

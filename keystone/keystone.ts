@@ -28,7 +28,7 @@ export default withAuth(
           await insertSeedData(context); // TODO: esto quizas podria ser opcional
        },
       // Optional advanced configuration
-      enableLogging: true,
+      enableLogging: undefined,
       useMigrations: false,
       idField: { kind: 'uuid' },
     },

@@ -16,7 +16,18 @@ export const autopsy = list({
     },
   },
   hooks: {
-    validateInput: relationshipRequiredCheckerHook("hdw_issue"),
+    afterOperation: async ({ resolvedData, item, context, operation }) => {
+      if (operation === "create") {
+        const hdwIssueId = resolvedData?.hdw_issue?.connect?.id;
+        await context.query.hdw_issue.updateOne({
+          where: { id: hdwIssueId },
+          data: {
+            status: "closed",
+          },
+          query: "id status",
+        });
+      }
+    },
   },
   fields: {
     date: timestamp({

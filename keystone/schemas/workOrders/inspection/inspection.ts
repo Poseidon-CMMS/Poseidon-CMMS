@@ -14,14 +14,14 @@ export const inspection = list({
         // validateInput: relationshipRequiredCheckerHook('hdw_issue'), //TODO no sirve
     },
     fields: {
-      date: timestamp({           validation: {
-            isRequired: true,
-          } }), //fecha de alta
+      date: timestamp({
+        validation: {
+          isRequired: true,
+        }
+      }), //fecha de alta
       comments: text(),
      
       //type-dependent fields
-      led_gtw: text(),
-      jumper_wifi: checkbox(),
       satellite_power: float(),
       gateway_battery_voltage: float(),
       lora_power: float(),

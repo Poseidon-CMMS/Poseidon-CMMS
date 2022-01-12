@@ -2,9 +2,7 @@
 export const assetTypes = [
   { name: "Gateway" },
   { name: "Nodo GPS" },
-  { name: "Sensor de Presión" },
-  { name: "LoRa" },
-  { name: "Ninguno" },
+  { name: "Sensor de Presión" }
 ];
 
 export const pressureSensorTypes = [
@@ -247,12 +245,12 @@ export const inspectionTypes = [
   },
   {
     name: "CLIENTE - Manómetro cliente dañado",
-    type: "Ninguno",
+    type: "Sensor de Presión",
     pressure_sensor_signal: true,
   },
   {
     name: "CLIENTE - Oscilación en campo (Bomba)",
-    type: "Ninguno",
+    type: "Sensor de Presión",
     pressure_sensor_signal: true,
   },
 ];

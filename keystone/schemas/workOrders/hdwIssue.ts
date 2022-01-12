@@ -23,7 +23,7 @@ export const hardwareIssue = list({
     // validateInput: relationshipRequiredCheckerHook("irrigator"), //TODO: valido para la creacion, nunca para el update
     resolveInput: async ({ resolvedData, item, context, operation }) => {//resolvedData es siempre los datos enviados. En caso de operaciones update, item representa el estado previo del item a actualizar
       //generacion de status
-      if(item && !item.assigned_technicianId && resolvedData.assigned_technician.connect.id){ //caso in-field => assigned
+      if(item && !item?.assigned_technicianId && resolvedData?.assigned_technician?.connect?.id){ //caso in-field => assigned
         resolvedData.status = "assigned";
       }
       else 

@@ -234,6 +234,12 @@ const insertAutopsyTypes = async (context: KeystoneContext) => {
       (a: any) => a.name === autopsyType.root
     );
     if (assetType && componentType && autopsyRoot) {
+      return {
+        ...autopsyType,
+        asset_type: { connect: { id: assetType.id } },
+        component: { connect: { id: componentType.id } },
+        root: { connect: { id: autopsyRoot.id } },
+      };
     } else {
       if (!assetType)
         console.log(
@@ -249,6 +255,7 @@ const insertAutopsyTypes = async (context: KeystoneContext) => {
         );
       return null;
     }
+
   });
 
   parsedAutopsyTypes = parsedAutopsyTypes.filter((e) => !!e);

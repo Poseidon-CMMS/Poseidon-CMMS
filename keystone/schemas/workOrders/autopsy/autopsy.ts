@@ -1,11 +1,6 @@
 import { list } from "@keystone-6/core";
 
-import {
-  text,
-  timestamp,
-  relationship,
-  file,
-} from "@keystone-6/core/fields";
+import { text, timestamp, relationship, file } from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../../hooks/relationshipRequiredCheckerHook";
 import { isAdmin } from "../../../utils/accessControl";
 
@@ -68,6 +63,6 @@ export const autopsy = list({
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,
-    }
+    },
   },
 });

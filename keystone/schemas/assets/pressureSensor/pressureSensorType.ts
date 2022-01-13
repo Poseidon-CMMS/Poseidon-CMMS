@@ -1,19 +1,21 @@
-import { list } from '@keystone-6/core';
+import { list } from "@keystone-6/core";
 
-import { text } from '@keystone-6/core/fields';
-import { isAdmin } from '../../../utils/accessControl';
+import { text } from "@keystone-6/core/fields";
+import { isAdmin } from "../../../utils/accessControl";
 
 export const pressureSensorType = list({
   ui: {
-    isHidden: true,
     listView: {
-      initialColumns: ['name'],
+      initialColumns: ["name"],
     },
   },
   fields: {
-    name: text({           validation: {
-            isRequired: true,
-          }, isIndexed: 'unique' }),
+    name: text({
+      validation: {
+        isRequired: true,
+      },
+      isIndexed: "unique",
+    }),
   },
   access: {
     operation: {
@@ -21,6 +23,6 @@ export const pressureSensorType = list({
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,
-    }
+    },
   },
 });

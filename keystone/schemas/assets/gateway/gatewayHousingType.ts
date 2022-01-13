@@ -5,7 +5,6 @@ import { isAdmin } from '../../../utils/accessControl';
 
 export const gatewayHousingType = list({
   ui: {
-    isHidden: true,
     listView: {
       initialColumns: ['name'],
     },

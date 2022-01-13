@@ -5,7 +5,6 @@ import { isAdmin } from '../../../utils/accessControl';
 
 export const batteryType = list({
   ui: {
-    isHidden: true,
     listView: {
       initialColumns: ['name'],
     },

@@ -1,9 +1,9 @@
 import { list } from "@keystone-6/core";
 
-import { text } from "@keystone-6/core/fields";
+import { relationship, text } from "@keystone-6/core/fields";
 import { isAdmin } from "../../utils/accessControl";
 
-export const loraAntennaType = list({
+export const componentType = list({
   ui: {
     listView: {
       initialColumns: ["name"],

@@ -31,7 +31,7 @@ export const diagnostic = list({
     comments: text(),
     ///nuevos opcionales
     gateway_satellite_power: float(),
-    angles: text({ }),
+    angles: text({}),
     packet_202_count: integer(),
     battery_2to3: checkbox({
       defaultValue: false,
@@ -49,7 +49,7 @@ export const diagnostic = list({
         displayMode: "segmented-control",
       },
     }),
-    lost_packets:  integer(),
+    lost_packets: integer(),
     node_to_gateway_distance_in_meters: float(),
     gateway_first_data_transmission_date: timestamp(),
     height_difference_in_meters: float(),

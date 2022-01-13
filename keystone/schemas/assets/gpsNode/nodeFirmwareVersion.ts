@@ -1,29 +1,31 @@
-import { list } from '@keystone-6/core';
+import { list } from "@keystone-6/core";
 
-import { relationship, text } from '@keystone-6/core/fields';
-import { isAdmin } from '../../../utils/accessControl';
+import { relationship, text } from "@keystone-6/core/fields";
+import { isAdmin } from "../../../utils/accessControl";
 
 export const nodeFirmwareVersion = list({
   ui: {
-    labelField: 'version',
-    isHidden: true,
+    labelField: "version",
     listView: {
-      initialColumns: ['version'],
+      initialColumns: ["version"],
     },
   },
   fields: {
-    version: text({           validation: {
-            isRequired: true,
-          }, isIndexed: 'unique' }),
+    version: text({
+      validation: {
+        isRequired: true,
+      },
+      isIndexed: "unique",
+    }),
     pcb_node: relationship({
-        ref: 'pcb_node.firmware_version',
-        ui: {
-            displayMode: 'count',
-            createView: {
-                fieldMode: 'hidden'
-            }
+      ref: "pcb_node.firmware_version",
+      ui: {
+        displayMode: "count",
+        createView: {
+          fieldMode: "hidden",
         },
-        many: true
+      },
+      many: true,
     }),
   },
   access: {
@@ -32,6 +34,6 @@ export const nodeFirmwareVersion = list({
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,
-    }
+    },
   },
 });

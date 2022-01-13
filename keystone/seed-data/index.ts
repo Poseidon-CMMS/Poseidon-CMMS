@@ -1,6 +1,7 @@
 import { KeystoneContext } from "@keystone-6/core/types";
 import {
   assetTypes,
+  componentTypes,
   batteryTypes,
   gpsAntennaTypes,
   pressureSensorTypes,
@@ -14,7 +15,9 @@ import {
   diagnosticTypes,
   inspectionTypes,
   solutionTypes,
-  repairTypes
+  repairTypes,
+  autopsyTypes,
+  autopsyRoots,
 } from "./data";
 
 import * as provinces from "./geographic/provincias.json";
@@ -28,6 +31,11 @@ const modelsToSeed = [
     tableName: "asset_type",
     label: "asset types",
     data: assetTypes,
+  },
+  {
+    tableName: "component_type",
+    label: "component types",
+    data: componentTypes,
   },
   {
     tableName: "pressure_sensor_type",
@@ -89,6 +97,11 @@ const modelsToSeed = [
     label: "repair types",
     data: repairTypes,
   },
+  {
+    tableName: "autopsy_root",
+    label: "autopsy roots",
+    data: autopsyRoots,
+  },
 ];
 
 export async function insertSeedData(context: KeystoneContext) {
@@ -97,30 +110,38 @@ export async function insertSeedData(context: KeystoneContext) {
   console.log(SYSTEM_DIVIDER);
 
   for (const model of modelsToSeed) {
-    console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding ${model.label}🌱`);
     console.log(SYSTEM_DIVIDER);
+    console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding ${model.label}🌱`);
     //@ts-ignore
     await insertData(context, model.tableName, model.data);
   }
 
-  // console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding provinces🌱`);
+  // console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding provinces🌱`);
   // console.log(SYSTEM_DIVIDER);
   // await insertProvinces(context);
 
-  // console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding cities🌱`);
+  // console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding cities🌱`);
   // console.log(SYSTEM_DIVIDER);
   // await insertCities(context);
 
-  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding diagnostic types🌱`);
+  console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding diagnostic types🌱`);
   console.log(SYSTEM_DIVIDER);
   await insertDiagnosticTypes(context);
 
-  console.log(`\n${SYSTEM_SIGNATURE}:🌱Seeding inspection types🌱`);
+  console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding inspection types🌱`);
   console.log(SYSTEM_DIVIDER);
   await insertInspectionTypes(context);
 
+  console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding autopsy types🌱`);
   console.log(SYSTEM_DIVIDER);
-  console.log(`${SYSTEM_SIGNATURE}:🌱Data inserted🌱`);
+  await insertAutopsyTypes(context);
+
+  console.log('');
+  console.log('');
+  console.log(SYSTEM_DIVIDER);
+  console.log(SYSTEM_DIVIDER);
+  console.log(`${SYSTEM_SIGNATURE}🌱Data inserted🌱`);
+  console.log(SYSTEM_DIVIDER);
   console.log(SYSTEM_DIVIDER);
 }
 
@@ -128,11 +149,11 @@ const insertProvinces = async (context: KeystoneContext) => {
   const parsedProvinces = provinces.provincias.map((province: any) => ({
     name: province.nombre,
   }));
-  await insertData(context, "Province", parsedProvinces);
+  await insertData(context, "province", parsedProvinces);
 };
 
 const insertCities = async (context: KeystoneContext) => {
-  const dbProvinces = await context.query.Province.findMany({
+  const dbProvinces = await context.query.province.findMany({
     query: "id name",
   });
   const parsedCities = cities.localidades.map((city: any) => {
@@ -144,7 +165,7 @@ const insertCities = async (context: KeystoneContext) => {
       province: { connect: { id: cityProvince?.id } },
     };
   });
-  await insertData(context, "City", parsedCities);
+  await insertData(context, "city", parsedCities);
 };
 
 const insertDiagnosticTypes = async (context: KeystoneContext) => {
@@ -152,7 +173,9 @@ const insertDiagnosticTypes = async (context: KeystoneContext) => {
     query: "id name",
   });
   let parsedDiagnosticTypes = diagnosticTypes.map((diagnosticType: any) => {
-    const assetType = asset_types.find((a) => a.name === diagnosticType.type);
+    const assetType = asset_types.find(
+      (a: any) => a.name === diagnosticType.type
+    );
     if (assetType) {
       delete diagnosticType.type;
       return {
@@ -173,19 +196,63 @@ const insertInspectionTypes = async (context: KeystoneContext) => {
     query: "id name",
   });
   let parsedInspectionTypes = inspectionTypes.map((inspectionType: any) => {
-    const assetType = asset_types.find((a) => a.name === inspectionType.type);
+    const assetType = asset_types.find(
+      (a: any) => a.name === inspectionType.type
+    );
     if (assetType)
       return {
         ...inspectionType,
         type: { connect: { id: assetType.id } },
       };
     else {
-      console.log("Warning: missing asset_type for a given inspection");
+      console.log("⚠ Warning: missing asset_type for a given inspection");
       return null;
     }
   });
   parsedInspectionTypes = parsedInspectionTypes.filter((e) => !!e);
   await insertData(context, "inspection_type", parsedInspectionTypes);
+};
+
+const insertAutopsyTypes = async (context: KeystoneContext) => {
+  const asset_types = await context.query.asset_type.findMany({
+    query: "id name",
+  });
+  const component_types = await context.query.component_type.findMany({
+    query: "id name",
+  });
+  const autopsy_roots = await context.query.autopsy_root.findMany({
+    query: "id name",
+  });
+  let parsedAutopsyTypes = autopsyTypes.map((autopsyType: any) => {
+    const assetType = asset_types.find(
+      (a: any) => a.name === autopsyType.asset_type
+    );
+    const componentType = component_types.find(
+      (a: any) => a.name === autopsyType.component
+    );
+    const autopsyRoot = autopsy_roots.find(
+      (a: any) => a.name === autopsyType.root
+    );
+    if (assetType && componentType && autopsyRoot) {
+    } else {
+      if (!assetType)
+        console.log(
+          `⚠ Warning: missing assetType: ${autopsyType.asset_type} for a given autopsyType: ${autopsyType.name}`
+        );
+      if (!componentType)
+        console.log(
+          `⚠ Warning: missing component: ${autopsyType.component} for a given autopsyType: ${autopsyType.name}`
+        );
+      if (!autopsyRoot)
+        console.log(
+          `⚠ Warning: missing root: ${autopsyType.root} for a given autopsyType: ${autopsyType.name}`
+        );
+      return null;
+    }
+  });
+
+  parsedAutopsyTypes = parsedAutopsyTypes.filter((e) => !!e);
+  await insertData(context, "autopsy_type", parsedAutopsyTypes);
 };
 
 const insertData = async (
@@ -194,7 +261,15 @@ const insertData = async (
   data: any
 ) => {
   // TODO: Revisar caminos no felices
-  await context.db[schema].createMany({
+  let dataCreated = await context.db[schema].createMany({
     data: data,
   });
+
+  if (dataCreated) {
+    console.log(`${SYSTEM_SIGNATURE}: ✅ ${schema} data inserted `);
+    console.log(SYSTEM_DIVIDER);
+  } else {
+    console.log(`${SYSTEM_SIGNATURE}: ❌ Couldn't insert ${schema} data`);
+    console.log(SYSTEM_DIVIDER);
+  }
 };

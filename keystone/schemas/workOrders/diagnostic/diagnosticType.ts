@@ -5,7 +5,6 @@ import { isAdmin } from "../../../utils/accessControl";
 
 export const diagnosticType = list({
   ui: {
-    isHidden: true,
     listView: {
       initialColumns: ["name", "type"],
     },
@@ -26,43 +25,43 @@ export const diagnosticType = list({
       many: false,
     }),
     gateway_satellite_power: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     angles: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     packet_202_count: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     battery_2to3: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     positions: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     lost_packets: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     node_to_gateway_distance_in_meters: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     gateway_first_data_transmission_date: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     height_difference_in_meters: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     from_hour: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     to_hour: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     packet_203_count: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     pressure_difference: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
   },
   access: {

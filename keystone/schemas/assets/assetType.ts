@@ -5,7 +5,6 @@ import { isAdmin } from "../../utils/accessControl";
 
 export const assetType = list({
   ui: {
-    isHidden: true,
     listView: {
       initialColumns: ["name"],
     },
@@ -26,7 +25,7 @@ export const assetType = list({
       many: true,
     }),
     autopsy_type: relationship({
-      ref: "autopsy_type.type",
+      ref: "autopsy_type.asset_type",
       many: true,
     }),
     repair: relationship({

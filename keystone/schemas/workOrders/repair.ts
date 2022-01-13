@@ -10,7 +10,7 @@ import {
 } from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../hooks/relationshipRequiredCheckerHook";
 import { isAdmin } from "../../utils/accessControl";
-import { graphql } from '@keystone-6/core';
+import { graphql } from "@keystone-6/core";
 
 export const repair = list({
   // TODO: falta definir sus relaciones

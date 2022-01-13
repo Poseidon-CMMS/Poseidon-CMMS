@@ -1,8 +1,7 @@
-import { list } from '@keystone-6/core';
+import { list } from "@keystone-6/core";
 
-import { text, relationship } from '@keystone-6/core/fields';
-import { isAdmin } from '../utils/accessControl';
-
+import { text, relationship } from "@keystone-6/core/fields";
+import { isAdmin } from "../utils/accessControl";
 
 export const province = list({
   ui: {
@@ -11,9 +10,11 @@ export const province = list({
     },
   },
   fields: {
-    name: text({           validation: {
-            isRequired: true,
-          } }),
+    name: text({
+      validation: {
+        isRequired: true,
+      },
+    }),
     field: relationship({
       ref: "field.province",
       ui: {
@@ -39,6 +40,6 @@ export const province = list({
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,
-    }
+    },
   },
 });

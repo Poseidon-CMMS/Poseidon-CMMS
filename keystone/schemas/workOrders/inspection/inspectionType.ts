@@ -1,37 +1,39 @@
-import { list } from '@keystone-6/core';
+import { list } from "@keystone-6/core";
 
-import { text, select, relationship, checkbox } from '@keystone-6/core/fields';
-import { isAdmin } from '../../../utils/accessControl';
+import { text, select, relationship, checkbox } from "@keystone-6/core/fields";
+import { isAdmin } from "../../../utils/accessControl";
 
 export const inspectionType = list({
   ui: {
-    isHidden: true,
     listView: {
-      initialColumns: ['name', 'type'],
+      initialColumns: ["name", "type"],
     },
   },
   fields: {
-    name: text({           validation: {
-            isRequired: true,
-          }, isIndexed: 'unique' }),
+    name: text({
+      validation: {
+        isRequired: true,
+      },
+      isIndexed: "unique",
+    }),
     type: relationship({
-        ref: 'asset_type.inspection_type',
-        many: false
+      ref: "asset_type.inspection_type",
+      many: false,
     }),
     pot_sat: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     gateway_battery_voltage: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     gps_node_battery_voltage: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     lora_power: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
     pressure_sensor_signal: checkbox({
-      defaultValue: false
+      defaultValue: false,
     }),
   },
   access: {
@@ -40,6 +42,6 @@ export const inspectionType = list({
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,
-    }
+    },
   },
 });

@@ -1,13 +1,12 @@
 import { list } from "@keystone-6/core";
 
-import { text, select, relationship } from "@keystone-6/core/fields";
+import { text, relationship, select } from "@keystone-6/core/fields";
 import { isAdmin } from "../../../utils/accessControl";
 
 export const autopsyType = list({
   ui: {
-    isHidden: true,
     listView: {
-      initialColumns: ["name", "type"],
+      initialColumns: ["name", "asset_type", "component", "root"],
     },
   },
   fields: {
@@ -17,14 +16,30 @@ export const autopsyType = list({
       },
       isIndexed: "unique",
     }),
-    type: relationship({
-      ref: 'asset_type.autopsy_type',
+    asset_type: relationship({
+      ref: "asset_type.autopsy_type",
       ui: {
-        displayMode: 'select',
-        labelField: 'name'
+        displayMode: "select",
+        labelField: "name",
       },
-      many: false
-  }),
+      many: false,
+    }),
+    component: relationship({
+      ref: "component_type",
+      ui: {
+        displayMode: "select",
+        labelField: "name",
+      },
+      many: false,
+    }),
+    root: relationship({
+      ref: "autopsy_root",
+      ui: {
+        displayMode: "select",
+        labelField: "name",
+      },
+      many: false,
+    }),
   },
   access: {
     operation: {
@@ -32,6 +47,6 @@ export const autopsyType = list({
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,
-    }
+    },
   },
 });

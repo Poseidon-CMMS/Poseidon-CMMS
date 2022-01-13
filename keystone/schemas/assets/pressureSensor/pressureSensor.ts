@@ -76,6 +76,15 @@ export const pressureSensor = list({
       },
       many: false,
     }),
+    install_uninstall_request: relationship({
+      ref: "install_uninstall_request.pressure_sensor",
+      ui: {
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
+      many: false,
+    }),
     installed_in_repair: relationship({
       //NO es una reparacion a este sensor de presión. Es una reparacion a algún equipo de riego, en la cual este sensor de presión se utilizó para reemplazar uno que estaba roto
       ref: "repair.new_pressure_sensor",

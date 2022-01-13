@@ -95,6 +95,15 @@ export const gateway = list({
       },
       many: false,
     }),
+    install_uninstall_request: relationship({
+      ref: "install_uninstall_request.gateway",
+      ui: {
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
+      many: false,
+    }),
     lora_antenna_type: relationship({
       ref: "lora_antenna_type",
       ui: {

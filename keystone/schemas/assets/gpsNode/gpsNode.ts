@@ -101,6 +101,15 @@ export const gpsNode = list({
       },
       many: false,
     }),
+    install_uninstall_request: relationship({
+      ref: "install_uninstall_request.gps_node",
+      ui: {
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
+      many: false,
+    }),
     installed_in_repair: relationship({
       //NO es una reparacion a este Nodo. Es una reparacion a algún equipo de riego, en la cual este Nodo se utilizó para reemplazar uno que estaba roto
       ref: "repair.new_gps_node",

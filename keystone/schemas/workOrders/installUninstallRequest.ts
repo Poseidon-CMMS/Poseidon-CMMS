@@ -1,6 +1,6 @@
 import { list } from "@keystone-6/core";
 
-import { select, timestamp, relationship } from "@keystone-6/core/fields";
+import { select, timestamp, relationship, image, file } from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../hooks/relationshipRequiredCheckerHook";
 import { isAdmin } from "../../utils/accessControl";
 
@@ -8,11 +8,11 @@ export const installUninstallRequest = list({
   // TODO: falta definir sus relaciones
   ui: {
     listView: {
-      initialColumns: ["creation_date", "status", "irrigator"],
+      initialColumns: ["creation_date", "completion_date", "close_date", "status", "irrigator"],
     },
   },
   hooks: {
-    validateInput: relationshipRequiredCheckerHook("irrigator"),
+    // validateInput: relationshipRequiredCheckerHook("irrigator"),
   },
   fields: {
     creation_date: timestamp({
@@ -25,11 +25,48 @@ export const installUninstallRequest = list({
         isRequired: false,
       },
     }), //fecha en la que realmente se hizo lo que habia que hacer (instalar o desinstalar)
+    close_date: timestamp({
+      validation: {
+        isRequired: false,
+      },
+    }), //fecha en la que realmente se hizo lo que habia que hacer (instalar o desinstalar)
     irrigator: relationship({
       ref: "irrigator.install_uninstall_request",
       ui: {
         displayMode: "cards",
         cardFields: ["name", "lat", "long", "status"],
+        linkToItem: true,
+        inlineConnect: true,
+      },
+      many: false,
+    }),
+    gateway: relationship({
+      ref: "gateway.install_uninstall_request",
+      ui: {
+        displayMode: "cards",
+        cardFields: ["fabrication_date"],
+        inlineEdit: { fields: ["fabrication_date"] },
+        linkToItem: true,
+        inlineConnect: true,
+        inlineCreate: { fields: ["fabrication_date"] },
+      },
+      many: false,
+    }),
+    gps_node: relationship({
+      ref: "gps_node.install_uninstall_request",
+      ui: {
+        displayMode: "cards",
+        cardFields: ["fabrication_date"],
+        linkToItem: true,
+        inlineConnect: true,
+      },
+      many: false,
+    }),
+    pressure_sensor: relationship({
+      ref: "pressure_sensor.install_uninstall_request",
+      ui: {
+        displayMode: "cards",
+        cardFields: ["integration_id", "status", "order"],
         linkToItem: true,
         inlineConnect: true,
       },
@@ -69,6 +106,10 @@ export const installUninstallRequest = list({
       },
       many: false,
     }),
+    gtw_image: image(),
+    node_gps_image: image(),
+    pressure_sensor_image: image(),
+    log: file(),
   },
   access: {
     operation: {

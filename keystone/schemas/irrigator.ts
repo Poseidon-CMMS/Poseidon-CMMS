@@ -52,7 +52,7 @@ export const irrigator = list({
         isRequired: true,
       },
       options: [
-        { label: "Sin telemetria", value: "no-telemetry" },
+        { label: "Sin telemetría", value: "no-telemetry" },
         { label: "Instalado", value: "installed" },
       ],
       ui: {

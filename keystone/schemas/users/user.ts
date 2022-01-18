@@ -42,6 +42,10 @@ export const user = list({
       ref: "hdw_issue.assigned_technician",
       many: true
     }),
+    install_uninstall_request: relationship({
+      ref: "install_uninstall_request.assigned_technician",
+      many: true
+    }),
     inspection: relationship({
       ref: "inspection.user",
       many: true,

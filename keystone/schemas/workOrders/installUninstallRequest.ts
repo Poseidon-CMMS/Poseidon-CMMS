@@ -110,6 +110,13 @@ export const installUninstallRequest = list({
     node_gps_image: image(),
     pressure_sensor_image: image(),
     log: file(),
+    assigned_technician: relationship({
+      ref: "user.install_uninstall_request",
+      ui: {
+        displayMode: "select",
+      },
+      many: false,
+    }),
   },
   access: {
     operation: {

@@ -12,7 +12,26 @@ export const installUninstallRequest = list({
     },
   },
   hooks: {
-    // validateInput: relationshipRequiredCheckerHook("irrigator"),
+    // validateInput: relationshipRequiredCheckerHook("irrigator"), //TODO: valido para la creacion, nunca para el update
+    resolveInput: async ({ resolvedData, item, context, operation }) => {
+      //resolvedData es siempre los datos enviados. En caso de operaciones update, item representa el estado previo del item a actualizar
+      //generacion de status
+      if (
+        item &&
+        !item?.assigned_technicianId &&
+        resolvedData?.assigned_technician?.connect?.id
+      ) {
+        //caso abierta => asignada
+        resolvedData.status = "assigned";
+      } else if (resolvedData?.assigned_technician?.disconnect) {
+        //caso asignada => in-field
+        resolvedData.status = "open";
+      } else if (!item?.completion_date && resolvedData?.completion_date) {
+        resolvedData.status = "done";
+      }
+
+      return resolvedData;
+    },
   },
   fields: {
     creation_date: timestamp({

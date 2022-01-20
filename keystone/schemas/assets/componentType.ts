@@ -7,6 +7,10 @@ export const componentType = list({
   ui: {
     listView: {
       initialColumns: ["name"],
+      initialSort: {
+          field: 'name',
+          direction: 'ASC'
+      }
     },
   },
   fields: {

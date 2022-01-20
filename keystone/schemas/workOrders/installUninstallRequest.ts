@@ -28,7 +28,7 @@ export const installUninstallRequest = list({
         resolvedData.status = "open";
       } else if (!item?.completion_date && resolvedData?.completion_date) {
         resolvedData.status = "done";
-      }
+      }//TODO: hook cerrador closed date
 
       return resolvedData;
     },
@@ -48,7 +48,7 @@ export const installUninstallRequest = list({
       validation: {
         isRequired: false,
       },
-    }), //fecha en la que realmente se hizo lo que habia que hacer (instalar o desinstalar)
+    }), //fecha en la que fue confirmado que todo se realizó correctamente
     irrigator: relationship({
       ref: "irrigator.install_uninstall_request",
       ui: {

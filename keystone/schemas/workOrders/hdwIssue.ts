@@ -34,6 +34,8 @@ export const hardwareIssue = list({
       } else if (resolvedData?.assigned_technician?.disconnect) {
         //caso assigned => in-field
         resolvedData.status = "in-field";
+      } else if (resolvedData?.status === "closed"){
+        resolvedData.close_date = new Date().toISOString();
       }
 
       const isCreationOperation = !item;

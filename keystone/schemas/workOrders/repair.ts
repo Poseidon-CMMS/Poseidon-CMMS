@@ -21,7 +21,7 @@ export const repair = list({
     labelField: "date",
   },
   hooks: {
-    validateInput: relationshipRequiredCheckerHook("work_order"),
+    // validateInput: relationshipRequiredCheckerHook("work_order"),
     afterOperation: async ({ resolvedData, item, context, operation }) => {
       if (operation === "create") {
         const hdwIssueId = resolvedData?.hdw_issue?.connect?.id;

@@ -12,8 +12,8 @@ export const pcbNode = list({
   },
   hooks: {
     validateInput: () => {
-      relationshipRequiredCheckerHook("firmware_version"),
-        relationshipRequiredCheckerHook("hardware_version");
+      // relationshipRequiredCheckerHook("firmware_version"),
+      //   relationshipRequiredCheckerHook("hardware_version");
     },
   },
   fields: {

@@ -12,7 +12,7 @@ export const city = list({
     },
   },
   hooks: {
-    validateInput: relationshipRequiredCheckerHook("province"),
+    // validateInput: relationshipRequiredCheckerHook("province"),
   },
   fields: {
     name: text({

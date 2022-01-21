@@ -23,7 +23,7 @@ export const satelliteModem = list({
     },
   },
   hooks: {
-    validateInput: relationshipRequiredCheckerHook("satellite_modem_type"),
+    // validateInput: relationshipRequiredCheckerHook("satellite_modem_type"),
   },
   fields: {
     integration_id: text({

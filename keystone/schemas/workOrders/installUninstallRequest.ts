@@ -28,9 +28,30 @@ export const installUninstallRequest = list({
         resolvedData.status = "open";
       } else if (!item?.completion_date && resolvedData?.completion_date) {
         resolvedData.status = "done";
-      }//TODO: hook cerrador closed date
-
+      } else if (!item?.close_date && resolvedData?.close_date) {
+        resolvedData.status = "completed";
+      }
       return resolvedData;
+    },
+    afterOperation: async ({ resolvedData, item, context, operation }) => {
+      console.log('resolvedData es: ');
+      console.log(resolvedData);
+      console.log('item es: ');
+      console.log(item);
+
+
+      if (operation === "update" && item?.status === "completed") {
+        const irrigatorId = item?.irrigatorId;
+        
+        await context.query.irrigator.updateOne({
+          // @ts-expect-error
+          where: { id: irrigatorId },
+          data: {
+            status: item?.request_type ==="install"? "installed": item?.request_type ==="uninstall"?"no-telemetry":"error",
+          },
+          query: "id status",
+        });
+      }
     },
   },
   fields: {

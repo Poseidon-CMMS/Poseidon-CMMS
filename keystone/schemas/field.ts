@@ -12,7 +12,7 @@ export const field = list({
     },
   },
   hooks: {
-    validateInput: relationshipRequiredCheckerHook("zone"),
+    // validateInput: relationshipRequiredCheckerHook("zone"),
   },
   fields: {
     name: text({

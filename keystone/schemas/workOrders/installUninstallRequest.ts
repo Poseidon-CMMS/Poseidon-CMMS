@@ -34,12 +34,6 @@ export const installUninstallRequest = list({
       return resolvedData;
     },
     afterOperation: async ({ resolvedData, item, context, operation }) => {
-      console.log('resolvedData es: ');
-      console.log(resolvedData);
-      console.log('item es: ');
-      console.log(item);
-
-
       if (operation === "update" && item?.status === "completed") {
         const irrigatorId = item?.irrigatorId;
         
@@ -162,13 +156,31 @@ export const installUninstallRequest = list({
     operation: {
       query: isLoggedIn,
       create: isAdmin,
-      update: isAdmin,
+      update: isLoggedIn,
       delete: isAdmin,
     },
     filter: {
       query: ({ session, context, listKey, operation }) => {
         const isAdmin = session?.data?.type === 'admin';
         return isAdmin? {} :  { assigned_technician: { id: {equals: session?.data?.id} } };
+      },
+    },
+    item: {
+      update: async ({ session, context, listKey, operation, inputData, item }) => {
+        const isAdmin = session?.data?.type === 'admin';
+        if(isAdmin) return true;
+
+        const workOrderTechnicianResult =
+          await context.query.work_order.findOne({
+            //@ts-ignore
+            where: { id: inputData.work_order.connect.id },
+            query: "technician {id}",
+          });
+        const technicianId = workOrderTechnicianResult.technician.id;
+
+        const technicianBelongsToWorkOrder = session?.data?.id === technicianId;
+        const technicianAssignedToRequest = session?.data?.id === item.assigned_technicianId;
+        return technicianAssignedToRequest && technicianBelongsToWorkOrder;
       },
     },
   },

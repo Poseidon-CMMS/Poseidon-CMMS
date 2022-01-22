@@ -1,7 +1,7 @@
 import { list } from "@keystone-6/core";
 
 import { text, timestamp, float, relationship } from "@keystone-6/core/fields";
-import { isAdmin } from "../../utils/accessControl";
+import { isAdmin, isLoggedIn } from "../../utils/accessControl";
 
 export const workOrder = list({
   ui: {
@@ -50,10 +50,22 @@ export const workOrder = list({
   },
   access: {
     operation: {
-      query: isAdmin,
-      create: isAdmin,
+      query: isLoggedIn,
+      create: isLoggedIn,
       update: isAdmin,
       delete: isAdmin,
+    },
+    filter: {
+      query: ({ session, context, listKey, operation }) => {
+        const isAdmin = session?.data?.type === 'admin';
+        return isAdmin? {} :  { technician: { id: {equals: session?.data?.id} } };
+      },
+    },
+    item: {
+      create: ({ session, context, listKey, operation, inputData }) => {
+        const isAdmin = session?.data?.type === 'admin';
+        return isAdmin ? true : session?.data?.id === inputData?.technician?.connect?.id;
+      },
     },
   },
 });

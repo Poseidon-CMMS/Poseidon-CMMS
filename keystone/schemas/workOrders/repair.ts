@@ -104,7 +104,7 @@ export const repair = list({
   access: {
     operation: {
       query: isLoggedIn,
-      create: isAdmin,
+      create: isLoggedIn,
       update: isAdmin,
       delete: isAdmin,
     },

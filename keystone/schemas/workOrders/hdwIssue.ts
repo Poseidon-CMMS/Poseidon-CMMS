@@ -10,7 +10,7 @@ import {
 } from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../hooks/relationshipRequiredCheckerHook";
 import { graphql } from "@keystone-6/core";
-import { isAdmin } from "../../utils/accessControl";
+import { isAdmin, isLoggedIn } from "../../utils/accessControl";
 
 export const hardwareIssue = list({
   ui: {
@@ -285,26 +285,15 @@ export const hardwareIssue = list({
   },
   access: {
     operation: {
-      query: isAdmin,
+      query: isLoggedIn,
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,
     },
     filter: {
       query: ({ session, context, listKey, operation }) => {
-        console.log('session es: ')
-        console.log(session);
-        
-        console.log('context es: ')
-        console.log(context);
-        
-        console.log('listkey es: ')
-        console.log(listKey);
-        
-        console.log('operation es: ')
-        console.log(operation);
-        
-        return { assigned_technician: { id: {equals: session?.data?.id} } };
+        const isAdmin = session?.data?.type === 'admin';
+        return isAdmin? {} :  { assigned_technician: { id: {equals: session?.data?.id} } };
       },
     },
   }

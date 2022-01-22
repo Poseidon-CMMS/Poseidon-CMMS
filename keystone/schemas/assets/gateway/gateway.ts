@@ -1,7 +1,7 @@
 import { list } from "@keystone-6/core";
 
 import { timestamp, relationship, text } from "@keystone-6/core/fields";
-import { isAdmin } from "../../../utils/accessControl";
+import { isAdmin, isLoggedIn } from "../../../utils/accessControl";
 
 export const gateway = list({
   // TODO: falta definir sus relaciones
@@ -128,7 +128,7 @@ export const gateway = list({
 
   access: {
     operation: {
-      query: isAdmin,
+      query: isLoggedIn,
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,

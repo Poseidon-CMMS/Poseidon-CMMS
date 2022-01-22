@@ -8,4 +8,5 @@ interface ISession {
 
 //@ts-ignore
 export const isAdmin = ({ session }: { session: SessionContext<ISession> }) => session?.data?.type === 'admin';
-export const isLoggedIn = ({ session }: { session: SessionContext<ISession> }) => !!session?.data?.email;
+//@ts-ignore
+export const isLoggedIn = ({ session }: { session: SessionContext<ISession> }) => !!session?.data?.id;

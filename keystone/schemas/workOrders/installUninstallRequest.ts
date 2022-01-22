@@ -2,7 +2,7 @@ import { list } from "@keystone-6/core";
 
 import { select, timestamp, relationship, image, file } from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../hooks/relationshipRequiredCheckerHook";
-import { isAdmin } from "../../utils/accessControl";
+import { isAdmin, isLoggedIn } from "../../utils/accessControl";
 
 export const installUninstallRequest = list({
   // TODO: falta definir sus relaciones
@@ -160,10 +160,16 @@ export const installUninstallRequest = list({
   },
   access: {
     operation: {
-      query: isAdmin,
+      query: isLoggedIn,
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,
+    },
+    filter: {
+      query: ({ session, context, listKey, operation }) => {
+        const isAdmin = session?.data?.type === 'admin';
+        return isAdmin? {} :  { assigned_technician: { id: {equals: session?.data?.id} } };
+      },
     },
   },
 });

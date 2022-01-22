@@ -1,7 +1,7 @@
 import { list } from "@keystone-6/core";
 
 import { text, select, relationship, checkbox } from "@keystone-6/core/fields";
-import { isAdmin } from "../../../utils/accessControl";
+import { isAdmin, isLoggedIn } from "../../../utils/accessControl";
 
 export const diagnosticType = list({
   ui: {
@@ -66,7 +66,7 @@ export const diagnosticType = list({
   },
   access: {
     operation: {
-      query: isAdmin,
+      query: isLoggedIn,
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,

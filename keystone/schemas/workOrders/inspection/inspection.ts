@@ -12,7 +12,7 @@ import {
   file,
 } from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../../hooks/relationshipRequiredCheckerHook";
-import { isAdmin } from "../../../utils/accessControl";
+import { isAdmin, isLoggedIn } from "../../../utils/accessControl";
 
 export const inspection = list({
   ui: {
@@ -65,7 +65,7 @@ export const inspection = list({
   },
   access: {
     operation: {
-      query: isAdmin,
+      query: isLoggedIn,
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,

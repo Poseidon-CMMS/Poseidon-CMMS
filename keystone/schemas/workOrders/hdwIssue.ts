@@ -290,5 +290,22 @@ export const hardwareIssue = list({
       update: isAdmin,
       delete: isAdmin,
     },
-  },
+    filter: {
+      query: ({ session, context, listKey, operation }) => {
+        console.log('session es: ')
+        console.log(session);
+        
+        console.log('context es: ')
+        console.log(context);
+        
+        console.log('listkey es: ')
+        console.log(listKey);
+        
+        console.log('operation es: ')
+        console.log(operation);
+        
+        return { assigned_technician: { id: {equals: session?.data?.id} } };
+      },
+    },
+  }
 });

@@ -19,6 +19,7 @@ export const inspection = list({
     listView: {
       initialColumns: ["hdw_issue", "date", "user", "comments"],
     },
+    labelField: "comments",
   },
   hooks: {
     // validateInput: relationshipRequiredCheckerHook('hdw_issue'), //TODO no sirve

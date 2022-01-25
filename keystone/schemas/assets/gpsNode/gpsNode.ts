@@ -8,8 +8,9 @@ import { isAdmin, isLoggedIn } from "../../../utils/accessControl";
 export const gpsNode = list({
   ui: {
     listView: {
-      initialColumns: ["integration_id", "fabrication_date"],
+      initialColumns: ["integration_id", "fabrication_date", "irrigator", "storage_location"],
     },
+    labelField: "integration_id",
   },
   fields: {
     fabrication_date: timestamp({

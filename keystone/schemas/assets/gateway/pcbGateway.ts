@@ -7,8 +7,10 @@ import { isAdmin } from "../../../utils/accessControl";
 export const pcbGateway = list({
   ui: {
     listView: {
-      initialColumns: ["integration_id", "fabrication_date", "status"],
+      initialColumns: ["integration_id", "fabrication_date", "status", "firmware_version", "hardware_version"],
     },
+    labelField: "integration_id",
+
   },
   hooks: {
     validateInput: () => {

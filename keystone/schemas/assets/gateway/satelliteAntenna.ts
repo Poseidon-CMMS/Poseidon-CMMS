@@ -6,7 +6,7 @@ import { isAdmin } from "../../../utils/accessControl";
 export const satelliteAntenna = list({
   ui: {
     listView: {
-      initialColumns: [],
+      initialColumns: ["integration_id", "gateway"],
     },
     labelField: "integration_id",
   },

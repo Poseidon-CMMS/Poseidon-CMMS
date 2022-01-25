@@ -6,8 +6,9 @@ import { isAdmin } from "../../utils/accessControl";
 export const storageLocation = list({
   ui: {
     listView: {
-      initialColumns: ["name", "lat", "long"],
+      initialColumns: ["name", "lat", "long", "user", "gateway", "gps_node","pressure_sensor"],
     },
+    labelField: "name",
   },
   fields: {
     name: text({

@@ -9,7 +9,11 @@ export const stockMovement = list({
       initialColumns: [
         "location_from",
         "location_to",
-        "author"
+        "author",
+        "gateway",
+        "gps_node",
+        "pressure_sensor",
+        
       ],
     },
   },

@@ -21,6 +21,7 @@ export const satelliteModem = list({
         "gateway",
       ],
     },
+    labelField: "integration_id",
   },
   hooks: {
     // validateInput: relationshipRequiredCheckerHook("satellite_modem_type"),

@@ -9,6 +9,7 @@ export const autopsy = list({
     listView: {
       initialColumns: ["hdw_issue", "date", "user", "comments"],
     },
+    labelField: "comments"
   },
   hooks: {
     afterOperation: async ({ resolvedData, item, context, operation }) => {

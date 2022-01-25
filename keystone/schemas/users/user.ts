@@ -3,8 +3,12 @@ import { text, relationship, password, select } from "@keystone-6/core/fields";
 import { isAdmin, isLoggedIn } from "../../utils/accessControl";
 
 export const user = list({
-  // Here are the fields that `User` will have. We want an email and password so they can log in
-  // a name so we can refer to them, and a way to connect users to posts.
+  ui: {
+    listView: {
+      initialColumns: ["name", "email", "type"],
+    },
+    labelField: "name",
+  },
   fields: {
     name: text({ validation: { isRequired: true } }),
     email: text({

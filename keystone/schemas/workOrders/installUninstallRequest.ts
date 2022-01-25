@@ -10,6 +10,7 @@ export const installUninstallRequest = list({
     listView: {
       initialColumns: ["creation_date", "completion_date", "close_date", "status", "irrigator"],
     },
+    labelField: "creation_date",
   },
   hooks: {
     // validateInput: relationshipRequiredCheckerHook("irrigator"), //TODO: valido para la creacion, nunca para el update

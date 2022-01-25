@@ -7,8 +7,9 @@ export const gateway = list({
   // TODO: falta definir sus relaciones
   ui: {
     listView: {
-      initialColumns: ["integration_id", "fabrication_date", "housing_type"],
+      initialColumns: ["integration_id", "fabrication_date", "irrigator"],
     },
+    labelField: "integration_id",
   },
   fields: {
     fabrication_date: timestamp({

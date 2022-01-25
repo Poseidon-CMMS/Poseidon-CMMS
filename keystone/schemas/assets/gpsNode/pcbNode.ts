@@ -7,8 +7,9 @@ import { isAdmin } from "../../../utils/accessControl";
 export const pcbNode = list({
   ui: {
     listView: {
-      initialColumns: ["integration_id", "fabrication_date"],
+      initialColumns: ["integration_id", "fabrication_date", "gps_node", "status"],
     },
+    labelField: "integration_id",
   },
   hooks: {
     validateInput: () => {

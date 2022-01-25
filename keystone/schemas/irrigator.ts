@@ -25,6 +25,7 @@ export const irrigator = list({
         "comment",
       ],
     },
+    labelField: "integration_id",
   },
   fields: {
     integration_id: text({

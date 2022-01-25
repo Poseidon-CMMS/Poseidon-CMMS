@@ -8,6 +8,8 @@ export const gatewayHousingType = list({
     listView: {
       initialColumns: ['name'],
     },
+    labelField: "name",
+    
   },
   fields: {
     name: text({           validation: {

@@ -36,6 +36,13 @@ export const user = list({
       ref: "autopsy.user",
       many: true,
     }),
+    created_stock_movement: relationship({
+      ref: "stock_movement.author",
+      many: true,
+      ui: {
+        hideCreate: true
+      }
+    }),
 
     //technician-only fields
     hdw_issue: relationship({

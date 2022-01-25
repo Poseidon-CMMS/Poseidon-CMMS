@@ -124,6 +124,13 @@ export const gateway = list({
       ref: "repair.new_gateway",
       many: true,
     }),
+    stock_movement: relationship({
+      ref: "stock_movement.gateway",
+      many: true,
+      ui: {
+        hideCreate: true
+      }
+    }),
   },
 
   access: {

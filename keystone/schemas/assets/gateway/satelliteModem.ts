@@ -54,13 +54,6 @@ export const satelliteModem = list({
       },
       many: false,
     }),
-    storage_location: relationship({
-      ref: "storage_location.satellite_modem",
-      ui: {
-        displayMode: "select",
-        labelField: "name",
-      },
-    }),
   },
   access: {
     operation: {

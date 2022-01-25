@@ -115,6 +115,13 @@ export const gpsNode = list({
       ref: "repair.new_gps_node",
       many: true,
     }),
+    stock_movement: relationship({
+      ref: "stock_movement.gps_node",
+      many: true,
+      ui: {
+        hideCreate: true
+      }
+    }),
   },
 
   access: {

@@ -13,7 +13,7 @@ RUN npm install
 ADD . /home/node
 RUN npm run postinstallfix
 
-RUN npm run-script build
+# RUN npm run-script build
 
 
 # Runtime container
@@ -24,4 +24,4 @@ WORKDIR /home/node
 COPY --from=build /home/node /home/node
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "dev"]

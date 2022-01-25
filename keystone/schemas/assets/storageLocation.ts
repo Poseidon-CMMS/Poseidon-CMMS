@@ -36,16 +36,6 @@ export const storageLocation = list({
       },
       many: true,
     }),
-    pcb_gateway: relationship({
-      ref: "pcb_gateway.storage_location",
-      ui: {
-        displayMode: "cards",
-        cardFields: ["integration_id"],
-        linkToItem: true,
-        inlineConnect: true,
-      },
-      many: true,
-    }),
     gps_node: relationship({
       ref: "gps_node.storage_location",
       ui: {
@@ -66,36 +56,6 @@ export const storageLocation = list({
       },
       many: true,
     }),
-    satellite_modem: relationship({
-      ref: "satellite_modem.storage_location",
-      ui: {
-        displayMode: "cards",
-        cardFields: ["integration_id"],
-        linkToItem: true,
-        inlineConnect: true,
-      },
-      many: true,
-    }),
-    pcb_node: relationship({
-      ref: "pcb_node.storage_location",
-      ui: {
-        displayMode: "cards",
-        cardFields: ["integration_id"],
-        linkToItem: true,
-        inlineConnect: true,
-      },
-      many: true,
-    }),
-    satellite_antenna: relationship({
-      ref: "satellite_antenna.storage_location",
-      ui: {
-        displayMode: "cards",
-        cardFields: ["integration_id"],
-        linkToItem: true,
-        inlineConnect: true,
-      },
-      many: true,
-    }),
     //People
     user: relationship({
       ref: "user.storage_location",
@@ -107,6 +67,29 @@ export const storageLocation = list({
       },
       many: false,
     }),
+    stock_movement_from: relationship({
+      ref: "stock_movement.location_from",
+      ui: {
+        displayMode: "cards",
+        cardFields: ["date"],
+        linkToItem: true,
+        inlineConnect: true,
+        hideCreate: true,
+        
+      },
+      many: true,
+    }),
+    stock_movement_to: relationship({
+      ref: "stock_movement.location_to",
+      ui: {
+        displayMode: "cards",
+        cardFields: ["date"],
+        linkToItem: true,
+        inlineConnect: true,
+        hideCreate: true,
+      },
+      many: true,
+    })
   },
   access: {
     operation: {

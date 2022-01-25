@@ -90,6 +90,13 @@ export const pressureSensor = list({
       ref: "repair.new_pressure_sensor",
       many: true,
     }),
+    stock_movement: relationship({
+      ref: "stock_movement.pressure_sensor",
+      many: true,
+      ui: {
+        hideCreate: true
+      }
+    }),
   },
   access: {
     operation: {

@@ -26,14 +26,6 @@ export const satelliteAntenna = list({
       },
       many: false,
     }),
-    storage_location: relationship({
-      ref: "storage_location.satellite_antenna",
-      ui: {
-        displayMode: "select",
-        labelField: "name",
-      },
-      many: false,
-    }),
   },
   access: {
     operation: {

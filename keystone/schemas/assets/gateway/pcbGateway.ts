@@ -70,13 +70,6 @@ export const pcbGateway = list({
       },
       many: false,
     }),
-    storage_location: relationship({
-      ref: "storage_location.pcb_gateway",
-      ui: {
-        displayMode: "select",
-        labelField: "name",
-      },
-    }),
   },
 
   access: {

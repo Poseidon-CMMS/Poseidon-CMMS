@@ -66,14 +66,6 @@ export const pcbNode = list({
       },
       many: false,
     }),
-    storage_location: relationship({
-      ref: "storage_location.pcb_node",
-      ui: {
-        displayMode: "select",
-        labelField: "name",
-      },
-      many: false,
-    }),
   },
   access: {
     operation: {

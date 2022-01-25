@@ -41,6 +41,7 @@ import { autopsyRoot } from './schemas/workOrders/autopsy/autopsyRoot';
 import { solutionType } from './schemas/workOrders/solutionType';
 import { repairType } from './schemas/workOrders/repairType';
 import { componentType } from './schemas/assets/componentType';
+import { stockMovement } from './schemas/assets/stockMovement';
 
 export const lists = {
   asset_type: assetType,
@@ -82,6 +83,7 @@ export const lists = {
   solar_panel_type: solarPanelType,
   solution_type: solutionType,
   storage_location: storageLocation,
+  stock_movement: stockMovement,
   user: user,
   work_order: workOrder,
   zone: zone,

@@ -12,9 +12,9 @@ export const pcbNode = list({
     labelField: "integration_id",
   },
   hooks: {
-    validateInput: () => {
-      // relationshipRequiredCheckerHook("firmware_version"),
-      //   relationshipRequiredCheckerHook("hardware_version");
+    validateInput: (params) => {
+      relationshipRequiredCheckerHook("firmware_version")(params);
+      relationshipRequiredCheckerHook("hardware_version")(params);
     },
   },
   fields: {

@@ -1,7 +1,8 @@
 import { list } from "@keystone-6/core";
 
-import { timestamp, float, relationship } from "@keystone-6/core/fields";
-import { isAdmin } from "../../utils/accessControl";
+import { timestamp, relationship } from "@keystone-6/core/fields";
+import { isAdmin } from "../../utils/accessControl"; 
+import { relationshipRequiredCheckerHook } from "../../hooks/relationshipRequiredCheckerHook";
 
 export const stockMovement = list({
   ui: {
@@ -13,8 +14,43 @@ export const stockMovement = list({
         "gateway",
         "gps_node",
         "pressure_sensor",
-        
       ],
+    },
+  },
+  hooks: {
+    validateInput: function (params) {
+      
+      relationshipRequiredCheckerHook('stock_movement_to')(params);
+      relationshipRequiredCheckerHook('stock_movement_to')(params);
+
+      const {
+        addValidationError,
+        resolvedData,
+        item,
+        operation,
+      } = params;
+
+      let assetCount;
+      if (operation === "create") {
+        const gateway = resolvedData.gateway;
+        const gps_node = resolvedData.gps_node;
+        const pressure_sensor = resolvedData.pressure_sensor;
+        //@ts-ignore
+        assetCount = !!(gateway) + !!(gps_node) + !!(pressure_sensor);
+        
+      } else if (operation === "update") {
+        const gateway = resolvedData.gateway?.disconnect ? null: resolvedData.gateway ? resolvedData.gateway : item.gatewayId;
+        const gps_node = resolvedData.gps_node?.disconnect ? null: resolvedData.gps_node ? resolvedData.gps_node : item.gps_nodeId;
+        const pressure_sensor = resolvedData.pressure_sensor?.disconnect ? null: resolvedData.pressure_sensor ? resolvedData.pressure_sensor : item.pressure_sensorId;
+        //@ts-ignore
+        assetCount = !!(gateway) + !!(gps_node) + !!(pressure_sensor);
+      }
+
+      if ( assetCount > 1){
+        addValidationError(`Solo se permite un dispositivo por movimiento de stock`);
+      } else if (assetCount === 0){
+        addValidationError(`Debe seleccionar exactamente un dispositivo`);
+      }
     },
   },
   fields: {

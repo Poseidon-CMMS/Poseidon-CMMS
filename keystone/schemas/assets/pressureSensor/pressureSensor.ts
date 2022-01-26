@@ -20,7 +20,7 @@ export const pressureSensor = list({
     labelField: "integration_id",
   },
   hooks: {
-    // validateInput: relationshipRequiredCheckerHook('pressure_sensor_type'), //TODO: versi esto se puede arreglar
+    validateInput: relationshipRequiredCheckerHook("pressure_sensor_type"), //TODO: versi esto se puede arreglar
   },
   fields: {
     integration_id: text({
@@ -48,8 +48,10 @@ export const pressureSensor = list({
       ui: {
         displayMode: "cards",
         cardFields: ["name", "lat", "long", "status"],
-        linkToItem: true,
-        inlineConnect: true,
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: false,
     }),
@@ -70,6 +72,7 @@ export const pressureSensor = list({
     hdw_issue: relationship({
       ref: "hdw_issue.pressure_sensor",
       ui: {
+        hideCreate: true,
         createView: {
           fieldMode: "hidden",
         },
@@ -79,6 +82,7 @@ export const pressureSensor = list({
     install_uninstall_request: relationship({
       ref: "install_uninstall_request.pressure_sensor",
       ui: {
+        hideCreate: true,
         createView: {
           fieldMode: "hidden",
         },
@@ -89,13 +93,22 @@ export const pressureSensor = list({
       //NO es una reparacion a este sensor de presión. Es una reparacion a algún equipo de riego, en la cual este sensor de presión se utilizó para reemplazar uno que estaba roto
       ref: "repair.new_pressure_sensor",
       many: true,
+      ui: {
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
     stock_movement: relationship({
       ref: "stock_movement.pressure_sensor",
       many: true,
       ui: {
-        hideCreate: true
-      }
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
   },
   access: {

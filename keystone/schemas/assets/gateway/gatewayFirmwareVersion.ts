@@ -21,6 +21,7 @@ export const gatewayFirmwareVersion = list({
       ref: "pcb_gateway.firmware_version",
       ui: {
         displayMode: "count",
+        hideCreate: true,
         createView: {
           fieldMode: "hidden",
         },

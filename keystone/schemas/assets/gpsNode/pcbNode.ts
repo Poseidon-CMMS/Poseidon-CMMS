@@ -7,7 +7,12 @@ import { isAdmin } from "../../../utils/accessControl";
 export const pcbNode = list({
   ui: {
     listView: {
-      initialColumns: ["integration_id", "fabrication_date", "gps_node", "status"],
+      initialColumns: [
+        "integration_id",
+        "fabrication_date",
+        "gps_node",
+        "status",
+      ],
     },
     labelField: "integration_id",
   },
@@ -45,6 +50,7 @@ export const pcbNode = list({
     gps_node: relationship({
       ref: "gps_node.pcb_node",
       ui: {
+        hideCreate: true,
         createView: {
           fieldMode: "hidden",
         },

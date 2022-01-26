@@ -35,41 +35,75 @@ export const user = list({
     diagnostic: relationship({
       ref: "diagnostic.user",
       many: true,
+      ui: {
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
     autopsy: relationship({
       ref: "autopsy.user",
       many: true,
+      ui: {
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
     created_stock_movement: relationship({
       ref: "stock_movement.author",
       many: true,
       ui: {
-        hideCreate: true
-      }
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
 
     //technician-only fields
     hdw_issue: relationship({
       ref: "hdw_issue.assigned_technician",
-      many: true
+      many: true,
+      ui: {
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
     install_uninstall_request: relationship({
       ref: "install_uninstall_request.assigned_technician",
-      many: true
+      many: true,
+      ui: {
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
     inspection: relationship({
       ref: "inspection.user",
       many: true,
+      ui: {
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
     zone: relationship({
       ref: "zone.user",
       ui: {
         displayMode: "cards",
         cardFields: ["code", "name", "is_foreign"],
-        inlineEdit: { fields: ["name", "is_foreign"] },
-        linkToItem: true,
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
         inlineConnect: true,
-        inlineCreate: { fields: ["name", "is_foreign"] },
       },
       many: true,
     }),
@@ -78,19 +112,23 @@ export const user = list({
       ui: {
         displayMode: "select",
         labelField: "name",
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: false,
     }),
     work_order: relationship({
       ref: "work_order.technician",
-      many: true
-    })
-  },
-  // Here we can configure the Admin UI. We want to show a user's name and posts in the Admin UI
-  ui: {
-    listView: {
-      initialColumns: ["name"],
-    },
+      many: true,
+      ui: {
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
+    }),
   },
   access: {
     operation: {
@@ -98,6 +136,6 @@ export const user = list({
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,
-    }
+    },
   },
 });

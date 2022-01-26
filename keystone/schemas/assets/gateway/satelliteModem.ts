@@ -24,7 +24,7 @@ export const satelliteModem = list({
     labelField: "integration_id",
   },
   hooks: {
-    // validateInput: relationshipRequiredCheckerHook("satellite_modem_type"),
+    validateInput: relationshipRequiredCheckerHook("satellite_modem_type"),
   },
   fields: {
     integration_id: text({
@@ -52,6 +52,10 @@ export const satelliteModem = list({
       ref: "gateway.satellite_modem",
       ui: {
         displayMode: "select",
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: false,
     }),

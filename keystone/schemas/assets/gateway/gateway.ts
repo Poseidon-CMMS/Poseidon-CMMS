@@ -4,7 +4,6 @@ import { timestamp, relationship, text } from "@keystone-6/core/fields";
 import { isAdmin, isLoggedIn } from "../../../utils/accessControl";
 
 export const gateway = list({
-  // TODO: falta definir sus relaciones
   ui: {
     listView: {
       initialColumns: ["integration_id", "fabrication_date", "irrigator"],
@@ -124,13 +123,22 @@ export const gateway = list({
       //NO es una reparacion a este gateway. Es una reparacion a algún equipo de riego, en la cual este gateway se utilizó para reemplazar uno que estaba roto
       ref: "repair.new_gateway",
       many: true,
+      ui: {
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
     stock_movement: relationship({
       ref: "stock_movement.gateway",
       many: true,
       ui: {
-        hideCreate: true
-      }
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
   },
 

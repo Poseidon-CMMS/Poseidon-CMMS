@@ -1,7 +1,7 @@
 node_modules
 .keystone/admin
-.keystone/schema.prisma
-.keystone/schema.graphql
 keystone.db
 *.log
 .env
+keystone/schema.graphql
+keystone/schema.prisma

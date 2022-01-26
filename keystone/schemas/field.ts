@@ -8,11 +8,11 @@ export const field = list({
   description: "Campo",
   ui: {
     listView: {
-      initialColumns: ["name", "gate", "phone", "zone", "province", "city"],
+      initialColumns: ["name", "gate", "phone", "zone", "city"],
     },
   },
   hooks: {
-    // validateInput: relationshipRequiredCheckerHook("zone"),
+    validateInput: relationshipRequiredCheckerHook("zone"),
   },
   fields: {
     name: text({
@@ -45,16 +45,6 @@ export const field = list({
       ui: {
         displayMode: "cards",
         cardFields: ["code", "name", "is_foreign"],
-        linkToItem: true,
-        inlineConnect: true,
-      },
-      many: false,
-    }),
-    province: relationship({
-      ref: "province.field",
-      ui: {
-        displayMode: "cards",
-        cardFields: ["name"],
         linkToItem: true,
         inlineConnect: true,
       },

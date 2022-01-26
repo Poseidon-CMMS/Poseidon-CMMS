@@ -21,7 +21,7 @@ export const diagnostic = list({
     labelField: "comments"
   },
   hooks: {
-    // validateInput: relationshipRequiredCheckerHook("hdw_issue"), //TODO: complica la creacion en cadena
+    validateInput: relationshipRequiredCheckerHook("hdw_issue")
   },
   fields: {
     date: timestamp({

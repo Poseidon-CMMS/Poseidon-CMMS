@@ -15,21 +15,15 @@ export const province = list({
         isRequired: true,
       },
     }),
-    field: relationship({
-      ref: "field.province",
-      ui: {
-        displayMode: "cards",
-        cardFields: ["name", "gate"],
-        linkToItem: true,
-        inlineConnect: true,
-      },
-      many: true,
-    }),
     city: relationship({
       ref: "city.province",
       ui: {
         displayMode: "select",
         labelField: "name",
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: true,
     }),

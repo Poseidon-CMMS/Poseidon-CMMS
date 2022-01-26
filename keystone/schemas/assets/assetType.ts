@@ -19,19 +19,43 @@ export const assetType = list({
     diagnostic_type: relationship({
       ref: "diagnostic_type.type",
       many: true,
+      ui: {
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
     inspection_type: relationship({
       ref: "inspection_type.type",
       many: true,
+      ui: {
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
     autopsy_type: relationship({
       ref: "autopsy_type.asset_type",
       many: true,
+      ui: {
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
     repair: relationship({
-      ref: 'repair.replaced_asset_type',
-      many: true
-    })
+      ref: "repair.replaced_asset_type",
+      many: true,
+      ui: {
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
+    }),
   },
   access: {
     operation: {

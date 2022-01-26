@@ -2,11 +2,20 @@ import { list } from "@keystone-6/core";
 
 import { text, float, relationship } from "@keystone-6/core/fields";
 import { isAdmin } from "../../utils/accessControl";
+import { relationshipRequiredCheckerHook } from "../../hooks/relationshipRequiredCheckerHook";
 
 export const storageLocation = list({
   ui: {
     listView: {
-      initialColumns: ["name", "lat", "long", "user", "gateway", "gps_node","pressure_sensor"],
+      initialColumns: [
+        "name",
+        "lat",
+        "long",
+        "user",
+        "gateway",
+        "gps_node",
+        "pressure_sensor",
+      ],
     },
     labelField: "name",
   },
@@ -76,7 +85,9 @@ export const storageLocation = list({
         linkToItem: true,
         inlineConnect: true,
         hideCreate: true,
-        
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: true,
     }),
@@ -88,9 +99,12 @@ export const storageLocation = list({
         linkToItem: true,
         inlineConnect: true,
         hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: true,
-    })
+    }),
   },
   access: {
     operation: {

@@ -13,7 +13,7 @@ export const installUninstallRequest = list({
     labelField: "creation_date",
   },
   hooks: {
-    // validateInput: relationshipRequiredCheckerHook("irrigator"), //TODO: valido para la creacion, nunca para el update
+    validateInput: relationshipRequiredCheckerHook("irrigator"),
     resolveInput: async ({ resolvedData, item, context, operation }) => {
       //resolvedData es siempre los datos enviados. En caso de operaciones update, item representa el estado previo del item a actualizar
       //generacion de status
@@ -79,11 +79,7 @@ export const installUninstallRequest = list({
       ref: "gateway.install_uninstall_request",
       ui: {
         displayMode: "cards",
-        cardFields: ["fabrication_date"],
-        inlineEdit: { fields: ["fabrication_date"] },
-        linkToItem: true,
-        inlineConnect: true,
-        inlineCreate: { fields: ["fabrication_date"] },
+        cardFields: ["integration_id"],
       },
       many: false,
     }),
@@ -92,8 +88,6 @@ export const installUninstallRequest = list({
       ui: {
         displayMode: "cards",
         cardFields: ["fabrication_date"],
-        linkToItem: true,
-        inlineConnect: true,
       },
       many: false,
     }),
@@ -102,8 +96,6 @@ export const installUninstallRequest = list({
       ui: {
         displayMode: "cards",
         cardFields: ["integration_id", "status", "order"],
-        linkToItem: true,
-        inlineConnect: true,
       },
       many: false,
     }),
@@ -136,7 +128,6 @@ export const installUninstallRequest = list({
       ui: {
         displayMode: "cards",
         cardFields: ["work_date", "km_traveled", "comment"],
-        linkToItem: true,
         inlineConnect: true,
       },
       many: false,

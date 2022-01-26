@@ -22,7 +22,7 @@ export const inspection = list({
     labelField: "comments",
   },
   hooks: {
-    // validateInput: relationshipRequiredCheckerHook('hdw_issue'), //TODO no sirve
+    validateInput: relationshipRequiredCheckerHook('hdw_issue'),
   },
   fields: {
     date: timestamp({
@@ -50,7 +50,6 @@ export const inspection = list({
       ui: {
         displayMode: "cards",
         cardFields: ["creation_date", "irrigator", "comments"],
-        linkToItem: true,
         inlineConnect: true,
       },
       many: false,

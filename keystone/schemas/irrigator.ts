@@ -27,6 +27,9 @@ export const irrigator = list({
     },
     labelField: "integration_id",
   },
+  hooks: {
+    validateInput: relationshipRequiredCheckerHook("field"),
+  },
   fields: {
     integration_id: text({
       validation: {
@@ -76,7 +79,6 @@ export const irrigator = list({
         inlineEdit: { fields: ["fabrication_date"] },
         linkToItem: true,
         inlineConnect: true,
-        inlineCreate: { fields: ["fabrication_date"] },
       },
       many: false,
     }),
@@ -107,6 +109,10 @@ export const irrigator = list({
         cardFields: ["creation_date"],
         linkToItem: true,
         inlineConnect: true,
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: true,
     }),
@@ -117,6 +123,10 @@ export const irrigator = list({
         cardFields: ["creation_date", "comments"],
         linkToItem: true,
         inlineConnect: true,
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: true,
     }),

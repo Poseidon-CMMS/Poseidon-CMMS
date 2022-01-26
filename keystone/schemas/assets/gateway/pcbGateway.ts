@@ -13,9 +13,9 @@ export const pcbGateway = list({
 
   },
   hooks: {
-    validateInput: () => {
-      // relationshipRequiredCheckerHook("firmware_version"),
-        // relationshipRequiredCheckerHook("hardware_version");
+    validateInput: (params) => {
+        relationshipRequiredCheckerHook("firmware_version")(params);
+        relationshipRequiredCheckerHook("hardware_version")(params);
     },
   },
   fields: {

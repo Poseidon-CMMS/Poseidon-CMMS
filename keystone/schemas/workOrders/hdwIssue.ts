@@ -20,7 +20,7 @@ export const hardwareIssue = list({
     labelField: "creation_date",
   },
   hooks: {
-    // validateInput: relationshipRequiredCheckerHook("irrigator"), //TODO: valido para la creacion, nunca para el update
+    validateInput: relationshipRequiredCheckerHook("irrigator"),
     resolveInput: async ({ resolvedData, item, context, operation }) => {
       //resolvedData es siempre los datos enviados. En caso de operaciones update, item representa el estado previo del item a actualizar
       //generacion de status
@@ -34,7 +34,7 @@ export const hardwareIssue = list({
       } else if (resolvedData?.assigned_technician?.disconnect) {
         //caso assigned => in-field
         resolvedData.status = "in-field";
-      } else if (resolvedData?.status === "closed"){
+      } else if (resolvedData?.status === "closed") {
         resolvedData.close_date = new Date().toISOString();
       }
 
@@ -182,7 +182,6 @@ export const hardwareIssue = list({
       ui: {
         displayMode: "cards",
         cardFields: ["date", "comments"],
-        linkToItem: true,
         inlineConnect: true,
       },
       many: false,
@@ -192,14 +191,17 @@ export const hardwareIssue = list({
       ui: {
         displayMode: "cards",
         cardFields: ["date", "comments"],
-        linkToItem: true,
-        inlineConnect: true,
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: true,
     }),
     repair: relationship({
       ref: "repair.hdw_issue",
       ui: {
+        hideCreate: true,
         createView: {
           fieldMode: "hidden",
         },
@@ -211,8 +213,11 @@ export const hardwareIssue = list({
       ui: {
         displayMode: "cards",
         cardFields: ["date", "comments"],
-        linkToItem: true,
         inlineConnect: true,
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: true,
     }),
@@ -245,7 +250,6 @@ export const hardwareIssue = list({
       ui: {
         displayMode: "cards",
         cardFields: ["name", "lat", "long", "status"],
-        linkToItem: true,
         inlineConnect: true,
       },
       many: false,
@@ -254,11 +258,11 @@ export const hardwareIssue = list({
       ref: "gateway.hdw_issue",
       ui: {
         displayMode: "cards",
-        cardFields: ["fabrication_date"],
-        inlineEdit: { fields: ["fabrication_date"] },
-        linkToItem: true,
-        inlineConnect: true,
-        inlineCreate: { fields: ["fabrication_date"] },
+        cardFields: ["integration_id"],
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: false,
     }),
@@ -266,9 +270,11 @@ export const hardwareIssue = list({
       ref: "gps_node.hdw_issue",
       ui: {
         displayMode: "cards",
-        cardFields: ["fabrication_date"],
-        linkToItem: true,
-        inlineConnect: true,
+        cardFields: ["integration_id"],
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: false,
     }),
@@ -276,9 +282,11 @@ export const hardwareIssue = list({
       ref: "pressure_sensor.hdw_issue",
       ui: {
         displayMode: "cards",
-        cardFields: ["integration_id", "status", "order"],
-        linkToItem: true,
-        inlineConnect: true,
+        cardFields: ["integration_id"],
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: false,
     }),
@@ -292,9 +300,11 @@ export const hardwareIssue = list({
     },
     filter: {
       query: ({ session, context, listKey, operation }) => {
-        const isAdmin = session?.data?.type === 'admin';
-        return isAdmin? {} :  { assigned_technician: { id: {equals: session?.data?.id} } };
+        const isAdmin = session?.data?.type === "admin";
+        return isAdmin
+          ? {}
+          : { assigned_technician: { id: { equals: session?.data?.id } } };
       },
     },
-  }
+  },
 });

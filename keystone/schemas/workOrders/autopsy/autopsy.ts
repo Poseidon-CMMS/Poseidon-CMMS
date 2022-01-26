@@ -44,7 +44,6 @@ export const autopsy = list({
       ui: {
         displayMode: "cards",
         cardFields: ["creation_date", "irrigator", "comments"],
-        linkToItem: true,
         inlineConnect: true,
       },
       many: false,

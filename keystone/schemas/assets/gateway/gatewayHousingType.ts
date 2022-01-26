@@ -1,20 +1,22 @@
-import { list } from '@keystone-6/core';
+import { list } from "@keystone-6/core";
 
-import { text } from '@keystone-6/core/fields';
-import { isAdmin } from '../../../utils/accessControl';
+import { text } from "@keystone-6/core/fields";
+import { isAdmin } from "../../../utils/accessControl";
 
 export const gatewayHousingType = list({
   ui: {
     listView: {
-      initialColumns: ['name'],
+      initialColumns: ["name"],
     },
     labelField: "name",
-    
   },
   fields: {
-    name: text({           validation: {
-            isRequired: true,
-          }, isIndexed: 'unique' }),
+    name: text({
+      validation: {
+        isRequired: true,
+      },
+      isIndexed: "unique",
+    }),
   },
   access: {
     operation: {
@@ -22,6 +24,6 @@ export const gatewayHousingType = list({
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,
-    }
+    },
   },
 });

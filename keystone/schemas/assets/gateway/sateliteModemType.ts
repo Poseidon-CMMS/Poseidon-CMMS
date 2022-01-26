@@ -35,6 +35,7 @@ export const satelliteModemType = list({
       ref: "satellite_modem.satellite_modem_type",
       ui: {
         displayMode: "count",
+        hideCreate: true,
         createView: {
           fieldMode: "hidden",
         },

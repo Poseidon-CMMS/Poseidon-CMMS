@@ -21,7 +21,7 @@ export const repair = list({
     labelField: "date",
   },
   hooks: {
-    // validateInput: relationshipRequiredCheckerHook("work_order"),
+    validateInput: relationshipRequiredCheckerHook("work_order"),
     afterOperation: async ({ resolvedData, item, context, operation }) => {
       if (operation === "create") {
         const hdwIssueId = resolvedData?.hdw_issue?.connect?.id;
@@ -51,7 +51,6 @@ export const repair = list({
           "time_to_repair_hours",
           "comments",
         ],
-        linkToItem: true,
         inlineConnect: true,
       },
       many: false,
@@ -93,7 +92,6 @@ export const repair = list({
       ui: {
         displayMode: "cards",
         cardFields: ["work_date", "km_traveled", "comment"],
-        linkToItem: true,
         inlineConnect: true,
       },
       many: false,

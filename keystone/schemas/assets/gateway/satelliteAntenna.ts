@@ -20,6 +20,7 @@ export const satelliteAntenna = list({
     gateway: relationship({
       ref: "gateway.satellite_antenna",
       ui: {
+        hideCreate: true,
         createView: {
           fieldMode: "hidden",
         },

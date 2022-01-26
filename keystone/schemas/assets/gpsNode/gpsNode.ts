@@ -8,7 +8,12 @@ import { isAdmin, isLoggedIn } from "../../../utils/accessControl";
 export const gpsNode = list({
   ui: {
     listView: {
-      initialColumns: ["integration_id", "fabrication_date", "irrigator", "storage_location"],
+      initialColumns: [
+        "integration_id",
+        "fabrication_date",
+        "irrigator",
+        "storage_location",
+      ],
     },
     labelField: "integration_id",
   },
@@ -31,8 +36,10 @@ export const gpsNode = list({
       ui: {
         displayMode: "cards",
         cardFields: ["name", "lat", "long", "status"],
-        linkToItem: true,
-        inlineConnect: true,
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: false,
     }),
@@ -81,8 +88,16 @@ export const gpsNode = list({
       ui: {
         displayMode: "cards",
         cardFields: ["fabrication_date", "integration_id"],
-        linkToItem: true,
         inlineConnect: true,
+        inlineCreate: {
+          fields: [
+            "fabrication_date",
+            "integration_id",
+            "status",
+            "firmware_version",
+            "hardware_version",
+          ],
+        },
       },
       many: false,
     }),
@@ -96,6 +111,7 @@ export const gpsNode = list({
     hdw_issue: relationship({
       ref: "hdw_issue.gps_node",
       ui: {
+        hideCreate: true,
         createView: {
           fieldMode: "hidden",
         },
@@ -105,6 +121,7 @@ export const gpsNode = list({
     install_uninstall_request: relationship({
       ref: "install_uninstall_request.gps_node",
       ui: {
+        hideCreate: true,
         createView: {
           fieldMode: "hidden",
         },
@@ -115,13 +132,22 @@ export const gpsNode = list({
       //NO es una reparacion a este Nodo. Es una reparacion a algún equipo de riego, en la cual este Nodo se utilizó para reemplazar uno que estaba roto
       ref: "repair.new_gps_node",
       many: true,
+      ui: {
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
     stock_movement: relationship({
       ref: "stock_movement.gps_node",
       many: true,
       ui: {
-        hideCreate: true
-      }
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
     }),
   },
 

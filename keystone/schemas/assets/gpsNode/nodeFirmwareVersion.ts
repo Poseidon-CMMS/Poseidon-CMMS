@@ -21,6 +21,7 @@ export const nodeFirmwareVersion = list({
       ref: "pcb_node.firmware_version",
       ui: {
         displayMode: "count",
+                hideCreate: true,
         createView: {
           fieldMode: "hidden",
         },

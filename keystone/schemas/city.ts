@@ -12,7 +12,7 @@ export const city = list({
     },
   },
   hooks: {
-    // validateInput: relationshipRequiredCheckerHook("province"),
+    validateInput: relationshipRequiredCheckerHook("province"),
   },
   fields: {
     name: text({
@@ -25,7 +25,6 @@ export const city = list({
       ui: {
         displayMode: "cards",
         cardFields: ["name"],
-        linkToItem: true,
         inlineConnect: true,
       },
       many: false,
@@ -37,6 +36,10 @@ export const city = list({
         cardFields: ["name"],
         linkToItem: true,
         inlineConnect: true,
+        hideCreate: true,
+        createView: {
+          fieldMode: "hidden",
+        },
       },
       many: true,
     }),

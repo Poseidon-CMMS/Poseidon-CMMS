@@ -12,10 +12,8 @@ import {
   solarPanelTypes,
   loraAntennaTypes,
   creaZones,
-  inspectionTypes,
   solutionTypes,
   repairTypes,
-  autopsyTypes,
   autopsyRoots,
   irrigators,
   provinces,
@@ -23,6 +21,8 @@ import {
   fields,
 } from "./data";
 import { diagnosticTypes } from "./data/diagnosticTypes";
+import { inspectionTypes } from "./data/inspectionTypes";
+import { autopsyTypes } from "./data/autopsyTypes";
 
 const SYSTEM_SIGNATURE = " 🌊 PoseidonCMMS: ";
 const SYSTEM_DIVIDER = "----------------------------------------------------";
@@ -117,7 +117,18 @@ const basicModelsToSeed = [
     tableName: "diagnostic_type",
     label: "diagnostic types",
     data: diagnosticTypes
-  }
+  },
+  {
+    tableName: "inspection_type",
+    label: "inspection types",
+    data: inspectionTypes
+  },
+  {
+    tableName: "autopsy_type",
+    label: "autopsy types",
+    data: autopsyTypes
+  },
+
 ];
 
 const mockModelsToSeed = [
@@ -147,14 +158,6 @@ export async function insertSeedData(context: KeystoneContext, include_example_e
     await prismaInsertData(context, model.tableName, model.data);
   }
 
-  console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding inspection types🌱`);
-  console.log(SYSTEM_DIVIDER);
-  await insertInspectionTypes(context);
-
-  console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding autopsy types🌱`);
-  console.log(SYSTEM_DIVIDER);
-  await insertAutopsyTypes(context);
-
   console.log('');
   console.log('');
   console.log(SYSTEM_DIVIDER);
@@ -163,96 +166,6 @@ export async function insertSeedData(context: KeystoneContext, include_example_e
   console.log(SYSTEM_DIVIDER);
   console.log(SYSTEM_DIVIDER);
 }
-
-const insertInspectionTypes = async (context: KeystoneContext) => {
-  const asset_types = await context.query.asset_type.findMany({
-    query: "id name",
-  });
-  let parsedInspectionTypes = inspectionTypes.map((inspectionType: any) => {
-    const assetType = asset_types.find(
-      (a: any) => a.name === inspectionType.type
-    );
-    if (assetType)
-      return {
-        ...inspectionType,
-        type: { connect: { id: assetType.id } },
-      };
-    else {
-      console.log("⚠ Warning: missing asset_type for a given inspection");
-      return null;
-    }
-  });
-  parsedInspectionTypes = parsedInspectionTypes.filter((e) => !!e);
-  await insertData(context, "inspection_type", parsedInspectionTypes);
-};
-
-const insertAutopsyTypes = async (context: KeystoneContext) => {
-  const asset_types = await context.query.asset_type.findMany({
-    query: "id name",
-  });
-  const component_types = await context.query.component_type.findMany({
-    query: "id name",
-  });
-  const autopsy_roots = await context.query.autopsy_root.findMany({
-    query: "id name",
-  });
-  let parsedAutopsyTypes = autopsyTypes.map((autopsyType: any) => {
-    const assetType = asset_types.find(
-      (a: any) => a.name === autopsyType.asset_type
-    );
-    const componentType = component_types.find(
-      (a: any) => a.name === autopsyType.component
-    );
-    const autopsyRoot = autopsy_roots.find(
-      (a: any) => a.name === autopsyType.root
-    );
-    if (assetType && componentType && autopsyRoot) {
-      return {
-        ...autopsyType,
-        asset_type: { connect: { id: assetType.id } },
-        component: { connect: { id: componentType.id } },
-        root: { connect: { id: autopsyRoot.id } },
-      };
-    } else {
-      if (!assetType)
-        console.log(
-          `⚠ Warning: missing assetType: ${autopsyType.asset_type} for a given autopsyType: ${autopsyType.name}`
-        );
-      if (!componentType)
-        console.log(
-          `⚠ Warning: missing component: ${autopsyType.component} for a given autopsyType: ${autopsyType.name}`
-        );
-      if (!autopsyRoot)
-        console.log(
-          `⚠ Warning: missing root: ${autopsyType.root} for a given autopsyType: ${autopsyType.name}`
-        );
-      return null;
-    }
-
-  });
-
-  parsedAutopsyTypes = parsedAutopsyTypes.filter((e) => !!e);
-  await insertData(context, "autopsy_type", parsedAutopsyTypes);
-};
-
-const insertData = async (
-  context: KeystoneContext,
-  schema: string,
-  data: any
-) => {
-  // TODO: Revisar caminos no felices
-  let dataCreated = await context.db[schema].createMany({
-    data: data,
-  });
-
-  if (dataCreated) {
-    console.log(`${SYSTEM_SIGNATURE}: ✅ ${schema} data inserted `);
-    console.log(SYSTEM_DIVIDER);
-  } else {
-    console.log(`${SYSTEM_SIGNATURE}: ❌ Couldn't insert ${schema} data`);
-    console.log(SYSTEM_DIVIDER);
-  }
-};
 
 const prismaInsertData = async (
   context: KeystoneContext,

@@ -12,17 +12,17 @@ import {
   solarPanelTypes,
   loraAntennaTypes,
   creaZones,
-  diagnosticTypes,
   inspectionTypes,
   solutionTypes,
   repairTypes,
   autopsyTypes,
   autopsyRoots,
   irrigators,
+  provinces,
+  cities,
+  fields,
 } from "./data";
-
-import * as provinces from "./geographic/provincias.json";
-import * as cities from "./geographic/localidades.json";
+import { diagnosticTypes } from "./data/diagnosticTypes";
 
 const SYSTEM_SIGNATURE = " 🌊 PoseidonCMMS: ";
 const SYSTEM_DIVIDER = "----------------------------------------------------";
@@ -98,9 +98,34 @@ const basicModelsToSeed = [
     label: "autopsy roots",
     data: autopsyRoots,
   },
+  {
+    tableName: "zone",
+    label: "CREA zones",
+    data: creaZones
+  },
+  {
+    tableName: "province",
+    label: "provinces",
+    data: provinces
+  },
+  {
+    tableName: "city",
+    label: "cities",
+    data: cities
+  },
+  {
+    tableName: "diagnostic_type",
+    label: "diagnostic types",
+    data: diagnosticTypes
+  }
 ];
 
 const mockModelsToSeed = [
+  {
+    tableName: "field",
+    label: "fields",
+    data: fields
+  },
   {
     tableName: "irrigator",
     label: "irrigators",
@@ -113,7 +138,7 @@ export async function insertSeedData(context: KeystoneContext, include_example_e
   console.log(`${SYSTEM_SIGNATURE}:🌱Inserting seed data🌱`);
   console.log(SYSTEM_DIVIDER);
 
-  const modelsToSeed = include_example_entities? [...basicModelsToSeed, mockModelsToSeed] : basicModelsToSeed;
+  const modelsToSeed = include_example_entities? [...basicModelsToSeed, ...mockModelsToSeed] : basicModelsToSeed;
 
   for (const model of modelsToSeed) {
     console.log(SYSTEM_DIVIDER);
@@ -121,22 +146,6 @@ export async function insertSeedData(context: KeystoneContext, include_example_e
     //@ts-ignore
     await prismaInsertData(context, model.tableName, model.data);
   }
-
-  console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding CREA zones🌱`);
-  console.log(SYSTEM_DIVIDER);
-  await insertCreaZones(context);
-
-  console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding provinces🌱`);
-  console.log(SYSTEM_DIVIDER);
-  await insertProvinces(context);
-
-  console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding cities🌱`);
-  console.log(SYSTEM_DIVIDER);
-  await insertCities(context);
-
-  console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding diagnostic types🌱`);
-  console.log(SYSTEM_DIVIDER);
-  await insertDiagnosticTypes(context);
 
   console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding inspection types🌱`);
   console.log(SYSTEM_DIVIDER);
@@ -154,51 +163,6 @@ export async function insertSeedData(context: KeystoneContext, include_example_e
   console.log(SYSTEM_DIVIDER);
   console.log(SYSTEM_DIVIDER);
 }
-
-const insertCreaZones = async (context: KeystoneContext) => {
-  await prismaInsertData(context, "zone", creaZones);
-};
-
-const insertProvinces = async (context: KeystoneContext) => {
-  const parsedProvinces = provinces.provincias.map((province: any) => ({
-    id: province.uuid,
-    name: province.nombre,
-  }));
-  await prismaInsertData(context, "province", parsedProvinces);
-};
-
-const insertCities = async (context: KeystoneContext) => {
-  const parsedCities = cities.localidades.map((city: any) => {
-    return {
-      name: city.nombre,
-      provinceId: city.provincia.uuid,
-    };
-  });
-  await prismaInsertData(context, "city", parsedCities);
-};
-
-const insertDiagnosticTypes = async (context: KeystoneContext) => {
-  const asset_types = await context.query.asset_type.findMany({
-    query: "id name",
-  });
-  let parsedDiagnosticTypes = diagnosticTypes.map((diagnosticType: any) => {
-    const assetType = asset_types.find(
-      (a: any) => a.name === diagnosticType.type
-    );
-    if (assetType) {
-      delete diagnosticType.type;
-      return {
-        type: { connect: { id: assetType.id } },
-        ...diagnosticType,
-      };
-    } else {
-      console.log("Warning: missing asset_type for a given diagnostic");
-      return null;
-    }
-  });
-  parsedDiagnosticTypes = parsedDiagnosticTypes.filter((e) => !!e);
-  await insertData(context, "diagnostic_type", parsedDiagnosticTypes);
-};
 
 const insertInspectionTypes = async (context: KeystoneContext) => {
   const asset_types = await context.query.asset_type.findMany({

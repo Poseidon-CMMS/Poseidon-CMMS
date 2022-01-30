@@ -81,6 +81,9 @@ export const irrigator = list({
         inlineConnect: true,
       },
       many: false,
+      db: {
+        foreignKey: true,
+      },
     }),
     gps_node: relationship({
       ref: "gps_node.irrigator",
@@ -91,6 +94,9 @@ export const irrigator = list({
         inlineConnect: true,
       },
       many: false,
+      db: {
+        foreignKey: true,
+      },
     }),
     field: relationship({
       ref: "field.irrigator",
@@ -139,6 +145,9 @@ export const irrigator = list({
         inlineConnect: true,
       },
       many: false,
+      db: {
+        foreignKey: true,
+      },
     }),
     transmission_status: virtual({
       field: graphql.field({

@@ -1,87 +1,234 @@
+import * as provincesJSON from "./geographic/provincias.json";
+import * as citiesJSON from "./geographic/localidades.json";
+
 // --- ASSETS ---
 export const assetTypes = [
-  { name: "Gateway" },
-  { name: "Nodo GPS" },
-  { name: "Sensor de Presión" },
+  {
+    id: "12b1d619-4bee-423d-bafd-51a6f153d16a",
+    name: "Gateway",
+  },
+  {
+    id: "bf2030f3-d1be-4840-ad9f-7d610e9384bf",
+    name: "Nodo GPS",
+  },
+  {
+    id: "ad8e1c40-e608-4b09-afd5-7536226b9e43",
+    name: "Sensor de Presión",
+  },
 ];
 
 export const componentTypes = [
-  { name: "GTW_BAT" },
-  { name: "GTW_LED" },
-  { name: "GTW_MODEM" },
-  { name: "GTW_PCB" },
-  { name: "GTW_PCB_FW" },
-  { name: "GTW_WIFI" },
-  { name: "SGPS_ANTGPS" },
-  { name: "SGPS_BAT" },
-  { name: "SGPS_FW" },
-  { name: "SGPS_LORA" },
-  { name: "SGPS_Panel" },
-  { name: "SGPS_PCB" },
-  { name: "SPRES_CONEC" },
-  { name: "SPRES_SENSOR" },
+  {
+    id: "ab50feff-090e-41de-ae42-bff269cdc736",
+    name: "GTW_BAT",
+  },
+  {
+    id: "a8f76d69-bdff-462a-afa4-abd6d04f6a0f",
+    name: "GTW_LED",
+  },
+  {
+    id: "5de20bf5-1d45-4dfa-9d8a-ecc7efc2ebb1",
+    name: "GTW_MODEM",
+  },
+  {
+    id: "e0a90667-79c6-4f56-a5fd-bd0ceca8f653",
+    name: "GTW_PCB",
+  },
+  {
+    id: "2a9e2fe3-6fe2-4292-9bd1-b819f96a3e3c",
+    name: "GTW_PCB_FW",
+  },
+  {
+    id: "a4bb7b93-c8f4-41a8-9e5d-a99699139c32",
+    name: "GTW_WIFI",
+  },
+  {
+    id: "01641a42-540c-4865-9f71-e26335f24506",
+    name: "SGPS_ANTGPS",
+  },
+  {
+    id: "a233c6a8-50ac-4c25-9469-39dc8318d29a",
+    name: "SGPS_BAT",
+  },
+  {
+    id: "8716b58e-eeaf-4b76-afb0-c8200d01512f",
+    name: "SGPS_FW",
+  },
+  {
+    id: "518c6446-8ca4-4d49-bea0-f9ca4d11c0bd",
+    name: "SGPS_LORA",
+  },
+  {
+    id: "3032ae14-8ae2-47ea-95ff-4caf756a3303",
+    name: "SGPS_Panel",
+  },
+  {
+    id: "08514ccb-8290-4a07-9626-b6834ca00059",
+    name: "SGPS_PCB",
+  },
+  {
+    id: "11b2132b-1e79-4745-9afe-a40d3bec93cb",
+    name: "SPRES_CONEC",
+  },
+  {
+    id: "2d7342f3-7811-47e4-ae90-6d052f02652f",
+    name: "SPRES_SENSOR",
+  },
 ];
 
 export const pressureSensorTypes = [
-  { name: "GPT230 0-6bar" },
-  { name: "FST800-211A 0-6" },
-  { name: "Sensor viejo 0-4" },
-  { name: "GPT230 0-10bar" },
+  {
+    id: "84fc832b-1abc-49ba-8781-d9a657fe4df8",
+    name: "GPT230 0-6bar",
+  },
+  {
+    id: "8f155d09-cbb4-4705-bc67-1bddf9a4af48",
+    name: "FST800-211A 0-6",
+  },
+  {
+    id: "4a590f13-83af-4732-b1bf-6ccc2cabc385",
+    name: "Sensor viejo 0-4",
+  },
+  {
+    id: "a0ecca45-2c7d-4684-be88-0b09e6291df7",
+    name: "GPT230 0-10bar",
+  },
 ];
 
 export const nodeFirmwareVersions = [
-  { version: "2.4(Sodaq)" },
-  { version: "3.2.4" },
-  { version: "3.3.0" },
-  { version: "3.2.3" },
-  { version: "3.5" },
+  {
+    id: "a9ab420d-6465-4092-bfba-7dc48eda6f4b",
+    version: "2.4(Sodaq)",
+  },
+  {
+    id: "2e3e787d-a83c-4718-969f-1481c0d5bc08",
+    version: "3.2.4",
+  },
+  {
+    id: "f78d350a-9435-4e47-8cea-cf0b6f496c96",
+    version: "3.3.0",
+  },
+  {
+    id: "43a1070f-5382-441e-b374-23580c6992a5",
+    version: "3.2.3",
+  },
+  {
+    id: "e4efacd3-5d0f-47f5-b6b0-0180734d3090",
+    version: "3.5",
+  },
 ];
 
 export const nodeHardwareVersions = [
-  { version: "SODAQ" },
-  { version: "NODO PONCE 2.3" },
-  { version: "NODO PONCE 2.2" },
+  {
+    id: "5eae75fe-f4b4-4bd1-b115-01c543652875",
+    version: "SODAQ",
+  },
+  {
+    id: "77b9a31c-4fc5-4667-8ad7-fa8efdd50371",
+    version: "NODO PONCE 2.3",
+  },
+  {
+    id: "da23ee2b-9e86-4036-8dd6-0b654f13605f",
+    version: "NODO PONCE 2.2",
+  },
 ];
 
 export const solarPanelTypes = [
-  { name: "Seeed - 1w 100x80 (viejo)" },
-  { name: "Huaxu Energy - 1.1W 5V 110x80" },
-  { name: "Monarca - 5v 1.25w 110x80" },
-  { name: "Norics - 5v 1 w 110x70" },
+  {
+    id: "088daecd-3941-42f3-8cfd-335d1293f420",
+    name: "Seeed - 1w 100x80 (viejo)",
+  },
+  {
+    id: "146f6886-893b-47c6-b80e-6a6d9c146a88",
+    name: "Huaxu Energy - 1.1W 5V 110x80",
+  },
+  {
+    id: "4d6aaf80-d10d-4969-aa42-637396e2f8d9",
+    name: "Monarca - 5v 1.25w 110x80",
+  },
+  {
+    id: "a52ee985-be78-4ec4-b87b-5adb2583e058",
+    name: "Norics - 5v 1 w 110x70",
+  },
 ];
 
 export const batteryTypes = [
-  { name: "LiPo - GNucleo" },
-  { name: "Li Ion - GeB China" },
+  {
+    id: "c7f855c9-e820-44e7-9da3-e78ecde1302f",
+    name: "LiPo - GNucleo",
+  },
+  {
+    id: "7e31f6d4-6402-4be9-98fc-766b7d055989",
+    name: "Li Ion - GeB China",
+  },
 ];
 
 export const loraAntennaTypes = [
-  { name: "Dipolo (Sodaq)" },
-  { name: "Antena SMA 2.5dB 0°" },
-  { name: "Antena SMA 2.5dB 90°" },
-  { name: "Antena SMA 3dB 90°" },
-  { name: "Hongsense - SMA 2.5dB 0°" },
-  { name: "Hongsense - SMA 2.5dB 90°" },
+  {
+    id: "8e1d9760-4b20-40e1-99a5-8757a00d8793",
+    name: "Dipolo (Sodaq)",
+  },
+  {
+    id: "3b4ad774-3d99-4e57-af06-b39d9abf3538",
+    name: "Antena SMA 2.5dB 0°",
+  },
+  {
+    id: "63db4767-91c6-4916-a884-ee8f2f768e92",
+    name: "Antena SMA 2.5dB 90°",
+  },
+  {
+    id: "dcdbe66a-2a26-4fdf-b96c-eafda3731230",
+    name: "Antena SMA 3dB 90°",
+  },
+  {
+    id: "4263a3ac-4280-492b-8825-9c0bd591857e",
+    name: "Hongsense - SMA 2.5dB 0°",
+  },
+  {
+    id: "31b945b7-0994-41ef-b009-764da0f0819d",
+    name: "Hongsense - SMA 2.5dB 90°",
+  },
 ];
 
 export const gpsAntennaTypes = [
-  { name: "GPS ufl MINI" },
-  { name: "GPS ufl" },
-  { name: "Hongsense - GPS ufl" },
+  {
+    id: "11b45685-199c-48a2-b939-e56d1cee9c79",
+    name: "GPS ufl MINI",
+  },
+  {
+    id: "37045299-a2c7-41c3-a340-3f9ae3608db8",
+    name: "GPS ufl",
+  },
+  {
+    id: "a3b332dc-9497-4f50-82a1-265577ad4f95",
+    name: "Hongsense - GPS ufl",
+  },
 ];
 
 export const nodeHousingTypes = [
-  { name: "Rotomoldeo v1.0" },
-  { name: "Roker" },
+  {
+    id: "5da6c54d-09b7-49cd-95ce-93dfedfa5357",
+    name: "Rotomoldeo v1.0",
+  },
+  {
+    id: "f41a4c28-8c21-4494-9fcb-99b06d903899",
+    name: "Roker",
+  },
 ];
 
-export const gatewayHousingTypes = [{ name: "Rotomoldeo v1.0" }];
+export const gatewayHousingTypes = [
+  {
+    id: "2ca73168-7106-4cc4-9260-040317175dbd",
+    name: "Rotomoldeo v1.0",
+  },
+];
 
 // --- END ASSETS ---
 
 // --- BUSINESS ---
 
 export const SLA = [
+  //unused, yet
   {
     name: "Nivel 1 - 48hs",
     MTTR: 48,
@@ -100,73 +247,7 @@ export const SLA = [
 
 // --- OT ---
 
-export const diagnosticTypes = [
-  { type: "Gateway", name: "Sin datos de GTW", gateway_satellite_power: true },
-  {
-    type: "Gateway",
-    name: "Intermitencia satelital - Ubicación",
-    gateway_satellite_power: true,
-    angles: true,
-  },
-  {
-    type: "Gateway",
-    name: "Intermitencia satelital - Alimentación",
-    packet_202_count: true,
-  },
-  {
-    type: "Nodo GPS",
-    name: "Pérdida de paquetes LORA - Muerte súbita",
-    battery_2to3: true,
-  },
-  { type: "Nodo GPS", name: "Posiciones GPS inválidas", positions: true },
-  {
-    type: "Nodo GPS",
-    name: "Pérdida de paquetes LORA - Intermitente",
-    lost_packets: true,
-    node_to_gateway_distance_in_meters: true,
-  },
-  {
-    type: "Nodo GPS",
-    name: "Pérdida de paquetes LORA - Desde inicio de datos",
-    battery_2to3: true,
-    gateway_first_data_transmission_date: true,
-  },
-  {
-    type: "Nodo GPS",
-    name: "Pérdida de paquetes LORA - Ubicación",
-    angles: true,
-    height_difference_in_meters: true,
-    lost_packets: true,
-    node_to_gateway_distance_in_meters: true,
-  },
-  {
-    type: "Nodo GPS",
-    name: "Pérdida de paquetes LORA - Horario",
-    to_hour: true,
-    from_hour: true,
-    lost_packets: true,
-  },
-  {
-    type: "Sensor de Presión",
-    name: "Presión en 0mA (203)",
-    packet_203_count: true,
-  },
-  {
-    type: "Sensor de Presión",
-    name: "Presiones inválidas (203)",
-    packet_203_count: true,
-  },
-  {
-    type: "Sensor de Presión",
-    name: "Oscilación de presión",
-    pressure_difference: true,
-  },
-  {
-    type: "Sensor de Presión",
-    name: "Presión medida distinta de real",
-    pressure_difference: true,
-  },
-];
+
 
 export const inspectionTypes = [
   { name: "Alimentación Ext -  Mal conectado en tablero", type: "Gateway" },
@@ -761,14 +842,14 @@ export const fields = [
     name: "Estancia Sierra de los Difuntos",
     gate: "38",
     phone: "+5492230000000",
-    zoneId: "16b3e19f-9d25-4476-a737-476833108573"
+    zoneId: "16b3e19f-9d25-4476-a737-476833108573",
   },
   {
     id: "5c7e539e-80f8-4c05-a223-8c6c2da1ad28",
     name: "Estancia Villa Epecuén",
     gate: "82",
     phone: "+5492231111111",
-    zoneId: "cd8dd7c4-e99b-41f5-b9e1-f3485036f193"
+    zoneId: "cd8dd7c4-e99b-41f5-b9e1-f3485036f193",
   },
   {
     id: "1d78c078-9880-4190-8a26-8f7dbd296a47",
@@ -789,11 +870,10 @@ export const irrigators = [
     status: "no-telemetry",
     enabled: false,
     comment: "Es color verde",
-    gateway: null,
-    gps_node: null,
+    gatewayId: null,
+    gps_nodeId: null,
     fieldId: "ddcbc7cd-a0b9-48ae-b1b7-e0e9ea45f1dd",
-    pressure_sensor: null,
-    transmission_status: "error",
+    pressure_sensorId: null,
   },
   {
     id: "5b6e93a2-9408-4a43-a37b-1f4fca0606c2",
@@ -804,11 +884,10 @@ export const irrigators = [
     status: "no-telemetry",
     enabled: false,
     comment: "Toma agua de la cascada",
-    gateway: null,
-    gps_node: null,
+    gatewayId: null,
+    gps_nodeId: null,
     fieldId: "1d78c078-9880-4190-8a26-8f7dbd296a47",
-    pressure_sensor: null,
-    transmission_status: "transmitting",
+    pressure_sensorId: null,
   },
   {
     id: "0d310a15-b1c0-4391-9a88-586da52fac8d",
@@ -819,10 +898,21 @@ export const irrigators = [
     status: "no-telemetry",
     enabled: false,
     comment: "Si",
-    gateway: null,
-    gps_node: null,
+    gatewayId: null,
+    gps_nodeId: null,
     fieldId: "1d78c078-9880-4190-8a26-8f7dbd296a47",
-    pressure_sensor: null,
-    transmission_status: "transmitting",
+    pressure_sensorId: null,
   },
 ];
+
+export const provinces = provincesJSON.provincias.map((province: any) => ({
+  id: province.uuid,
+  name: province.nombre,
+}));
+
+export const cities = citiesJSON.localidades.map((city: any) => {
+  return {
+    name: city.nombre,
+    provinceId: city.provincia.uuid,
+  };
+});

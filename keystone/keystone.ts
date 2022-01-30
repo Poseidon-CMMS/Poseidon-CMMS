@@ -25,7 +25,7 @@ export default withAuth(
       onConnect: async context => { 
         const assetTypes = await context.query.asset_type.findMany({query: 'id name'});
         if(assetTypes.length === 0) //ya seedeamos?
-          await insertSeedData(context); // TODO: esto quizas podria ser opcional
+          await insertSeedData(context, true); // TODO: esto quizas podria ser opcional
        },
       // Optional advanced configuration
       enableLogging: undefined,

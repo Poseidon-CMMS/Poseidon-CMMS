@@ -84,11 +84,6 @@ const basicModelsToSeed = [
     data: nodeHousingTypes,
   },
   {
-    tableName: "zone",
-    label: "CREA zones",
-    data: creaZones,
-  },
-  {
     tableName: "solution_type",
     label: "solution types",
     data: solutionTypes,
@@ -124,16 +119,20 @@ export async function insertSeedData(context: KeystoneContext, include_example_e
     console.log(SYSTEM_DIVIDER);
     console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding ${model.label}🌱`);
     //@ts-ignore
-    await insertData(context, model.tableName, model.data);
+    await prismaInsertData(context, model.tableName, model.data);
   }
 
-  // console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding provinces🌱`);
-  // console.log(SYSTEM_DIVIDER);
-  // await insertProvinces(context);
+  console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding CREA zones🌱`);
+  console.log(SYSTEM_DIVIDER);
+  await insertCreaZones(context);
 
-  // console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding cities🌱`);
-  // console.log(SYSTEM_DIVIDER);
-  // await insertCities(context);
+  console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding provinces🌱`);
+  console.log(SYSTEM_DIVIDER);
+  await insertProvinces(context);
+
+  console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding cities🌱`);
+  console.log(SYSTEM_DIVIDER);
+  await insertCities(context);
 
   console.log(`\n${SYSTEM_SIGNATURE}🌱Seeding diagnostic types🌱`);
   console.log(SYSTEM_DIVIDER);
@@ -156,27 +155,26 @@ export async function insertSeedData(context: KeystoneContext, include_example_e
   console.log(SYSTEM_DIVIDER);
 }
 
+const insertCreaZones = async (context: KeystoneContext) => {
+  await prismaInsertData(context, "zone", creaZones);
+};
+
 const insertProvinces = async (context: KeystoneContext) => {
   const parsedProvinces = provinces.provincias.map((province: any) => ({
+    id: province.uuid,
     name: province.nombre,
   }));
-  await insertData(context, "province", parsedProvinces);
+  await prismaInsertData(context, "province", parsedProvinces);
 };
 
 const insertCities = async (context: KeystoneContext) => {
-  const dbProvinces = await context.query.province.findMany({
-    query: "id name",
-  });
   const parsedCities = cities.localidades.map((city: any) => {
-    const cityProvince = dbProvinces.find(
-      (p) => p.name === city.provincia.nombre
-    );
     return {
       name: city.nombre,
-      province: { connect: { id: cityProvince?.id } },
+      provinceId: city.provincia.uuid,
     };
   });
-  await insertData(context, "city", parsedCities);
+  await prismaInsertData(context, "city", parsedCities);
 };
 
 const insertDiagnosticTypes = async (context: KeystoneContext) => {
@@ -285,6 +283,25 @@ const insertData = async (
 
   if (dataCreated) {
     console.log(`${SYSTEM_SIGNATURE}: ✅ ${schema} data inserted `);
+    console.log(SYSTEM_DIVIDER);
+  } else {
+    console.log(`${SYSTEM_SIGNATURE}: ❌ Couldn't insert ${schema} data`);
+    console.log(SYSTEM_DIVIDER);
+  }
+};
+
+const prismaInsertData = async (
+  context: KeystoneContext,
+  schema: string,
+  data: any
+) => {
+  // TODO: Revisar caminos no felices
+  let dataCreated = await context.prisma[schema].createMany({
+    data: data,
+  });
+
+  if (dataCreated) {
+    console.log(`${SYSTEM_SIGNATURE}: ✅ ${schema} data inserted  w/prisma`);
     console.log(SYSTEM_DIVIDER);
   } else {
     console.log(`${SYSTEM_SIGNATURE}: ❌ Couldn't insert ${schema} data`);

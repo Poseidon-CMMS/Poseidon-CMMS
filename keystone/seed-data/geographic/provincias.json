@@ -6,6 +6,7 @@
             "iso_id": "AR-N",
             "nombre": "Misiones",
             "id": "54",
+            "uuid": "f9109fda-e7fb-4510-b47b-353b86b5b307",
             "categoria": "Provincia",
             "iso_nombre": "Misiones",
             "centroide": {
@@ -19,6 +20,7 @@
             "iso_id": "AR-D",
             "nombre": "San Luis",
             "id": "74",
+            "uuid": "f2007c60-ec4c-4289-875e-062211a80a80",
             "categoria": "Provincia",
             "iso_nombre": "San Luis",
             "centroide": {
@@ -32,6 +34,7 @@
             "iso_id": "AR-J",
             "nombre": "San Juan",
             "id": "70",
+            "uuid": "e36ee7ba-33b7-491b-96b8-dbf1b7a3f13e",
             "categoria": "Provincia",
             "iso_nombre": "San Juan",
             "centroide": {
@@ -45,6 +48,7 @@
             "iso_id": "AR-E",
             "nombre": "Entre Ríos",
             "id": "30",
+            "uuid": "02ee1d8b-0b6f-49e9-9494-009139fa3074",
             "categoria": "Provincia",
             "iso_nombre": "Entre Ríos",
             "centroide": {
@@ -58,6 +62,7 @@
             "iso_id": "AR-Z",
             "nombre": "Santa Cruz",
             "id": "78",
+            "uuid": "229a7961-73fa-4f21-aeea-d531072840d0",
             "categoria": "Provincia",
             "iso_nombre": "Santa Cruz",
             "centroide": {
@@ -71,6 +76,7 @@
             "iso_id": "AR-R",
             "nombre": "Río Negro",
             "id": "62",
+            "uuid": "256e00f7-8e72-4722-8cef-49fba7c14cde",
             "categoria": "Provincia",
             "iso_nombre": "Río Negro",
             "centroide": {
@@ -84,6 +90,7 @@
             "iso_id": "AR-U",
             "nombre": "Chubut",
             "id": "26",
+            "uuid": "b10b2634-faf3-48cd-8760-dfdd6b448d49",
             "categoria": "Provincia",
             "iso_nombre": "Chubut",
             "centroide": {
@@ -97,6 +104,7 @@
             "iso_id": "AR-X",
             "nombre": "Córdoba",
             "id": "14",
+            "uuid": "aa157d5b-3f0c-432a-af74-b479e9a3b96c",
             "categoria": "Provincia",
             "iso_nombre": "Córdoba",
             "centroide": {
@@ -110,6 +118,7 @@
             "iso_id": "AR-M",
             "nombre": "Mendoza",
             "id": "50",
+            "uuid": "019520eb-a136-43c4-898b-f8b0f85b0a1f",
             "categoria": "Provincia",
             "iso_nombre": "Mendoza",
             "centroide": {
@@ -123,6 +132,7 @@
             "iso_id": "AR-F",
             "nombre": "La Rioja",
             "id": "46",
+            "uuid": "b813f51a-d787-476d-8227-202c88791662",
             "categoria": "Provincia",
             "iso_nombre": "La Rioja",
             "centroide": {
@@ -136,6 +146,7 @@
             "iso_id": "AR-K",
             "nombre": "Catamarca",
             "id": "10",
+            "uuid": "49cca54d-690d-47a0-bb2e-f9290ab8d1cd",
             "categoria": "Provincia",
             "iso_nombre": "Catamarca",
             "centroide": {
@@ -149,6 +160,7 @@
             "iso_id": "AR-L",
             "nombre": "La Pampa",
             "id": "42",
+            "uuid": "a2a72c74-680d-408a-8142-2ef4bf645994",
             "categoria": "Provincia",
             "iso_nombre": "La Pampa",
             "centroide": {
@@ -162,6 +174,7 @@
             "iso_id": "AR-G",
             "nombre": "Santiago del Estero",
             "id": "86",
+            "uuid": "a2f79135-6bfe-455d-9238-db6a30e685e8",
             "categoria": "Provincia",
             "iso_nombre": "Santiago del Estero",
             "centroide": {
@@ -175,6 +188,7 @@
             "iso_id": "AR-W",
             "nombre": "Corrientes",
             "id": "18",
+            "uuid": "fb3eb19a-b555-4e34-bfb5-d7c98a752f85",
             "categoria": "Provincia",
             "iso_nombre": "Corrientes",
             "centroide": {
@@ -188,6 +202,7 @@
             "iso_id": "AR-S",
             "nombre": "Santa Fe",
             "id": "82",
+            "uuid": "410a226d-dd76-4746-9bf4-b07c30114b66",
             "categoria": "Provincia",
             "iso_nombre": "Santa Fe",
             "centroide": {
@@ -201,6 +216,7 @@
             "iso_id": "AR-T",
             "nombre": "Tucumán",
             "id": "90",
+            "uuid": "2c8dc0e1-15e8-4a28-b8db-34b6cd0b95a4",
             "categoria": "Provincia",
             "iso_nombre": "Tucumán",
             "centroide": {
@@ -214,6 +230,7 @@
             "iso_id": "AR-Q",
             "nombre": "Neuquén",
             "id": "58",
+            "uuid": "954757d0-e37c-40ad-b526-f7af7a44759b",
             "categoria": "Provincia",
             "iso_nombre": "Neuquén",
             "centroide": {
@@ -227,6 +244,7 @@
             "iso_id": "AR-A",
             "nombre": "Salta",
             "id": "66",
+            "uuid": "7fbc137b-6ae0-467f-a832-0ec1dd697d4e",
             "categoria": "Provincia",
             "iso_nombre": "Salta",
             "centroide": {
@@ -240,6 +258,7 @@
             "iso_id": "AR-H",
             "nombre": "Chaco",
             "id": "22",
+            "uuid": "30b21eb3-f9a4-487e-88aa-209386bb43dc",
             "categoria": "Provincia",
             "iso_nombre": "Chaco",
             "centroide": {
@@ -253,6 +272,7 @@
             "iso_id": "AR-P",
             "nombre": "Formosa",
             "id": "34",
+            "uuid": "40e5a3eb-bdaf-41ff-a6a8-4e6c2245dc9b",
             "categoria": "Provincia",
             "iso_nombre": "Formosa",
             "centroide": {
@@ -266,6 +286,7 @@
             "iso_id": "AR-Y",
             "nombre": "Jujuy",
             "id": "38",
+            "uuid": "347d2f9d-906f-48ec-9e08-f6cdbcd17118",
             "categoria": "Provincia",
             "iso_nombre": "Jujuy",
             "centroide": {
@@ -279,6 +300,7 @@
             "iso_id": "AR-C",
             "nombre": "Ciudad Autónoma de Buenos Aires",
             "id": "02",
+            "uuid": "ffa9ca45-1864-41d8-8347-14ee9e44d7b3",
             "categoria": "Ciudad Autónoma",
             "iso_nombre": "Ciudad Autónoma de Buenos Aires",
             "centroide": {
@@ -292,6 +314,7 @@
             "iso_id": "AR-B",
             "nombre": "Buenos Aires",
             "id": "06",
+            "uuid": "7e777339-92f8-4bd6-8843-0b11d9738f9e",
             "categoria": "Provincia",
             "iso_nombre": "Buenos Aires",
             "centroide": {
@@ -305,6 +328,7 @@
             "iso_id": "AR-V",
             "nombre": "Tierra del Fuego, Antártida e Islas del Atlántico Sur",
             "id": "94",
+            "uuid": "5a3cc5a7-46b5-4d6f-bf2b-593679ff9133",
             "categoria": "Provincia",
             "iso_nombre": "Tierra del Fuego",
             "centroide": {

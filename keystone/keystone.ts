@@ -23,8 +23,8 @@ export default withAuth(
       provider: 'postgresql',
       url: process.env.DATABASE_URL || ' ',
       onConnect: async context => { 
-        const assetTypes = await context.query.asset_type.findMany({query: 'id name'});
-        if(assetTypes.length === 0) //ya seedeamos?
+        const users = await context.query.user.findMany({query: 'id'});
+        if(users.length === 0) //es la primera vez que abre keystone?
           await insertSeedData(context, true); // TODO: esto quizas podria ser opcional
        },
       // Optional advanced configuration

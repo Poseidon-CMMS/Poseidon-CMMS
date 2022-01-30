@@ -11,7 +11,7 @@ import { zone } from './schemas/zone';
 import { client } from './schemas/client';
 import { gatewayHousingType } from './schemas/assets/gateway/gatewayHousingType';
 import { satelliteModem } from './schemas/assets/gateway/satelliteModem';
-import { satelliteModemType } from './schemas/assets/gateway/sateliteModemType';
+import { satelliteModemType } from './schemas/assets/gateway/satelliteModemType';
 import { satelliteAntenna } from './schemas/assets/gateway/satelliteAntenna';
 import { batteryType } from './schemas/assets/gpsNode/batteryType';
 import { gpsAntennaType } from './schemas/assets/gpsNode/gpsAntennaType';

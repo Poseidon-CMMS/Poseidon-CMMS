@@ -80,9 +80,6 @@ export const gateway = list({
     pcb_gateway: relationship({
       ref: "pcb_gateway.gateway",
       ui: {
-        createView: {
-          fieldMode: "hidden",
-        },
       },
       many: false,
     }),

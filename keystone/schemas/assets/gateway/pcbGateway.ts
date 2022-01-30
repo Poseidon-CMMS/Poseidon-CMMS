@@ -1,6 +1,6 @@
 import { list } from "@keystone-6/core";
 
-import { timestamp, relationship, text, select } from "@keystone-6/core/fields";
+import { timestamp, relationship, text, select, image } from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../../hooks/relationshipRequiredCheckerHook";
 import { isAdmin } from "../../../utils/accessControl";
 
@@ -30,11 +30,7 @@ export const pcbGateway = list({
         isRequired: true,
       },
     }),
-    picture: text({
-      validation: {
-        isRequired: false,
-      },
-    }),
+    picture: image(),
     status: select({
       validation: {
         isRequired: true,

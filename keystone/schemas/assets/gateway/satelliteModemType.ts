@@ -27,7 +27,7 @@ export const satelliteModemType = list({
         type: graphql.String,
         resolve(item, args, context) {
           //@ts-ignore
-          return `${item.referenceNumber} ${item.version}`;
+          return `${item.reference_number} ${item.version}`;
         },
       }),
     }),

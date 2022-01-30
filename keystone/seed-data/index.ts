@@ -23,6 +23,14 @@ import {
 import { diagnosticTypes } from "./data/diagnosticTypes";
 import { inspectionTypes } from "./data/inspectionTypes";
 import { autopsyTypes } from "./data/autopsyTypes";
+import { satelliteModemTypes } from "./data/satelliteModemTypes";
+import { satelliteModems } from "./data/mocks/satelliteModems";
+import { satelliteAntennas } from "./data/mocks/satelliteAntennas";
+import { storageLocations } from "./data/mocks/storageLocations";
+import { gateways } from "./data/mocks/gateways";
+import { pcbGateways } from "./data/mocks/pcbGateways";
+import { gatewayFirmwareVersions } from "./data/mocks/gatewayFirmwareVersions";
+import { gatewayHardwareVersions } from "./data/mocks/gatewayHardwareVersions";
 
 const SYSTEM_SIGNATURE = " 🌊 PoseidonCMMS: ";
 const SYSTEM_DIVIDER = "----------------------------------------------------";
@@ -128,6 +136,11 @@ const basicModelsToSeed = [
     label: "autopsy types",
     data: autopsyTypes
   },
+  {
+    tableName: "satellite_modem_type",
+    label: "satellite modem types",
+    data: satelliteModemTypes
+  },
 
 ];
 
@@ -142,6 +155,42 @@ const mockModelsToSeed = [
     label: "irrigators",
     data: irrigators,
   },
+  {
+    tableName: "satellite_modem",
+    label: "satellite modems",
+    data: satelliteModems,
+  },
+  {
+    tableName: "satellite_antenna",
+    label: "satellite antennas",
+    data: satelliteAntennas,
+  },
+  {
+    tableName: "storage_location",
+    label: "storage locations",
+    data: storageLocations,
+  },
+  {
+    tableName: "gateway_firmware_version",
+    label: "gateway firmware versions",
+    data: gatewayFirmwareVersions,
+  },
+  {
+    tableName: "gateway_hardware_version",
+    label: "gateway hardware versions",
+    data: gatewayHardwareVersions,
+  },
+  {
+    tableName: "pcb_gateway",
+    label: "Pcb gateways",
+    data: pcbGateways,
+  },
+  {
+    tableName: "gateway",
+    label: "gateways",
+    data: gateways,
+  },
+
 ];
 
 export async function insertSeedData(context: KeystoneContext, include_example_entities: boolean) {

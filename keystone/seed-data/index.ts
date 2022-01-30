@@ -15,7 +15,6 @@ import {
   solutionTypes,
   repairTypes,
   autopsyRoots,
-  irrigators,
   provinces,
   cities,
   fields,
@@ -31,6 +30,10 @@ import { gateways } from "./data/mocks/gateways";
 import { pcbGateways } from "./data/mocks/pcbGateways";
 import { gatewayFirmwareVersions } from "./data/mocks/gatewayFirmwareVersions";
 import { gatewayHardwareVersions } from "./data/mocks/gatewayHardwareVersions";
+import { irrigators } from "./data/mocks/irrigators";
+import { gpsNodes } from "./data/mocks/gpsNodes";
+import { pcbNodes } from "./data/mocks/pcbNodes";
+import { pressureSensors } from "./data/mocks/pressureSensors";
 
 const SYSTEM_SIGNATURE = " 🌊 PoseidonCMMS: ";
 const SYSTEM_DIVIDER = "----------------------------------------------------";
@@ -151,11 +154,6 @@ const mockModelsToSeed = [
     data: fields
   },
   {
-    tableName: "irrigator",
-    label: "irrigators",
-    data: irrigators,
-  },
-  {
     tableName: "satellite_modem",
     label: "satellite modems",
     data: satelliteModems,
@@ -189,6 +187,26 @@ const mockModelsToSeed = [
     tableName: "gateway",
     label: "gateways",
     data: gateways,
+  },
+  {
+    tableName: "pcb_node",
+    label: "pcb nodes",
+    data: pcbNodes,
+  },
+  {
+    tableName: "gps_node",
+    label: "gps nodes",
+    data: gpsNodes,
+  },
+  {
+    tableName: "pressure_sensor",
+    label: "pressure sensors",
+    data: pressureSensors,
+  },
+  {
+    tableName: "irrigator",
+    label: "irrigators",
+    data: irrigators,
   },
 
 ];

@@ -1,6 +1,6 @@
 import { list } from "@keystone-6/core";
 
-import { timestamp, relationship, text } from "@keystone-6/core/fields";
+import { timestamp, relationship, text, image } from "@keystone-6/core/fields";
 
 import { relationshipRequiredCheckerHook } from "../../../hooks/relationshipRequiredCheckerHook";
 import { isAdmin, isLoggedIn } from "../../../utils/accessControl";
@@ -29,8 +29,8 @@ export const gpsNode = list({
       },
       isIndexed: "unique",
     }),
-    internal_photo: text(),
-    external_photo: text(),
+    internal_photo: image(),
+    external_photo: image(),
     irrigator: relationship({
       ref: "irrigator.gps_node",
       ui: {

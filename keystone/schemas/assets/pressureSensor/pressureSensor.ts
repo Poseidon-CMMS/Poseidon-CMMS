@@ -1,6 +1,6 @@
 import { list } from "@keystone-6/core";
 
-import { relationship, text, select, integer } from "@keystone-6/core/fields";
+import { relationship, text, select, integer, image } from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../../hooks/relationshipRequiredCheckerHook";
 import { isAdmin, isLoggedIn } from "../../../utils/accessControl";
 
@@ -42,7 +42,7 @@ export const pressureSensor = list({
     }),
     comments: text(),
     order: integer(),
-    image: text(),
+    image: image(),
     irrigator: relationship({
       ref: "irrigator.pressure_sensor",
       ui: {

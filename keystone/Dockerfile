@@ -13,7 +13,7 @@ RUN npm install
 ADD . /home/node
 RUN npm run postinstallfix
 
-# RUN npm run-script build
+#RUN npm run-script build
 
 
 # Runtime container

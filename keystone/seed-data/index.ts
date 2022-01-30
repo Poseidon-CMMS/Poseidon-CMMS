@@ -18,6 +18,7 @@ import {
   repairTypes,
   autopsyTypes,
   autopsyRoots,
+  irrigators,
 } from "./data";
 
 import * as provinces from "./geographic/provincias.json";
@@ -26,7 +27,7 @@ import * as cities from "./geographic/localidades.json";
 const SYSTEM_SIGNATURE = " 🌊 PoseidonCMMS: ";
 const SYSTEM_DIVIDER = "----------------------------------------------------";
 
-const modelsToSeed = [
+const basicModelsToSeed = [
   {
     tableName: "asset_type",
     label: "asset types",
@@ -104,10 +105,20 @@ const modelsToSeed = [
   },
 ];
 
-export async function insertSeedData(context: KeystoneContext) {
+const mockModelsToSeed = [
+  {
+    tableName: "irrigator",
+    label: "irrigators",
+    data: irrigators,
+  },
+];
+
+export async function insertSeedData(context: KeystoneContext, include_example_entities: boolean) {
   console.log(SYSTEM_DIVIDER);
   console.log(`${SYSTEM_SIGNATURE}:🌱Inserting seed data🌱`);
   console.log(SYSTEM_DIVIDER);
+
+  const modelsToSeed = include_example_entities? [...basicModelsToSeed, mockModelsToSeed] : basicModelsToSeed;
 
   for (const model of modelsToSeed) {
     console.log(SYSTEM_DIVIDER);

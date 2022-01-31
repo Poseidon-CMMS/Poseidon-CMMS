@@ -10,7 +10,7 @@ import {
 } from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../hooks/relationshipRequiredCheckerHook";
 import { graphql } from "@keystone-6/core";
-import { isAdmin, isLoggedIn } from "../../utils/accessControl";
+import { isAdmin, hasAPIKey, isLoggedIn } from "../../utils/accessControl";
 
 export const hardwareIssue = list({
   ui: {
@@ -40,9 +40,15 @@ export const hardwareIssue = list({
 
       const isCreationOperation = !item;
       if (isCreationOperation) {
+        const whereClause = resolvedData?.irrigator?.connect?.id //normal creation
+          ? { id: resolvedData.irrigator.connect.id }
+          : resolvedData?.irrigator?.connect?.integration_id //automatic webhook-based creation
+          ? { integration_id: resolvedData.irrigator.connect.integration_id }
+          : { error: "error" };
+
         const { gateway, gps_node, pressure_sensor } =
           await context.query.irrigator.findOne({
-            where: { id: resolvedData.irrigator.connect.id },
+            where: whereClause,
             query: "gateway {id} gps_node {id} pressure_sensor {id}",
           });
 
@@ -69,6 +75,20 @@ export const hardwareIssue = list({
       },
     }),
     close_date: timestamp(),
+    automatic_diagnostic: select({
+      type: "integer",
+      options: [
+        { label: "Funcionamiento normal", value: 0 },
+        { label: "Revisar NODO GPS", value: 1 },
+        { label: "Revisar SPRES", value: 2 },
+        { label: "Revisar todo", value: 3 },
+      ],
+      ui: {
+        createView: {
+          fieldMode: "hidden",
+        },
+      },
+    }),
     comments: virtual({
       field: graphql.field({
         type: graphql.String,
@@ -294,7 +314,7 @@ export const hardwareIssue = list({
   access: {
     operation: {
       query: isLoggedIn,
-      create: isAdmin,
+      create: (params) => isAdmin(params) || hasAPIKey(params),
       update: isAdmin,
       delete: isAdmin,
     },

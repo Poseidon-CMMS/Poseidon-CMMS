@@ -27,6 +27,7 @@ export const pressureSensor = list({
       validation: {
         isRequired: true,
       },
+      isIndexed: "unique",
     }),
     status: select({
       validation: {

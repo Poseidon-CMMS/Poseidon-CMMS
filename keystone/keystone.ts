@@ -14,6 +14,8 @@ import { lists } from './schema';
 // Keystone auth is configured separately - check out the basic auth setup we are importing from our auth file.
 import { withAuth, session } from './auth';
 import { insertSeedData } from './seed-data';
+const bodyParser = require('body-parser');
+import { cbCreateHardwareIssue } from './rest/cbCreateHardwareIssue';
 
 export default withAuth(
   // Using the config function helps typescript guide you to the available options.
@@ -44,7 +46,15 @@ export default withAuth(
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
         origin: process.env.CORS_FRONTEND_URL,
         credentials: true,
-      }
+      },
+      extendExpressApp: (app, createContext) => {
+        app.use('/rest', bodyParser.json());
+        app.use('/rest', async (req, res, next) => {
+          (req as any).context = await createContext(req, res);
+          next();
+        });
+        app.post('/rest/hardwareIssue', cbCreateHardwareIssue); //TODO autenticacion
+      },
     },
     files: {
       upload: 'local',

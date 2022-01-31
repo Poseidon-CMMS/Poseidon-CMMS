@@ -10,7 +10,7 @@ import {
   virtual,
 } from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../hooks/relationshipRequiredCheckerHook";
-import { isAdmin, isLoggedIn } from "../utils/accessControl";
+import { hasAPIKey, isAdmin, isLoggedIn } from "../utils/accessControl";
 
 export const irrigator = list({
   ui: {
@@ -35,6 +35,7 @@ export const irrigator = list({
       validation: {
         isRequired: true,
       },
+      isIndexed: "unique",
     }),
     name: text({
       validation: {
@@ -166,7 +167,7 @@ export const irrigator = list({
   },
   access: {
     operation: {
-      query: isLoggedIn,
+      query: params => isLoggedIn(params) || hasAPIKey(params),
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,

@@ -50,9 +50,6 @@ export const installUninstallRequest = list({
       //stock & locations update hook
       if (!(operation === "update" && item?.status === "completed")) return;
       const {irrigatorId, gatewayId, gps_nodeId, pressure_sensorId, assigned_technicianId} = item;
-      console.log(item);
-      console.log('oitem34583498534u98534j95843u85934u59843785983475u348957834578439853498534')
-      console.log(originalItem);
 
       if (item?.request_type === "install") {
         //irrigator update
@@ -102,11 +99,7 @@ export const installUninstallRequest = list({
           where: { id: assigned_technicianId },
           query: "id storage_location {id}",
         });
-        console.log('uninstaller technician:');
-        console.log(uninstallerTechnician)
         const uninstallerTechnicianStorageLocationId = uninstallerTechnician.storage_location.id;
-        console.log('utsli');
-        console.log(uninstallerTechnicianStorageLocationId);
 
         //fetch the irrigator's current assets to move them to the tech's stock
         const irrigatorResult = await context.query.irrigator.findOne({

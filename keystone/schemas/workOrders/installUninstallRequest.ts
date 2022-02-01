@@ -107,6 +107,14 @@ export const installUninstallRequest = list({
         const uninstallerTechnicianStorageLocationId = uninstallerTechnician.storage_location.id;
         console.log('utsli');
         console.log(uninstallerTechnicianStorageLocationId);
+
+        //fetch the irrigator's current assets to move them to the tech's stock
+        const irrigatorResult = await context.query.irrigator.findOne({
+          // @ts-expect-error
+          where: { id: irrigatorId },
+          query: "id gateway {id} pressure_sensor {id} gps_node {id}",
+        });
+
         //irrigator update: update status to no telemetry and disconnect all assets
         await context.query.irrigator.updateOne({
           // @ts-expect-error
@@ -122,24 +130,21 @@ export const installUninstallRequest = list({
 
   //storage location update: move assets to the tech's stock
        await context.query.gateway.updateOne({
-         //@ts-expect-error
-         where: {id: gatewayId},
+         where: {id: irrigatorResult?.gateway?.id},
          data: {
            storage_location: {connect: {id: uninstallerTechnicianStorageLocationId}} 
          },
          query: "id storage_location {id}"
        });
        await context.query.gps_node.updateOne({
-        //@ts-expect-error
-        where: {id: gps_nodeId},
+        where: {id: irrigatorResult?.gps_node?.id},
         data: {
           storage_location: {connect: {id: uninstallerTechnicianStorageLocationId}} 
         },
         query: "id storage_location {id}"
       });
       await context.query.pressure_sensor.updateOne({
-        //@ts-expect-error
-        where: {id: pressure_sensorId},
+        where: {id: irrigatorResult?.pressure_sensor?.id},
         data: {
           storage_location: {connect: {id: uninstallerTechnicianStorageLocationId}} 
         },

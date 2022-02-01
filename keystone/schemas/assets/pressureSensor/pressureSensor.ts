@@ -1,6 +1,7 @@
 import { list } from "@keystone-6/core";
 
 import { relationship, text, select, integer, image } from "@keystone-6/core/fields";
+import { autogenerateStockMovementHook } from "../../../hooks/autogenerateStockMovementHook";
 import { relationshipRequiredCheckerHook } from "../../../hooks/relationshipRequiredCheckerHook";
 import { isAdmin, isLoggedIn } from "../../../utils/accessControl";
 
@@ -20,7 +21,8 @@ export const pressureSensor = list({
     labelField: "integration_id",
   },
   hooks: {
-    validateInput: relationshipRequiredCheckerHook("pressure_sensor_type"), //TODO: versi esto se puede arreglar
+    validateInput: relationshipRequiredCheckerHook("pressure_sensor_type"), //TODO: versi esto se puede arreglar,
+    afterOperation: autogenerateStockMovementHook('pressure_sensor'),
   },
   fields: {
     integration_id: text({

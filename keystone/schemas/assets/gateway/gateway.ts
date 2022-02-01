@@ -1,6 +1,7 @@
 import { list } from "@keystone-6/core";
 
 import { timestamp, relationship, text } from "@keystone-6/core/fields";
+import { autogenerateStockMovementHook } from "../../../hooks/autogenerateStockMovementHook";
 import { isAdmin, isLoggedIn } from "../../../utils/accessControl";
 
 export const gateway = list({
@@ -150,20 +151,6 @@ export const gateway = list({
     },
   },
   hooks: {
-    afterOperation: async ({ resolvedData, originalItem, item, context, operation }) => {
-      if (operation !== "update") return;
-      
-      if(originalItem?.storage_locationId !== item?.storage_locationId){
-        const result = await context.query.stock_movement.createOne({
-          data: {
-            date: new Date().toISOString(),
-            location_from: {connect: {id: originalItem?.storage_locationId}},
-            location_to: item?.storage_locationId? {connect: {id: item?.storage_locationId}}: undefined,
-            gateway: {connect: {id: item?.id}}
-          },
-          query: 'id date location_from {id} location_to {id} gateway {id}',
-        });
-      }
-    }
+    afterOperation: autogenerateStockMovementHook('gateway'),
   }
 });

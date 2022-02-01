@@ -1,11 +1,15 @@
 import { list } from "@keystone-6/core";
 
 import { timestamp, relationship, text, image } from "@keystone-6/core/fields";
+import { autogenerateStockMovementHook } from "../../../hooks/autogenerateStockMovementHook";
 
 import { relationshipRequiredCheckerHook } from "../../../hooks/relationshipRequiredCheckerHook";
 import { isAdmin, isLoggedIn } from "../../../utils/accessControl";
 
 export const gpsNode = list({
+  hooks: {
+    afterOperation: autogenerateStockMovementHook('gps_node'),
+  },
   ui: {
     listView: {
       initialColumns: [

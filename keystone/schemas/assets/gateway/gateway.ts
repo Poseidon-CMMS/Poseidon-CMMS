@@ -163,9 +163,6 @@ export const gateway = list({
           },
           query: 'id date location_from {id} location_to {id} gateway {id}',
         });
-
-        console.log('================================================================se creo este stock movement para gateeways')
-        console.log(result);
       }
     }
   }

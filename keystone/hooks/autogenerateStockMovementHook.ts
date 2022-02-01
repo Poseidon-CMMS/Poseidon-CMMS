@@ -6,7 +6,9 @@ export const autogenerateStockMovementHook =
     if (originalItem?.storage_locationId !== item?.storage_locationId) {
       const newStockMovement: any = {
         date: new Date().toISOString(),
-        location_from: { connect: { id: originalItem?.storage_locationId } },
+        location_from: originalItem?.storage_locationId
+          ? { connect: { id: originalItem?.storage_locationId } }
+          : undefined,
         location_to: item?.storage_locationId
           ? { connect: { id: item?.storage_locationId } }
           : undefined,
@@ -17,7 +19,9 @@ export const autogenerateStockMovementHook =
         data: newStockMovement,
         query: `id date location_from {id} location_to {id} ${assetName} {id}`,
       });
-      console.log('==========================================================creado');
+      console.log(
+        "==========================================================creado"
+      );
       console.log(result);
     }
   };

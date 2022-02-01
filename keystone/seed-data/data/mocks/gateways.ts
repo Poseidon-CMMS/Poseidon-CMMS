@@ -8,7 +8,7 @@ export const gateways = [
     satellite_antennaId: "29980915-82df-4c2a-80b8-6004b8cd788d" ,
     pcb_gatewayId: "01a77147-60df-4f31-bd42-99dad576d99a" ,
     lora_antenna_typeId: "31b945b7-0994-41ef-b009-764da0f0819d" ,
-    storage_locationId: "6a8d2188-f667-4984-9f54-4bd5fa690132" ,
+    storage_locationId: null,
   },
   {
     id: "2f3dc087-db41-40bb-ae9b-b230c439cafa",

@@ -46,10 +46,13 @@ export const installUninstallRequest = list({
       }
       return resolvedData;
     },
-    afterOperation: async ({ resolvedData, item, context, operation }) => {
+    afterOperation: async ({ resolvedData, item, originalItem, context, operation }) => {
       //stock & locations update hook
       if (!(operation === "update" && item?.status === "completed")) return;
-      const {irrigatorId, gatewayId, gps_nodeId, pressure_sensorId} = item;
+      const {irrigatorId, gatewayId, gps_nodeId, pressure_sensorId, assigned_technicianId} = item;
+      console.log(item);
+      console.log('oitem34583498534u98534j95843u85934u59843785983475u348957834578439853498534')
+      console.log(originalItem);
 
       if (item?.request_type === "install") {
         //irrigator update
@@ -94,9 +97,56 @@ export const installUninstallRequest = list({
       //stock movements are created automatically in a hook on each asset
 
       } else if (item?.request_type === "uninstall") {
-        //TODO aca
-         //TODO aca
-          //TODO aca
+        const uninstallerTechnician =  await context.query.user.findOne({
+          //@ts-expect-error
+          where: { id: assigned_technicianId },
+          query: "id storage_location {id}",
+        });
+        console.log('uninstaller technician:');
+        console.log(uninstallerTechnician)
+        const uninstallerTechnicianStorageLocationId = uninstallerTechnician.storage_location.id;
+        console.log('utsli');
+        console.log(uninstallerTechnicianStorageLocationId);
+        //irrigator update: update status to no telemetry and disconnect all assets
+        await context.query.irrigator.updateOne({
+          // @ts-expect-error
+          where: { id: irrigatorId },
+          data: {
+            status: "no-telemetry",
+            gateway: { disconnect: true },
+            pressure_sensor: { disconnect: true },
+            gps_node: { disconnect: true },
+          },
+          query: "id status gateway {id} pressure_sensor {id} gps_node {id}",
+        });
+
+  //storage location update: move assets to the tech's stock
+       await context.query.gateway.updateOne({
+         //@ts-expect-error
+         where: {id: gatewayId},
+         data: {
+           storage_location: {connect: {id: uninstallerTechnicianStorageLocationId}} 
+         },
+         query: "id storage_location {id}"
+       });
+       await context.query.gps_node.updateOne({
+        //@ts-expect-error
+        where: {id: gps_nodeId},
+        data: {
+          storage_location: {connect: {id: uninstallerTechnicianStorageLocationId}} 
+        },
+        query: "id storage_location {id}"
+      });
+      await context.query.pressure_sensor.updateOne({
+        //@ts-expect-error
+        where: {id: pressure_sensorId},
+        data: {
+          storage_location: {connect: {id: uninstallerTechnicianStorageLocationId}} 
+        },
+        query: "id storage_location {id}"
+      });
+
+      //stock movements are created automatically in a hook on each asset
       } else throw new Error("undefined request type");
     },
   },

@@ -27,14 +27,8 @@ export const storageLocation = list({
       isIndexed: "unique",
     }),
     lat: float({
-      validation: {
-        isRequired: true,
-      },
     }),
     long: float({
-      validation: {
-        isRequired: true,
-      },
     }),
     gateway: relationship({
       ref: "gateway.storage_location",

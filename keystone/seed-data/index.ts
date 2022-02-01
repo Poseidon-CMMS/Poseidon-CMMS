@@ -165,6 +165,11 @@ const mockModelsToSeed = [
     data: satelliteAntennas,
   },
   {
+    tableName: "user",
+    label: "users",
+    data: users,
+  },
+  {
     tableName: "storage_location",
     label: "storage locations",
     data: storageLocations,
@@ -209,12 +214,6 @@ const mockModelsToSeed = [
     label: "irrigators",
     data: irrigators,
   },
-  {
-    tableName: "user",
-    label: "users",
-    data: users,
-  },
-
 ];
 
 export async function insertSeedData(context: KeystoneContext, include_example_entities: boolean) {

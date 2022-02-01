@@ -34,6 +34,7 @@ import { irrigators } from "./data/mocks/irrigators";
 import { gpsNodes } from "./data/mocks/gpsNodes";
 import { pcbNodes } from "./data/mocks/pcbNodes";
 import { pressureSensors } from "./data/mocks/pressureSensors";
+import { users } from "./data/mocks/users";
 
 const SYSTEM_SIGNATURE = " 🌊 PoseidonCMMS: ";
 const SYSTEM_DIVIDER = "----------------------------------------------------";
@@ -207,6 +208,11 @@ const mockModelsToSeed = [
     tableName: "irrigator",
     label: "irrigators",
     data: irrigators,
+  },
+  {
+    tableName: "user",
+    label: "users",
+    data: users,
   },
 
 ];

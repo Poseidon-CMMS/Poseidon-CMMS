@@ -13,4 +13,18 @@ export const gpsNodes = [
     pcb_nodeId: "015b8aa1-5aa0-479c-b457-c5a6722bcd66",
     storage_locationId: null,
   },
+  {
+    id: "8e2840e8-ffde-457a-a0a2-07f23b699dd1",
+    fabrication_date: "2022-01-07T03:00:00.000Z",
+    integration_id: "NODO555",
+    internal_photo_id: null,
+    external_photo_id: null,
+    battery_typeId: "7e31f6d4-6402-4be9-98fc-766b7d055989",
+    gps_antenna_typeId: "11b45685-199c-48a2-b939-e56d1cee9c79",
+    node_housing_typeId: "f41a4c28-8c21-4494-9fcb-99b06d903899",
+    lora_antenna_typeId: "3b4ad774-3d99-4e57-af06-b39d9abf3538",
+    solar_panel_typeId: "088daecd-3941-42f3-8cfd-335d1293f420",
+    pcb_nodeId: "cbfbccb7-6921-45e2-98d0-bdb81745c32d",
+    storage_locationId: "6a8d2188-f667-4984-9f54-4bd5fa690132",
+  },
 ];

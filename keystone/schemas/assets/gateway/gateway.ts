@@ -55,6 +55,7 @@ export const gateway = list({
             "shipment_date",
             "is_transmitting",
             "comment",
+            "satellite_modem_type",
           ],
         },
         linkToItem: true,
@@ -65,6 +66,7 @@ export const gateway = list({
             "shipment_date",
             "is_transmitting",
             "comment",
+            "satellite_modem_type",
           ],
         },
       },
@@ -147,4 +149,24 @@ export const gateway = list({
       delete: isAdmin,
     },
   },
+  hooks: {
+    afterOperation: async ({ resolvedData, originalItem, item, context, operation }) => {
+      if (operation !== "update") return;
+      
+      if(originalItem?.storage_locationId !== item?.storage_locationId){
+        const result = await context.query.stock_movement.createOne({
+          data: {
+            date: new Date().toISOString(),
+            location_from: {connect: {id: originalItem?.storage_locationId}},
+            location_to: item?.storage_locationId? {connect: {id: item?.storage_locationId}}: undefined,
+            gateway: {connect: {id: item?.id}}
+          },
+          query: 'id date location_from {id} location_to {id} gateway {id}',
+        });
+
+        console.log('================================================================se creo este stock movement para gateeways')
+        console.log(result);
+      }
+    }
+  }
 });

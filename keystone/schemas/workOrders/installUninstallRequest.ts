@@ -1,6 +1,12 @@
 import { list } from "@keystone-6/core";
 
-import { select, timestamp, relationship, image, file } from "@keystone-6/core/fields";
+import {
+  select,
+  timestamp,
+  relationship,
+  image,
+  file,
+} from "@keystone-6/core/fields";
 import { relationshipRequiredCheckerHook } from "../../hooks/relationshipRequiredCheckerHook";
 import { isAdmin, isLoggedIn } from "../../utils/accessControl";
 
@@ -8,7 +14,13 @@ export const installUninstallRequest = list({
   // TODO: falta definir sus relaciones
   ui: {
     listView: {
-      initialColumns: ["creation_date", "completion_date", "close_date", "status", "irrigator"],
+      initialColumns: [
+        "creation_date",
+        "completion_date",
+        "close_date",
+        "status",
+        "irrigator",
+      ],
     },
     labelField: "creation_date",
   },
@@ -35,18 +47,57 @@ export const installUninstallRequest = list({
       return resolvedData;
     },
     afterOperation: async ({ resolvedData, item, context, operation }) => {
-      if (operation === "update" && item?.status === "completed") {
-        const irrigatorId = item?.irrigatorId;
-        
+      //stock & locations update hook
+      if (!(operation === "update" && item?.status === "completed")) return;
+      const {irrigatorId, gatewayId, gps_nodeId, pressure_sensorId} = item;
+
+      if (item?.request_type === "install") {
+        //irrigator update
         await context.query.irrigator.updateOne({
           // @ts-expect-error
           where: { id: irrigatorId },
           data: {
-            status: item?.request_type ==="install"? "installed": item?.request_type ==="uninstall"?"no-telemetry":"error",
+            status: "installed",
+            gateway: { connect: { id: item?.gatewayId } },
+            pressure_sensor: { connect: { id: item?.pressure_sensorId } },
+            gps_node: { connect: { id: item?.gps_nodeId } },
           },
-          query: "id status",
+          query: "id status gateway {id} pressure_sensor {id} gps_node {id}",
         });
-      }
+
+  //storage location update
+       await context.query.gateway.updateOne({
+         //@ts-expect-error
+         where: {id: gatewayId},
+         data: {
+           storage_location: {disconnect: true} //TODO: null storage location means it's installed on an irrigator
+         },
+         query: "id storage_location {id}"
+       });
+       await context.query.gps_node.updateOne({
+        //@ts-expect-error
+        where: {id: gps_nodeId},
+        data: {
+          storage_location: {disconnect: true}
+        },
+        query: "id storage_location {id}"
+      });
+      await context.query.pressure_sensor.updateOne({
+        //@ts-expect-error
+        where: {id: pressure_sensorId},
+        data: {
+          storage_location: {disconnect: true}
+        },
+        query: "id storage_location {id}"
+      });
+
+      //stock movements are created automatically in a hook on each asset
+
+      } else if (item?.request_type === "uninstall") {
+        //TODO aca
+         //TODO aca
+          //TODO aca
+      } else throw new Error("undefined request type");
     },
   },
   fields: {
@@ -82,6 +133,9 @@ export const installUninstallRequest = list({
         cardFields: ["integration_id"],
       },
       many: false,
+      db: {
+        foreignKey: true,
+      },
     }),
     gps_node: relationship({
       ref: "gps_node.install_uninstall_request",
@@ -90,6 +144,9 @@ export const installUninstallRequest = list({
         cardFields: ["fabrication_date"],
       },
       many: false,
+      db: {
+        foreignKey: true,
+      },
     }),
     pressure_sensor: relationship({
       ref: "pressure_sensor.install_uninstall_request",
@@ -98,6 +155,9 @@ export const installUninstallRequest = list({
         cardFields: ["integration_id", "status", "order"],
       },
       many: false,
+      db: {
+        foreignKey: true,
+      },
     }),
     request_type: select({
       validation: { isRequired: true },
@@ -153,14 +213,24 @@ export const installUninstallRequest = list({
     },
     filter: {
       query: ({ session, context, listKey, operation }) => {
-        const isAdmin = session?.data?.type === 'admin';
-        return isAdmin? {} :  { assigned_technician: { id: {equals: session?.data?.id} } };
+        const isAdmin = session?.data?.type === "admin";
+        return isAdmin
+          ? {}
+          : { assigned_technician: { id: { equals: session?.data?.id } } };
       },
     },
     item: {
-      update: async ({ session, context, listKey, operation, inputData, item }) => {
-        const isAdmin = session?.data?.type === 'admin';
-        if(isAdmin) return true;
+      update: async ({
+        session,
+        context,
+        listKey,
+        operation,
+        inputData,
+        item,
+      }) => {
+        //this hook checks whether the work order being associated belongs to the correct technician (the one assigned to the request)
+        const isAdmin = session?.data?.type === "admin";
+        if (isAdmin) return true;
 
         const workOrderTechnicianResult =
           await context.query.work_order.findOne({
@@ -171,7 +241,8 @@ export const installUninstallRequest = list({
         const technicianId = workOrderTechnicianResult.technician.id;
 
         const technicianBelongsToWorkOrder = session?.data?.id === technicianId;
-        const technicianAssignedToRequest = session?.data?.id === item.assigned_technicianId;
+        const technicianAssignedToRequest =
+          session?.data?.id === item.assigned_technicianId;
         return technicianAssignedToRequest && technicianBelongsToWorkOrder;
       },
     },

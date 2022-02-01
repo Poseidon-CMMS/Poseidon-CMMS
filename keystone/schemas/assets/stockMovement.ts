@@ -18,11 +18,7 @@ export const stockMovement = list({
     },
   },
   hooks: {
-    validateInput: function (params) {
-      
-      relationshipRequiredCheckerHook('stock_movement_to')(params);
-      relationshipRequiredCheckerHook('stock_movement_to')(params);
-
+    validateInput: function (params) { //this middleware forces each stock movement to have only a single asset
       const {
         addValidationError,
         resolvedData,

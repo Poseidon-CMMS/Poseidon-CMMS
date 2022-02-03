@@ -138,4 +138,18 @@ export const user = list({
       delete: isAdmin,
     },
   },
+  hooks: {
+    afterOperation: async ({ resolvedData, item, context, operation }) => {
+      if (item?.type ==='technician' && !item?.storage_location) {
+        const result = await context.query.storage_location.createOne({
+          data: {
+            name: `Stock de ${item?.name}`,
+            user: {connect: {id: item?.id}}
+          },
+          query: "id name user {id}"
+        });
+        console.log(result);
+      }
+    },
+  }
 });

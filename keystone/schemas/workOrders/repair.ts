@@ -16,31 +16,25 @@ export const repair = list({
   // TODO: falta definir sus relaciones
   ui: {
     listView: {
-      initialColumns: ["date", "work_order"],
+      initialColumns: ["real_repair_date", "work_order"],
     },
-    labelField: "date",
+    labelField: "real_repair_date",
   },
   hooks: {
     validateInput: relationshipRequiredCheckerHook("work_order"),
-    afterOperation: async ({ resolvedData, item, context, operation }) => {
-      if (operation === "create") {
-        const hdwIssueId = resolvedData?.hdw_issue?.connect?.id;
-        await context.query.hdw_issue.updateOne({
-          where: { id: hdwIssueId },
-          data: {
-            status: "repaired",
-          },
-          query: "id status",
-        });
-      }
-    },
+    afterOperation: setHdwIssueStatusToRepairedHook
   },
   fields: {
-    date: timestamp({
+    creation_date: timestamp({//fecha de creacion en el sistema
       validation: {
         isRequired: true,
       },
-    }), //fecha de alta
+    }), 
+    real_repair_date: timestamp({//fecha de reparacion real
+      validation: {
+        isRequired: true,
+      }, 
+    }),
     hdw_issue: relationship({
       ref: "hdw_issue.repair",
       ui: {
@@ -108,3 +102,16 @@ export const repair = list({
     },
   },
 });
+
+async function setHdwIssueStatusToRepairedHook({ resolvedData, item, context, operation }: any) {
+  if (operation === "create") {
+    const hdwIssueId = resolvedData?.hdw_issue?.connect?.id;
+    await context.query.hdw_issue.updateOne({
+      where: { id: hdwIssueId },
+      data: {
+        status: "repaired",
+      },
+      query: "id status",
+    });
+  }
+};

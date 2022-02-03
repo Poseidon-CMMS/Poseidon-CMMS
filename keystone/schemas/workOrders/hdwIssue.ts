@@ -67,6 +67,98 @@ export const hardwareIssue = list({
 
       return resolvedData;
     },
+    afterOperation: async ({
+      resolvedData,
+      item,
+      originalItem,
+      context,
+      operation,
+    }) => {
+      //stock & locations update hook
+      if (operation !== "update" || item?.status !== "out-of-field") return;
+
+      const { irrigatorId } = item;
+
+      const lastRepair = (
+        await context.query.repair.findMany({
+          where: { hdw_issue: {id: {equals: item?.id }} },
+          take: 1,
+          skip: 0,
+          orderBy: [{ creation_date: "desc" }],
+          query: `
+          id 
+          new_gateway {id} 
+          new_pressure_sensor {id} 
+          new_gps_node {id} 
+          work_order 
+          {
+            id 
+            technician 
+              {
+                id 
+                storage_location 
+                  {
+                    id
+                  }
+              } 
+          }`,
+        })
+      )[0];
+
+      const oldIrrigatorAssets = await context.query.irrigator.findOne({
+        //@ts-ignore
+        where: { id: item?.irrigatorId },
+        query: "id gateway {id} pressure_sensor {id} gps_node {id}",
+      });
+
+      const technicianStorageLocation =
+        lastRepair.work_order.technician.storage_location.id;
+
+      //stock
+      for (const asset of ["gateway", "pressure_sensor", "gps_node"]) {
+        if (lastRepair[`new_${asset}`]) {
+          //Si ese asset fue reemplazado
+
+          //mover el viejo de storage: null => al stock del tecnico
+          const storageLocationMovementRemoved = await context.query[
+            asset
+          ].updateOne({
+            where: { id: oldIrrigatorAssets[asset]?.id },
+            data: {
+              storage_location: { connect: { id: technicianStorageLocation } },
+            },
+            query: "id storage_location {id}",
+          });
+
+          //mover el viejo de storage: stock del tecnico => null (instalado)
+          const storageLocationMovementAdded = await context.query[
+            asset
+          ].updateOne({
+            where: { id: lastRepair[`new_${asset}`]?.id },
+            data: {
+              storage_location: { disconnect: true },
+            },
+            query: "id storage_location {id}",
+          });
+        }
+      }
+
+      //actualizar relaciones del irrigator
+      const irrigatorUpdatedData: any = {};
+      for (const asset of ["gps_node", "gateway", "pressure_sensor"]) {
+        if (lastRepair[`new_${asset}`]) {
+          irrigatorUpdatedData[asset] = {
+            connect: { id: lastRepair[`new_${asset}`].id },
+          };
+        }
+      }
+      const irrigatorUpdateResult = await context.query.irrigator.updateOne({
+        //@ts-ignore
+        where: { id: irrigatorId },
+        data: irrigatorUpdatedData,
+        query: "id",
+      });
+    },
   },
   fields: {
     creation_date: timestamp({
@@ -120,7 +212,7 @@ export const hardwareIssue = list({
             //@ts-ignore
             const oldDate: Date = new Date(diagnostic.date);
             //@ts-ignore
-            const finalDate: Date = new Date(repair.date);
+            const finalDate: Date = new Date(repair.real_repair_date);
             //@ts-ignore
             const differenceinMs = finalDate - oldDate;
             const differenceinHours = differenceinMs / (1000 * 60 * 60);

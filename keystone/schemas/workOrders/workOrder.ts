@@ -37,7 +37,7 @@ export const workOrder = list({
       ref: "repair.work_order",
       ui: {
         displayMode: "cards",
-        cardFields: ["date"],
+        cardFields: ["real_repair_date"],
         linkToItem: true,
         inlineConnect: true,
       },

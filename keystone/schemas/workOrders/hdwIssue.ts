@@ -208,7 +208,7 @@ export const hardwareIssue = list({
             query: "diagnostic { date } repair { date }  ",
           });
           //@ts-ignore
-          if (diagnostic && diagnostic.date && repair && repair.date) {
+          if (diagnostic && diagnostic.date && repair && repair.real_repair_date) {
             //@ts-ignore
             const oldDate: Date = new Date(diagnostic.date);
             //@ts-ignore

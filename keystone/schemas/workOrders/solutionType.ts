@@ -1,7 +1,7 @@
 import { list } from "@keystone-6/core";
 
 import { text } from "@keystone-6/core/fields";
-import { isAdmin } from "../../utils/accessControl";
+import { isAdmin, isLoggedIn } from "../../utils/accessControl";
 
 export const solutionType = list({
   ui: {
@@ -19,7 +19,7 @@ export const solutionType = list({
   },
   access: {
     operation: {
-      query: isAdmin,
+      query: isLoggedIn,
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,

@@ -407,7 +407,7 @@ export const hardwareIssue = list({
     operation: {
       query: isLoggedIn,
       create: (params) => isAdmin(params) || hasAPIKey(params),
-      update: isAdmin,
+      update: isLoggedIn,
       delete: isAdmin,
     },
     filter: {

@@ -205,7 +205,7 @@ export const hardwareIssue = list({
           const { diagnostic, repair } = await context.query.hdw_issue.findOne({
             //@ts-expect-error
             where: { id: item.id.toString() },
-            query: "diagnostic { date } repair { date }  ",
+            query: "diagnostic { date } repair { real_repair_date }  ",
           });
           //@ts-ignore
           if (diagnostic && diagnostic.date && repair && repair.real_repair_date) {
@@ -253,9 +253,9 @@ export const hardwareIssue = list({
             where: { id: item.id.toString() },
             query: `
               repair(
-                orderBy: { date: desc }
+                orderBy: { real_repair_date: desc }
               ) {
-                date
+                real_repair_date
                 repair_type {
                   name
                   value
@@ -277,7 +277,7 @@ export const hardwareIssue = list({
             autopsy[0]
           ) {
             //@ts-ignore
-            const oldDate: Date = new Date(repair[0].date);
+            const oldDate: Date = new Date(repair[0].real_repair_date);
             //@ts-ignore
             const finalDate: Date = new Date(autopsy[0].date);
             //@ts-ignore

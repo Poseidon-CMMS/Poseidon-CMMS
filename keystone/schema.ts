@@ -42,6 +42,8 @@ import { solutionType } from './schemas/workOrders/solutionType';
 import { repairType } from './schemas/workOrders/repairType';
 import { componentType } from './schemas/assets/componentType';
 import { stockMovement } from './schemas/assets/stockMovement';
+import { contract } from './schemas/contract';
+import { serviceLevelAgreement } from './schemas/serviceLevelAgreement';
 
 export const lists = {
   asset_type: assetType,
@@ -87,4 +89,6 @@ export const lists = {
   user: user,
   work_order: workOrder,
   zone: zone,
+  contract: contract,
+  service_level_agreement: serviceLevelAgreement,
 };

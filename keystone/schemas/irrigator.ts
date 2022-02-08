@@ -64,7 +64,8 @@ export const irrigator = list({
         displayMode: "segmented-control",
       },
     }),
-    enabled: checkbox({ defaultValue: false }),
+    enabled: checkbox({ defaultValue: false }), //de alta?
+    mapped: checkbox({ defaultValue: false }), // mapeado?
     comment: text({
       validation: {
         isRequired: false,
@@ -149,6 +150,16 @@ export const irrigator = list({
       db: {
         foreignKey: true,
       },
+    }),
+    contract: relationship({
+      ref: "contract.irrigator",
+      ui: {
+        displayMode: "cards",
+        cardFields: ["hubspot_id"],
+        linkToItem: false,
+        inlineConnect: true,
+      },
+      many: false,
     }),
     transmission_status: virtual({
       field: graphql.field({

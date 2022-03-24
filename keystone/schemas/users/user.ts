@@ -97,13 +97,7 @@ export const user = list({
     zone: relationship({
       ref: "zone.user",
       ui: {
-        displayMode: "cards",
-        cardFields: ["code", "name", "is_foreign"],
-        hideCreate: true,
-        createView: {
-          fieldMode: "hidden",
-        },
-        inlineConnect: true,
+        displayMode: "select",
       },
       many: true,
     }),

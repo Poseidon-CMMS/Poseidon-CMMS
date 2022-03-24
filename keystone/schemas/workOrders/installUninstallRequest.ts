@@ -26,6 +26,7 @@ export const installUninstallRequest = list({
   },
   hooks: {
     validateInput: async ({ addValidationError, resolvedData, item, operation, context }: any) => {
+      if( operation !== 'create' ) return;
       const requestType = resolvedData.request_type;
       const activeRequestsOfTheSameType = await context.query.install_uninstall_request.findMany({
         where: {

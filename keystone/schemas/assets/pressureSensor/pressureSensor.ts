@@ -121,5 +121,13 @@ export const pressureSensor = list({
       update: isAdmin,
       delete: isAdmin,
     },
+    filter: {
+      query: ({ session, context, listKey, operation }) => {
+        const isAdmin = session?.data?.type === "admin";
+        return isAdmin
+          ? {}
+          : { storage_location: { user: {id: { equals: session?.data?.id } } } };
+      },
+    },
   },
 });

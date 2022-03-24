@@ -25,7 +25,23 @@ export const installUninstallRequest = list({
     labelField: "creation_date",
   },
   hooks: {
-    validateInput: relationshipRequiredCheckerHook("irrigator"),
+    validateInput: async ({ addValidationError, resolvedData, item, operation, context }: any) => {
+      const requestType = resolvedData.request_type;
+      const activeRequestsOfTheSameType = await context.query.install_uninstall_request.findMany({
+        where: {
+            status: { not: {equals: 'completed'} },
+            request_type: {equals: requestType},
+            irrigator: {
+              id: {equals: resolvedData.irrigatorId}
+          },
+        },
+        query: "id status",
+      });
+      if (activeRequestsOfTheSameType.length > 0) {
+        addValidationError(`Ya existe una solicitud de este tipo activa para este equipo.`);
+      } 
+
+    },
     resolveInput: async ({ resolvedData, item, context, operation }) => {
       //resolvedData es siempre los datos enviados. En caso de operaciones update, item representa el estado previo del item a actualizar
       //generacion de status

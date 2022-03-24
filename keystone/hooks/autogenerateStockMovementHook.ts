@@ -19,9 +19,5 @@ export const autogenerateStockMovementHook =
         data: newStockMovement,
         query: `id date location_from {id} location_to {id} ${assetName} {id}`,
       });
-      console.log(
-        "==========================================================creado"
-      );
-      console.log(result);
     }
   };

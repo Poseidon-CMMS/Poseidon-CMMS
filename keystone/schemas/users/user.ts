@@ -148,7 +148,6 @@ export const user = list({
           },
           query: "id name user {id}"
         });
-        console.log(result);
       }
     },
   }

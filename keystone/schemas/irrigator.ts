@@ -165,20 +165,25 @@ export const irrigator = list({
       field: graphql.field({
         type: graphql.String,
         async resolve(item, args, context) {
-          const later = (delay: number, value: string): Promise<string> =>
-            new Promise((resolve) => setTimeout(resolve, delay, value));
+          const activeHdwIssues = await context.query.hdw_issue.findMany({
+            where: {
+              hdw_issue: {
+                status: { in: ["in-field", "assigned", "repaired"] },
+              },
+            },
+            query: "id status",
+          });
 
-          return await later(
-            300,
-            Math.random() > 0.5 ? "transmitting" : "error"
-          );
+          const status = activeHdwIssues.length > 0 ? "error" : "transmitting"
+
+          return status;
         },
       }),
     }),
   },
   access: {
     operation: {
-      query: params => isLoggedIn(params) || hasAPIKey(params),
+      query: (params) => isLoggedIn(params) || hasAPIKey(params),
       create: isAdmin,
       update: isAdmin,
       delete: isAdmin,

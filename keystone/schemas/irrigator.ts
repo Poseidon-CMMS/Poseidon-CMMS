@@ -167,9 +167,7 @@ export const irrigator = list({
         async resolve(item, args, context) {
           const activeHdwIssues = await context.query.hdw_issue.findMany({
             where: {
-              hdw_issue: {
                 status: { in: ["in-field", "assigned", "repaired"] },
-              },
             },
             query: "id status",
           });

@@ -30,7 +30,7 @@ export const installUninstallRequest = list({
       const requestType = resolvedData.request_type;
       const activeRequestsOfTheSameType = await context.query.install_uninstall_request.findMany({
         where: {
-            status: { not: {equals: 'completed'} },
+            status: { notIn: ['completed', 'rejected']},
             request_type: {equals: requestType},
             irrigator: {
               id: {equals: resolvedData.irrigatorId}
@@ -58,9 +58,7 @@ export const installUninstallRequest = list({
         resolvedData.status = "open";
       } else if (!item?.completion_date && resolvedData?.completion_date) {
         resolvedData.status = "done";
-      } else if (!item?.close_date && resolvedData?.close_date) {
-        resolvedData.status = "completed";
-      }
+      };
       return resolvedData;
     },
     afterOperation: async ({
@@ -71,7 +69,7 @@ export const installUninstallRequest = list({
       operation,
     }) => {
       //stock & locations update hook
-      if (!(operation === "update" && item?.status === "completed")) return;
+      if (!(operation === "update" && (item?.status === "completed" || item?.status === "rejected"))) return;
       const {
         irrigatorId,
         gatewayId,
@@ -151,33 +149,36 @@ export const installUninstallRequest = list({
         });
 
         //storage location update: move assets to the tech's stock
-        await context.query.gateway.updateOne({
-          where: { id: irrigatorResult?.gateway?.id },
-          data: {
-            storage_location: {
-              connect: { id: uninstallerTechnicianStorageLocationId },
+        if(irrigatorResult?.gateway?.id)
+          await context.query.gateway.updateOne({
+            where: { id: irrigatorResult?.gateway?.id },
+            data: {
+              storage_location: {
+                connect: { id: uninstallerTechnicianStorageLocationId },
+              },
             },
-          },
-          query: "id storage_location {id}",
-        });
-        await context.query.gps_node.updateOne({
-          where: { id: irrigatorResult?.gps_node?.id },
-          data: {
-            storage_location: {
-              connect: { id: uninstallerTechnicianStorageLocationId },
+            query: "id storage_location {id}",
+          });
+        if(irrigatorResult?.gps_node?.id)
+          await context.query.gps_node.updateOne({
+            where: { id: irrigatorResult?.gps_node?.id },
+            data: {
+              storage_location: {
+                connect: { id: uninstallerTechnicianStorageLocationId },
+              },
             },
-          },
-          query: "id storage_location {id}",
-        });
-        await context.query.pressure_sensor.updateOne({
-          where: { id: irrigatorResult?.pressure_sensor?.id },
-          data: {
-            storage_location: {
-              connect: { id: uninstallerTechnicianStorageLocationId },
+            query: "id storage_location {id}",
+          });
+        if(irrigatorResult?.pressure_sensor?.id)
+          await context.query.pressure_sensor.updateOne({
+            where: { id: irrigatorResult?.pressure_sensor?.id },
+            data: {
+              storage_location: {
+                connect: { id: uninstallerTechnicianStorageLocationId },
+              },
             },
-          },
-          query: "id storage_location {id}",
-        });
+            query: "id storage_location {id}",
+          });
 
         //stock movements are created automatically in a hook on each asset
       } else throw new Error("undefined request type");
@@ -261,6 +262,7 @@ export const installUninstallRequest = list({
         { label: "Asignada", value: "assigned" },
         { label: "Realizada", value: "done" },
         { label: "Completada", value: "completed" },
+        { label: "Rechazada", value: "rejected" },
       ],
       ui: {
         displayMode: "segmented-control",

@@ -46,16 +46,6 @@ export const assetType = list({
         },
       },
     }),
-    repair: relationship({
-      ref: "repair.replaced_asset_type",
-      many: true,
-      ui: {
-        hideCreate: true,
-        createView: {
-          fieldMode: "hidden",
-        },
-      },
-    }),
   },
   access: {
     operation: {

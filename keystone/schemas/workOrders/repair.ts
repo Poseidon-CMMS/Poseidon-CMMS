@@ -65,10 +65,6 @@ export const repair = list({
       },
       many: false,
     }),
-    replaced_asset_type: relationship({
-      ref: "asset_type.repair",
-      many: false,
-    }),
     new_gateway: relationship({
       ref: "gateway.installed_in_repair",
       many: false,

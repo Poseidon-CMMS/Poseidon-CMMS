@@ -172,7 +172,7 @@ export const irrigator = list({
             query: "id status",
           });
 
-          const status = activeHdwIssues.length > 0 ? "error" : "transmitting"
+          const status = activeHdwIssues.length > 0 ? "Error" : "Transmitiendo"
 
           return status;
         },

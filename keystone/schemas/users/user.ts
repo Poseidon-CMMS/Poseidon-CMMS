@@ -134,7 +134,7 @@ export const user = list({
   },
   hooks: {
     afterOperation: async ({ resolvedData, item, context, operation }) => {
-      if (item?.type ==='technician' && !item?.storage_location) {
+      if (item?.type ==='technician' && !item?.storage_location && operation === 'create') {
         const result = await context.query.storage_location.createOne({
           data: {
             name: `Stock de ${item?.name}`,

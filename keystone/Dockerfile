@@ -4,14 +4,12 @@ ARG NODE_VERSION=14.17.6
 # Build container
 FROM node:${NODE_VERSION}-alpine AS build
 
-WORKDIR /home/node
-
-COPY package*.json ./
+COPY package*.json /home/node
 
 RUN npm install
 
 ADD . /home/node
-RUN npm run postinstallfix
+RUN npm run postinstall --fix
 
 RUN npm run-script build
 

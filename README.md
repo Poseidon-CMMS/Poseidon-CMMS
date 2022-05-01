@@ -33,7 +33,7 @@ Este repositorio incluye el servidor KeystoneJS que se comporta como el backend 
 ### Pasos a seguir para ejecutar localmente
 
 1. Clonar el repositorio
-2. Crear un archivo `.env` en el la raíz y setear las variables de entorno mencionadas anteriormente, excepto la variable DATABASE_URL. Esta última no es necesaria debido a que el archivo docker-compose.yml ya genera la base de datos Postgres necesaria para hacer pruebas y agrega automáticamente este parámetro.
+2. Crear un archivo `.env` en la raíz y setear las variables de entorno mencionadas anteriormente, excepto la variable DATABASE_URL. Esta última no es necesaria debido a que el archivo docker-compose.yml ya genera la base de datos Postgres necesaria para hacer pruebas y agrega automáticamente este parámetro.
 3. Ejecutar el comando `docker-compose up --build`
 4. Abrir la interfaz de administrador `localhost:4000` en su navegador. Si cambió la variable de entorno PORT entonces deberá cambiar el puerto por el que haya seleccionado.
 5. Para acceder al frontend, ejecute los pasos de ejecución local del [repo correspondiente](https://github.com/Poseidon-CMMS/poseidon-cmms-app). Asegurarse de establecer la variable CORS_FRONTEND_URL correctamente después de este paso.

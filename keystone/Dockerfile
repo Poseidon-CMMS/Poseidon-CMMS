@@ -6,11 +6,11 @@ FROM node:${NODE_VERSION}-alpine AS build
 
 WORKDIR /home/node
 
-COPY package*.json /home/node
+COPY ./package*.json /home/node
 
 RUN npm install
 
-ADD . /home/node
+COPY . /home/node
 RUN npm run postinstallfix
 
 RUN npm run-script build

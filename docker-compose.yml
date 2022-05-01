@@ -4,8 +4,6 @@ services:
   ## Keystone ###########################################
   keystone:
     image: poseidoncmms:0.1.0
-    build:
-      context: ./keystone
     depends_on:
         - "db"
     environment:

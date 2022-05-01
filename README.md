@@ -42,4 +42,4 @@ Este repositorio incluye el servidor KeystoneJS que se comporta como el backend 
 
 1. Crear un servicio Web utilizando este repo según las instrucciones del proveedor.
 2. Crear una base de datos PostgreSQL en el servicio.
-3. Establecer las varaibles de entorno con sus valores correspondientes. Asegurarse de establecer la variable `DATABASE_URL` con la URL obtenida en el paso anterior.
+3. Establecer las variables de entorno con sus valores correspondientes. Asegurarse de establecer la variable `DATABASE_URL` con la URL obtenida en el paso anterior.

@@ -27,7 +27,7 @@ Este repositorio incluye el servidor KeystoneJS que se comporta como el backend 
 - SESSION_SECRET: Secreto utilizado para generar los tokens de sesión de KeystoneJS. Utilizar una secuencia aleatoria de al menos 32 caracteres.
 - M2M_API_KEY: Secreto utilizado para la comunicación con sistema de detección de fallas en tiempo real. Utilizar una secuencia aleatoria de al menos 32 caracteres.
 - CORS_FRONTEND_URL: URL del frontend para completar el header `Access-Control-Allow-Origin`. Por ejemplo, `http://localhost:8080`
-- NODE_ENV: Tipo de entorno NodeJS. Por ejemplo, `develop` o `production`.
+- NODE_ENV: Tipo de entorno NodeJS. Por ejemplo, `development` o `production`.
 - PORT: Puerto en el cual se disponibilizará la interfaz de administrador de KeystoneJS. Por ejemplo, `4000`.
 
 ### Pasos a seguir para ejecutar localmente

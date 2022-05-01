@@ -10,7 +10,7 @@ COPY ./keystone/package*.json /home/node
 
 RUN npm install
 
-COPY ./keystone/* /home/node
+COPY ./keystone/ /home/node
 RUN npm run postinstallfix
 
 RUN npm run-script build

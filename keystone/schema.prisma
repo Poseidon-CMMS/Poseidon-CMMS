@@ -11,219 +11,56 @@ generator client {
   output   = "node_modules/.prisma/client"
 }
 
-model irrigator {
-  id                        String                      @id @default(uuid()) @postgresql.Uuid
-  integration_id            String                      @default("")
-  name                      String                      @default("")
-  lat                       Float
-  long                      Float
-  status                    String
-  enabled                   Boolean                     @default(false)
-  comment                   String                      @default("")
-  gateway                   gateway?                    @relation("gateway_irrigator")
-  gps_node                  gps_node?                   @relation("gps_node_irrigator")
-  field                     field?                      @relation("irrigator_field", fields: [fieldId], references: [id])
-  fieldId                   String?                     @map("field") @postgresql.Uuid
-  install_uninstall_request install_uninstall_request[] @relation("install_uninstall_request_irrigator")
-  hdw_issue                 hdw_issue[]                 @relation("hdw_issue_irrigator")
-  pressure_sensor           pressure_sensor?            @relation("irrigator_pressure_sensor", fields: [pressure_sensorId], references: [id])
-  pressure_sensorId         String?                     @unique @map("pressure_sensor") @postgresql.Uuid
-
-  @@index([fieldId])
+model asset_type {
+  id              String            @id @default(uuid()) @postgresql.Uuid
+  name            String            @unique @default("")
+  diagnostic_type diagnostic_type[] @relation("diagnostic_type_type")
+  inspection_type inspection_type[] @relation("inspection_type_type")
+  autopsy_type    autopsy_type[]    @relation("autopsy_type_asset_type")
 }
 
-model gateway {
-  id                  String                @id @default(uuid()) @postgresql.Uuid
-  fabrication_date    DateTime
-  integration_id      String                @unique @default("")
-  irrigator           irrigator?            @relation("gateway_irrigator", fields: [irrigatorId], references: [id])
-  irrigatorId         String?               @unique @map("irrigator") @postgresql.Uuid
-  housing_type        gateway_housing_type? @relation("gateway_housing_type", fields: [housing_typeId], references: [id])
-  housing_typeId      String?               @map("housing_type") @postgresql.Uuid
-  satellite_modem     satellite_modem?      @relation("gateway_satellite_modem", fields: [satellite_modemId], references: [id])
-  satellite_modemId   String?               @unique @map("satellite_modem") @postgresql.Uuid
-  satellite_antenna   satellite_antenna?    @relation("gateway_satellite_antenna", fields: [satellite_antennaId], references: [id])
-  satellite_antennaId String?               @unique @map("satellite_antenna") @postgresql.Uuid
-  pcb_gateway         pcb_gateway?          @relation("gateway_pcb_gateway", fields: [pcb_gatewayId], references: [id])
-  pcb_gatewayId       String?               @unique @map("pcb_gateway") @postgresql.Uuid
-  hdw_issue           hdw_issue?            @relation("gateway_hdw_issue", fields: [hdw_issueId], references: [id])
-  hdw_issueId         String?               @unique @map("hdw_issue") @postgresql.Uuid
-  lora_antenna_type   lora_antenna_type?    @relation("gateway_lora_antenna_type", fields: [lora_antenna_typeId], references: [id])
-  lora_antenna_typeId String?               @map("lora_antenna_type") @postgresql.Uuid
-  storage_location    storage_location?     @relation("gateway_storage_location", fields: [storage_locationId], references: [id])
-  storage_locationId  String?               @map("storage_location") @postgresql.Uuid
+model autopsy {
+  id                            String        @id @default(uuid()) @postgresql.Uuid
+  date                          DateTime
+  self_diagnostic_file_filesize Int?
+  self_diagnostic_file_mode     String?
+  self_diagnostic_file_filename String?
+  pressure_log_filesize         Int?
+  pressure_log_mode             String?
+  pressure_log_filename         String?
+  comments                      String        @default("")
+  user                          user?         @relation("autopsy_user", fields: [userId], references: [id])
+  userId                        String?       @map("user") @postgresql.Uuid
+  hdw_issue                     hdw_issue?    @relation("autopsy_hdw_issue", fields: [hdw_issueId], references: [id])
+  hdw_issueId                   String?       @map("hdw_issue") @postgresql.Uuid
+  autopsy_type                  autopsy_type? @relation("autopsy_autopsy_type", fields: [autopsy_typeId], references: [id])
+  autopsy_typeId                String?       @map("autopsy_type") @postgresql.Uuid
 
-  @@index([housing_typeId])
-  @@index([lora_antenna_typeId])
-  @@index([storage_locationId])
+  @@index([userId])
+  @@index([hdw_issueId])
+  @@index([autopsy_typeId])
 }
 
-model gps_node {
-  id                  String             @id @default(uuid()) @postgresql.Uuid
-  fabrication_date    DateTime
-  integration_id      String             @unique @default("")
-  internal_photo      String             @default("")
-  external_photo      String             @default("")
-  irrigator           irrigator?         @relation("gps_node_irrigator", fields: [irrigatorId], references: [id])
-  irrigatorId         String?            @unique @map("irrigator") @postgresql.Uuid
-  battery_type        battery_type?      @relation("gps_node_battery_type", fields: [battery_typeId], references: [id])
-  battery_typeId      String?            @map("battery_type") @postgresql.Uuid
-  gps_antenna_type    gps_antenna_type?  @relation("gps_node_gps_antenna_type", fields: [gps_antenna_typeId], references: [id])
-  gps_antenna_typeId  String?            @map("gps_antenna_type") @postgresql.Uuid
-  node_housing_type   node_housing_type? @relation("gps_node_node_housing_type", fields: [node_housing_typeId], references: [id])
-  node_housing_typeId String?            @map("node_housing_type") @postgresql.Uuid
-  lora_antenna_type   lora_antenna_type? @relation("gps_node_lora_antenna_type", fields: [lora_antenna_typeId], references: [id])
-  lora_antenna_typeId String?            @map("lora_antenna_type") @postgresql.Uuid
-  solar_panel_type    solar_panel_type?  @relation("gps_node_solar_panel_type", fields: [solar_panel_typeId], references: [id])
-  solar_panel_typeId  String?            @map("solar_panel_type") @postgresql.Uuid
-  pcb_node            pcb_node?          @relation("gps_node_pcb_node", fields: [pcb_nodeId], references: [id])
-  pcb_nodeId          String?            @unique @map("pcb_node") @postgresql.Uuid
-  storage_location    storage_location?  @relation("gps_node_storage_location", fields: [storage_locationId], references: [id])
-  storage_locationId  String?            @map("storage_location") @postgresql.Uuid
-  hdw_issue           hdw_issue?         @relation("gps_node_hdw_issue", fields: [hdw_issueId], references: [id])
-  hdw_issueId         String?            @unique @map("hdw_issue") @postgresql.Uuid
+model autopsy_type {
+  id                        String          @id @default(uuid()) @postgresql.Uuid
+  name                      String          @unique @default("")
+  asset_type                asset_type?     @relation("autopsy_type_asset_type", fields: [asset_typeId], references: [id])
+  asset_typeId              String?         @map("asset_type") @postgresql.Uuid
+  component                 component_type? @relation("autopsy_type_component", fields: [componentId], references: [id])
+  componentId               String?         @map("component") @postgresql.Uuid
+  root                      autopsy_root?   @relation("autopsy_type_root", fields: [rootId], references: [id])
+  rootId                    String?         @map("root") @postgresql.Uuid
+  from_autopsy_autopsy_type autopsy[]       @relation("autopsy_autopsy_type")
 
-  @@index([battery_typeId])
-  @@index([gps_antenna_typeId])
-  @@index([node_housing_typeId])
-  @@index([lora_antenna_typeId])
-  @@index([solar_panel_typeId])
-  @@index([storage_locationId])
+  @@index([asset_typeId])
+  @@index([componentId])
+  @@index([rootId])
 }
 
-model field {
-  id          String      @id @default(uuid()) @postgresql.Uuid
-  name        String      @default("")
-  gate        String      @default("")
-  phone       String      @default("")
-  irrigator   irrigator[] @relation("irrigator_field")
-  zone        zone?       @relation("field_zone", fields: [zoneId], references: [id])
-  zoneId      String?     @map("zone") @postgresql.Uuid
-  province    province?   @relation("field_province", fields: [provinceId], references: [id])
-  provinceId  String?     @map("province") @postgresql.Uuid
-  city        city?       @relation("field_city", fields: [cityId], references: [id])
-  cityId      String?     @map("city") @postgresql.Uuid
-  client      client?     @relation("client_field")
-  hdw_issue   hdw_issue?  @relation("field_hdw_issue", fields: [hdw_issueId], references: [id])
-  hdw_issueId String?     @unique @map("hdw_issue") @postgresql.Uuid
-
-  @@index([zoneId])
-  @@index([provinceId])
-  @@index([cityId])
-}
-
-model install_uninstall_request {
-  id            String      @id @default(uuid()) @postgresql.Uuid
-  creation_date DateTime
-  irrigator     irrigator?  @relation("install_uninstall_request_irrigator", fields: [irrigatorId], references: [id])
-  irrigatorId   String?     @map("irrigator") @postgresql.Uuid
-  status        String
-  work_order    work_order? @relation("install_uninstall_request_work_order", fields: [work_orderId], references: [id])
-  work_orderId  String?     @map("work_order") @postgresql.Uuid
-
-  @@index([irrigatorId])
-  @@index([work_orderId])
-}
-
-model city {
-  id         String    @id @default(uuid()) @postgresql.Uuid
-  name       String    @default("")
-  borrame    String    @default("")
-  province   province? @relation("city_province", fields: [provinceId], references: [id])
-  provinceId String?   @map("province") @postgresql.Uuid
-  field      field[]   @relation("field_city")
-
-  @@index([provinceId])
-}
-
-model field_technician {
-  id                 String            @id @default(uuid()) @postgresql.Uuid
-  name               String            @default("")
-  email              String            @default("")
-  zone               zone[]            @relation("field_technician_zone")
-  storage_location   storage_location? @relation("field_technician_storage_location", fields: [storage_locationId], references: [id])
-  storage_locationId String?           @unique @map("storage_location") @postgresql.Uuid
-}
-
-model hdw_issue {
-  id                String           @id @default(uuid()) @postgresql.Uuid
-  creation_date     DateTime
-  close_date        DateTime?
-  comments          String           @default("")
-  diagnostic        diagnostic?      @relation("diagnostic_hdw_issue")
-  inspection        inspection?      @relation("hdw_issue_inspection", fields: [inspectionId], references: [id])
-  inspectionId      String?          @unique @map("inspection") @postgresql.Uuid
-  repair            repair?          @relation("hdw_issue_repair", fields: [repairId], references: [id])
-  repairId          String?          @unique @map("repair") @postgresql.Uuid
-  status            Int
-  field             field?           @relation("field_hdw_issue")
-  irrigator         irrigator[]      @relation("hdw_issue_irrigator")
-  gateway           gateway?         @relation("gateway_hdw_issue")
-  gps_node          gps_node?        @relation("gps_node_hdw_issue")
-  pressure_sensor   pressure_sensor? @relation("hdw_issue_pressure_sensor", fields: [pressure_sensorId], references: [id])
-  pressure_sensorId String?          @unique @map("pressure_sensor") @postgresql.Uuid
-}
-
-model province {
-  id    String  @id @default(uuid()) @postgresql.Uuid
-  name  String  @default("")
-  field field[] @relation("field_province")
-  city  city[]  @relation("city_province")
-}
-
-model zone {
-  id               String             @id @default(uuid()) @postgresql.Uuid
-  name             String             @default("")
-  code             String             @default("")
-  is_foreign       Boolean            @default(false)
-  field            field[]            @relation("field_zone")
-  field_technician field_technician[] @relation("field_technician_zone")
-}
-
-model client {
-  id      String  @id @default(uuid()) @postgresql.Uuid
-  name    String  @default("")
-  field   field?  @relation("client_field", fields: [fieldId], references: [id])
-  fieldId String? @unique @map("field") @postgresql.Uuid
-}
-
-model gateway_housing_type {
-  id                        String    @id @default(uuid()) @postgresql.Uuid
-  name                      String    @unique @default("")
-  from_gateway_housing_type gateway[] @relation("gateway_housing_type")
-}
-
-model satellite_modem {
-  id                     String                @id @default(uuid()) @postgresql.Uuid
-  manufacturer_id        String                @unique @default("")
-  shipment_date          DateTime
-  is_transmitting        Boolean               @default(false)
-  comment                String                @default("")
-  satellite_modem_type   satellite_modem_type? @relation("satellite_modem_satellite_modem_type", fields: [satellite_modem_typeId], references: [id])
-  satellite_modem_typeId String?               @map("satellite_modem_type") @postgresql.Uuid
-  gateway                gateway?              @relation("gateway_satellite_modem")
-  storage_location       storage_location?     @relation("satellite_modem_storage_location", fields: [storage_locationId], references: [id])
-  storage_locationId     String?               @map("storage_location") @postgresql.Uuid
-
-  @@index([satellite_modem_typeId])
-  @@index([storage_locationId])
-}
-
-model satellite_modem_type {
-  id               String            @id @default(uuid()) @postgresql.Uuid
-  reference_number String            @unique @default("")
-  version          String            @unique @default("")
-  satellite_modem  satellite_modem[] @relation("satellite_modem_satellite_modem_type")
-}
-
-model satellite_antenna {
-  id                 String            @id @default(uuid()) @postgresql.Uuid
-  manufacturer_id    String            @unique @default("")
-  gateway            gateway?          @relation("gateway_satellite_antenna")
-  storage_location   storage_location? @relation("satellite_antenna_storage_location", fields: [storage_locationId], references: [id])
-  storage_locationId String?           @map("storage_location") @postgresql.Uuid
-
-  @@index([storage_locationId])
+model autopsy_root {
+  id                     String         @id @default(uuid()) @postgresql.Uuid
+  name                   String         @unique @default("")
+  from_autopsy_type_root autopsy_type[] @relation("autopsy_type_root")
 }
 
 model battery_type {
@@ -232,78 +69,129 @@ model battery_type {
   from_gps_node_battery_type gps_node[] @relation("gps_node_battery_type")
 }
 
-model gps_antenna_type {
-  id                             String     @id @default(uuid()) @postgresql.Uuid
-  name                           String     @unique @default("")
-  from_gps_node_gps_antenna_type gps_node[] @relation("gps_node_gps_antenna_type")
+model city {
+  id         String    @id @default(uuid()) @postgresql.Uuid
+  name       String    @default("")
+  province   province? @relation("city_province", fields: [provinceId], references: [id])
+  provinceId String?   @map("province") @postgresql.Uuid
+  field      field[]   @relation("field_city")
+
+  @@index([provinceId])
 }
 
-model node_housing_type {
-  id                              String     @id @default(uuid()) @postgresql.Uuid
-  name                            String     @unique @default("")
-  from_gps_node_node_housing_type gps_node[] @relation("gps_node_node_housing_type")
+model client {
+  id    String  @id @default(uuid()) @postgresql.Uuid
+  name  String  @default("")
+  field field[] @relation("field_client")
 }
 
-model lora_antenna_type {
-  id                              String     @id @default(uuid()) @postgresql.Uuid
-  name                            String     @unique @default("")
-  from_gateway_lora_antenna_type  gateway[]  @relation("gateway_lora_antenna_type")
-  from_gps_node_lora_antenna_type gps_node[] @relation("gps_node_lora_antenna_type")
+model component_type {
+  id                          String         @id @default(uuid()) @postgresql.Uuid
+  name                        String         @unique @default("")
+  from_autopsy_type_component autopsy_type[] @relation("autopsy_type_component")
 }
 
-model solar_panel_type {
-  id                             String     @id @default(uuid()) @postgresql.Uuid
-  name                           String     @unique @default("")
-  from_gps_node_solar_panel_type gps_node[] @relation("gps_node_solar_panel_type")
+model diagnostic_type {
+  id                                   String       @id @default(uuid()) @postgresql.Uuid
+  name                                 String       @unique @default("")
+  type                                 asset_type?  @relation("diagnostic_type_type", fields: [typeId], references: [id])
+  typeId                               String?      @map("type") @postgresql.Uuid
+  gateway_satellite_power              Boolean      @default(false)
+  angles                               Boolean      @default(false)
+  packet_202_count                     Boolean      @default(false)
+  battery_2to3                         Boolean      @default(false)
+  positions                            Boolean      @default(false)
+  lost_packets                         Boolean      @default(false)
+  node_to_gateway_distance_in_meters   Boolean      @default(false)
+  gateway_first_data_transmission_date Boolean      @default(false)
+  height_difference_in_meters          Boolean      @default(false)
+  from_hour                            Boolean      @default(false)
+  to_hour                              Boolean      @default(false)
+  packet_203_count                     Boolean      @default(false)
+  pressure_difference                  Boolean      @default(false)
+  from_diagnostic_diagnostic_type      diagnostic[] @relation("diagnostic_diagnostic_type")
+
+  @@index([typeId])
 }
 
-model pcb_node {
-  id                 String                 @id @default(uuid()) @postgresql.Uuid
-  integration_id     String                 @unique @default("")
-  fabrication_date   DateTime
-  picture            String                 @default("")
-  status             String
-  gps_node           gps_node?              @relation("gps_node_pcb_node")
-  firmware_version   node_firmware_version? @relation("pcb_node_firmware_version", fields: [firmware_versionId], references: [id])
-  firmware_versionId String?                @map("firmware_version") @postgresql.Uuid
-  hardware_version   node_hardware_version? @relation("pcb_node_hardware_version", fields: [hardware_versionId], references: [id])
-  hardware_versionId String?                @map("hardware_version") @postgresql.Uuid
-  storage_location   storage_location?      @relation("pcb_node_storage_location", fields: [storage_locationId], references: [id])
-  storage_locationId String?                @map("storage_location") @postgresql.Uuid
+model diagnostic {
+  id                                   String           @id @default(uuid()) @postgresql.Uuid
+  date                                 DateTime
+  comments                             String           @default("")
+  gateway_satellite_power              Float?
+  angles                               String           @default("")
+  packet_202_count                     Int?
+  battery_2to3                         Boolean          @default(false)
+  positions                            String?
+  lost_packets                         Int?
+  node_to_gateway_distance_in_meters   Float?
+  gateway_first_data_transmission_date DateTime?
+  height_difference_in_meters          Float?
+  from_hour                            String           @default("")
+  to_hour                              String           @default("")
+  packet_203_count                     Int?
+  pressure_difference                  Float?
+  grafana_link                         String           @default("")
+  altimetry_image_filesize             Int?
+  altimetry_image_extension            String?
+  altimetry_image_width                Int?
+  altimetry_image_height               Int?
+  altimetry_image_mode                 String?
+  altimetry_image_id                   String?
+  user                                 user?            @relation("diagnostic_user", fields: [userId], references: [id])
+  userId                               String?          @map("user") @postgresql.Uuid
+  hdw_issue                            hdw_issue?       @relation("diagnostic_hdw_issue", fields: [hdw_issueId], references: [id])
+  hdw_issueId                          String?          @unique @map("hdw_issue") @postgresql.Uuid
+  diagnostic_type                      diagnostic_type? @relation("diagnostic_diagnostic_type", fields: [diagnostic_typeId], references: [id])
+  diagnostic_typeId                    String?          @map("diagnostic_type") @postgresql.Uuid
 
-  @@index([firmware_versionId])
-  @@index([hardware_versionId])
-  @@index([storage_locationId])
+  @@index([userId])
+  @@index([diagnostic_typeId])
 }
 
-model node_firmware_version {
-  id       String     @id @default(uuid()) @postgresql.Uuid
-  version  String     @unique @default("")
-  pcb_node pcb_node[] @relation("pcb_node_firmware_version")
+model field {
+  id        String      @id @default(uuid()) @postgresql.Uuid
+  name      String      @default("")
+  gate      String      @default("")
+  phone     String      @default("")
+  irrigator irrigator[] @relation("irrigator_field")
+  zone      zone?       @relation("field_zone", fields: [zoneId], references: [id])
+  zoneId    String?     @map("zone") @postgresql.Uuid
+  city      city?       @relation("field_city", fields: [cityId], references: [id])
+  cityId    String?     @map("city") @postgresql.Uuid
+  client    client?     @relation("field_client", fields: [clientId], references: [id])
+  clientId  String?     @map("client") @postgresql.Uuid
+
+  @@index([zoneId])
+  @@index([cityId])
+  @@index([clientId])
 }
 
-model node_hardware_version {
-  id       String     @id @default(uuid()) @postgresql.Uuid
-  version  String     @unique @default("")
-  pcb_node pcb_node[] @relation("pcb_node_hardware_version")
-}
+model gateway {
+  id                        String                     @id @default(uuid()) @postgresql.Uuid
+  fabrication_date          DateTime
+  integration_id            String                     @unique @default("")
+  irrigator                 irrigator?                 @relation("irrigator_gateway")
+  housing_type              gateway_housing_type?      @relation("gateway_housing_type", fields: [housing_typeId], references: [id])
+  housing_typeId            String?                    @map("housing_type") @postgresql.Uuid
+  satellite_modem           satellite_modem?           @relation("gateway_satellite_modem", fields: [satellite_modemId], references: [id])
+  satellite_modemId         String?                    @unique @map("satellite_modem") @postgresql.Uuid
+  satellite_antenna         satellite_antenna?         @relation("gateway_satellite_antenna", fields: [satellite_antennaId], references: [id])
+  satellite_antennaId       String?                    @unique @map("satellite_antenna") @postgresql.Uuid
+  pcb_gateway               pcb_gateway?               @relation("gateway_pcb_gateway", fields: [pcb_gatewayId], references: [id])
+  pcb_gatewayId             String?                    @unique @map("pcb_gateway") @postgresql.Uuid
+  hdw_issue                 hdw_issue?                 @relation("gateway_hdw_issue", fields: [hdw_issueId], references: [id])
+  hdw_issueId               String?                    @unique @map("hdw_issue") @postgresql.Uuid
+  install_uninstall_request install_uninstall_request? @relation("install_uninstall_request_gateway")
+  lora_antenna_type         lora_antenna_type?         @relation("gateway_lora_antenna_type", fields: [lora_antenna_typeId], references: [id])
+  lora_antenna_typeId       String?                    @map("lora_antenna_type") @postgresql.Uuid
+  storage_location          storage_location?          @relation("gateway_storage_location", fields: [storage_locationId], references: [id])
+  storage_locationId        String?                    @map("storage_location") @postgresql.Uuid
+  installed_in_repair       repair[]                   @relation("repair_new_gateway")
+  stock_movement            stock_movement[]           @relation("stock_movement_gateway")
 
-model pcb_gateway {
-  id                 String                    @id @default(uuid()) @postgresql.Uuid
-  integration_id     String                    @unique @default("")
-  fabrication_date   DateTime
-  picture            String                    @default("")
-  status             String
-  gateway            gateway?                  @relation("gateway_pcb_gateway")
-  firmware_version   gateway_firmware_version? @relation("pcb_gateway_firmware_version", fields: [firmware_versionId], references: [id])
-  firmware_versionId String?                   @map("firmware_version") @postgresql.Uuid
-  hardware_version   gateway_hardware_version? @relation("pcb_gateway_hardware_version", fields: [hardware_versionId], references: [id])
-  hardware_versionId String?                   @map("hardware_version") @postgresql.Uuid
-  storage_location   storage_location?         @relation("pcb_gateway_storage_location", fields: [storage_locationId], references: [id])
-  storage_locationId String?                   @map("storage_location") @postgresql.Uuid
-
-  @@index([firmware_versionId])
-  @@index([hardware_versionId])
+  @@index([housing_typeId])
+  @@index([lora_antenna_typeId])
   @@index([storage_locationId])
 }
 
@@ -319,133 +207,95 @@ model gateway_hardware_version {
   pcb_gateway pcb_gateway[] @relation("pcb_gateway_hardware_version")
 }
 
-model asset_type {
-  id              String            @id @default(uuid()) @postgresql.Uuid
-  name            String            @unique @default("")
-  inspection      inspection[]      @relation("inspection_device_with_problems")
-  inspection_type inspection_type[] @relation("inspection_type_type")
+model gateway_housing_type {
+  id                        String    @id @default(uuid()) @postgresql.Uuid
+  name                      String    @unique @default("")
+  from_gateway_housing_type gateway[] @relation("gateway_housing_type")
 }
 
-model work_order {
-  id                        String                      @id @default(uuid()) @postgresql.Uuid
-  work_date                 DateTime
-  km_traveled               Float
-  comment                   String                      @default("")
-  install_uninstall_request install_uninstall_request[] @relation("install_uninstall_request_work_order")
-  repair                    repair[]                    @relation("repair_work_order")
+model gps_antenna_type {
+  id                             String     @id @default(uuid()) @postgresql.Uuid
+  name                           String     @unique @default("")
+  from_gps_node_gps_antenna_type gps_node[] @relation("gps_node_gps_antenna_type")
 }
 
-model pressure_sensor_type {
-  id                                        String            @id @default(uuid()) @postgresql.Uuid
-  name                                      String            @unique @default("")
-  from_pressure_sensor_pressure_sensor_type pressure_sensor[] @relation("pressure_sensor_pressure_sensor_type")
-}
+model gps_node {
+  id                        String                     @id @default(uuid()) @postgresql.Uuid
+  fabrication_date          DateTime
+  integration_id            String                     @unique @default("")
+  internal_photo_filesize   Int?
+  internal_photo_extension  String?
+  internal_photo_width      Int?
+  internal_photo_height     Int?
+  internal_photo_mode       String?
+  internal_photo_id         String?
+  external_photo_filesize   Int?
+  external_photo_extension  String?
+  external_photo_width      Int?
+  external_photo_height     Int?
+  external_photo_mode       String?
+  external_photo_id         String?
+  irrigator                 irrigator?                 @relation("irrigator_gps_node")
+  battery_type              battery_type?              @relation("gps_node_battery_type", fields: [battery_typeId], references: [id])
+  battery_typeId            String?                    @map("battery_type") @postgresql.Uuid
+  gps_antenna_type          gps_antenna_type?          @relation("gps_node_gps_antenna_type", fields: [gps_antenna_typeId], references: [id])
+  gps_antenna_typeId        String?                    @map("gps_antenna_type") @postgresql.Uuid
+  node_housing_type         node_housing_type?         @relation("gps_node_node_housing_type", fields: [node_housing_typeId], references: [id])
+  node_housing_typeId       String?                    @map("node_housing_type") @postgresql.Uuid
+  lora_antenna_type         lora_antenna_type?         @relation("gps_node_lora_antenna_type", fields: [lora_antenna_typeId], references: [id])
+  lora_antenna_typeId       String?                    @map("lora_antenna_type") @postgresql.Uuid
+  solar_panel_type          solar_panel_type?          @relation("gps_node_solar_panel_type", fields: [solar_panel_typeId], references: [id])
+  solar_panel_typeId        String?                    @map("solar_panel_type") @postgresql.Uuid
+  pcb_node                  pcb_node?                  @relation("gps_node_pcb_node", fields: [pcb_nodeId], references: [id])
+  pcb_nodeId                String?                    @unique @map("pcb_node") @postgresql.Uuid
+  storage_location          storage_location?          @relation("gps_node_storage_location", fields: [storage_locationId], references: [id])
+  storage_locationId        String?                    @map("storage_location") @postgresql.Uuid
+  hdw_issue                 hdw_issue?                 @relation("gps_node_hdw_issue", fields: [hdw_issueId], references: [id])
+  hdw_issueId               String?                    @unique @map("hdw_issue") @postgresql.Uuid
+  install_uninstall_request install_uninstall_request? @relation("install_uninstall_request_gps_node")
+  installed_in_repair       repair[]                   @relation("repair_new_gps_node")
+  stock_movement            stock_movement[]           @relation("stock_movement_gps_node")
 
-model pressure_sensor {
-  id                     String                @id @default(uuid()) @postgresql.Uuid
-  manufacturer_id        String                @default("")
-  status                 String
-  comments               String                @default("")
-  order                  Int?
-  image                  String                @default("")
-  irrigator              irrigator?            @relation("irrigator_pressure_sensor")
-  pressure_sensor_type   pressure_sensor_type? @relation("pressure_sensor_pressure_sensor_type", fields: [pressure_sensor_typeId], references: [id])
-  pressure_sensor_typeId String?               @map("pressure_sensor_type") @postgresql.Uuid
-  storage_location       storage_location?     @relation("pressure_sensor_storage_location", fields: [storage_locationId], references: [id])
-  storage_locationId     String?               @map("storage_location") @postgresql.Uuid
-  hdw_issue              hdw_issue?            @relation("hdw_issue_pressure_sensor")
-
-  @@index([pressure_sensor_typeId])
+  @@index([battery_typeId])
+  @@index([gps_antenna_typeId])
+  @@index([node_housing_typeId])
+  @@index([lora_antenna_typeId])
+  @@index([solar_panel_typeId])
   @@index([storage_locationId])
 }
 
-model repair {
-  id            String       @id @default(uuid()) @postgresql.Uuid
-  date          DateTime
-  hdw_issue     hdw_issue?   @relation("hdw_issue_repair")
-  status        String
-  repair_type   repair_type? @relation("repair_repair_type", fields: [repair_typeId], references: [id])
-  repair_typeId String?      @map("repair_type") @postgresql.Uuid
-  work_order    work_order?  @relation("repair_work_order", fields: [work_orderId], references: [id])
-  work_orderId  String?      @map("work_order") @postgresql.Uuid
+model hdw_issue {
+  id                    String           @id @default(uuid()) @postgresql.Uuid
+  creation_date         DateTime
+  close_date            DateTime?
+  automatic_diagnostic  Int?
+  diagnostic            diagnostic?      @relation("diagnostic_hdw_issue")
+  inspection            inspection[]     @relation("inspection_hdw_issue")
+  repair                repair[]         @relation("repair_hdw_issue")
+  autopsy               autopsy[]        @relation("autopsy_hdw_issue")
+  status                String
+  assigned_technician   user?            @relation("hdw_issue_assigned_technician", fields: [assigned_technicianId], references: [id])
+  assigned_technicianId String?          @map("assigned_technician") @postgresql.Uuid
+  irrigator             irrigator?       @relation("hdw_issue_irrigator", fields: [irrigatorId], references: [id])
+  irrigatorId           String?          @map("irrigator") @postgresql.Uuid
+  gateway               gateway?         @relation("gateway_hdw_issue")
+  gps_node              gps_node?        @relation("gps_node_hdw_issue")
+  pressure_sensor       pressure_sensor? @relation("hdw_issue_pressure_sensor", fields: [pressure_sensorId], references: [id])
+  pressure_sensorId     String?          @unique @map("pressure_sensor") @postgresql.Uuid
 
-  @@index([repair_typeId])
-  @@index([work_orderId])
-}
-
-model repair_type {
-  id                      String   @id @default(uuid()) @postgresql.Uuid
-  type                    String
-  name                    String   @unique @default("")
-  from_repair_repair_type repair[] @relation("repair_repair_type")
-}
-
-model storage_location {
-  id                String              @id @default(uuid()) @postgresql.Uuid
-  name              String              @unique @default("")
-  lat               Float
-  long              Float
-  gateway           gateway[]           @relation("gateway_storage_location")
-  pcb_gateway       pcb_gateway[]       @relation("pcb_gateway_storage_location")
-  gps_node          gps_node[]          @relation("gps_node_storage_location")
-  pressure_sensor   pressure_sensor[]   @relation("pressure_sensor_storage_location")
-  satellite_modem   satellite_modem[]   @relation("satellite_modem_storage_location")
-  pcb_node          pcb_node[]          @relation("pcb_node_storage_location")
-  satellite_antenna satellite_antenna[] @relation("satellite_antenna_storage_location")
-  field_technician  field_technician?   @relation("field_technician_storage_location")
-}
-
-model diagnostic_type {
-  id                              String       @id @default(uuid()) @postgresql.Uuid
-  name                            String       @unique @default("")
-  type                            String
-  from_diagnostic_diagnostic_type diagnostic[] @relation("diagnostic_diagnostic_type")
-  from_inspection_diagnostic_type inspection[] @relation("inspection_diagnostic_type")
-}
-
-model diagnostic {
-  id                                     String           @id @default(uuid()) @postgresql.Uuid
-  date                                   DateTime
-  comments                               String           @default("")
-  angles                                 String           @default("")
-  height_diff                            Float?
-  battery2to3                            Boolean          @default(false)
-  time_start                             String           @default("")
-  time_end                               String           @default("")
-  gps_positions                          Int?
-  packets_lost                           Int?
-  distance_to_irrigator_center_in_meters Int?
-  initial_snr                            Int?
-  pressure_sensor_packets                Int?
-  grafana_link                           String           @default("")
-  altimetry_image_filesize               Int?
-  altimetry_image_extension              String?
-  altimetry_image_width                  Int?
-  altimetry_image_height                 Int?
-  altimetry_image_mode                   String?
-  altimetry_image_id                     String?
-  user                                   user?            @relation("diagnostic_user", fields: [userId], references: [id])
-  userId                                 String?          @map("user") @postgresql.Uuid
-  hdw_issue                              hdw_issue?       @relation("diagnostic_hdw_issue", fields: [hdw_issueId], references: [id])
-  hdw_issueId                            String?          @unique @map("hdw_issue") @postgresql.Uuid
-  diagnostic_type                        diagnostic_type? @relation("diagnostic_diagnostic_type", fields: [diagnostic_typeId], references: [id])
-  diagnostic_typeId                      String?          @map("diagnostic_type") @postgresql.Uuid
-
-  @@index([userId])
-  @@index([diagnostic_typeId])
+  @@index([assigned_technicianId])
+  @@index([irrigatorId])
 }
 
 model inspection {
   id                       String           @id @default(uuid()) @postgresql.Uuid
   date                     DateTime
   comments                 String           @default("")
-  led_gtw                  String           @default("")
-  jumper_wifi              Boolean          @default(false)
   satellite_power          Float?
-  gateway_battery_voltage  String           @default("")
+  gateway_battery_voltage  Float?
   lora_power               Float?
-  gps_node_battery_voltage String           @default("")
-  pressure_sensor_signal   String           @default("")
+  gps_node_battery_voltage Float?
+  pressure_sensor_signal   Float?
   picture_filesize         Int?
   picture_extension        String?
   picture_width            Int?
@@ -455,33 +305,385 @@ model inspection {
   log_filesize             Int?
   log_mode                 String?
   log_filename             String?
-  device_with_problems     asset_type?      @relation("inspection_device_with_problems", fields: [device_with_problemsId], references: [id])
-  device_with_problemsId   String?          @map("device_with_problems") @postgresql.Uuid
   user                     user?            @relation("inspection_user", fields: [userId], references: [id])
   userId                   String?          @map("user") @postgresql.Uuid
-  hdw_issue                hdw_issue?       @relation("hdw_issue_inspection")
-  diagnostic_type          diagnostic_type? @relation("inspection_diagnostic_type", fields: [diagnostic_typeId], references: [id])
-  diagnostic_typeId        String?          @map("diagnostic_type") @postgresql.Uuid
+  hdw_issue                hdw_issue?       @relation("inspection_hdw_issue", fields: [hdw_issueId], references: [id])
+  hdw_issueId              String?          @map("hdw_issue") @postgresql.Uuid
+  inspection_type          inspection_type? @relation("inspection_inspection_type", fields: [inspection_typeId], references: [id])
+  inspection_typeId        String?          @map("inspection_type") @postgresql.Uuid
 
-  @@index([device_with_problemsId])
   @@index([userId])
-  @@index([diagnostic_typeId])
+  @@index([hdw_issueId])
+  @@index([inspection_typeId])
 }
 
 model inspection_type {
-  id     String      @id @default(uuid()) @postgresql.Uuid
-  name   String      @unique @default("")
-  type   asset_type? @relation("inspection_type_type", fields: [typeId], references: [id])
-  typeId String?     @map("type") @postgresql.Uuid
+  id                              String       @id @default(uuid()) @postgresql.Uuid
+  name                            String       @unique @default("")
+  type                            asset_type?  @relation("inspection_type_type", fields: [typeId], references: [id])
+  typeId                          String?      @map("type") @postgresql.Uuid
+  pot_sat                         Boolean      @default(false)
+  gateway_battery_voltage         Boolean      @default(false)
+  gps_node_battery_voltage        Boolean      @default(false)
+  lora_power                      Boolean      @default(false)
+  pressure_sensor_signal          Boolean      @default(false)
+  from_inspection_inspection_type inspection[] @relation("inspection_inspection_type")
 
   @@index([typeId])
 }
 
+model install_uninstall_request {
+  id                              String           @id @default(uuid()) @postgresql.Uuid
+  creation_date                   DateTime
+  completion_date                 DateTime?
+  close_date                      DateTime?
+  irrigator                       irrigator?       @relation("install_uninstall_request_irrigator", fields: [irrigatorId], references: [id])
+  irrigatorId                     String?          @map("irrigator") @postgresql.Uuid
+  gateway                         gateway?         @relation("install_uninstall_request_gateway", fields: [gatewayId], references: [id])
+  gatewayId                       String?          @unique @map("gateway") @postgresql.Uuid
+  gps_node                        gps_node?        @relation("install_uninstall_request_gps_node", fields: [gps_nodeId], references: [id])
+  gps_nodeId                      String?          @unique @map("gps_node") @postgresql.Uuid
+  pressure_sensor                 pressure_sensor? @relation("install_uninstall_request_pressure_sensor", fields: [pressure_sensorId], references: [id])
+  pressure_sensorId               String?          @unique @map("pressure_sensor") @postgresql.Uuid
+  request_type                    String
+  status                          String
+  work_order                      work_order?      @relation("install_uninstall_request_work_order", fields: [work_orderId], references: [id])
+  work_orderId                    String?          @map("work_order") @postgresql.Uuid
+  gtw_image_filesize              Int?
+  gtw_image_extension             String?
+  gtw_image_width                 Int?
+  gtw_image_height                Int?
+  gtw_image_mode                  String?
+  gtw_image_id                    String?
+  node_gps_image_filesize         Int?
+  node_gps_image_extension        String?
+  node_gps_image_width            Int?
+  node_gps_image_height           Int?
+  node_gps_image_mode             String?
+  node_gps_image_id               String?
+  pressure_sensor_image_filesize  Int?
+  pressure_sensor_image_extension String?
+  pressure_sensor_image_width     Int?
+  pressure_sensor_image_height    Int?
+  pressure_sensor_image_mode      String?
+  pressure_sensor_image_id        String?
+  log_filesize                    Int?
+  log_mode                        String?
+  log_filename                    String?
+  assigned_technician             user?            @relation("install_uninstall_request_assigned_technician", fields: [assigned_technicianId], references: [id])
+  assigned_technicianId           String?          @map("assigned_technician") @postgresql.Uuid
+
+  @@index([irrigatorId])
+  @@index([work_orderId])
+  @@index([assigned_technicianId])
+}
+
+model irrigator {
+  id                        String                      @id @default(uuid()) @postgresql.Uuid
+  integration_id            String                      @unique @default("")
+  name                      String                      @default("")
+  lat                       Float
+  long                      Float
+  status                    String
+  enabled                   Boolean                     @default(false)
+  mapped                    Boolean                     @default(false)
+  comment                   String                      @default("")
+  gateway                   gateway?                    @relation("irrigator_gateway", fields: [gatewayId], references: [id])
+  gatewayId                 String?                     @unique @map("gateway") @postgresql.Uuid
+  gps_node                  gps_node?                   @relation("irrigator_gps_node", fields: [gps_nodeId], references: [id])
+  gps_nodeId                String?                     @unique @map("gps_node") @postgresql.Uuid
+  field                     field?                      @relation("irrigator_field", fields: [fieldId], references: [id])
+  fieldId                   String?                     @map("field") @postgresql.Uuid
+  install_uninstall_request install_uninstall_request[] @relation("install_uninstall_request_irrigator")
+  hdw_issue                 hdw_issue[]                 @relation("hdw_issue_irrigator")
+  pressure_sensor           pressure_sensor?            @relation("irrigator_pressure_sensor", fields: [pressure_sensorId], references: [id])
+  pressure_sensorId         String?                     @unique @map("pressure_sensor") @postgresql.Uuid
+  contract                  contract?                   @relation("irrigator_contract", fields: [contractId], references: [id])
+  contractId                String?                     @map("contract") @postgresql.Uuid
+
+  @@index([fieldId])
+  @@index([contractId])
+}
+
+model lora_antenna_type {
+  id                              String     @id @default(uuid()) @postgresql.Uuid
+  name                            String     @unique @default("")
+  from_gateway_lora_antenna_type  gateway[]  @relation("gateway_lora_antenna_type")
+  from_gps_node_lora_antenna_type gps_node[] @relation("gps_node_lora_antenna_type")
+}
+
+model node_firmware_version {
+  id       String     @id @default(uuid()) @postgresql.Uuid
+  version  String     @unique @default("")
+  pcb_node pcb_node[] @relation("pcb_node_firmware_version")
+}
+
+model node_hardware_version {
+  id       String     @id @default(uuid()) @postgresql.Uuid
+  version  String     @unique @default("")
+  pcb_node pcb_node[] @relation("pcb_node_hardware_version")
+}
+
+model node_housing_type {
+  id                              String     @id @default(uuid()) @postgresql.Uuid
+  name                            String     @unique @default("")
+  from_gps_node_node_housing_type gps_node[] @relation("gps_node_node_housing_type")
+}
+
+model pcb_gateway {
+  id                 String                    @id @default(uuid()) @postgresql.Uuid
+  integration_id     String                    @unique @default("")
+  fabrication_date   DateTime
+  picture_filesize   Int?
+  picture_extension  String?
+  picture_width      Int?
+  picture_height     Int?
+  picture_mode       String?
+  picture_id         String?
+  status             String
+  gateway            gateway?                  @relation("gateway_pcb_gateway")
+  firmware_version   gateway_firmware_version? @relation("pcb_gateway_firmware_version", fields: [firmware_versionId], references: [id])
+  firmware_versionId String?                   @map("firmware_version") @postgresql.Uuid
+  hardware_version   gateway_hardware_version? @relation("pcb_gateway_hardware_version", fields: [hardware_versionId], references: [id])
+  hardware_versionId String?                   @map("hardware_version") @postgresql.Uuid
+
+  @@index([firmware_versionId])
+  @@index([hardware_versionId])
+}
+
+model pcb_node {
+  id                 String                 @id @default(uuid()) @postgresql.Uuid
+  integration_id     String                 @unique @default("")
+  fabrication_date   DateTime
+  picture_filesize   Int?
+  picture_extension  String?
+  picture_width      Int?
+  picture_height     Int?
+  picture_mode       String?
+  picture_id         String?
+  status             String
+  gps_node           gps_node?              @relation("gps_node_pcb_node")
+  firmware_version   node_firmware_version? @relation("pcb_node_firmware_version", fields: [firmware_versionId], references: [id])
+  firmware_versionId String?                @map("firmware_version") @postgresql.Uuid
+  hardware_version   node_hardware_version? @relation("pcb_node_hardware_version", fields: [hardware_versionId], references: [id])
+  hardware_versionId String?                @map("hardware_version") @postgresql.Uuid
+
+  @@index([firmware_versionId])
+  @@index([hardware_versionId])
+}
+
+model pressure_sensor {
+  id                        String                     @id @default(uuid()) @postgresql.Uuid
+  integration_id            String                     @unique @default("")
+  status                    String
+  comments                  String                     @default("")
+  order                     Int?
+  image_filesize            Int?
+  image_extension           String?
+  image_width               Int?
+  image_height              Int?
+  image_mode                String?
+  image_id                  String?
+  irrigator                 irrigator?                 @relation("irrigator_pressure_sensor")
+  pressure_sensor_type      pressure_sensor_type?      @relation("pressure_sensor_pressure_sensor_type", fields: [pressure_sensor_typeId], references: [id])
+  pressure_sensor_typeId    String?                    @map("pressure_sensor_type") @postgresql.Uuid
+  storage_location          storage_location?          @relation("pressure_sensor_storage_location", fields: [storage_locationId], references: [id])
+  storage_locationId        String?                    @map("storage_location") @postgresql.Uuid
+  hdw_issue                 hdw_issue?                 @relation("hdw_issue_pressure_sensor")
+  install_uninstall_request install_uninstall_request? @relation("install_uninstall_request_pressure_sensor")
+  installed_in_repair       repair[]                   @relation("repair_new_pressure_sensor")
+  stock_movement            stock_movement[]           @relation("stock_movement_pressure_sensor")
+
+  @@index([pressure_sensor_typeId])
+  @@index([storage_locationId])
+}
+
+model pressure_sensor_type {
+  id                                        String            @id @default(uuid()) @postgresql.Uuid
+  name                                      String            @unique @default("")
+  from_pressure_sensor_pressure_sensor_type pressure_sensor[] @relation("pressure_sensor_pressure_sensor_type")
+}
+
+model province {
+  id   String @id @default(uuid()) @postgresql.Uuid
+  name String @default("")
+  city city[] @relation("city_province")
+}
+
+model repair {
+  id                    String           @id @default(uuid()) @postgresql.Uuid
+  creation_date         DateTime
+  real_repair_date      DateTime
+  hdw_issue             hdw_issue?       @relation("repair_hdw_issue", fields: [hdw_issueId], references: [id])
+  hdw_issueId           String?          @map("hdw_issue") @postgresql.Uuid
+  repair_type           repair_type?     @relation("repair_repair_type", fields: [repair_typeId], references: [id])
+  repair_typeId         String?          @map("repair_type") @postgresql.Uuid
+  solution_type         solution_type?   @relation("repair_solution_type", fields: [solution_typeId], references: [id])
+  solution_typeId       String?          @map("solution_type") @postgresql.Uuid
+  new_gateway           gateway?         @relation("repair_new_gateway", fields: [new_gatewayId], references: [id])
+  new_gatewayId         String?          @map("new_gateway") @postgresql.Uuid
+  new_gps_node          gps_node?        @relation("repair_new_gps_node", fields: [new_gps_nodeId], references: [id])
+  new_gps_nodeId        String?          @map("new_gps_node") @postgresql.Uuid
+  new_pressure_sensor   pressure_sensor? @relation("repair_new_pressure_sensor", fields: [new_pressure_sensorId], references: [id])
+  new_pressure_sensorId String?          @map("new_pressure_sensor") @postgresql.Uuid
+  work_order            work_order?      @relation("repair_work_order", fields: [work_orderId], references: [id])
+  work_orderId          String?          @map("work_order") @postgresql.Uuid
+  comments              String           @default("")
+  log_filesize          Int?
+  log_mode              String?
+  log_filename          String?
+
+  @@index([hdw_issueId])
+  @@index([repair_typeId])
+  @@index([solution_typeId])
+  @@index([new_gatewayId])
+  @@index([new_gps_nodeId])
+  @@index([new_pressure_sensorId])
+  @@index([work_orderId])
+}
+
+model repair_type {
+  id                      String   @id @default(uuid()) @postgresql.Uuid
+  name                    String   @unique @default("")
+  value                   String   @unique @default("")
+  from_repair_repair_type repair[] @relation("repair_repair_type")
+}
+
+model satellite_modem {
+  id                     String                @id @default(uuid()) @postgresql.Uuid
+  integration_id         String                @unique @default("")
+  shipment_date          DateTime
+  is_transmitting        Boolean               @default(false)
+  comment                String                @default("")
+  satellite_modem_type   satellite_modem_type? @relation("satellite_modem_satellite_modem_type", fields: [satellite_modem_typeId], references: [id])
+  satellite_modem_typeId String?               @map("satellite_modem_type") @postgresql.Uuid
+  gateway                gateway?              @relation("gateway_satellite_modem")
+
+  @@index([satellite_modem_typeId])
+}
+
+model satellite_modem_type {
+  id               String            @id @default(uuid()) @postgresql.Uuid
+  reference_number String            @unique @default("")
+  version          String            @unique @default("")
+  satellite_modem  satellite_modem[] @relation("satellite_modem_satellite_modem_type")
+}
+
+model satellite_antenna {
+  id             String   @id @default(uuid()) @postgresql.Uuid
+  integration_id String   @unique @default("")
+  gateway        gateway? @relation("gateway_satellite_antenna")
+}
+
+model solar_panel_type {
+  id                             String     @id @default(uuid()) @postgresql.Uuid
+  name                           String     @unique @default("")
+  from_gps_node_solar_panel_type gps_node[] @relation("gps_node_solar_panel_type")
+}
+
+model solution_type {
+  id                        String   @id @default(uuid()) @postgresql.Uuid
+  name                      String   @unique @default("")
+  from_repair_solution_type repair[] @relation("repair_solution_type")
+}
+
+model storage_location {
+  id                  String            @id @default(uuid()) @postgresql.Uuid
+  name                String            @unique @default("")
+  lat                 Float?
+  long                Float?
+  gateway             gateway[]         @relation("gateway_storage_location")
+  gps_node            gps_node[]        @relation("gps_node_storage_location")
+  pressure_sensor     pressure_sensor[] @relation("pressure_sensor_storage_location")
+  user                user?             @relation("storage_location_user", fields: [userId], references: [id])
+  userId              String?           @unique @map("user") @postgresql.Uuid
+  stock_movement_from stock_movement[]  @relation("stock_movement_location_from")
+  stock_movement_to   stock_movement[]  @relation("stock_movement_location_to")
+}
+
+model stock_movement {
+  id                String            @id @default(uuid()) @postgresql.Uuid
+  date              DateTime
+  location_from     storage_location? @relation("stock_movement_location_from", fields: [location_fromId], references: [id])
+  location_fromId   String?           @map("location_from") @postgresql.Uuid
+  location_to       storage_location? @relation("stock_movement_location_to", fields: [location_toId], references: [id])
+  location_toId     String?           @map("location_to") @postgresql.Uuid
+  gateway           gateway?          @relation("stock_movement_gateway", fields: [gatewayId], references: [id])
+  gatewayId         String?           @map("gateway") @postgresql.Uuid
+  gps_node          gps_node?         @relation("stock_movement_gps_node", fields: [gps_nodeId], references: [id])
+  gps_nodeId        String?           @map("gps_node") @postgresql.Uuid
+  pressure_sensor   pressure_sensor?  @relation("stock_movement_pressure_sensor", fields: [pressure_sensorId], references: [id])
+  pressure_sensorId String?           @map("pressure_sensor") @postgresql.Uuid
+  author            user?             @relation("stock_movement_author", fields: [authorId], references: [id])
+  authorId          String?           @map("author") @postgresql.Uuid
+
+  @@index([location_fromId])
+  @@index([location_toId])
+  @@index([gatewayId])
+  @@index([gps_nodeId])
+  @@index([pressure_sensorId])
+  @@index([authorId])
+}
+
 model user {
-  id         String       @id @default(uuid()) @postgresql.Uuid
-  name       String       @default("")
-  email      String       @unique @default("")
-  password   String
-  diagnostic diagnostic[] @relation("diagnostic_user")
-  inspection inspection[] @relation("inspection_user")
+  id                        String                      @id @default(uuid()) @postgresql.Uuid
+  name                      String                      @default("")
+  email                     String                      @unique @default("")
+  password                  String
+  type                      String
+  diagnostic                diagnostic[]                @relation("diagnostic_user")
+  autopsy                   autopsy[]                   @relation("autopsy_user")
+  created_stock_movement    stock_movement[]            @relation("stock_movement_author")
+  hdw_issue                 hdw_issue[]                 @relation("hdw_issue_assigned_technician")
+  install_uninstall_request install_uninstall_request[] @relation("install_uninstall_request_assigned_technician")
+  inspection                inspection[]                @relation("inspection_user")
+  zone                      zone[]                      @relation("user_zone")
+  storage_location          storage_location?           @relation("storage_location_user")
+  work_order                work_order[]                @relation("work_order_technician")
+}
+
+model work_order {
+  id                        String                      @id @default(uuid()) @postgresql.Uuid
+  work_date                 DateTime
+  km_traveled               Float
+  comment                   String                      @default("")
+  install_uninstall_request install_uninstall_request[] @relation("install_uninstall_request_work_order")
+  repair                    repair[]                    @relation("repair_work_order")
+  technician                user?                       @relation("work_order_technician", fields: [technicianId], references: [id])
+  technicianId              String?                     @map("technician") @postgresql.Uuid
+
+  @@index([technicianId])
+}
+
+model zone {
+  id         String  @id @default(uuid()) @postgresql.Uuid
+  name       String  @default("")
+  code       String  @default("")
+  is_foreign Boolean @default(false)
+  field      field[] @relation("field_zone")
+  user       user[]  @relation("user_zone")
+}
+
+model contract {
+  id                        String                   @id @default(uuid()) @postgresql.Uuid
+  hubspot_id                String                   @unique @default("")
+  creation_date             DateTime
+  start_date                DateTime
+  end_date                  DateTime
+  actual_install_date       DateTime?
+  actual_uninstall_date     DateTime?
+  name                      String                   @default("")
+  irrigator_quantity        Int?
+  irrigator                 irrigator[]              @relation("irrigator_contract")
+  service_level_agreement   service_level_agreement? @relation("contract_service_level_agreement", fields: [service_level_agreementId], references: [id])
+  service_level_agreementId String?                  @map("service_level_agreement") @postgresql.Uuid
+  contract_type             String
+
+  @@index([service_level_agreementId])
+}
+
+model service_level_agreement {
+  id       String     @id @default(uuid()) @postgresql.Uuid
+  name     String     @unique @default("")
+  contract contract[] @relation("contract_service_level_agreement")
 }

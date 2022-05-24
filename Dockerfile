@@ -1,16 +1,16 @@
 # https://docs.docker.com/samples/library/node/
-ARG NODE_VERSION=14.17.6
+ARG NODE_VERSION=16.15.0
 
 # Build container
 FROM node:${NODE_VERSION}-alpine AS build
 
 WORKDIR /home/node
 
-COPY ./keystone/package*.json /home/node
+COPY ./package*.json /home/node
 
 RUN npm install
 
-COPY ./keystone/ /home/node
+COPY . /home/node
 RUN npm run postinstallfix
 
 #RUN npm run-script build

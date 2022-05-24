@@ -7,6 +7,8 @@ You can find all the config options in our docs here: https://keystonejs.com/doc
 */
 
 import { config } from '@keystone-6/core';
+import dotenv from 'dotenv';
+if(process.env.NODE_ENV !== 'production') dotenv.config();
 
 // Look in the schema file for how we define our lists, and how users interact with them through graphql or the Admin UI
 import { lists } from './schema';

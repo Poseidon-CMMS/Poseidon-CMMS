@@ -33,7 +33,7 @@ export default withAuth(
        },
       // Optional advanced configuration
       enableLogging: undefined,
-      useMigrations: false,
+      useMigrations: true,
       idField: { kind: 'uuid' },
     },
     // This config allows us to set up features of the Admin UI https://keystonejs.com/docs/apis/config#ui

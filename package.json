@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npm run services:start && keystone dev",
-    "start": "keystone start",
+    "start": "keystone prisma migrate deploy && keystone start",
     "services:start": "docker-compose -f ./localstack/docker-compose.yml up -d",
     "services:stop": "docker-compose -f ./localstack/docker-compose.yml stop",
     "services:reset": "docker-compose -f ./localstack/docker-compose.yml down",

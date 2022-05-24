@@ -13,7 +13,6 @@ RUN npm install
 #RUN npm run postinstallfix
 
 RUN npm run-script build
-RUN keystone prisma migrate deploy
 
 # Runtime container
 FROM node:${NODE_VERSION}-alpine

@@ -1,5 +1,5 @@
-import * as provincesJSON from "./geographic/provincias.json";
-import * as citiesJSON from "./geographic/localidades.json";
+import provincesJSON from "./geographic/provincias.json";
+import citiesJSON from "./geographic/localidades.json";
 
 // --- ASSETS ---
 export const assetTypes = [

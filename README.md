@@ -23,7 +23,7 @@ Este repositorio incluye el servidor KeystoneJS que se comporta como el backend 
 
 ### Variables de entorno
 
-- DATABASE_URL: La URL de la base de datos PostgreSQL a utilizar. Por ejemplo, `postgres://user:password@dbHost:5432/poseidon_cmms`.
+- DATABASE_URL: La URL de la base de datos PostgreSQL a utilizar. Por ejemplo, `postgres://poseidonuser:poseidonpassword@localhost:5432/poseidon.
 - SESSION_SECRET: Secreto utilizado para generar los tokens de sesión de KeystoneJS. Utilizar una secuencia aleatoria de al menos 32 caracteres.
 - M2M_API_KEY: Secreto utilizado para la comunicación con sistema de detección de fallas en tiempo real. Utilizar una secuencia aleatoria de al menos 32 caracteres.
 - CORS_FRONTEND_URL: URL del frontend para completar el header `Access-Control-Allow-Origin`. Por ejemplo, `http://localhost:8080`
@@ -32,14 +32,18 @@ Este repositorio incluye el servidor KeystoneJS que se comporta como el backend 
 
 ### Pasos a seguir para ejecutar localmente
 
+#### Requisitos
+- NodeJS
+- Docker
+
 1. Clonar el repositorio
-2. Crear un archivo `.env` en la raíz y setear las variables de entorno mencionadas anteriormente, excepto la variable DATABASE_URL. Esta última no es necesaria debido a que el archivo docker-compose.yml ya genera la base de datos Postgres necesaria para hacer pruebas y agrega automáticamente este parámetro.
-3. Ejecutar el comando `docker-compose up --build`
-4. Abrir la interfaz de administrador `localhost:4000` en su navegador. Si cambió la variable de entorno PORT entonces deberá cambiar el puerto por el que haya seleccionado.
+2. Crear un archivo `.env` en la raíz y setear las variables de entorno mencionadas anteriormente (o copiar el .env-example y renombrarlo).
+3. Ejecutar el comando `npm run dev`
+4. Abrir la interfaz de administrador `localhost:3000` en su navegador. Si cambió la variable de entorno PORT entonces deberá cambiar el puerto por el que haya seleccionado.
 5. Para acceder al frontend, ejecute los pasos de ejecución local del [repo correspondiente](https://github.com/Poseidon-CMMS/poseidon-cmms-app). Asegurarse de establecer la variable CORS_FRONTEND_URL correctamente después de este paso.
 
 ### Pasos a seguir para ejecutar en un servicio de hosting de containers
 
-1. Crear un servicio Web utilizando este repo según las instrucciones del proveedor.
+1. Crear un servicio Web utilizando este repo según las instrucciones del proveedor (El Dockerfile ya existe y esta incluido).
 2. Crear una base de datos PostgreSQL en el servicio.
 3. Establecer las variables de entorno con sus valores correspondientes. Asegurarse de establecer la variable `DATABASE_URL` con la URL obtenida en el paso anterior.

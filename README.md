@@ -38,9 +38,10 @@ Este repositorio incluye el servidor KeystoneJS que se comporta como el backend 
 
 1. Clonar el repositorio
 2. Crear un archivo `.env` en la raíz y setear las variables de entorno mencionadas anteriormente (o copiar el .env-example y renombrarlo).
-3. Ejecutar el comando `npm run dev`
-4. Abrir la interfaz de administrador `localhost:3000` en su navegador. Si cambió la variable de entorno PORT entonces deberá cambiar el puerto por el que haya seleccionado.
-5. Para acceder al frontend, ejecute los pasos de ejecución local del [repo correspondiente](https://github.com/Poseidon-CMMS/poseidon-cmms-app). Asegurarse de establecer la variable CORS_FRONTEND_URL correctamente después de este paso.
+3. Ejecutar el comando `npm install`.
+4. Ejecutar el comando `npm run dev`.
+5. Abrir la interfaz de administrador `localhost:3000` en su navegador. Si cambió la variable de entorno PORT entonces deberá cambiar el puerto por el que haya seleccionado.
+6. Para acceder al frontend, ejecute los pasos de ejecución local del [repo correspondiente](https://github.com/Poseidon-CMMS/poseidon-cmms-app). Asegurarse de establecer la variable CORS_FRONTEND_URL correctamente después de este paso.
 
 ### Pasos a seguir para ejecutar en un servicio de hosting de containers
 
